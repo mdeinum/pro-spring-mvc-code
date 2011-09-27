@@ -1,6 +1,7 @@
 apply plugin: 'war'
 apply plugin: 'eclipse'
 
+description='Pizzas-R-Us Sample Application'
 sourceCompatibility=1.6
 version='1.0.0-SNAPSHOT'
 

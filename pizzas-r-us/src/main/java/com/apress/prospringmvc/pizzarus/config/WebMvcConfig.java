@@ -17,7 +17,7 @@ import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapt
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
-@EnableWebMvc
+@EnableWebMvc()
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
