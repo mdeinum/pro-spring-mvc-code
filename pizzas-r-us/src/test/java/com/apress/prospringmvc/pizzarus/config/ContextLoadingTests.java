@@ -13,15 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.PlatformTransactionManager;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
 @ContextConfiguration(loader=AnnotationConfigContextLoader.class, classes=InfrastructureConfig.class)
-public class ContextLoadingTests {
+public class ContextLoadingTests extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	private Logger logger = LoggerFactory.getLogger(ContextLoadingTests.class);
 	
@@ -31,22 +31,17 @@ public class ContextLoadingTests {
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
 	@Test
 	public void contextLoading() {
 		logger.info("DataSource: {}", dataSource.getClass());
 		assertNotNull(dataSource);
 		logger.info("TransactionManager: {}", transactionManager.getClass());		
 		assertNotNull(transactionManager);
-		logger.info("JdbcTemplate: {}", jdbcTemplate);
-		assertNotNull(jdbcTemplate);
 	}
 	
 	@Test
 	public void testInit() {
-		int count = jdbcTemplate.queryForInt("select count(*) from pizza");
+		int count = countRowsInTable("pizza"); 
 		assertEquals(2, count);
 	}
 

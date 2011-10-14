@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import com.apress.prospringmvc.pizzarus.web.method.annotation.support.SessionAttributeMethodProcessor;
 
 @Configuration
-@EnableWebMvc()
+@EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -93,7 +93,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	  mappings.setProperty("DataAccessException", "databaseError");
 	  mappings.setProperty("PizzaException", "pizzaError");
 	  resolver.setExceptionMappings(mappings);
-	  resolver.set
 	  return resolver;
 	}
 
