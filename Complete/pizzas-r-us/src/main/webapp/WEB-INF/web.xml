@@ -5,7 +5,7 @@
 
 	<servlet>
 		<servlet-name>pizzas</servlet-name>
-		<servlet-class>org.springframework.servlet.webDispatcherServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
