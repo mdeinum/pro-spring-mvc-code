@@ -1,0 +1,4 @@
+dependencies() {
+	runtime "org.springframework:spring-jdbc:$springVersion"
+
+}

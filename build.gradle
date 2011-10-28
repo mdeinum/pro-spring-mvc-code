@@ -22,9 +22,9 @@ allprojects {
 	}
 
 	repositories {
-		mavenRepo urls: 'http://maven.springframework.org/release'
+		mavenRepo url: 'http://maven.springframework.org/release'
 		mavenCentral()
-        mavenRepo urls: 'http://maven.springframework.org/milestone'
+        mavenRepo url: 'http://maven.springframework.org/milestone'
 	}
 
 	dependencies() {
