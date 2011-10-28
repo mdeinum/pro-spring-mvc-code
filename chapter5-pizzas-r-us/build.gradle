@@ -1,4 +1,3 @@
-dependencies() {
-	runtime "org.springframework:spring-jdbc:$springVersion"
-
+war {
+	archiveName = 'pizzas-r-us.war'
 }
