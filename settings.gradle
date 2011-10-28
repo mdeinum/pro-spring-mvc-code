@@ -1,0 +1,8 @@
+rootProject.name = 'pizzas-r-us'
+
+def String[] modules = [
+	'chapter2-pizzas-r-us',
+	'chapter5-pizzas-r-us'
+]
+
+include modules
