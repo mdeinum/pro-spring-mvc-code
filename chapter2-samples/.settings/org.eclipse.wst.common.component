@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="2.0">
+	<wb-module deploy-name="chapter2-samples">
+		<property name="context-root" value="chapter2-samples"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
+		<wb-resource deploy-path="/" source-path="src/main/webapp"/>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-jdbc/9924ebc753430e1a5270f75bb295de43/jars/spring-jdbc-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-context-support/9924ebc753430e1a5270f75bb295de43/jars/spring-context-support-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/ch.qos.logback/logback-classic/c12498cf18507aa6433a94eb7d3e77d5/jars/logback-classic-0.9.30.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-context/9924ebc753430e1a5270f75bb295de43/jars/spring-context-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-core/9924ebc753430e1a5270f75bb295de43/jars/spring-core-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-web/9924ebc753430e1a5270f75bb295de43/jars/spring-web-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-asm/9924ebc753430e1a5270f75bb295de43/jars/spring-asm-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.slf4j/jcl-over-slf4j/c12498cf18507aa6433a94eb7d3e77d5/jars/jcl-over-slf4j-1.6.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-tx/9924ebc753430e1a5270f75bb295de43/jars/spring-tx-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/commons-logging/commons-logging/c12498cf18507aa6433a94eb7d3e77d5/jars/commons-logging-1.1.1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.apache.commons/commons-lang3/c12498cf18507aa6433a94eb7d3e77d5/jars/commons-lang3-3.0.1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/javax.servlet/jstl/c12498cf18507aa6433a94eb7d3e77d5/jars/jstl-1.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/com.h2database/h2/c12498cf18507aa6433a94eb7d3e77d5/jars/h2-1.3.160.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.slf4j/slf4j-api/c12498cf18507aa6433a94eb7d3e77d5/jars/slf4j-api-1.6.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-aop/9924ebc753430e1a5270f75bb295de43/jars/spring-aop-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/cglib/cglib-nodep/c12498cf18507aa6433a94eb7d3e77d5/jars/cglib-nodep-2.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-beans/9924ebc753430e1a5270f75bb295de43/jars/spring-beans-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-webmvc/9924ebc753430e1a5270f75bb295de43/jars/spring-webmvc-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/org.springframework/spring-expression/9924ebc753430e1a5270f75bb295de43/jars/spring-expression-3.1.0.RC1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/aopalliance/aopalliance/c12498cf18507aa6433a94eb7d3e77d5/jars/aopalliance-1.0.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/marten/.gradle/caches/artifacts-3/ch.qos.logback/logback-core/c12498cf18507aa6433a94eb7d3e77d5/jars/logback-core-0.9.30.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+	</wb-module>
+</project-modules>
