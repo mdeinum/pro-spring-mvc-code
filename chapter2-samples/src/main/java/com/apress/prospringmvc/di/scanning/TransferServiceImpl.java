@@ -1,25 +1,27 @@
-package com.apress.prospringmvc.di.annotation;
+package com.apress.prospringmvc.di.scanning;
 
 import java.math.BigDecimal;
 
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.apress.prospringmvc.Account;
 import com.apress.prospringmvc.AccountService;
 import com.apress.prospringmvc.TransferService;
 
+@Service("transferService")
 public class TransferServiceImpl implements TransferService {
 
-	@Inject
+	@Autowired
 	private AccountService accountService;
-
+	
 	public TransferServiceImpl() {
 		super();
 	}
-
+	
+	
 	@Override
-	public void transfer(final Account from, final Account to,
-			final BigDecimal amount) {
+	public void transfer(Account from, Account to, BigDecimal amount) {
 	}
 
 }

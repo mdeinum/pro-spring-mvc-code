@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.apress.prospringmvc.AccountService;
 import com.apress.prospringmvc.TransferService;
 import com.apress.prospringmvc.di.AccountServiceImpl;
+import com.apress.prospringmvc.di.setter.TransferServiceImpl;
 
 @Configuration
 public class ApplicationConfig {

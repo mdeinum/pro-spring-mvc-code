@@ -8,7 +8,6 @@ import com.apress.prospringmvc.Account;
 import com.apress.prospringmvc.AccountService;
 import com.apress.prospringmvc.TransferService;
 
-@Service
 public class TransferServiceImpl implements TransferService {
 
 	private AccountService accountService;

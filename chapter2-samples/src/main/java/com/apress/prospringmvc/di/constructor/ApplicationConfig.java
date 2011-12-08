@@ -7,6 +7,11 @@ import com.apress.prospringmvc.AccountService;
 import com.apress.prospringmvc.TransferService;
 import com.apress.prospringmvc.di.AccountServiceImpl;
 
+/**
+ * Constructor based dependency injection sample.
+ * 
+ * @author M. Deinum
+ */
 @Configuration
 public class ApplicationConfig {
 
