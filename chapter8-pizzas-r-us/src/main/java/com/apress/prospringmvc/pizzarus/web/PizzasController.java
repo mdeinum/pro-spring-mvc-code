@@ -32,7 +32,6 @@ public class PizzasController {
 		ModelAndView mav = new ModelAndView("io-error");
 		mav.addObject("username", principal.getName());
 		mav.addAllObjects(request.getParameterMap());
-		
 		for(Iterator<String> names = request.getHeaderNames(); names.hasNext(); ) {
 			String name =  names.next();
 			String[] value = request.getHeaderValues(name);

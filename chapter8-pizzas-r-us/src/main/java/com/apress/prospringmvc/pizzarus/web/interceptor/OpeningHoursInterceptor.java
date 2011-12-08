@@ -26,8 +26,7 @@ public class OpeningHoursInterceptor extends HandlerInterceptorAdapter {
 		int hour = now.get(Calendar.HOUR_OF_DAY);
 		
 		if (hour > 2 && hour < 15) {
-			UriTemplate.
-			response.sendRedirect("")
+			response.sendRedirect("/foo");
 			return false;
 		}
 		return true;

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-//@Configuration
+@Configuration
 public class InfrastructureContext {
 
 	@Autowired
@@ -21,7 +21,7 @@ public class InfrastructureContext {
 	 * 
 	 * @author M. Deinum
 	 */
-//	@Configuration
+	@Configuration
 	@Profile("test")
 	private static class TestDataContext {
 		
@@ -41,7 +41,7 @@ public class InfrastructureContext {
 	 * @author M. Deinum
 	 *
 	 */
-//	@Configuration
+	@Configuration
 	@Profile("local")
 	private static class LocalDataContext {
 		
