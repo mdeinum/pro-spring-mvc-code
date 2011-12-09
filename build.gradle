@@ -43,9 +43,7 @@ subprojects {
 		compile 'cglib:cglib-nodep:2.2'
 		compile 'org.aspectj:aspectjrt:1.6.12'
 		compile 'org.aspectj:aspectjweaver:1.6.12'
-		compile files("${rootDir}/libs/jamon-2.73.jar")
-		
-		
+
 		testCompile 'junit:junit:4.9'
 		testCompile "org.springframework:spring-test:$springVersion"
 	
