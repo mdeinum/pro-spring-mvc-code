@@ -1,2 +1,7 @@
 /bin/
 /build/
+/.settings/
+/*.classpath
+/*.iml
+/*.log
+/*.project

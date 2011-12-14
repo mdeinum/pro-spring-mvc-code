@@ -24,18 +24,18 @@ public class PerformanceMonitoringAspect {
 
     private final Logger logger = LoggerFactory.getLogger(PerformanceMonitoringAspect.class);
 
-    @Pointcut("execution(* com.apress.prospringmvc..*.*(..))")
+    @Pointcut("execution(* com.apress.prospringmvc.pizzarus.web.*.*(..))")
     public void allMethods() {
     }
 
     @Around("allMethods()")
     public Object performance(final ProceedingJoinPoint pjp) throws Throwable {
-        long start = System.currentTimeMillis();
+        final long start = System.currentTimeMillis();
 
         try {
             return pjp.proceed();
         } finally {
-            long end = System.currentTimeMillis();
+            final long end = System.currentTimeMillis();
             this.logger.debug("Method {} took {} ms.", pjp.getSignature(), (end - start));
         }
     }

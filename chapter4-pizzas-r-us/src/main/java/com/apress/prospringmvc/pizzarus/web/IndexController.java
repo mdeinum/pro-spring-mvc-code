@@ -9,6 +9,6 @@ public class IndexController {
 
 	@RequestMapping(value = "/index.htm")
 	public ModelAndView indexPage() {
-		return new ModelAndView("/WEB-INF/view/index.jsp");
+		return new ModelAndView("index");
 	}
 }
