@@ -16,6 +16,10 @@ allprojects {
         mavenCentral()
         mavenRepo url: 'http://maven.springframework.org/milestone'
     }
+
+    eclipse {
+        project.natures "org.springframework.ide.eclipse.core.springnature"
+    }
 }
 
 
@@ -49,6 +53,7 @@ subprojects {
 
     springVersion='3.1.0.RELEASE'
     springSecurityVersion='3.1.0.RELEASE'
+    springSwfVersion='2.3.0.RELEASE'
 
     configurations { all*.exclude group: 'commons-logging' }
 
