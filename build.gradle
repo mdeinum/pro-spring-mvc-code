@@ -92,6 +92,7 @@ subprojects {
         compile 'org.aspectj:aspectjrt:1.6.12'
         compile 'org.aspectj:aspectjweaver:1.6.12'
         compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+        compile 'opensymphony:sitemesh:2.4.2'
 
         runtime "jstl:jstl:1.2"
         

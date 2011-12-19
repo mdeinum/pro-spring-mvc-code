@@ -22,6 +22,7 @@ public class PizzaRepositoryImpl implements PizzaRepository {
     private SessionFactory sessionFactory;
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Pizza> findAll() {
         return this.sessionFactory.getCurrentSession().createQuery("from Pizza order by name").list();
     }

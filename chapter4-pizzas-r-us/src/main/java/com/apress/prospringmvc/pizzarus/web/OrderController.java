@@ -13,13 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 import com.apress.prospringmvc.pizzarus.service.OrderService;
 
-/**
- * Created by IntelliJ IDEA.
- * User: marten
- * Date: 15-12-11
- * Time: 15:50
- * To change this template use File | Settings | File Templates.
- */
 @Controller
 public class OrderController {
 
@@ -35,7 +28,6 @@ public class OrderController {
 
     @RequestMapping(value = "/order.htm", method = RequestMethod.POST)
     public ModelAndView newOrder(final HttpServletRequest request) {
-
         Order newOrder = new Order();
         newOrder.setName(request.getParameter("name"));
         newOrder.setAddress(request.getParameter("address"));
@@ -51,5 +43,4 @@ public class OrderController {
 
         return new ModelAndView("order");
     }
-
 }
