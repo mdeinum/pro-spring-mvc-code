@@ -1,0 +1,45 @@
+body {
+	font-family: helvetica, arial, verdana;
+	font-size: 12px;
+	height: 100%;;	
+}
+
+nav {
+	background-color: green;
+    border-bottom: thin;
+    border-bottom-style: solid;
+    border-bottom-width: 100%;  
+}
+
+nav a {	
+	border-left: thick;
+	padding-left: 8px;
+    padding-left: 8px;
+    color: black;
+}
+
+nav a:link, nav a:visited, nav a:active { 
+    color: black;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+nav a:hover { 
+	background-color: white;
+	font-weight: bold;
+}
+
+
+header {
+	border-bottom: thin;
+	border-bottom-color: bloack;
+	border-bottom-style: dotted;
+	border-bottom-width: 100%;		
+}
+
+footer {
+    border-top: thin;
+    border-top-color: black;
+    border-top-style: dashed;
+    border-top-width: 100%;  
+}
