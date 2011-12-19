@@ -1,0 +1,7 @@
+war {
+	archiveName = 'pizzas-r-us-swf.war'
+}
+
+dependencies() {
+	compile "org.springframework.webflow:spring-webflow:$springSwfVersion"
+}
