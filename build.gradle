@@ -15,6 +15,7 @@ allprojects {
         mavenRepo url: 'http://maven.springframework.org/release'
         mavenCentral()
         mavenRepo url: 'http://maven.springframework.org/milestone'
+	mavenRepo url: 'https://repository.jboss.org/nexus/content/repositories/releases/'
     }
 
     eclipse {
@@ -54,6 +55,8 @@ subprojects {
     springVersion='3.1.0.RELEASE'
     springSecurityVersion='3.1.0.RELEASE'
     springSwfVersion='2.3.0.RELEASE'
+    hibernateCoreVersion='3.6.8.Final'
+    hibernateEmVersion='3.5.6-Final'
 
     configurations { all*.exclude group: 'commons-logging' }
 
@@ -61,6 +64,7 @@ subprojects {
         compile "org.springframework:spring-webmvc:$springVersion"
         compile "org.springframework:spring-jdbc:$springVersion"
         compile "org.springframework:spring-aop:$springVersion"
+        compile "org.springframework:spring-orm:$springVersion"
         compile 'org.slf4j:jcl-over-slf4j:1.6.4'
         compile 'ch.qos.logback:logback-classic:1.0.0'
         compile 'org.apache.commons:commons-lang3:3.0.1'
