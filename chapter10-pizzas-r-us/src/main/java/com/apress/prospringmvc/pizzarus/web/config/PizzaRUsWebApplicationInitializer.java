@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web;
+package com.apress.prospringmvc.pizzarus.web.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,18 +9,23 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.apress.prospringmvc.pizzarus.config.InfrastructureContext;
-import com.apress.prospringmvc.pizzarus.web.config.WebMvcContext;
+import com.apress.prospringmvc.pizzarus.config.InfrastructureContextConfiguration;
+import com.apress.prospringmvc.pizzarus.config.RepositoryConfiguration;
+import com.apress.prospringmvc.pizzarus.config.TestDataContextConfiguration;
 
 public class PizzaRUsWebApplicationInitializer implements WebApplicationInitializer {
 
+	private static final Class<?>[] configurationClasses = new Class<?>[] { TestDataContextConfiguration.class,
+			WebMvcContext.class, InfrastructureContextConfiguration.class, WebflowContextConfiguration.class,
+			RepositoryConfiguration.class };
+
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		
+
 		// Create the 'root' Spring application context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.setConfigLocation("classpath:/spring/applicationContext.xml");
-		rootContext.register(InfrastructureContext.class);
+		rootContext.register(configurationClasses);
+
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 
 		// Register and map the dispatcher servlet
@@ -29,5 +34,4 @@ public class PizzaRUsWebApplicationInitializer implements WebApplicationInitiali
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/*");
 	}
-
 }

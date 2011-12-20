@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -25,6 +26,7 @@ import org.hibernate.annotations.CascadeType;
  */
 
 @Entity
+@Table(name = "ORDERS")
 public class Order {
 
 	@Id
@@ -36,7 +38,7 @@ public class Order {
 	private boolean delivered;
 	private BigDecimal totalOrderPrice;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order", orphanRemoval = true)
+	@OneToMany(mappedBy = "order", orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 

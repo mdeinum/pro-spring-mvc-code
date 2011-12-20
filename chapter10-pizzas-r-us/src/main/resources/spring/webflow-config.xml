@@ -6,20 +6,16 @@
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd">
 
-           
 	<webflow:flow-executor id="flowExecutor"/>
           
-	<webflow:flow-registry id="flowRegistry" base-path="/flows">
-		<webflow:flow-location-pattern value="**/*-flow.xml"/>
+	<webflow:flow-registry id="flowRegistry"  base-path="/WEB-INF/classes/flows" flow-builder-services="flowBuilderServices">
+		<webflow:flow-location-pattern value="/**/*-flow.xml"/>
 	</webflow:flow-registry>
 	
-	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
-    	<property name="flowExecutor" ref="flowExecutor" />
-	</bean>
-	
-	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
-    	<property name="flowRegistry" ref="flowRegistry"/>
-    	<property name="order" value="0"/>
-	</bean>
-			
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"/>
+
+ 	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+      <property name="viewResolvers" ref="viewResolver"/>
+   </bean>
+   
 </beans>

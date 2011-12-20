@@ -50,6 +50,7 @@ public class WebMvcContext extends WebMvcConfigurationSupport {
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+		internalResourceViewResolver.setOrder(1);
 		internalResourceViewResolver.setPrefix("/WEB-INF/view");
 		internalResourceViewResolver.setSuffix(".jspx");
 		internalResourceViewResolver.setViewClass(JstlView.class);

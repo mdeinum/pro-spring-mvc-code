@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.config;
+package com.apress.prospringmvc.pizzarus.support;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,8 +11,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import com.apress.prospringmvc.pizzarus.config.support.CustomerBuilder;
-import com.apress.prospringmvc.pizzarus.config.support.OrderBuilder;
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 
@@ -24,7 +22,7 @@ public class DataSetup {
 	@Autowired
 	private TransactionTemplate transactionTemplate;
 
-	public void setupDate() {
+	public void setupData() {
 		transactionTemplate.execute(new TransactionCallback<Void>() {
 
 			@Override

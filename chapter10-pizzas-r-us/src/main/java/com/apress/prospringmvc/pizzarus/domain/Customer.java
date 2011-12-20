@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ import org.hibernate.annotations.CascadeType;
  * @author K. Serneels
  */
 
+@Entity
 public class Customer {
 
 	@Id
@@ -38,7 +40,7 @@ public class Customer {
 	private String username;
 	private String password;
 
-	@OneToMany(fetch = FetchType.EAGER,  orphanRemoval = true)
+	@OneToMany(orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
 	private List<Order> orders = new ArrayList<Order>();
 

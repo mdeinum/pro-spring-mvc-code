@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
 		  xmlns:c="http://java.sun.com/jsf/core"
-          xmlns="http://www.w3.org/1999/xhtml"
           version="2.2">
+	
+	<jsp:directive.page pageEncoding="UTF-8" contentType="application/xhtml+xml; charset=UTF-8"/>
+	
 	<html>
 		<head>
 			<title>Welcome to Pizzas R Us</title>

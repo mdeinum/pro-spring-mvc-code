@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.config.support;
+package com.apress.prospringmvc.pizzarus.support;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
