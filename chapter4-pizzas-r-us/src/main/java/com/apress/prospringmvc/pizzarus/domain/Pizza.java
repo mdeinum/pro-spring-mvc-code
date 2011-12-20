@@ -2,6 +2,8 @@ package com.apress.prospringmvc.pizzarus.domain;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+
 /**
  * Created by IntelliJ IDEA.
  * User: marten
@@ -9,31 +11,35 @@ import java.math.BigDecimal;
  * Time: 11:27
  * To change this template use File | Settings | File Templates.
  */
-public class Pizza {
+@Entity
+public class Pizza extends AbstractEntity {
 
-    private long id;
     private String name;
     private String description;
     private BigDecimal price;
-    
-    public Pizza(long id, String name, String description, BigDecimal price) {
-        super();
-        this.id=id;
-        this.name=name;
-        this.description=description;
-        this.price=price;
-    }
-    
+
     public String getName() {
         return this.name;
     }
-    
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return this.description;
     }
-        
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
     public BigDecimal getPrice() {
         return this.price;
+    }
+
+    public void setPrice(final BigDecimal price) {
+        this.price = price;
     }
 
 }

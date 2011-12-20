@@ -1,30 +1,28 @@
 package com.apress.prospringmvc.pizzarus.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.apress.prospringmvc.pizzarus.domain.Pizza;
-import com.apress.prospringmvc.pizzarus.repository.PizzaRepository;
+import com.apress.prospringmvc.pizzarus.domain.Order;
+import com.apress.prospringmvc.pizzarus.repository.OrderRepository;
 
 /**
  * Created by IntelliJ IDEA.
  * User: marten
- * Date: 12-12-11
- * Time: 11:32
+ * Date: 15-12-11
+ * Time: 16:06
  * To change this template use File | Settings | File Templates.
  */
-@Service(value = "pizzaService")
+@Service(value = "orderService")
 @Transactional
-public class PizzaServiceImpl implements PizzaService {
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    private PizzaRepository pizzaRepository;
+    private OrderRepository orderRepository;
 
     @Override
-    public List<Pizza> findAll() {
-        return this.pizzaRepository.findAll();
+    public void newOrder(final Order order) {
+        this.orderRepository.save(order);
     }
 }

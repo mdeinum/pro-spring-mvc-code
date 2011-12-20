@@ -23,7 +23,7 @@ public class PizzasController {
     @RequestMapping(value = "/pizzas.htm")
     public ModelAndView menu() {
         ModelAndView mav = new ModelAndView("pizzas");
-        mav.addObject("pizzas", this.pizzaService.findAll());
+        mav.addObject("pizzaList", this.pizzaService.findAll());
         return mav;
     }
 }

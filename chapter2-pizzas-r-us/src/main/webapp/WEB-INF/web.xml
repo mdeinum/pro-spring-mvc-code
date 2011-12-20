@@ -14,10 +14,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>
-                com.apress.prospringmvc.pizzarus.web
-                com.apress.prospringmvc.aop
-            </param-value>
+            <param-value>com.apress.prospringmvc.pizzarus.web.config</param-value>
         </init-param>
         <init-param>
             <param-name>spring.profiles.active</param-name>

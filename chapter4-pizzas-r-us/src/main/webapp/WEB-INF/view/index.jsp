@@ -1,15 +1,9 @@
 <!DOCTYPE HTML>
+<html>
 <head>
-<title>Welcome to Pizzas R Us</title>
+<title>Home</title>
 </head>
 <body>
-<header>
-<h1>Welcome to Pizzas-R-Us. Your online Pizza Store</h1>
-</header>
-<nav>
- <a href="/pizzas.htm">Menu</a>
-</nav>
-<footer>
-<small>(C) Pizzas-R-Us Ltd.</small>
-</footer>
+    <p>Welcome to Pizzas-R-us.
 </body>
+</html>

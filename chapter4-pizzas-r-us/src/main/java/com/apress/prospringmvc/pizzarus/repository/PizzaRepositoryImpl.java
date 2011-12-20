@@ -1,18 +1,12 @@
 package com.apress.prospringmvc.pizzarus.repository;
 
-import com.apress.prospringmvc.pizzarus.domain.Pizza;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.apress.prospringmvc.pizzarus.domain.Pizza;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,18 +19,12 @@ import java.util.List;
 public class PizzaRepositoryImpl implements PizzaRepository {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private SessionFactory sessionFactory;
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Pizza> findAll() {
-        final String sql = "select id, name, description, price from pizza order by name";
-        return jdbcTemplate.query(sql, new PizzaRowMapper());
+        return this.sessionFactory.getCurrentSession().createQuery("from Pizza order by name").list();
     }
 
-    private static class PizzaRowMapper implements RowMapper<Pizza> {
-        @Override
-        public Pizza mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Pizza(rs.getLong("id"), rs.getString("name"), rs.getString("description"), rs.getBigDecimal("price"));
-        }
-    }
 }
