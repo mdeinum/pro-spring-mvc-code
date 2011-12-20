@@ -4,4 +4,10 @@ war {
 
 dependencies() {
 	compile "org.springframework.webflow:spring-webflow:$springSwfVersion"
+	compile "org.springframework.webflow:spring-js:$springSwfVersion"
+	compile "org.springframework.webflow:spring-binding:$springSwfVersion"
+	compile "org.hibernate:hibernate-core:$hibernateCoreVersion"
+	compile "org.hibernate:hibernate-entitymanager:$hibernateEmVersion"
+	compile "commons-codec:commons-codec:1.6"
 }
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+		  xmlns:c="http://java.sun.com/jsf/core"
+          xmlns="http://www.w3.org/1999/xhtml"
+          version="2.2">
+	<html>
+		<head>
+			<title>Welcome to Pizzas R Us</title>
+			<link type="text/css" href="http://localhost:8080<c:url value="/css/pizzas-r-us.css"/>" ></link>
+		</head>
+
+		<body>
+			<p>How exciting!  Our first vertical slice!</p>
+
+			<div id="menu">
+				<jsp:include page="menu.jspx" />
+			</div>
+
+		</body>
+	</html>
+</jsp:root>

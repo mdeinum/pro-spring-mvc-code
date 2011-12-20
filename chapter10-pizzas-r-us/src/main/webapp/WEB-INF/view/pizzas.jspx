@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+		  xmlns:c="http://java.sun.com/jsf/core"
+		  xmlns:spring="http://www.springframework.org/tags"
+          xmlns="http://www.w3.org/1999/xhtml"
+          version="2.2">
+	<head>
+		<title><spring:message code="home.title"/></title>
+	</head>
+	<body>
+		<h1>Pizzas</h1>
+
+		<div id="menu">
+			<jsp:include page="menu.jspx" />
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th><spring:message code="pizzas.table.name" /></th>
+					<th><spring:message code="pizzas.table.description" /></th>
+					<th><spring:message code="pizzas.table.price" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${pizzas}" var="pizza">
+					<tr>
+						<td>${pizza.name}</td>
+						<td>${pizza.description}</td>
+						<td>${pizza.price}</td>
+					<tr>
+				</c:forEach>
+			</tbody>	
+		</table>
+	</body>
+</jsp:root>
