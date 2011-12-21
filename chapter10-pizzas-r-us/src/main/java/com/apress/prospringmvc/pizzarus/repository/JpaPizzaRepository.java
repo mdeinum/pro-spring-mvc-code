@@ -22,8 +22,7 @@ public class JpaPizzaRepository implements PizzaRepository {
 	private EntityManager entityManager;
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<Pizza> findAll() {
-		return (List<Pizza>) entityManager.createQuery("select p from Pizza p").getResultList();
+		return entityManager.createQuery("select p from Pizza p", Pizza.class).getResultList();
 	}
 }
