@@ -1,20 +1,24 @@
 package com.apress.prospringmvc.pizzarus.config;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.EJB3NamingStrategy;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -29,41 +33,71 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         "com.apress.prospringmvc.pizzarus.repository" })
 public class InfrastructureConfig {
 
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
     @Bean
-    public DataSource dataSource() {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        builder.setType(EmbeddedDatabaseType.H2);
-        return builder.build();
+    public FactoryBean<EntityManagerFactory> entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
+        //        localContainerEntityManagerFactoryBean.setPersistenceUnitName("pizzas-r-us");
+        localContainerEntityManagerFactoryBean.setPackagesToScan("com.apress.prospringmvc.pizzarus.domain");
+        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+        return localContainerEntityManagerFactoryBean;
     }
 
     @Bean
-    public SessionFactory sessionFactory() {
-        LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("com.apress.prospringmvc.pizzarus.domain");
-        builder.setNamingStrategy(new EJB3NamingStrategy());
-        builder.setProperty("hibernate.show_sql", "true");
-        builder.setProperty("hibernate.hbm2ddl.auto", "update");
-        return builder.buildSessionFactory();
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        jpaVendorAdapter.setGenerateDdl(true);
+        jpaVendorAdapter.setShowSql(true);
+        return jpaVendorAdapter;
     }
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory());
-        transactionManager.setDataSource(dataSource());
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(this.entityManagerFactory);
+        transactionManager.setDataSource(this.dataSource);
         return transactionManager;
     }
 
     @Bean
-    @DependsOn(value = "sessionFactory")
+    @DependsOn(value = "entityManagerFactory")
     public DataSourceInitializer dataSourceInitializer() {
         DataSourceInitializer initializer = new DataSourceInitializer();
-        initializer.setDataSource(dataSource());
+        initializer.setDataSource(this.dataSource);
         initializer.setEnabled(true);
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource("/META-INF/sql/data.sql"));
         initializer.setDatabasePopulator(populator);
         return initializer;
+    }
+
+    @Configuration
+    @Profile("test")
+    public static class TestDataSourceConfiguration {
+
+        @Bean
+        public DataSource dataSource() {
+            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+            builder.setType(EmbeddedDatabaseType.H2);
+            return builder.build();
+        }
+    }
+
+    @Configuration
+    @Profile("local")
+    public static class LocalDataSourceConfiguration {
+        @Bean
+        public DataSource dataSource() {
+            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+            builder.setType(EmbeddedDatabaseType.H2);
+            return builder.build();
+        }
     }
 
 }

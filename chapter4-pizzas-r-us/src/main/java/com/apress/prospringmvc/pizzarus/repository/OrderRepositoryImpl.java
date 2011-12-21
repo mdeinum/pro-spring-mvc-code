@@ -1,7 +1,8 @@
 package com.apress.prospringmvc.pizzarus.repository;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 
 import com.apress.prospringmvc.pizzarus.domain.Order;
@@ -16,11 +17,11 @@ import com.apress.prospringmvc.pizzarus.domain.Order;
 @Repository("orderRepository")
 public class OrderRepositoryImpl implements OrderRepository {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void save(final Order order) {
-        this.sessionFactory.getCurrentSession().save(order);
+        this.entityManager.persist(order);
     }
 }
