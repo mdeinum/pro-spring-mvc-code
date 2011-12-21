@@ -28,8 +28,8 @@ allprojects {
         mavenRepo url: 'http://maven.springframework.org/release'
         mavenCentral()
         mavenRepo url: 'http://maven.springframework.org/milestone'
-	mavenRepo url: 'https://repository.jboss.org/nexus/content/repositories/releases/'
-	mavenRepo url: 'http://download.java.net/maven/glassfish/org/glassfish/javax.servlet/3.0/'
+	    mavenRepo url: 'https://repository.jboss.org/nexus/content/repositories/releases/'
+	    mavenRepo url: 'http://download.java.net/maven/glassfish/org/glassfish/javax.servlet/3.0/'
     }
 
     eclipse {
