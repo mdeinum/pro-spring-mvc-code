@@ -7,13 +7,9 @@
 		<evaluate expression="orderController.initializeOrderForm()" result="flowScope.orderForm" />
 	</on-start>
 
-	<view-state id="createOrder" view="createOrder" model="orderForm">
-		<binder>
-	        <binding property="pizza" required="true" />
-			<binding property="quantity" required="true" />
-		</binder>
+	<view-state id="createOrder" view="createOrder" model="orderForm" >
 		
-		<transition on="add" to="createOrder">
+		<transition on="add" to="createOrder" bind="true">
 			<evaluate expression="orderController.addPizza(flowScope.orderForm)" />
 		</transition>
 		

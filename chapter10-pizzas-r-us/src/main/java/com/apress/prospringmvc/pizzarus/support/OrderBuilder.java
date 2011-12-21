@@ -11,7 +11,7 @@ import com.apress.prospringmvc.pizzarus.domain.OrderDetail;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.domain.Shop;
 
-public class OrderBuilder {
+public class OrderBuilder extends EntityBuilder<Order> {
 
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private Order product = new Order();
@@ -52,18 +52,19 @@ public class OrderBuilder {
 		return this;
 	}
 
-	public Order build() {;
-	BigDecimal totalOrderPrice = new BigDecimal("0");
-	totalOrderPrice.setScale(2, RoundingMode.HALF_UP);
+	@Override
+	Order assembleProduct() {
+		BigDecimal totalOrderPrice = new BigDecimal("0");
+		totalOrderPrice.setScale(2, RoundingMode.HALF_UP);
 
-	for (OrderDetail orderDetail : orderDetails) {
-		totalOrderPrice = totalOrderPrice.add(orderDetail.getPizza().getPrice()
-				.multiply(new BigDecimal(orderDetail.getAmount())));
-	}
+		for (OrderDetail orderDetail : orderDetails) {
+			totalOrderPrice = totalOrderPrice.add(orderDetail.getPizza().getPrice()
+					.multiply(new BigDecimal(orderDetail.getAmount())));
+		}
 
-	product.setOrderDetails(orderDetails);
-	product.setTotalOrderPrice(totalOrderPrice);
+		product.setOrderDetails(orderDetails);
+		product.setTotalOrderPrice(totalOrderPrice);
 
-	return product;
+		return product;
 	}
 }

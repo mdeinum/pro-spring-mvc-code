@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  * A customer resembles an authenticated user of our system. A customer is able to make orders. A customer is identified
@@ -41,9 +39,8 @@ public class Customer implements Serializable {
 	private String username;
 	private String password;
 
-	@OneToMany(orphanRemoval = true)
+	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "customerId")
-	@Cascade(CascadeType.ALL)
 	private List<Order> orders = new ArrayList<Order>();
 
 	public Long getId() {

@@ -6,7 +6,7 @@ import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.CustomerAddress;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 
-public class CustomerBuilder {
+public class CustomerBuilder extends EntityBuilder<Customer> {
 
 	private Customer product = new Customer();
 
@@ -39,12 +39,15 @@ public class CustomerBuilder {
 		return this;
 	}
 
-	public CustomerBuilder addOrder(Order order) {
-		product.getOrders().add(order);
+	public CustomerBuilder addOrder(Order... orders) {
+		for (Order order : orders) {
+			product.getOrders().add(order);
+		}
 		return this;
 	}
 
-	public Customer build() {
+	@Override
+	Customer assembleProduct() {
 		return product;
 	}
 }

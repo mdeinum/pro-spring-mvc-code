@@ -16,6 +16,8 @@ public class Shop implements Serializable {
 
 	private String shopName;
 
+	private String city;
+
 	public String getShopName() {
 		return shopName;
 	}
@@ -30,5 +32,13 @@ public class Shop implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 }

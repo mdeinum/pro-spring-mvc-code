@@ -2,14 +2,12 @@ package com.apress.prospringmvc.pizzarus.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  * Models a "Pizza" in our domain. A pizza has a name, a longer description (possibly describing its ingredients) and a
@@ -27,12 +25,10 @@ public class OrderDetail implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@ManyToOne(optional=false)
-	@Cascade(CascadeType.ALL)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	private Pizza pizza;
 
-	@ManyToOne(optional=false)
-	@Cascade(CascadeType.ALL)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	private Order order;
 
 	private int amount;
