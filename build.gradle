@@ -29,7 +29,7 @@ allprojects {
         mavenCentral()
         mavenRepo url: 'http://maven.springframework.org/milestone'
 	    mavenRepo url: 'https://repository.jboss.org/nexus/content/repositories/releases/'
-	    mavenRepo url: 'http://download.java.net/maven/glassfish/org/glassfish/javax.servlet/3.0/'
+	    mavenRepo url: 'http://download.java.net/maven/glassfish/org/glassfish/'
     }
 
     eclipse {
@@ -49,6 +49,7 @@ configure(webProjects) {
     
     dependencies() {
         providedCompile 'org.glassfish:javax.servlet:3.0'
+        providedCompile 'org.glassfish:javax.servlet.jsp:3.0'
 
         def tomcatVersion = '7.0.23'
         tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
@@ -64,6 +65,7 @@ configure(javaProjects) {
 
     dependencies() {
         compile 'org.glassfish:javax.servlet:3.0'
+        compile 'org.glassfish:javax.servlet.jsp:3.0'
     }
     
 }

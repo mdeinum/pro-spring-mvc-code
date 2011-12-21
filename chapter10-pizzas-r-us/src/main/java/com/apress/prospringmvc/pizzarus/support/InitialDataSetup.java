@@ -14,7 +14,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 
-public class DataSetup {
+public class InitialDataSetup {
 
 	@PersistenceContext
 	private EntityManager entityManager;

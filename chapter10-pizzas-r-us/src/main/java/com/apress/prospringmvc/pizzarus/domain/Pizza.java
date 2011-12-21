@@ -1,11 +1,15 @@
 package com.apress.prospringmvc.pizzarus.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Models a "Pizza" in our domain. A pizza has a name, a longer description (possibly describing its ingredients) and a
@@ -17,7 +21,7 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Pizza {
+public class Pizza implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,4 +61,25 @@ public class Pizza {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	// Entity equality on ID is a
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		Pizza other = (Pizza) object;
+
+		return new EqualsBuilder().append(this.getPrice(), other.getPrice()).append(this.getName(), other.getName())
+				.append(this.getDescription(), other.getDescription()).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(getDescription()).append(getName()).append(getPrice()).toHashCode();
+	}
+
 }

@@ -12,6 +12,6 @@ public interface PizzasService {
 
 	Customer authenticateCustomer(String username, String password) throws InvalidCredentialsException;
 
-	void addOrder(Customer customerDetached,Order order);
+	void addOrder(Customer customerDetached, Order order);
 
 }
