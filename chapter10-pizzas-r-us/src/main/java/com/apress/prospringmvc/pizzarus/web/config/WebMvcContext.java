@@ -1,23 +1,15 @@
 package com.apress.prospringmvc.pizzarus.web.config;
 
-import java.util.Properties;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
-import com.apress.prospringmvc.pizzarus.web.interceptor.OpeningHoursInterceptor;
 
 /**
  * WebMvc Configuration.
@@ -25,19 +17,14 @@ import com.apress.prospringmvc.pizzarus.web.interceptor.OpeningHoursInterceptor;
  * @author M. Deinum
  */
 @Configuration
+@EnableWebMvc
 public class WebMvcContext extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/js/**", "*.js").addResourceLocations("/WEB-INF/js");
-		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images");
-	}
-
-	@Override
-	protected void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LocaleChangeInterceptor());
-		registry.addInterceptor(new OpeningHoursInterceptor());
-		registry.addInterceptor(new ThemeChangeInterceptor());
+		registry.addResourceHandler("/js/**", "*.js").addResourceLocations("/WEB-INF/js/");
+		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/");
+		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/css/");
 	}
 
 	@Bean
@@ -51,19 +38,9 @@ public class WebMvcContext extends WebMvcConfigurationSupport {
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
 		internalResourceViewResolver.setOrder(1);
-		internalResourceViewResolver.setPrefix("/WEB-INF/view");
+		internalResourceViewResolver.setPrefix("/WEB-INF/view/");
 		internalResourceViewResolver.setSuffix(".jspx");
 		internalResourceViewResolver.setViewClass(JstlView.class);
 		return internalResourceViewResolver;
 	}
-
-	public HandlerExceptionResolver simpleMappingExceptionResolver() {
-		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-		Properties mappings = new Properties();
-		mappings.setProperty("DataAccessException", "db-error");
-		mappings.setProperty("Exception", "error");
-		resolver.setExceptionMappings(mappings);
-		return resolver;
-	}
-
 }

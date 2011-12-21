@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+		  xmlns:jsp="http://java.sun.com/JSP/Page" 
 		  xmlns:c="http://java.sun.com/jsf/core"
 		  xmlns:spring="http://www.springframework.org/tags"
           version="2.2">
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="application/xhtml+xml; charset=UTF-8"/>
-
-	<h3><spring:message code="menu.title" /></h3>
+<!DOCTYPE html>
+	<h3></h3>
 		<ul>
-			<li><a href="<spring:url value="/pizzas.htm" />"><spring:message code="menu.pizzas"/></a></li>
-			<li><a href="<spring:url value="/accounts.htm" />"><spring:message code="menu.accounts" /></a></li>
+		
 		</ul>
 </jsp:root>
 	

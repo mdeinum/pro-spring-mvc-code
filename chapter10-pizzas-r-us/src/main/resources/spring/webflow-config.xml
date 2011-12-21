@@ -18,4 +18,7 @@
       <property name="viewResolvers" ref="viewResolver"/>
    </bean>
    
+   <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+   
+   
 </beans>

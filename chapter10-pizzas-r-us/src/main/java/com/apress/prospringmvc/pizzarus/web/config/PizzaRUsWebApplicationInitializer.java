@@ -9,6 +9,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.apress.prospringmvc.pizzarus.config.CustomComponentScanFilter;
 import com.apress.prospringmvc.pizzarus.config.InfrastructureContextConfiguration;
 import com.apress.prospringmvc.pizzarus.config.RepositoryConfiguration;
 import com.apress.prospringmvc.pizzarus.config.TestDataContextConfiguration;
@@ -17,7 +18,7 @@ public class PizzaRUsWebApplicationInitializer implements WebApplicationInitiali
 
 	private static final Class<?>[] configurationClasses = new Class<?>[] { TestDataContextConfiguration.class,
 			WebMvcContext.class, InfrastructureContextConfiguration.class, WebflowContextConfiguration.class,
-			RepositoryConfiguration.class };
+			RepositoryConfiguration.class, CustomComponentScanFilter.class };
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
@@ -32,6 +33,6 @@ public class PizzaRUsWebApplicationInitializer implements WebApplicationInitiali
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("pizza-r-us", new DispatcherServlet(
 				rootContext));
 		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/*");
+		dispatcher.addMapping("/");
 	}
 }

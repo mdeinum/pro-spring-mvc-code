@@ -3,7 +3,7 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <view-state id="showLogin" view="/index">
+    <view-state id="showLogin" view="index">
         <transition on="submit" to="authenticate" />
         <transition on="register" to="register" />
     </view-state>

@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
-		  xmlns:c="http://java.sun.com/jsf/core"
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+		  xmlns:jsp="http://java.sun.com/JSP/Page"
+		  xmlns:spring="http://www.springframework.org/tags"
+		  xmlns:form="http://www.springframework.org/tags/form" 
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"
           version="2.2">
-	
-	<jsp:directive.page pageEncoding="UTF-8" contentType="application/xhtml+xml; charset=UTF-8"/>
-	
+<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"/>
+<jsp:output omit-xml-declaration="false"/>
+<jsp:output doctype-root-element="HTML"  doctype-system="about:legacy-compat"/> 
+
 	<html>
 		<head>
 			<title>Welcome to Pizzas R Us</title>
-			<link type="text/css" href="http://localhost:8080<c:url value="/css/pizzas-r-us.css"/>" ></link>
+			<spring:url value="/css/pizzas-r-us.css" var="pizzaCss"/>
+			<link rel="stylesheet" type="text/css" href="${pizzaCss}"/>
 		</head>
 
 		<body>
-			<p>How exciting!  Our first vertical slice!</p>
-
-			<div id="menu">
-				<jsp:include page="menu.jspx" />
-			</div>
-
+			<form:form modelAttribute="userModel" action="${flowExecutionUrl}">
+			
+				<form:input path="checkinDate"/>
+			
+			
+			</form:form>
 		</body>
 	</html>
 </jsp:root>

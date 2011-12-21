@@ -12,15 +12,14 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
 
 @Configuration
+@EnableTransactionManagement
 @ImportResource("classpath:/spring/transaction-config.xml")
-@ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus" }, excludeFilters = {
-		@Filter(type = FilterType.ANNOTATION, value = Controller.class),
-		@Filter(type = FilterType.CUSTOM, value = CustomComponentScanFilter.class) })
+@ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus" }, excludeFilters = { @Filter(type = FilterType.CUSTOM, value = CustomComponentScanFilter.class) })
 public class InfrastructureContextConfiguration {
 
 	@Autowired

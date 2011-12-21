@@ -14,8 +14,8 @@ public class CustomComponentScanFilter implements TypeFilter {
 
 		if (classPackage.getName().startsWith("com.apress.prospringmvc.pizzarus.config")
 				|| classPackage.toString().startsWith("com.apress.prospringmvc.pizzarus.web.config")) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 }
