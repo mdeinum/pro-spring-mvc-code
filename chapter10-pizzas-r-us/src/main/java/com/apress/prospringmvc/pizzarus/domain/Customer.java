@@ -1,5 +1,6 @@
 package com.apress.prospringmvc.pizzarus.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import org.hibernate.annotations.CascadeType;
  */
 
 @Entity
-public class Customer {
+public class Customer implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

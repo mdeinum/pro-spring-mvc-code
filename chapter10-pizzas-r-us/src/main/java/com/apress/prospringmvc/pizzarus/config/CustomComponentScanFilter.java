@@ -10,10 +10,10 @@ public class CustomComponentScanFilter implements TypeFilter {
 
 	@Override
 	public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
-		Package classPackage = metadataReader.getClassMetadata().getClass().getPackage();
+		String className = metadataReader.getClassMetadata().getClassName();
 
-		if (classPackage.getName().startsWith("com.apress.prospringmvc.pizzarus.config")
-				|| classPackage.toString().startsWith("com.apress.prospringmvc.pizzarus.web.config")) {
+		if (className.startsWith("com.apress.prospringmvc.pizzarus.config")
+				|| className.startsWith("com.apress.prospringmvc.pizzarus.web.config")) {
 			return true;
 		}
 		return false;

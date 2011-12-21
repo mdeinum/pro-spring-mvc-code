@@ -17,7 +17,7 @@ import com.apress.prospringmvc.pizzarus.config.TestDataContextConfiguration;
 public class PizzaRUsWebApplicationInitializer implements WebApplicationInitializer {
 
 	private static final Class<?>[] configurationClasses = new Class<?>[] { TestDataContextConfiguration.class,
-			WebMvcContext.class, InfrastructureContextConfiguration.class, WebflowContextConfiguration.class,
+			WebMvcContextConfiguration.class, InfrastructureContextConfiguration.class, WebflowContextConfiguration.class,
 			RepositoryConfiguration.class, CustomComponentScanFilter.class };
 
 	@Override

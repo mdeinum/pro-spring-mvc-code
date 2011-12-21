@@ -17,8 +17,18 @@
 		</head>
 
 		<body>
-			<spring:url value="/create-order-flow" var="createOrderFlow"/>
-			<a href="${createOrderFlow}">Create new Order</a>
+			<form:form modelAttribute="order" action="${flowExecutionUrl}">
+				<table>
+					<tr>
+						<td>
+							SELECT SHOP
+						</td>
+					</tr>
+				</table>
+				
+				<form:button value="Next"/>
+				<form:button value="Cancel"/>
+			</form:form>
 		</body>
 	</html>
 </jsp:root>

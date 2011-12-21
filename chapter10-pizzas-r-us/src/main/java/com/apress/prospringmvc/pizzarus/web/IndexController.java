@@ -9,8 +9,8 @@ import org.springframework.webflow.execution.Event;
 @Controller
 public class IndexController {
 
-	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
-	public Event indexPage() {
-		return new EventFactorySupport().success(this);
+	@RequestMapping(value = "/index.html", method = RequestMethod.GET)
+	public void indexPage() {
+
 	}
 }

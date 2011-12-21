@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-public class WebMvcContext extends WebMvcConfigurationSupport {
+public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {

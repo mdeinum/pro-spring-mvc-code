@@ -1,5 +1,7 @@
 package com.apress.prospringmvc.pizzarus.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ import org.hibernate.annotations.CascadeType;
  */
 
 @Entity
-public class OrderDetail {
+public class OrderDetail implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

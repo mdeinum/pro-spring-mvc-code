@@ -1,9 +1,11 @@
 package com.apress.prospringmvc.pizzarus.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class CustomerAddress {
+public class CustomerAddress implements Serializable{
 
 	private String street;
 	private String houseNumber;

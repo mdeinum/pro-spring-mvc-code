@@ -1,5 +1,6 @@
 package com.apress.prospringmvc.pizzarus.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,7 +29,7 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class Order implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,6 +43,9 @@ public class Order {
 	@OneToMany(mappedBy = "order", orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+
+	@ManyToOne
+	private Shop shop;
 
 	public Long getId() {
 		return id;
@@ -88,5 +93,13 @@ public class Order {
 
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 }
