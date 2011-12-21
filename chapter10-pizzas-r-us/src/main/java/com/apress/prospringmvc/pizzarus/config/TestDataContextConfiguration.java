@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.apress.prospringmvc.pizzarus.support.InitialDataSetup;
 
 @Configuration
-//@Profile("test")
+// @Profile("test")
 public class TestDataContextConfiguration {
 
 	@Bean(initMethod = "setupData")

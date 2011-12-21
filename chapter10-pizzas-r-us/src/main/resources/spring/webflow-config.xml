@@ -1,24 +1,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
-       xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+	xsi:schemaLocation="
            http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd">
 
-	<webflow:flow-executor id="flowExecutor"/>
-          
-	<webflow:flow-registry id="flowRegistry"  base-path="/WEB-INF/classes/flows" flow-builder-services="flowBuilderServices">
-		<webflow:flow-location-pattern value="/**/*-flow.xml"/>
-	</webflow:flow-registry>
-	
-	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"/>
+	<webflow:flow-executor id="flowExecutor" />
 
- 	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
-      <property name="viewResolvers" ref="viewResolver"/>
-   </bean>
-   
-   <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-   
-   
+	<webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/classes/flows" flow-builder-services="flowBuilderServices">
+		<webflow:flow-location-pattern value="/**/*-flow.xml" />
+	</webflow:flow-registry>
+
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"  conversion-service="mvcConversionService" />
+
+	<bean id="mvcViewFactoryCreator"
+		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<property name="viewResolvers" ref="viewResolver" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+
 </beans>

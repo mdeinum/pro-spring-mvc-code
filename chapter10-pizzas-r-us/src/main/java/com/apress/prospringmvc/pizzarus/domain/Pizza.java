@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -21,11 +23,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 
 @Entity
+@Table(name = "Pizza", uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
 public class Pizza implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	private String name;
 	private String description;
 	private BigDecimal price;
@@ -73,13 +77,11 @@ public class Pizza implements Serializable {
 		}
 		Pizza other = (Pizza) object;
 
-		return new EqualsBuilder().append(this.getPrice(), other.getPrice()).append(this.getName(), other.getName())
-				.append(this.getDescription(), other.getDescription()).isEquals();
+		return new EqualsBuilder().append(this.getName(), other.getName()).isEquals();
 	}
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(getDescription()).append(getName()).append(getPrice()).toHashCode();
+		return new HashCodeBuilder().append(getName()).toHashCode();
 	}
-
 }

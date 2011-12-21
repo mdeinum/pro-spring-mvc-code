@@ -1,8 +1,5 @@
 package com.apress.prospringmvc.pizzarus.support;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.apress.prospringmvc.pizzarus.domain.Customer;

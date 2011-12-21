@@ -7,5 +7,5 @@ import com.apress.prospringmvc.pizzarus.domain.Pizza;
 public interface PizzaRepository {
 
 	List<Pizza> findAll();
-	
+
 }

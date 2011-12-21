@@ -1,29 +1,37 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<on-start>
 		<evaluate expression="orderController.initializeOrderForm()" result="flowScope.orderForm" />
 	</on-start>
 
-    <view-state id="createOrder" view="createOrder" model="order">
-    	<transition on="add" to="createOrder">
-    		<evaluate expression="orderController.addPizza(flowScope.orderForm)"  />
-    	</transition>
-        <transition on="next" to="selectShop" />
-        <transition on="reset" to="createOrder">
-        	<evaluate expression="orderController.initializeOrderForm()" result="flowScope.orderForm" />
-        </transition>
-        <transition on="return" to="end" />
-    </view-state>
-	
-    <view-state id="selectShop" view="selectShop" model="order">
-        <transition on="submit" to="registerCustomer" />
-        <transition on="cancel" to="showLogin" />
-    </view-state>
-	
-    <end-state id="end" />
-    	
+	<view-state id="createOrder" view="createOrder" model="orderForm">
+		<binder>
+	        <binding property="pizza" required="true" />
+			<binding property="quantity" required="true" />
+		</binder>
+		
+		<transition on="add" to="createOrder">
+			<evaluate expression="orderController.addPizza(flowScope.orderForm)" />
+		</transition>
+		
+		<transition on="next" to="selectShop" />
+		
+		<transition on="reset" to="createOrder">
+			<evaluate expression="orderController.initializeOrderForm()" result="flowScope.orderForm" />
+		</transition>
+		
+		<transition on="return" to="end" />
+	</view-state>
+
+	<view-state id="selectShop" view="selectShop" model="order">
+		<transition on="submit" to="registerCustomer" />
+		<transition on="cancel" to="showLogin" />
+	</view-state>
+
+	<end-state id="end" />
+
 </flow>	
 	

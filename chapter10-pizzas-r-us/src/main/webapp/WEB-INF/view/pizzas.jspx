@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
-		  xmlns:c="http://java.sun.com/jsf/core"
-		  xmlns:spring="http://www.springframework.org/tags"
-          version="2.2">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:spring="http://www.springframework.org/tags" version="2.2">
 
-	<jsp:directive.page pageEncoding="UTF-8" contentType="application/xhtml+xml; charset=UTF-8"/>
+	<jsp:directive.page pageEncoding="UTF-8"
+		contentType="application/xhtml+xml; charset=UTF-8" />
 
 	<head>
-		<title><spring:message code="home.title"/></title>
+<title><spring:message code="home.title" /></title>
 	</head>
 	<body>
 		<h1>Pizzas</h1>
@@ -31,7 +31,7 @@
 						<td>${pizza.price}</td>
 					<tr>
 				</c:forEach>
-			</tbody>	
+			</tbody>
 		</table>
 	</body>
 </jsp:root>

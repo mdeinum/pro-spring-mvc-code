@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns="http://www.w3.org/1999/xhtml"
-		  xmlns:jsp="http://java.sun.com/JSP/Page"
-		  xmlns:spring="http://www.springframework.org/tags"
-		  xmlns:form="http://www.springframework.org/tags/form" 
-		  xmlns:c="http://java.sun.com/jsp/jstl/core"
-          version="2.2">
-<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"/>
-<jsp:output omit-xml-declaration="false"/>
-<jsp:output doctype-root-element="HTML"  doctype-system="about:legacy-compat"/> 
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+	<jsp:directive.page pageEncoding="UTF-8"
+		contentType="text/html; charset=UTF-8" />
+	<jsp:output omit-xml-declaration="false" />
+	<jsp:output doctype-root-element="HTML"
+		doctype-system="about:legacy-compat" />
 
 	<html>
-		<head>
-			<title>Welcome to Pizzas R Us</title>
-			<spring:url value="/css/pizzas-r-us.css" var="pizzaCss"/>
-			<link rel="stylesheet" type="text/css" href="${pizzaCss}"/>
-		</head>
+<head>
+<title>Welcome to Pizzas R Us</title>
+<spring:url value="/css/pizzas-r-us.css" var="pizzaCss" />
+<link rel="stylesheet" type="text/css" href="${pizzaCss}" />
+</head>
 
-		<body>
-			<spring:url value="/create-order-flow" var="createOrderFlow"/>
-			<a href="${createOrderFlow}">Create new Order</a>
-		</body>
+<body>
+	<spring:url value="/create-order-flow" var="createOrderFlow" />
+	<a href="${createOrderFlow}">Create new Order</a>
+</body>
 	</html>
 </jsp:root>

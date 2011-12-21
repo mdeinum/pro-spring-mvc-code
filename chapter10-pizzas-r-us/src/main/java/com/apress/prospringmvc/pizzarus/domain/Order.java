@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +28,7 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order implements Serializable{
+public class Order implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,11 +39,12 @@ public class Order implements Serializable{
 	private boolean delivered;
 	private BigDecimal totalOrderPrice;
 
-	@OneToMany(mappedBy = "order", orphanRemoval = true)
+	@OneToMany(mappedBy = "order")
 	@Cascade(CascadeType.ALL)
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 
 	@ManyToOne
+	@Cascade(CascadeType.ALL)
 	private Shop shop;
 
 	public Long getId() {

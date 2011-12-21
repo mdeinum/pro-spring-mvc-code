@@ -13,6 +13,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
+import com.apress.prospringmvc.pizzarus.domain.Shop;
 
 public class InitialDataSetup {
 
@@ -27,9 +28,14 @@ public class InitialDataSetup {
 
 			@Override
 			public Void doInTransaction(TransactionStatus status) {
+				Shop shop = new Shop();
+				shop.setShopName("Pizza-r-us");
+
 				Order pizzaMargheritaOrder = new OrderBuilder()
-						.addPizza("Pizza Margherita", "Tomato, sliced mozzarella, basil and extra-virgin olive oil",
-								new BigDecimal("13.20"), 1).deliveryDate(new Date()).orderDate(new Date()).build();
+				.addPizza("Pizza Margherita", "Tomato, sliced mozzarella, basil and extra-virgin olive oil",
+						new BigDecimal("13.20"), 1).deliveryDate(new Date()).orderDate(new Date()).shop(shop)
+						.build();
+
 				Customer johnDoe = new CustomerBuilder().addOrder(pizzaMargheritaOrder)
 						.address("Brussels", "1000", "Nieuwstraat", "1", "A").credentials("jd", "secret")
 						.name("John", "Doe").build();
