@@ -39,18 +39,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LocaleChangeInterceptor());
-	}
-
-	@Bean
-	public MessageSource messageSource() {
-		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("messages");
-		return messageSource;
-	}
-
-	@Override
 	public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
