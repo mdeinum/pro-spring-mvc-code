@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.convert.TypeDescriptor;
@@ -14,6 +15,8 @@ import com.apress.prospringmvc.pizzarus.service.PizzasService;
 
 public class PizzaConverter implements GenericConverter, ApplicationContextAware {
 
+	@Autowired
+	private PizzasService pizzaService;
 	private ApplicationContext applicationContext;
 
 	@Override
@@ -36,7 +39,7 @@ public class PizzaConverter implements GenericConverter, ApplicationContextAware
 
 		if (sourceType.getObjectType().isAssignableFrom(String.class)
 				&& targetType.getObjectType().isAssignableFrom(Pizza.class)) {
-			PizzasService pizzaService = (PizzasService) applicationContext.getBean("pizzaService");
+			// PizzasService pizzaService = (PizzasService) applicationContext.getBean("pizzaService");
 
 			for (Pizza pizza : pizzaService.getPizzas()) {
 				if (pizza.getName().equals(source)) {

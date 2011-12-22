@@ -11,13 +11,11 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.apress.prospringmvc.pizzarus.config.InfrastructureContextConfiguration;
-import com.apress.prospringmvc.pizzarus.config.RepositoryConfiguration;
 import com.apress.prospringmvc.pizzarus.config.TestDataContextConfiguration;
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { InfrastructureContextConfiguration.class, RepositoryConfiguration.class,
-		TestDataContextConfiguration.class })
+@ContextConfiguration(classes = { InfrastructureContextConfiguration.class, TestDataContextConfiguration.class })
 @ActiveProfiles("test")
 public class CustomerRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 

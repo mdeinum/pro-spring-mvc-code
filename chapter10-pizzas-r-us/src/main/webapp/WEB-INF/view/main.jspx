@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+
+	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
+	<jsp:output omit-xml-declaration="false" />
+	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+		<title>Pizza-R-Us - the best pizza in town</title>
+		<spring:url value="/css/pizzas-r-us.css" var="pizzaCss" />
+		<link rel="stylesheet" type="text/css" href="${pizzaCss}" />
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="incontainer">
+				<div id="header">
+					<ul class="menu">
+						<li class="btn_1">
+							 <spring:url value="/WEB-INF/views/main.jspx" var="home" />
+							<a href="${home}" title="home page">home page</a>
+						</li>
+						<li class="line"/>
+						<li class="btn_4">
+							<spring:url value="/create-order-flow" var="createOrder" />
+							<a href="${createOrder}" title="home delivery">home delivery</a>
+						</li>
+						<li class="line"/>
+						<li class="btn_3">
+							<spring:url value="/login-flow" var="login" />
+							<a href="${login}" title="login">Login</a>
+						</li>
+					</ul>
+					<img src="images/logo.jpg" width="293" height="80" alt="" id="logo" />
+				</div>
+
+				<div id="content">
+					<div id="leftPan">
+						<div id="welcome">
+							
+						</div>
+					</div>
+				</div>
+
+				<div id="footer">
+					<p>
+						<a href="#">HOME PAGE</a> | <a href="#">ABOUT US</a> | <a href="#">HOME DLIVERY</a> | <a href="#">CONTACTS</a><br />Copyright &#174; Pizza-R-Us
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+</jsp:root>

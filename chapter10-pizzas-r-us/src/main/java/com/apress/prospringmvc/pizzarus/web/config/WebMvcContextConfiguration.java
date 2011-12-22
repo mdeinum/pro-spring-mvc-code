@@ -2,7 +2,6 @@ package com.apress.prospringmvc.pizzarus.web.config;
 
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +13,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles2.TilesView;
 
 import com.apress.prospringmvc.pizzarus.web.PizzaConverter;
 
@@ -25,9 +27,6 @@ import com.apress.prospringmvc.pizzarus.web.PizzaConverter;
 @Configuration
 @EnableWebMvc
 public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
-
-	@Autowired
-	private PizzaConverter pizzaConverter;
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -45,9 +44,17 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
+	public ViewResolver tilesViewResolver() {
+		UrlBasedViewResolver urlBasedViewResolver = new UrlBasedViewResolver();
+		urlBasedViewResolver.setOrder(1);
+		urlBasedViewResolver.setViewClass(TilesView.class);
+		return urlBasedViewResolver;
+	}
+
+	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-		internalResourceViewResolver.setOrder(1);
+		internalResourceViewResolver.setOrder(2);
 		internalResourceViewResolver.setPrefix("/WEB-INF/view/");
 		internalResourceViewResolver.setSuffix(".jspx");
 		internalResourceViewResolver.setViewClass(JstlView.class);
@@ -59,8 +66,15 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 		return new PizzaConverter();
 	}
 
+	@Bean
+	public TilesConfigurer tilesConfigurer() {
+		TilesConfigurer tilesConfigurer = new TilesConfigurer();
+		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
+		return tilesConfigurer;
+	}
+
 	@Override
 	protected void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(pizzaConverter);
+		registry.addConverter(pizzaConverter());
 	}
 }

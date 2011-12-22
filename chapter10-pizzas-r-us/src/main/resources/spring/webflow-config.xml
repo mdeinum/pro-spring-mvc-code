@@ -13,17 +13,18 @@
 
 	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"  conversion-service="defaultConversionService"/>
 
-	<bean id="mvcViewFactoryCreator"
-		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
-		<property name="viewResolvers" ref="viewResolver" />
+	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<property name="viewResolvers">
+			<list>
+				<ref bean="tilesViewResolver"/>
+				<ref bean="viewResolver"/>
+			</list>
+		</property> 
 	</bean>
 
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	
 	 <bean id="defaultConversionService" class="org.springframework.binding.convert.service.DefaultConversionService">
     	<constructor-arg ref="applicationConversionSevice"/>
     </bean>
-		
 	
 	<bean id="applicationConversionSevice" class="com.apress.prospringmvc.pizzarus.web.config.ApplicationConversionServiceFactoryBean"/>
 
