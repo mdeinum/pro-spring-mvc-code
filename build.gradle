@@ -28,8 +28,8 @@ allprojects {
         mavenRepo url: 'http://maven.springframework.org/release'
         mavenCentral()
         mavenRepo url: 'http://maven.springframework.org/milestone'
-	    mavenRepo url: 'https://repository.jboss.org/nexus/content/repositories/releases/'
-	    mavenRepo url: 'http://download.java.net/maven/glassfish/org/glassfish/'
+	mavenRepo url: 'https://repository.jboss.org/nexus/content/repositories/releases/'
+	mavenRepo url: 'http://download.java.net/maven/glassfish/org/glassfish/'
     }
 
     eclipse {
@@ -79,6 +79,7 @@ subprojects {
     springSecurityVersion='3.1.0.RELEASE'
     springSwfVersion='2.3.0.RELEASE'
     hibernateVersion='4.0.0.Final'
+    tilesVersion='2.2.2'
 
     configurations { all*.exclude group: 'commons-logging' }
 
@@ -96,7 +97,12 @@ subprojects {
         compile 'org.aspectj:aspectjrt:1.6.12'
         compile 'org.aspectj:aspectjweaver:1.6.12'
         compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
-	    compile "org.hibernate:hibernate-core:$hibernateVersion"
+	compile "org.hibernate:hibernate-core:$hibernateVersion"
+
+	compile "org.apache.tiles:tiles-servlet:$tilesVersion"
+	compile "org.apache.tiles:tiles-jsp:$tilesVersion"
+	compile "org.apache.tiles:tiles-api:$tilesVersion"
+	compile "org.apache.tiles:tiles-core:$tilesVersion"
 
         compile 'opensymphony:sitemesh:2.4.2'
 
