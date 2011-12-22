@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+
+	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
+		<table style="width: 100%">
+			<tr>
+				<td><spring:message code="page.products.select.quantity" /></td>
+				<td><form:input path="orderDate" disabled="true" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code="page.products.select.quantity" /></td>
+				<td>
+					<form:input path="deliveryDate" />
+					<script type="text/javascript">
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : "deliveryDate",
+								widgetType : "dijit.form.DateTextBox",
+								widgetAttrs : { datePattern : "MM-dd-yyyy", required : true }}));  
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<form:errors path="deliveryDate" cssClass="error"/>
+				</td>
+			</tr>
+		</table>
+		
+		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
+			<button type="submit" id="previous" name="_eventId_previous">Previous</button>
+			<button type="submit" id="placeOrder" name="_eventId_finish">Order!</button>
+		</div>
+	</form:form>
+</jsp:root>

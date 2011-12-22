@@ -4,7 +4,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.CustomerAddress;
-import com.apress.prospringmvc.pizzarus.domain.Order;
 
 public class CustomerBuilder extends EntityBuilder<Customer> {
 
@@ -36,13 +35,6 @@ public class CustomerBuilder extends EntityBuilder<Customer> {
 	public CustomerBuilder name(String firstName, String lastName) {
 		product.setFirstName(firstName);
 		product.setLastName(lastName);
-		return this;
-	}
-
-	public CustomerBuilder addOrder(Order... orders) {
-		for (Order order : orders) {
-			product.getOrders().add(order);
-		}
 		return this;
 	}
 

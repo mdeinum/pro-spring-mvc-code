@@ -1,17 +1,12 @@
 package com.apress.prospringmvc.pizzarus.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 /**
  * A customer resembles an authenticated user of our system. A customer is able to make orders. A customer is identified
@@ -38,10 +33,6 @@ public class Customer implements Serializable {
 	private String emailAddress;
 	private String username;
 	private String password;
-
-	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-	@JoinColumn(name = "customerId")
-	private List<Order> orders = new ArrayList<Order>();
 
 	public Long getId() {
 		return id;
@@ -89,14 +80,6 @@ public class Customer implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
 	}
 
 	public CustomerAddress getCustomerAddress() {

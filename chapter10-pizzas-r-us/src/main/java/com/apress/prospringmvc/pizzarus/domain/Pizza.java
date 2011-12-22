@@ -3,6 +3,7 @@ package com.apress.prospringmvc.pizzarus.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,23 +24,29 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 
 @Entity
-@Table(name = "Pizza", uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
 public class Pizza implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(nullable = false)
 	private String name;
 	private String description;
 	private BigDecimal price;
 
-	public String getName() {
-		return name;
+	@SuppressWarnings("unused")
+	private Pizza() {
+		// For ORM
 	}
 
-	public void setName(String name) {
+	public Pizza(String name) {
 		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public String getDescription() {
@@ -66,7 +73,6 @@ public class Pizza implements Serializable {
 		this.id = id;
 	}
 
-	// Entity equality on ID is a
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {

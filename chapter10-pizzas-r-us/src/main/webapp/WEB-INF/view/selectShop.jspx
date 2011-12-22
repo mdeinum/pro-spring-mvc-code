@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:jsp="http://java.sun.com/JSP/Page"
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
-	<jsp:directive.page pageEncoding="UTF-8"
-		contentType="text/html; charset=UTF-8" />
-	<jsp:output omit-xml-declaration="false" />
-	<jsp:output doctype-root-element="HTML"
-		doctype-system="about:legacy-compat" />
 
-	<html>
-<head>
-<title>Welcome to Pizzas R Us</title>
-<spring:url value="/css/pizzas-r-us.css" var="pizzaCss" />
-<link rel="stylesheet" type="text/css" href="${pizzaCss}" />
-</head>
-
-<body>
-	<form:form modelAttribute="order" action="${flowExecutionUrl}">
-		<table>
+	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
+		<table style="width: 100%">
 			<tr>
-				<td>SELECT SHOP</td>
+				<td><spring:message code="page.products.select.shop" /></td>
+				<td><form:select path="shop">
+						<c:forEach items="${orderForm.selectableShops}" var="shop">
+							<form:option label="${shop.shopName} (${shop.city})" value="${shop.id}" />
+						</c:forEach>
+					</form:select>
+					<form:errors path="shop" cssClass="error"/>
+					</td>
 			</tr>
 		</table>
-
-		<form:button value="Next" />
-		<form:button value="Cancel" />
+		
+		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
+			<button type="submit" id="return" name="_eventId_previous">Previous</button>
+			<button type="submit" id="continue" name="_eventId_next">Next</button>
+		</div>
 	</form:form>
-</body>
-	</html>
 </jsp:root>

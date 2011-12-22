@@ -7,18 +7,67 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.binding.validation.ValidationContext;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.domain.Shop;
 
 public class OrderForm implements Serializable {
 
-	private Map<Pizza, Integer> pizzas = new HashMap<Pizza, Integer>();
-	private Pizza pizza;
 	private List<Pizza> selectablePizzas = new ArrayList<Pizza>();
-	private int quantity;
+	private List<Shop> selectableShops = new ArrayList<Shop>();
+	private Map<Pizza, Integer> pizzas = new HashMap<Pizza, Integer>();
+
+	private Pizza pizza;
+	private Integer quantity;
 	private Shop shop;
+
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date deliveryDate;
+
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date orderDate;
+
+	// ---- Form validation methods triggered by webflow according to convention, see reference 5.10. Validating a model
+	public void validateSelectPizzas(ValidationContext context) {
+		if (context.getUserEvent().equals("next")) {
+			MessageContext messages = context.getMessageContext();
+			if (pizzas.isEmpty()) {
+				messages.addMessage(new MessageBuilder().error().source("pizzas").code("error.page.pizzas.required")
+						.build());
+			}
+		}
+	}
+
+	public void validateSelectShop(ValidationContext context) {
+		if (context.getUserEvent().equals("next")) {
+			MessageContext messages = context.getMessageContext();
+			if (shop == null) {
+				messages.addMessage(new MessageBuilder().error().source("shop").code("error.page.shop.required")
+						.build());
+			}
+		}
+	}
+
+	public void validateSelectDeliveryOptions(ValidationContext context) {
+		if (context.getUserEvent().equals("finish")) {
+			MessageContext messages = context.getMessageContext();
+			if (deliveryDate == null) {
+				messages.addMessage(new MessageBuilder().error().source("deliveryDate")
+						.code("error.page.selectdeliveryoptions.deliverydate.required").build());
+			} else {
+				if (deliveryDate.before(DateUtils.setHours(
+						DateUtils.setMinutes(DateUtils.setSeconds(DateUtils.setMilliseconds(new Date(), 0), 0), 0), 0))) {
+					messages.addMessage(new MessageBuilder().error().source("deliveryDate")
+							.code("error.page.selectdeliveryoptions.deliverydate.in.past").build());
+				}
+			}
+		}
+	}
 
 	public Map<Pizza, Integer> getPizzas() {
 		return pizzas;
@@ -60,11 +109,11 @@ public class OrderForm implements Serializable {
 		this.pizza = pizza;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
@@ -76,4 +125,11 @@ public class OrderForm implements Serializable {
 		this.selectablePizzas = selectablePizzas;
 	}
 
+	public List<Shop> getSelectableShops() {
+		return selectableShops;
+	}
+
+	public void setSelectableShops(List<Shop> selectableShops) {
+		this.selectableShops = selectableShops;
+	}
 }

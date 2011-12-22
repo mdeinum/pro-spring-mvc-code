@@ -6,11 +6,17 @@
 
 	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
 		<table style="width: 100%">
+			<tr >
+				<td colspan="2">
+					<form:errors path="pizzas" cssClass="error"/>
+				</td>
+			</tr>
+			<tr style="height: 10px;"/>
 			<tr>
 				<td><spring:message code="page.products.select.pizza" /></td>
 				<td><form:select path="pizza">
 						<c:forEach items="${orderForm.selectablePizzas}" var="pizza">
-							<form:option label="${pizza.name}" value="${pizza.name}" />
+							<form:option label="${pizza.name}" value="${pizza.id}" />
 						</c:forEach>
 					</form:select></td>
 			</tr>
@@ -28,7 +34,7 @@
 		
 		<p />
 			<h3>Currently selected pizzas:</h3>
-			<div style="border: 1px dashed; border-color: red; margin-top: 10px; margin-bottom: 10px;">
+			<div style="margin-top: 10px; margin-bottom: 10px;">
 			<table style="width: 100%;" rules="groups">
 				<thead>
 					<tr>

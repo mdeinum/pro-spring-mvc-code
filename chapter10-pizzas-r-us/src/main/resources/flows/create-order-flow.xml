@@ -4,30 +4,55 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<on-start>
-		<evaluate expression="orderController.initializeOrderForm()" result="flowScope.orderForm" />
+		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
 	</on-start>
 
-	<view-state id="createOrder" view="createOrder" model="orderForm" >
-		
-		<transition on="add" to="createOrder" bind="true">
+	<view-state id="selectPizzas" view="selectPizzas" model="orderForm" >
+		<transition on="add" to="selectPizzas" bind="true">
 			<evaluate expression="orderController.addPizza(flowScope.orderForm)" />
 		</transition>
 		
 		<transition on="next" to="selectShop" />
 		
-		<transition on="reset" to="createOrder">
-			<evaluate expression="orderController.initializeOrderForm()" result="flowScope.orderForm" />
+		<transition on="reset" to="selectPizzas">
+			<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
 		</transition>
 		
 		<transition on="return" to="end" />
 	</view-state>
 
-	<view-state id="selectShop" view="selectShop" model="order">
-		<transition on="submit" to="registerCustomer" />
-		<transition on="cancel" to="showLogin" />
+	<view-state id="selectShop" view="selectShop" model="orderForm">
+		<transition on="next" to="selectDeliveryOptions" bind="true"/>
+		
+		<transition on="previous" to="selectPizzas" />
 	</view-state>
+	
+	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
+		<transition on="finish" to="loginCheck" bind="true"/>
+			
+		<transition on="previous" to="selectShop" />
+	</view-state>
+	
+	<decision-state id="loginCheck">
+		<if test="externalContext.sessionMap.contains('authenticatedCustomer') == true" then="createOrder" else="authenticate"/>
+	</decision-state>	
 
-	<end-state id="end" />
+	<view-state id="authenticate" view="login" model="authenticationForm">
+		<on-entry>
+			<evaluate expression="authenticationController.initializeForm()" result="flowScope.authenticationForm" />
+		</on-entry>
+		<transition on="authenticate" to="createOrder" bind="true">
+			<evaluate expression="authenticationController.authenticate(flowScope.authenticationForm, externalContext)"/>
+		</transition>
 
+		<transition on="previous" to="selectDeliveryOptions"/>
+	</view-state>
+	
+	<action-state id="createOrder">
+		<evaluate expression="orderController.placeOrder(externalContext.sessionMap.get('authenticatedCustomer'), flowScope.orderForm)" result="flowScope.orderId"/>
+		<transition on="success" to="end"/>
+	</action-state>
+
+	<end-state id="end" view="redirect:/ordersOverview.html?orderOk=true&amp;orderId=${orderId}"/>
 </flow>	
 	

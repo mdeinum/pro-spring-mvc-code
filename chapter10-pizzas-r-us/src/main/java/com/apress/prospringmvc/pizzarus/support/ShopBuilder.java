@@ -4,15 +4,10 @@ import com.apress.prospringmvc.pizzarus.domain.Shop;
 
 public class ShopBuilder extends EntityBuilder<Shop> {
 
-	private Shop product = new Shop();
+	private Shop product;
 
-	public ShopBuilder name(String name) {
-		product.setShopName(name);
-		return this;
-	}
-
-	public ShopBuilder city(String city) {
-		product.setCity(city);
+	public ShopBuilder shop(String name, String city) {
+		product = new Shop(name, city);
 		return this;
 	}
 

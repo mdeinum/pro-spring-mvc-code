@@ -17,7 +17,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesView;
 
-import com.apress.prospringmvc.pizzarus.web.PizzaConverter;
+import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
+import com.apress.prospringmvc.pizzarus.web.converter.ShopConverter;
 
 /**
  * WebMvc Configuration.
@@ -30,6 +31,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
 		registry.addResourceHandler("/js/**", "*.js").addResourceLocations("/WEB-INF/js/");
 		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/");
 		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/css/");
@@ -67,6 +69,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
+	public ShopConverter shopConverter() {
+		return new ShopConverter();
+	}
+
+	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
 		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
@@ -76,5 +83,6 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	@Override
 	protected void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(pizzaConverter());
+		registry.addConverter(shopConverter());
 	}
 }

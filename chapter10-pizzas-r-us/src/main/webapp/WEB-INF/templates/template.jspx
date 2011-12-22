@@ -11,15 +11,23 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Pizza-R-Us - the best pizza in town</title>
 		<spring:url value="/css/pizzas-r-us.css" var="pizzaCss" />
 		<link rel="stylesheet" type="text/css" href="${pizzaCss}" />
+		<spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundraCss" />
+		<link type="text/css" rel="stylesheet" href="${tundraCss}"/>
+
+		<script type="text/javascript" src="/chapter10-pizzas-r-us/resources/dojo/dojo.js"><!----></script>
+		<script type="text/javascript" src="/chapter10-pizzas-r-us/resources/spring/Spring.js"><!----></script>
+		<script type="text/javascript" src="/chapter10-pizzas-r-us/resources/spring/Spring-Dojo.js"><!----></script>
+		
 	</head>
 
-	<body>
-		<div id="container">
+<body class="tundra">
+		<div id="container" class="container">
 			<div id="incontainer">
+
 				<div id="header">
 					<tiles:insertAttribute name="header"/>
 				</div>

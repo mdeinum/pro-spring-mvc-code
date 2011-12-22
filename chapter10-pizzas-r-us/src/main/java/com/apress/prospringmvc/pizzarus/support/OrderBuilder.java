@@ -5,7 +5,10 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 import com.apress.prospringmvc.pizzarus.domain.OrderDetail;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
@@ -16,19 +19,28 @@ public class OrderBuilder extends EntityBuilder<Order> {
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private Order product = new Order();
 
-	public OrderBuilder addPizza(String name, String description, BigDecimal price, int amount) {
+	public OrderBuilder buildAndAddPizza(String name, String description, BigDecimal price, int amount) {
+
+		Pizza pizza = new Pizza(name);
+		pizza.setDescription(description);
+		pizza.setPrice(price);
+		return addPizza(pizza, amount);
+	}
+
+	public OrderBuilder addPizza(Pizza pizza, int amount) {
 		OrderDetail orderDetail = new OrderDetail();
 		orderDetail.setAmount(amount);
-
-		Pizza pizza = new Pizza();
-		pizza.setDescription(description);
-		pizza.setName(name);
-		pizza.setPrice(price);
 
 		orderDetail.setPizza(pizza);
 		orderDetail.setOrder(product);
 		orderDetails.add(orderDetail);
+		return this;
+	}
 
+	public OrderBuilder addPizzas(Map<Pizza, Integer> map) {
+		for (Entry<Pizza, Integer> entry : map.entrySet()) {
+			addPizza(entry.getKey(), entry.getValue());
+		}
 		return this;
 	}
 
@@ -49,6 +61,11 @@ public class OrderBuilder extends EntityBuilder<Order> {
 
 	public OrderBuilder shop(Shop shop) {
 		product.setShop(shop);
+		return this;
+	}
+
+	public OrderBuilder customer(Customer customer) {
+		product.setCustomer(customer);
 		return this;
 	}
 

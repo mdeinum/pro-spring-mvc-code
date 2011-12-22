@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * An order consists out of one or more {@link OrderDetail}s. It is the link between
@@ -34,12 +36,17 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date orderDate;
-	private Date DeliveryDate;
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	private Date deliveryDate;
 	private boolean delivered;
 	private BigDecimal totalOrderPrice;
 
-	@OneToMany(mappedBy = "order")
+	@ManyToOne
+	private Customer customer;
+
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 
@@ -64,11 +71,19 @@ public class Order implements Serializable {
 	}
 
 	public Date getDeliveryDate() {
-		return DeliveryDate;
+		return deliveryDate;
 	}
 
 	public void setDeliveryDate(Date deliveryDate) {
-		DeliveryDate = deliveryDate;
+		this.deliveryDate = deliveryDate;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public boolean isDelivered() {

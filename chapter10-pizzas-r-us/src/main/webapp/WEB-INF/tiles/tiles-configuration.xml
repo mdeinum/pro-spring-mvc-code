@@ -10,8 +10,28 @@
     <definition name="contentOnlyTemplate" template="/WEB-INF/templates/contentOnly.jspx">
     </definition>	
 
-	<definition name="createOrder" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/createOrder.jspx"/>
+	<definition name="main" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/main.jspx"/>
+    </definition>
+
+	<definition name="selectPizzas" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/selectPizzas.jspx"/>
     </definition>
 	
+	<definition name="selectShop" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/selectShop.jspx"/>
+    </definition>
+	
+	<definition name="selectDeliveryOptions" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/selectDeliveryOptions.jspx"/>
+    </definition>
+
+	<definition name="login" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/login.jspx"/>
+    </definition>
+    
+    <definition name="ordersOverview" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/ordersOverview.jspx"/>
+    </definition>
+
 </tiles-definitions>

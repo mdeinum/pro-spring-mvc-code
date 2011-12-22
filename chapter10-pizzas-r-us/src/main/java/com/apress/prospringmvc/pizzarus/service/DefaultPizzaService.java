@@ -2,6 +2,8 @@ package com.apress.prospringmvc.pizzarus.service;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
+import com.apress.prospringmvc.pizzarus.domain.Shop;
 import com.apress.prospringmvc.pizzarus.repository.CustomerRepository;
+import com.apress.prospringmvc.pizzarus.repository.OrderRepository;
 import com.apress.prospringmvc.pizzarus.repository.PizzaRepository;
+import com.apress.prospringmvc.pizzarus.repository.ShopRepository;
 
 /**
  * Default implementation for the {@link PizzasService}.
@@ -24,9 +29,12 @@ public class DefaultPizzaService implements PizzasService {
 
 	@Autowired
 	private PizzaRepository pizzaRepository;
-
 	@Autowired
 	private CustomerRepository customerRepository;
+	@Autowired
+	private ShopRepository shopRepository;
+	@Autowired
+	private OrderRepository orderRepository;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -37,18 +45,34 @@ public class DefaultPizzaService implements PizzasService {
 	@Override
 	@Transactional(readOnly = true)
 	public Customer authenticateCustomer(String username, String password) throws InvalidCredentialsException {
-		Customer customer = customerRepository.getCustomer(username);
+		try {
+			Customer customer = customerRepository.getCustomer(username);
 
-		if (customer.getPassword().equals(DigestUtils.sha512(password))) {
-			return customer;
-		} else {
+			if (customer.getPassword().equals(DigestUtils.sha512Hex(password))) {
+				return customer;
+			} else {
+				throw new InvalidCredentialsException();
+			}
+		} catch (NoResultException noResultException) {
 			throw new InvalidCredentialsException();
 		}
 	}
 
 	@Override
-	public void addOrder(Customer customerDetached, Order order) {
-		Customer customer = customerRepository.getCustomer(customerDetached.getUsername());
-		customer.getOrders().add(order);
+	@Transactional
+	public Long addOrder(Customer customer, Order order) {
+		return orderRepository.saveOrder(customer, order);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Shop> getShops() {
+		return shopRepository.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersForCustomer(Customer customer) {
+		return orderRepository.getOrders(customer.getId());
 	}
 }
