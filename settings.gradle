@@ -1,6 +1,7 @@
 rootProject.name = 'pizzas-r-us'
 
 def String[] modules = [
+    'pizzas-r-us-web-resources',
 	'chapter2-samples',
 	'chapter1-pizzas-r-us',
 	'chapter2-pizzas-r-us',
