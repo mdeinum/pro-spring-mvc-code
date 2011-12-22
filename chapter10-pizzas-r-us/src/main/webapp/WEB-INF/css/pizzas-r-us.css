@@ -29,17 +29,17 @@ p a:hover{ color:#000; text-decoration:none;}
 #header ul.menu li a{height:16px; display:block; text-indent:-20000px; }
 #header ul.menu li a:hover{height:16px;}
 
-#header ul.menu li.btn_1 a{width:69px; background:url(../images/btn_1.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_1 a:hover{width:69px; background:url(../images/btn_1_over.gif) 0 0 no-repeat;}
+#header ul.menu li.btn_1 a{width:69px; background:url(../images/btn_homepage.gif) 0 0 no-repeat; }
+#header ul.menu li.btn_1 a:hover{width:69px; background:url(../images/btn_homepage_over.gif) 0 0 no-repeat;}
 
-#header ul.menu li.btn_3 a{margin-left: -10px; margin-top: -1px; width:67px; background:url(../images/btn_3.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_3 a:hover{width:67px; background:url(../images/btn_3_over.gif) 0 0 no-repeat;}
+#header ul.menu li.btn_3 a{margin-left: -10px; margin-top: -1px; width:67px; background:url(../images/btn_login.gif) 0 0 no-repeat; }
+#header ul.menu li.btn_3 a:hover{width:67px; background:url(../images/btn_login_over.gif) 0 0 no-repeat;}
 
-#header ul.menu li.btn_4 a{width:90px; background:url(../images/btn_4.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_4 a:hover{width:90px; background:url(../images/btn_4_over.gif) 0 0 no-repeat;}
+#header ul.menu li.btn_4 a{width:90px; background:url(../images/btn_homedelivery.gif) 0 0 no-repeat; }
+#header ul.menu li.btn_4 a:hover{width:90px; background:url(../images/btn_homedelivery_over.gif) 0 0 no-repeat;}
 
-#header ul.menu li.btn_2 a{margin-top: -1px; width:95px; background:url(../images/btn_2.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_2 a:hover{width:95px; background:url(../images/btn_2_over.gif) 0 0 no-repeat;}
+#header ul.menu li.btn_2 a{margin-top: -1px; width:95px; background:url(../images/btn_orderdetails.gif) 0 0 no-repeat; }
+#header ul.menu li.btn_2 a:hover{width:95px; background:url(../images/btn_orderdetails_over.gif) 0 0 no-repeat;}
 
 
 #header ul.menu li.line{width:16px; background:url(../images/bullet_m.gif) 0 0 no-repeat}

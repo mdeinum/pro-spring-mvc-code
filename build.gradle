@@ -81,6 +81,7 @@ subprojects {
     springSecurityVersion='3.1.0.RELEASE'
     springSwfVersion='2.3.0.RELEASE'
     hibernateVersion='4.0.0.Final'
+    hibernateValidatorVersion='4.2.0.Final'
     tilesVersion='2.2.2'
 
     configurations { all*.exclude group: 'commons-logging' }
@@ -100,12 +101,16 @@ subprojects {
         compile 'org.aspectj:aspectjweaver:1.6.12'
         compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
 	compile "org.hibernate:hibernate-core:$hibernateVersion"
+	compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
 
 	compile "org.apache.tiles:tiles-servlet:$tilesVersion"
 	compile "org.apache.tiles:tiles-jsp:$tilesVersion"
 	compile "org.apache.tiles:tiles-api:$tilesVersion"
 	compile "org.apache.tiles:tiles-core:$tilesVersion"
 
+	compile "javax.validation:validation-api:1.0.0.GA"
+
+	compile "joda-time:joda-time:2.0"
         compile 'opensymphony:sitemesh:2.4.2'
 
         runtime "jstl:jstl:1.2"
