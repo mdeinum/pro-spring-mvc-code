@@ -12,7 +12,7 @@
 				<tr>
 					<td>
 						<ul style="list-style-type: disc">
-							<li><h3><spring:message code="order.success" arguments="${param.orderId}" /></h3></li>
+							<li><h3><spring:message code="label.page.ordersoverview.order.success" arguments="${param.orderId}" /></h3></li>
 						</ul>
 					</td>
 				</tr>
@@ -24,11 +24,11 @@
 	<table style="width: 100%;" rules="groups">
 		<thead>
 			<tr>
-				<th align="left">Order</th>
-				<th align="left">Pizzas</th>
-				<th align="left">Order date</th>
-				<th align="left">Delivery date</th>
-				<th align="left">Total price</th>
+				<th align="left"><spring:message code="label.page.ordersoverview.order"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.pizzas"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.order.date"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.delivery.date"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.total.price"/></th>
 			</tr>
 		</thead>
 		<tbody>

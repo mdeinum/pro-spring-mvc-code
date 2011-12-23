@@ -7,7 +7,7 @@
 	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
 		<table style="width: 100%">
 			<tr>
-				<td><spring:message code="page.products.select.shop" /></td>
+				<td><spring:message code="label.page.select.shop"/></td>
 				<td><form:select path="shop">
 						<c:forEach items="${orderForm.selectableShops}" var="shop">
 							<form:option label="${shop.shopName} (${shop.city})" value="${shop.id}" />
@@ -19,8 +19,8 @@
 		</table>
 		
 		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
-			<button type="submit" id="return" name="_eventId_previous">Previous</button>
-			<button type="submit" id="continue" name="_eventId_next">Next</button>
+			<button type="submit" id="return" name="_eventId_previous"><spring:message code="label.page.select.shop.previous"/></button>
+			<button type="submit" id="continue" name="_eventId_next"><spring:message code="label.page.select.shop.next"/></button>
 		</div>
 	</form:form>
 </jsp:root>

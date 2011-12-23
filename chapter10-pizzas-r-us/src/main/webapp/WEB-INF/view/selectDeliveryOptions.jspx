@@ -7,11 +7,11 @@
 	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
 		<table style="width: 100%">
 			<tr>
-				<td><spring:message code="page.products.select.quantity" /></td>
+				<td><spring:message code="label.page.selectdeliveryoptions.select.order.date" /></td>
 				<td><form:input path="orderDate" disabled="true" /></td>
 			</tr>
 			<tr>
-				<td><spring:message code="page.products.select.quantity" /></td>
+				<td><spring:message code="label.page.selectdeliveryoptions.select.delivery.date" /></td>
 				<td>
 					<form:input path="deliveryDate" />
 					<script type="text/javascript">
@@ -30,8 +30,8 @@
 		</table>
 		
 		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
-			<button type="submit" id="previous" name="_eventId_previous">Previous</button>
-			<button type="submit" id="placeOrder" name="_eventId_finish">Order!</button>
+			<button type="submit" id="previous" name="_eventId_previous"><spring:message code="label.page.selectdeliveryoptions.previous"/></button>
+			<button type="submit" id="placeOrder" name="_eventId_finish"><spring:message code="label.page.selectdeliveryoptions.order"/></button>
 		</div>
 	</form:form>
 </jsp:root>
