@@ -7,27 +7,29 @@
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
 	
-	<ul class="menu">
-		<li class="btn_1">
-			<spring:url value="/index.html" var="home" />
-			<a href="${home}">Home</a>
-		</li>
-        <li class="line"/>
-		<li class="btn_1">
-			<spring:url value="/create-order-flow" var="createOrder" />
-			<a href="${createOrder}">Home deliver</a>
-		</li>
-		<li class="line"/>
-		<li class="btn_1">
-			<spring:url value="/login.html" var="login" />
-			<a href="${login}">Login</a>
-		</li>
-		<c:if test="${authenticatedCustomer !=null}">
-			<li class="line"/>
-			<li class="btn_1">
-				<spring:url value="/ordersOverview.html" var="ordersOverview" />
-				<a href="${ordersOverview}">View orders</a>
-			</li>
-		</c:if>
-	</ul>
+	<table style="width: 100%">
+		<tr>
+			<td width="10%">
+				<spring:url value="/index.html" var="home" />
+				<a href="${home}">Home</a>
+			</td>
+			<td class="line" width="5%"/>
+			<td width="15%">
+				<spring:url value="/create-order-flow" var="createOrder" />
+				<a href="${createOrder}">Home delivery</a>
+			</td>	
+			<td class="line" width="5%"/>
+			<td width="10%">
+				<spring:url value="/login.html" var="login" />
+				<a href="${login}">Login</a>
+			</td>	
+			<c:if test="${authenticatedCustomer !=null}">
+				<td class="line" width="5%"/>
+				<td width="20%">
+					<spring:url value="/ordersOverview.html" var="ordersOverview" />
+					<a href="${ordersOverview}">View orders</a>
+				</td>	
+			</c:if>
+		</tr>
+	</table>	
 </jsp:root>

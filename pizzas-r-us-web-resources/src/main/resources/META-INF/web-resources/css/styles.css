@@ -25,11 +25,10 @@ h1 { font-family: romy; font-size: 48px; font-style: bold; color: orange;}
 header{width:617px; height:345px; background: url(../images/b_header.jpg) 0 0 no-repeat; position:relative;}
 
 header nav{position:absolute; top:16px; left:19px; width:585px}
-header nav li{height:16px; margin-right:8px; float:left;list-style-type:none; display: inline}
-header nav li a{height:16px; width: 80px; font-size:12px; font-weight: bold; color: white; display: inline; float: left; text-decoration: none;}
-header nav li a:hover{color: orange;}
+header nav td a{font-size:12px; font-weight: bold; color: white; display: inline; float: left; text-decoration: none;}
+header nav td a:hover{color: orange;}
 
-header nav li.line{width:16px; background:url(../images/bullet_m.gif) 0 0 no-repeat}
+header nav td.line{background:url(../images/bullet_m.gif) 0 0 no-repeat}
 
 header img#logo{position:absolute; top:97px; left:323px}
 
