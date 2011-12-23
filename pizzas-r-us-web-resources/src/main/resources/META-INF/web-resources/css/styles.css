@@ -2,12 +2,12 @@
 @font-face { font-family: romy; src: url(../fonts/Romy.ttf) format("truetype"); }
 
 /* CSS Document */
-body{padding:0px; margin:0px; background:#fff; color:#616161; font:13px/15px Tahoma, sans-serif;}
+body{padding:0px; margin:0px; background:#fff; color:#616161; font:12px/14px Tahoma, sans-serif;}
 div, p, ul, h2, h3, h4, img{padding:0px; margin:0px;}
 ul{list-style-type:none;}
 
-.error{color: red;}
 .clear {clear: both; margin: 0px; height:0}
+.error{color: red;}
 
 p a{font:10px/14px Tahoma, sans-serif; color:#d50100; text-decoration:none;}
 p a:hover{ color:#000; text-decoration:none;}
@@ -22,29 +22,16 @@ h1 { font-family: romy; font-size: 48px; font-style: bold; color: orange;}
 
 /* HEADER */
 
-#header{width:617px; height:345px; background: url(../images/b_header.jpg) 0 0 no-repeat; position:relative;}
+header{width:617px; height:345px; background: url(../images/b_header.jpg) 0 0 no-repeat; position:relative;}
 
-#header ul.menu{position:absolute; top:16px; left:19px; width:585px}
-#header ul.menu li{height:16px; margin-right:19px; float:left}
-#header ul.menu li a{height:16px; display:block; text-indent:-20000px; }
-#header ul.menu li a:hover{height:16px;}
+header nav{position:absolute; top:16px; left:19px; width:585px}
+header nav li{height:16px; margin-right:8px; float:left;list-style-type:none; display: inline}
+header nav li a{height:16px; width: 80px; font-size:12px; font-weight: bold; color: white; display: inline; float: left; text-decoration: none;}
+header nav li a:hover{color: orange;}
 
-#header ul.menu li.btn_1 a{width:69px; background:url(../images/btn_homepage.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_1 a:hover{width:69px; background:url(../images/btn_homepage_over.gif) 0 0 no-repeat;}
+header nav li.line{width:16px; background:url(../images/bullet_m.gif) 0 0 no-repeat}
 
-#header ul.menu li.btn_3 a{margin-left: -10px; margin-top: -1px; width:67px; background:url(../images/btn_login.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_3 a:hover{width:67px; background:url(../images/btn_login_over.gif) 0 0 no-repeat;}
-
-#header ul.menu li.btn_4 a{width:90px; background:url(../images/btn_homedelivery.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_4 a:hover{width:90px; background:url(../images/btn_homedelivery_over.gif) 0 0 no-repeat;}
-
-#header ul.menu li.btn_2 a{margin-top: -1px; width:95px; background:url(../images/btn_orderdetails.gif) 0 0 no-repeat; }
-#header ul.menu li.btn_2 a:hover{width:95px; background:url(../images/btn_orderdetails_over.gif) 0 0 no-repeat;}
-
-
-#header ul.menu li.line{width:16px; background:url(../images/bullet_m.gif) 0 0 no-repeat}
-
-#header img#logo{position:absolute; top:97px; left:323px}
+header img#logo{position:absolute; top:97px; left:323px}
 
 /* content */
 
@@ -69,7 +56,7 @@ h1 { font-family: romy; font-size: 48px; font-style: bold; color: orange;}
 
 /* footer */
 
-#footer{height:59px; clear:both; width:617px; border-top: #cccccc 1px solid}
-#footer p{padding: 15px 0 0 0; font:10px/16px Tahoma, sans-serif; font-weight:normal; text-align:center; color:#000;}
-#footer p a{font:10px/16px Tahoma, sans-serif; font-weight:normal; color:#000; text-decoration:none; padding: 0 3px }
-#footer p a:hover{text-decoration:underline; color:#000}
+footer{height:59px; clear:both; width:617px; border-top: #cccccc 1px solid}
+footer p{padding: 15px 0 0 0; font:10px/16px Tahoma, sans-serif; font-weight:normal; text-align:center; color:#000;}
+footer p a{font:10px/16px Tahoma, sans-serif; font-weight:normal; color:#000; text-decoration:none; padding: 0 3px; }
+footer p a:hover{text-decoration:underline; color:#000}

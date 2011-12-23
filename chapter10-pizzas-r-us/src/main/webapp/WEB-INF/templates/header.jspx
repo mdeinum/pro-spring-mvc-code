@@ -9,27 +9,25 @@
 	
 	<ul class="menu">
 		<li class="btn_1">
-				 <spring:url value="/index.html" var="home" />
-				<a href="${home}" title="home page">home page</a>
-			</li>
+			<spring:url value="/index.html" var="home" />
+			<a href="${home}">Home</a>
+		</li>
+        <li class="line"/>
+		<li class="btn_1">
+			<spring:url value="/create-order-flow" var="createOrder" />
+			<a href="${createOrder}">Home deliver</a>
+		</li>
+		<li class="line"/>
+		<li class="btn_1">
+			<spring:url value="/login.html" var="login" />
+			<a href="${login}">Login</a>
+		</li>
+		<c:if test="${authenticatedCustomer !=null}">
 			<li class="line"/>
-			<li class="btn_4">
-				<spring:url value="/create-order-flow" var="createOrder" />
-				<a href="${createOrder}" title="home delivery">home delivery</a>
+			<li class="btn_1">
+				<spring:url value="/ordersOverview.html" var="ordersOverview" />
+				<a href="${ordersOverview}">View orders</a>
 			</li>
-			<li class="line"/>
-			<li class="btn_3">
-				<spring:url value="/login.html" var="login" />
-				<a href="${login}" title="login">Login</a>
-			</li>
-			<c:if test="${authenticatedCustomer !=null}">
-				<li class="line"/>
-				<li class="btn_2">
-					<spring:url value="/ordersOverview.html" var="ordersOverview" />
-					<a href="${ordersOverview}" title="ordersOverview">OrdersOverview</a>
-				</li>
-			</c:if>
-
-		</ul>
-	<img src="images/logo.jpg" width="293" height="80" alt="" id="logo" />
+		</c:if>
+	</ul>
 </jsp:root>

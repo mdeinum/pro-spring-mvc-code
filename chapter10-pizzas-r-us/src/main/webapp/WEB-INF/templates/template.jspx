@@ -15,32 +15,37 @@
 		<title>Pizza-R-Us - the best pizza in town</title>
 		<spring:url value="/resources/css/styles.css" var="pizzaCss" />
 		<link rel="stylesheet" type="text/css" href="${pizzaCss}" />
-		<spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundraCss" />
-		<link type="text/css" rel="stylesheet" href="${tundraCss}"/>
+		<spring:url value="/resources/dijit/themes/tundra/tundra.css"	var="tundraCss" />
+		<link type="text/css" rel="stylesheet" href="${tundraCss}" />
 
 		<script type="text/javascript" src="/chapter10-pizzas-r-us/resources/dojo/dojo.js"><!----></script>
-		<script type="text/javascript" src="/chapter10-pizzas-r-us/resources/spring/Spring.js"><!----></script>
+		<script type="text/javascript" src="/chapter10-pizzas-r-us/resources/spring/Spring.js"> <!----></script>
 		<script type="text/javascript" src="/chapter10-pizzas-r-us/resources/spring/Spring-Dojo.js"><!----></script>
-		
 	</head>
 
-<body class="tundra">
-		<div id="container" class="container">
-			<div id="incontainer">
-
-				<div id="header">
-					<tiles:insertAttribute name="header"/>
-				</div>
+	<body class="tundra">
+		<div id="container">
+			<div id="incontainer" style="margin-top: -20px;">
+		
+				<header>
+					<spring:url value="/resources/images/slice_of_pizza.jpg" var="pizza" />
+					<img src="${pizza}" align="right" alt="Slice of Pizza" height="200" />
+					<nav>
+						<tiles:insertAttribute name="header" />
+					</nav>
+						<spring:url value="/resources/images/logo.jpg" var="logo" />
+					<img src="${logo}" width="293" height="80" alt="" id="logo" />
+				</header>
 
 				<div id="content">
 					<div id="leftPan" style="width: 90%">
-						<tiles:insertAttribute name="content"/>		
+						<tiles:insertAttribute name="content" />
 					</div>
 				</div>
 
-				<div id="footer">
-					<tiles:insertAttribute name="footer"/>
-				</div>
+				<footer>
+					<tiles:insertAttribute name="footer" />
+				</footer>
 			</div>
 		</div>
 	</body>
