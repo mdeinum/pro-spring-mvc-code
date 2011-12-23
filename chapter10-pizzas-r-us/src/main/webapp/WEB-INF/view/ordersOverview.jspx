@@ -12,7 +12,7 @@
 				<tr>
 					<td>
 						<ul style="list-style-type: disc">
-							<li><spring:message code="order.success" arguments="${param.orderId}" /></li>
+							<li><h3><spring:message code="order.success" arguments="${param.orderId}" /></h3></li>
 						</ul>
 					</td>
 				</tr>

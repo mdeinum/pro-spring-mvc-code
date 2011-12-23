@@ -53,6 +53,6 @@
 		<transition on="success" to="end"/>
 	</action-state>
 
-	<end-state id="end" view="redirect:/ordersOverview.html?orderOk=true&amp;orderId=${orderId}"/>
+	<end-state id="end" view="redirect:/ordersOverview.html?orderOk=true&amp;orderId={orderId}"/>
 </flow>	
 	

@@ -13,7 +13,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Pizza-R-Us - the best pizza in town</title>
-		<spring:url value="/css/pizzas-r-us.css" var="pizzaCss" />
+		<spring:url value="/resources/css/styles.css" var="pizzaCss" />
 		<link rel="stylesheet" type="text/css" href="${pizzaCss}" />
 		<spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundraCss" />
 		<link type="text/css" rel="stylesheet" href="${tundraCss}"/>
