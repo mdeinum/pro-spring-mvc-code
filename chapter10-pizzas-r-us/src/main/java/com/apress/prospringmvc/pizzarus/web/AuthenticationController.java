@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,10 +60,12 @@ public class AuthenticationController {
 		return new AuthenticationForm();
 	}
 
-	public Event authenticate(AuthenticationForm authenticationForm, MvcExternalContext externalContext) {
+	public Event authenticate(AuthenticationForm authenticationForm, MvcExternalContext externalContext,
+			MessageContext messageContext) {
 		try {
 			authenticate(authenticationForm, ((HttpServletRequest) externalContext.getNativeRequest()).getSession());
 		} catch (InvalidCredentialsException invalidCredentialsException) {
+			messageContext.addMessage(new MessageBuilder().error().code(LOGIN_FAILED_KEY).build());
 			return new EventFactorySupport().error(this);
 		}
 		return new EventFactorySupport().success(this);
