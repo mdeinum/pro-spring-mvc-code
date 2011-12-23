@@ -34,16 +34,19 @@ public class AuthenticationController {
 		return mov;
 	}
 
-	@RequestMapping(value="authenticate.html", method = RequestMethod.POST)
+	@RequestMapping(value = "authenticate.html", method = RequestMethod.POST)
 	public ModelAndView authentication(@ModelAttribute
 			AuthenticationForm authenticationForm, ModelAndView mov, HttpSession httpSession) {
 		mov.setViewName("main");
+		mov.addObject("authenticationOk", "true");
+		mov.addObject("username", authenticationForm.getUsername());
 		try {
 			authenticate(authenticationForm, httpSession);
 		} catch (InvalidCredentialsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return mov;
 	}
 
