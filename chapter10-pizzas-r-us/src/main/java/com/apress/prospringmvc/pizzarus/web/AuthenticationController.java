@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,8 @@ public class AuthenticationController {
 
 	public static final String AUTHENTICATED_CUSTOMER_KEY = "authenticatedCustomer";
 
+	private static final String LOGIN_FAILED_KEY = "label.login.failed";
+
 	@Autowired
 	private PizzasService pizzasService;
 
@@ -36,15 +39,16 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "authenticate.html", method = RequestMethod.POST)
 	public ModelAndView authentication(@ModelAttribute
-			AuthenticationForm authenticationForm, ModelAndView mov, HttpSession httpSession) {
-		mov.setViewName("main");
-		mov.addObject("authenticationOk", "true");
-		mov.addObject("username", authenticationForm.getUsername());
+			AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession) {
+
 		try {
 			authenticate(authenticationForm, httpSession);
-		} catch (InvalidCredentialsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mov.addObject("authenticationOk", "true");
+			mov.addObject("username", authenticationForm.getUsername());
+			mov.setViewName("main");
+		} catch (InvalidCredentialsException invalidCredentialsException) {
+			errors.reject(LOGIN_FAILED_KEY);
+			mov.setViewName("login");
 		}
 
 		return mov;
