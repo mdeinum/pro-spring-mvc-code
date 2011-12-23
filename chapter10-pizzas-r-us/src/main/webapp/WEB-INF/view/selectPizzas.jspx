@@ -14,11 +14,9 @@
 			<tr style="height: 10px;"/>
 			<tr>
 				<td><spring:message code="label.page.products.select.pizza" /></td>
-				<td><form:select path="pizza">
-						<c:forEach items="${orderForm.selectablePizzas}" var="pizza">
-							<form:option label="${pizza.name}" value="${pizza.id}" />
-						</c:forEach>
-					</form:select></td>
+				<td>
+					<form:select path="pizza" items="${orderForm.selectablePizzas}" itemLabel="name" itemValue="id"/>
+				</td>
 			</tr>
 			<tr>
 				<td><spring:message code="label.page.products.select.quantity"/></td>

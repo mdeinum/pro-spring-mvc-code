@@ -7,14 +7,11 @@
 	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
 		<table style="width: 100%">
 			<tr>
-				<td><spring:message code="label.page.select.shop"/></td>
-				<td><form:select path="shop">
-						<c:forEach items="${orderForm.selectableShops}" var="shop">
-							<form:option label="${shop.shopName} (${shop.city})" value="${shop.id}" />
-						</c:forEach>
-					</form:select>
+				<td width="30%"><spring:message code="label.page.select.shop"/></td>
+				<td>
+					<form:select path="shop" items="${orderForm.selectableShops}" itemLabel="shopName" itemValue="id"/>
 					<form:errors path="shop" cssClass="error"/>
-					</td>
+				</td>
 			</tr>
 		</table>
 		
