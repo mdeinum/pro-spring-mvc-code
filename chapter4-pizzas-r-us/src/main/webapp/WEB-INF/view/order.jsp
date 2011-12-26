@@ -4,8 +4,8 @@
 <title>Place Order</title>
 </head>
 <body>
-    <h1>Order</h1>
     <form method="post" id="orderForm">
+        <h1 style="{padding-left: 12px;}">Order</h1>
         <div id="leftPan">
         <fieldset>
             <legend>Personal</legend>
