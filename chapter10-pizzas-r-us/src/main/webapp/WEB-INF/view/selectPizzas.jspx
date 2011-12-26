@@ -22,6 +22,11 @@
 				<td><spring:message code="label.page.products.select.quantity"/></td>
 				<td><form:input path="quantity" /></td>
 			</tr>
+			<tr>
+				<td colspan="2">
+					<form:errors path="quantity" cssClass="error"/>
+				</td>
+			</tr>
 			<tr height="10px"/>
 			<tr align="right">
 				<td colspan="2">

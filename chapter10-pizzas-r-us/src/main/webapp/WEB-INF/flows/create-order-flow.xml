@@ -8,7 +8,7 @@
 	</on-start>
 
 	<view-state id="selectPizzas" view="selectPizzas" model="orderForm" >
-		<transition on="add" to="selectPizzas" bind="true">
+		<transition on="add" >
 			<evaluate expression="orderController.addPizza(flowScope.orderForm)" />
 		</transition>
 		
@@ -22,7 +22,7 @@
 	</view-state>
 
 	<view-state id="selectShop" view="selectShop" model="orderForm">
-		<transition on="next" to="selectDeliveryOptions" bind="true"/>
+		<transition on="next" to="selectDeliveryOptions"/>
 		
 		<transition on="previous" to="selectPizzas" />
 	</view-state>

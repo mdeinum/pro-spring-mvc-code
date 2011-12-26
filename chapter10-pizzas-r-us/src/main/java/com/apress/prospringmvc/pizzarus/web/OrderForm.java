@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -23,6 +27,9 @@ public class OrderForm implements Serializable {
 	private Map<Pizza, Integer> pizzas = new HashMap<Pizza, Integer>();
 
 	private Pizza pizza;
+	@NotNull
+	@Min(1)
+	@Max(99)
 	private Integer quantity;
 	private Shop shop;
 
