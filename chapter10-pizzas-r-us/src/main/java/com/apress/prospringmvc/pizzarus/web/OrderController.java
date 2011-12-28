@@ -20,6 +20,13 @@ import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.service.PizzasService;
 import com.apress.prospringmvc.pizzarus.support.OrderBuilder;
 
+/**
+ * Controller to be used to place and view orders using the {@link PizzasService}. This controller can be used using
+ * Spring MVC (view orders) or by POJO access (for example Web Flow) for placing orders
+ * 
+ * @author Koen Serneels
+ */
+
 @Controller
 public class OrderController {
 
@@ -52,7 +59,7 @@ public class OrderController {
 		if (orderForm.getPizzas().containsKey(pizza)) {
 			orderForm.getPizzas().put(pizza, orderForm.getPizzas().get(pizza) + orderForm.getQuantity());
 		} else {
-			orderForm.getPizzas().put(pizza, 1);
+			orderForm.getPizzas().put(pizza, orderForm.getQuantity());
 		}
 	}
 

@@ -83,6 +83,7 @@ subprojects {
     hibernateVersion='4.0.0.Final'
     hibernateValidatorVersion='4.2.0.Final'
     tilesVersion='2.2.2'
+    ehCacheVersion='2.5.0'
 
     configurations { all*.exclude group: 'commons-logging' }
 
@@ -99,9 +100,12 @@ subprojects {
         compile 'cglib:cglib-nodep:2.2'
         compile 'org.aspectj:aspectjrt:1.6.12'
         compile 'org.aspectj:aspectjweaver:1.6.12'
+
         compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
 	compile "org.hibernate:hibernate-core:$hibernateVersion"
+	compile "org.hibernate:hibernate-ehcache:$hibernateVersion"
 	compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
+	compile "net.sf.ehcache:ehcache-core:$ehCacheVersion"
 
 	compile "org.apache.tiles:tiles-servlet:$tilesVersion"
 	compile "org.apache.tiles:tiles-jsp:$tilesVersion"

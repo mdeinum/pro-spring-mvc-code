@@ -10,12 +10,21 @@ import org.springframework.stereotype.Repository;
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 
+/**
+ * JPA implementation of the {@link OrderRepository}
+ * 
+ * @author Koen Serneels
+ */
+
 @Repository("orderRepository")
 public class JpaOrderRepository implements OrderRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * @see OrderRepository#saveOrder(Customer, Order)
+	 */
 	@Override
 	public Long saveOrder(Customer customer, Order order) {
 		customer = entityManager.find(Customer.class, customer.getId());
@@ -24,6 +33,9 @@ public class JpaOrderRepository implements OrderRepository {
 		return order.getId();
 	}
 
+	/**
+	 * @see OrderRepository#getOrders(Long)
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Order> getOrders(Long customerId) {

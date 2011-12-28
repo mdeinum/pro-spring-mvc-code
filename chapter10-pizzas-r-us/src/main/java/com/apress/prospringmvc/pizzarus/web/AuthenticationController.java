@@ -20,6 +20,13 @@ import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.service.InvalidCredentialsException;
 import com.apress.prospringmvc.pizzarus.service.PizzasService;
 
+/**
+ * This controller talks to the {@link PizzasService} to authenticate a user. This controller can be used via Spring MVC
+ * (request mapping login.html) or as POJO for example via Web Flow
+ * 
+ * @author Koen Serneels
+ */
+
 @Controller
 public class AuthenticationController {
 
@@ -29,6 +36,8 @@ public class AuthenticationController {
 
 	@Autowired
 	private PizzasService pizzasService;
+
+	// ----- Spring MVC logic
 
 	@RequestMapping("login.html")
 	public ModelAndView authentication() {
@@ -41,8 +50,7 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "authenticate.html", method = RequestMethod.POST)
 	public ModelAndView authentication(@ModelAttribute
-			AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession) {
-
+	AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession) {
 		try {
 			authenticate(authenticationForm, httpSession);
 			mov.addObject("authenticationOk", "true");
@@ -60,6 +68,7 @@ public class AuthenticationController {
 		return new AuthenticationForm();
 	}
 
+	// ---- POJO logic
 	public Event authenticate(AuthenticationForm authenticationForm, MvcExternalContext externalContext,
 			MessageContext messageContext) {
 		try {
@@ -71,6 +80,7 @@ public class AuthenticationController {
 		return new EventFactorySupport().success(this);
 	}
 
+	// ---- Helpers
 	private void authenticate(AuthenticationForm authenticationForm, HttpSession httpSession)
 			throws InvalidCredentialsException {
 		Customer customer = pizzasService.authenticateCustomer(authenticationForm.getUsername(),

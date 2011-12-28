@@ -13,6 +13,13 @@ import javax.persistence.UniqueConstraint;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+/**
+ * A shop is the place where {@link Order}s are placed. For the sample it just has a name and a city. The business key
+ * of a shop is the combination of name and city. Two shop entities with the same name and city are considered equal.
+ * 
+ * @author Koen Serneels
+ */
+
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "shopName", "city" }) })
 public class Shop implements Serializable {

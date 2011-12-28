@@ -12,17 +12,22 @@ import com.apress.prospringmvc.pizzarus.domain.Pizza;
 /**
  * JPA implementation for the {@link PizzaRepository}.
  * 
- * @author M. Deinum
- * 
+ * @author Koen Serneels
  */
+
 @Repository("pizzaRepository")
 public class JpaPizzaRepository implements PizzaRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * Finds all pizza's stored in the database. Note that this query is cached. Calling this multiple times will cause
+	 * no database overhead.
+	 */
 	@Override
 	public List<Pizza> findAll() {
-		return entityManager.createQuery("select p from Pizza p", Pizza.class).getResultList();
+		return entityManager.createQuery("select p from Pizza p", Pizza.class).setHint("org.hibernate.cacheable", true)
+				.getResultList();
 	}
 }

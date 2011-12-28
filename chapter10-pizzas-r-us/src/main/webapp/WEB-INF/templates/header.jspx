@@ -7,25 +7,25 @@
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
 	
-	<table style="width: 100%">
+	<table>
 		<tr>
-			<td width="10%">
+			<td>
 				<spring:url value="/index.html" var="home" />
 				<a href="${home}">Home</a>
 			</td>
-			<td class="line" width="5%"/>
-			<td width="15%">
+			<td class="line" width="15px"/>
+			<td>
 				<spring:url value="/create-order-flow" var="createOrder" />
 				<a href="${createOrder}">Home delivery</a>
 			</td>	
-			<td class="line" width="5%"/>
-			<td width="10%">
+			<td class="line" width="15px"/>
+			<td>
 				<spring:url value="/login.html" var="login" />
 				<a href="${login}">Login</a>
 			</td>	
 			<c:if test="${authenticatedCustomer !=null}">
-				<td class="line" width="5%"/>
-				<td width="20%">
+				<td class="line" width="15px"/>
+				<td>
 					<spring:url value="/ordersOverview.html" var="ordersOverview" />
 					<a href="${ordersOverview}">View orders</a>
 				</td>	

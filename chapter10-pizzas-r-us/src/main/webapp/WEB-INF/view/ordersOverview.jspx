@@ -5,7 +5,7 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
 
-	<c:if test="${param.orderOk =='true'}">
+	<c:if test="${param.orderId !=null}">
 		<div id="orderSuccess"
 			style="color: green; display: block; margin-left: 15px; margin-bottom: 10px;">
 			<table>

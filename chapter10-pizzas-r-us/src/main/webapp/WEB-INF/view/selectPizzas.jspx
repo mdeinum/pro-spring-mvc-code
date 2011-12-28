@@ -20,11 +20,11 @@
 			</tr>
 			<tr>
 				<td><spring:message code="label.page.products.select.quantity"/></td>
-				<td><form:input path="quantity" /></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<form:errors path="quantity" cssClass="error"/>
+				<td>
+					<form:input path="quantity" />
+					<span style="margin-left: 5px">
+						<form:errors path="quantity" cssClass="error"/>
+					</span>
 				</td>
 			</tr>
 			<tr height="10px"/>

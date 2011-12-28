@@ -4,26 +4,37 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.apress.prospringmvc.pizzarus.config.CustomComponentScanFilter;
 import com.apress.prospringmvc.pizzarus.config.InfrastructureContextConfiguration;
 import com.apress.prospringmvc.pizzarus.config.TestDataContextConfiguration;
+
+/**
+ * The main {@link WebApplicationInitializer} which starts up a {@link AnnotationConfigWebApplicationContext}. Resources
+ * for this context are retrieved from annotated classes which are annotated using the {@link Configuration}.
+ * The classes loaded are mentioned here are stored in the {@link #configurationClasses}<p/>
+ * 
+ * Finally we also programmatically configure the {@link DispatcherServlet} that listens to /
+ * 
+ * @author Koen Serneels
+ */
 
 public class PizzaRUsWebApplicationInitializer implements WebApplicationInitializer {
 
 	private static final Class<?>[] configurationClasses = new Class<?>[] { TestDataContextConfiguration.class,
-		WebMvcContextConfiguration.class, InfrastructureContextConfiguration.class,
-		WebflowContextConfiguration.class, CustomComponentScanFilter.class };
+			WebMvcContextConfiguration.class, InfrastructureContextConfiguration.class,
+			WebflowContextConfiguration.class };
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 
 		// Create the 'root' Spring application context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.getEnvironment().addActiveProfile("container");
 		rootContext.register(configurationClasses);
 
 		servletContext.addListener(new ContextLoaderListener(rootContext));
@@ -31,6 +42,7 @@ public class PizzaRUsWebApplicationInitializer implements WebApplicationInitiali
 		// Register and map the dispatcher servlet
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("pizza-r-us", new DispatcherServlet(
 				rootContext));
+
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 	}

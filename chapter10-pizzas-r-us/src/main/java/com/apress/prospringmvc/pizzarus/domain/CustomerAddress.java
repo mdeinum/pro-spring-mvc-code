@@ -4,6 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
+/**
+ * A component which resembles the address of a {@link Customer}
+ * 
+ * @author Koen Serneels
+ */
+
 @Embeddable
 public class CustomerAddress implements Serializable {
 

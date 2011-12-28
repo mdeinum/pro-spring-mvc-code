@@ -1,13 +1,24 @@
 package com.apress.prospringmvc.pizzarus.support;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.stereotype.Component;
 
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.CustomerAddress;
 
+/**
+ * Builds {@link Customer} domain objects
+ * 
+ * @author Koen Serneels
+ */
+
+@Component
 public class CustomerBuilder extends EntityBuilder<Customer> {
 
-	private Customer product = new Customer();
+	@Override
+	void initProduct() {
+		product = new Customer();		
+	}
 
 	public CustomerBuilder credentials(String username, String password) {
 		product.setUsername(username);

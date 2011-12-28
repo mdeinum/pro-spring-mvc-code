@@ -8,19 +8,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.springframework.stereotype.Component;
+
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 import com.apress.prospringmvc.pizzarus.domain.OrderDetail;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.domain.Shop;
 
+/**
+ * Builds {@link Order} domain objects
+ * 
+ * @author Koen Serneels
+ */
+
+@Component
 public class OrderBuilder extends EntityBuilder<Order> {
 
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-	private Order product = new Order();
+
+	@Override
+	void initProduct() {
+		product = new Order();
+
+	}
 
 	public OrderBuilder buildAndAddPizza(String name, String description, BigDecimal price, int amount) {
-
 		Pizza pizza = new Pizza(name);
 		pizza.setDescription(description);
 		pizza.setPrice(price);

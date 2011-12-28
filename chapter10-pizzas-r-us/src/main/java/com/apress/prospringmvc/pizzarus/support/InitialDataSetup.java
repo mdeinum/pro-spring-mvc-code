@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -17,69 +14,78 @@ import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 import com.apress.prospringmvc.pizzarus.domain.Shop;
 
-public class InitialDataSetup {
+/**
+ * Sets up initial data so the application can be used straight away. The data setup is executed in a separate
+ * transaction, and commited when the {@link #setupData()} method returns
+ * 
+ * @author Koen Serneels
+ */
 
-	@PersistenceContext
-	private EntityManager entityManager;
+public class InitialDataSetup {
 
 	@Autowired
 	private TransactionTemplate transactionTemplate;
+	@Autowired
+	private OrderBuilder orderBuilder;
+	@Autowired
+	private ShopBuilder shopBuilder;
+	@Autowired
+	private CustomerBuilder customerBuilder;
 
 	public void setupData() {
 		transactionTemplate.execute(new TransactionCallback<Void>() {
 
 			@Override
 			public Void doInTransaction(TransactionStatus status) {
-				EntityBuilder.initialize(entityManager);
+				System.err.println("ORRRRRRRRRRRRRRRRRRRRRRRRRRRRR " + orderBuilder);
 				Shop brussels;
 				Customer johnDoe;
 
 				// Create customer
 				{
-					johnDoe = new CustomerBuilder().address("Brussels", "1000", "Nieuwstraat", "1", "A")
+					johnDoe = customerBuilder.address("Brussels", "1000", "Nieuwstraat", "1", "A")
 							.credentials("jd", "secret").name("John", "Doe").build();
 				}
 
 				// Setup different shops
 				{
-					brussels = new ShopBuilder().shop("Pizza-r-us", "Brussels").build();
-					new ShopBuilder().shop("Pizza-r-us", "Antwerp").build();
-					new ShopBuilder().shop("Pizza-r-us", "Gent").build();
-					new ShopBuilder().shop("Pizza-r-us", "Bruges").build();
-					new ShopBuilder().shop("Pizza-r-us", "Liege").build();
-					new ShopBuilder().shop("Pizza-r-us", "Charleroi").build();
+					brussels = shopBuilder.shop("Pizza-r-us", "Brussels").build();
+					shopBuilder.shop("Pizza-r-us", "Antwerp").build();
+					shopBuilder.shop("Pizza-r-us", "Gent").build();
+					shopBuilder.shop("Pizza-r-us", "Bruges").build();
+					shopBuilder.shop("Pizza-r-us", "Liege").build();
+					shopBuilder.shop("Pizza-r-us", "Charleroi").build();
 				}
 
 				// Create different pizza's and directly attach them with an order
 				List<Order> orders = new ArrayList<Order>();
 				{
-					orders.add(new OrderBuilder()
-					.buildAndAddPizza("Pizza Margherita",
-							"Tomato, sliced mozzarella, basil and extra-virgin olive oil",
-							new BigDecimal("13.20"), 1).deliveryDate(new Date()).orderDate(new Date())
+					orders.add(orderBuilder
+							.buildAndAddPizza("Pizza Margherita",
+									"Tomato, sliced mozzarella, basil and extra-virgin olive oil",
+									new BigDecimal("13.20"), 1).deliveryDate(new Date()).orderDate(new Date())
 							.shop(brussels).customer(johnDoe).build());
 
-					orders.add(new OrderBuilder()
-					.buildAndAddPizza(
-							"Pizza Funghi",
-							"olive oil, garlic, sliced assorted mushrooms, parsley leaves, thyme leaves, fontina cheese, oregano",
-							new BigDecimal("10.00"), 1).deliveryDate(new Date()).orderDate(new Date())
+					orders.add(orderBuilder
+							.buildAndAddPizza(
+									"Pizza Funghi",
+									"olive oil, garlic, sliced assorted mushrooms, parsley leaves, thyme leaves, fontina cheese, oregano",
+									new BigDecimal("10.00"), 1).deliveryDate(new Date()).orderDate(new Date())
 							.shop(brussels).customer(johnDoe).build());
 
-					orders.add(new OrderBuilder()
-					.buildAndAddPizza("Pizza capricciosa",
-							"mozzarella, tomato, mushrooms, artichokes, cooked ham, olives, oil",
-							new BigDecimal("15.45"), 1).deliveryDate(new Date()).orderDate(new Date())
+					orders.add(orderBuilder
+							.buildAndAddPizza("Pizza capricciosa",
+									"mozzarella, tomato, mushrooms, artichokes, cooked ham, olives, oil",
+									new BigDecimal("15.45"), 1).deliveryDate(new Date()).orderDate(new Date())
 							.shop(brussels).customer(johnDoe).build());
 
-					orders.add(new OrderBuilder()
-					.buildAndAddPizza("Pizza quattro formaggi",
-							"tomatoes, and the cheeses mozzarella, stracchino, fontina, and gorgonzola",
-							new BigDecimal("11.24"), 1).deliveryDate(new Date()).orderDate(new Date())
+					orders.add(orderBuilder
+							.buildAndAddPizza("Pizza quattro formaggi",
+									"tomatoes, and the cheeses mozzarella, stracchino, fontina, and gorgonzola",
+									new BigDecimal("11.24"), 1).deliveryDate(new Date()).orderDate(new Date())
 							.shop(brussels).customer(johnDoe).build());
 				}
 
-				EntityBuilder.clear();
 				return null;
 			}
 		});

@@ -16,6 +16,7 @@
 		</table>
 		
 		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
+			<button type="submit" id="return" name="_eventId_return"><spring:message code="label.page.products.select.cancel"/></button>
 			<button type="submit" id="return" name="_eventId_previous"><spring:message code="label.page.select.shop.previous"/></button>
 			<button type="submit" id="continue" name="_eventId_next"><spring:message code="label.page.select.shop.next"/></button>
 		</div>

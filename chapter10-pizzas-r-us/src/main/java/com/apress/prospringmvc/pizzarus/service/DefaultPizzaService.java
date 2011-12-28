@@ -19,11 +19,12 @@ import com.apress.prospringmvc.pizzarus.repository.PizzaRepository;
 import com.apress.prospringmvc.pizzarus.repository.ShopRepository;
 
 /**
- * Default implementation for the {@link PizzasService}.
+ * Default implemenatation of the {@link PizzasService}
  * 
- * @author M. Deinum
- * 
+ * @see PizzasService
+ * @author Koen Serneels
  */
+
 @Service("pizzaService")
 public class DefaultPizzaService implements PizzasService {
 
@@ -36,12 +37,18 @@ public class DefaultPizzaService implements PizzasService {
 	@Autowired
 	private OrderRepository orderRepository;
 
+	/**
+	 * @see PizzasService#getPizzas()
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public List<Pizza> getPizzas() {
 		return pizzaRepository.findAll();
 	}
 
+	/**
+	 * @see PizzasService#authenticateCustomer(String, String)
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public Customer authenticateCustomer(String username, String password) throws InvalidCredentialsException {
@@ -58,18 +65,27 @@ public class DefaultPizzaService implements PizzasService {
 		}
 	}
 
+	/**
+	 * @see PizzasService#addOrder(Customer, Order)
+	 */
 	@Override
 	@Transactional
 	public Long addOrder(Customer customer, Order order) {
 		return orderRepository.saveOrder(customer, order);
 	}
 
+	/**
+	 * @see PizzasService#getShops()
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public List<Shop> getShops() {
 		return shopRepository.findAll();
 	}
 
+	/**
+	 * @see PizzasService#getOrdersForCustomer(Customer)
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public List<Order> getOrdersForCustomer(Customer customer) {

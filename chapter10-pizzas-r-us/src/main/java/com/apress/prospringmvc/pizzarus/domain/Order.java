@@ -20,12 +20,12 @@ import org.hibernate.annotations.CascadeType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * An order consists out of one or more {@link OrderDetail}s. It is the link between
+ * An order consists out of one or more {@link OrderDetail}s. Further more it has special fields identifying when the
+ * order was made {@link #orderDate} when the order should be delivered {@link #deliveryDate} and what the total price
+ * of the order is {@link #totalOrderPrice}. The latter can also be caculated by iterarting over the {@link OrderDetail}
+ * s, but this is a nice denormalization which enables quick access to the total price without fetching any other data.
  * 
- * 
- * @author M. Deinum
- * @author C. Yates
- * @author K. Serneels
+ * @author Koen Serneels
  */
 
 @Entity

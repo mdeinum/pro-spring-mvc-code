@@ -9,13 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * A customer resembles an authenticated user of our system. A customer is able to make orders. A customer is identified
- * by his or her username. When authenticating the user supplies its username and password. Besides identification
- * information we also store basic legal information such as firstname, lastname and emailaddress.
+ * A customer resembles an authenticated user of our system. A customer is able to submit orders. A customer is
+ * identified by his or her username. When authenticating the user supplies its username and password. Besides
+ * identification information we also store basic legal information such as address, firstname, lastname and email
+ * address.
  * 
- * @author M. Deinum
- * @author C. Yates
- * @author K. Serneels
+ * @author Koen Serneels
  */
 
 @Entity

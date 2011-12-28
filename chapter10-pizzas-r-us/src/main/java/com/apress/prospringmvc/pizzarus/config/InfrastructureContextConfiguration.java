@@ -10,10 +10,8 @@ import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -24,9 +22,25 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
 
+/**
+ * Configures the main infrastructure related beans such as:
+ * 
+ * <ul>
+ * <li>JPA local transaction manager</li>
+ * <li>Starts an internal H2 database with an attached TCP connector so you can connect externally to it</li>
+ * <li>Creates a datasource to in memory started database</li>
+ * <li>Creates the {@link EntityManagerFactory} based upon information in the META-INF/persistence.xml
+ * </ul>
+ * 
+ * <b>Note:</b> After starting the container, you can use the following URL (with your favoriate JDBC client) to connect
+ * to the database: <i>jdbc:h2:tcp://localhost/mem:testdb</i>
+ * 
+ * @author Koen Serneels
+ */
+
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus" }, excludeFilters = { @Filter(type = FilterType.CUSTOM, value = CustomComponentScanFilter.class) })
+@ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus" })
 public class InfrastructureContextConfiguration {
 
 	@Autowired

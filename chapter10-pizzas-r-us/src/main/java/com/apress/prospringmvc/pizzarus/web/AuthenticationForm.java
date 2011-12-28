@@ -2,6 +2,12 @@ package com.apress.prospringmvc.pizzarus.web;
 
 import java.io.Serializable;
 
+/**
+ * Simple form for holding username and password
+ * 
+ * @author Koen Serneels
+ */
+
 public class AuthenticationForm implements Serializable {
 
 	private String username;

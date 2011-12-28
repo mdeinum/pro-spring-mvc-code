@@ -10,6 +10,13 @@ import org.springframework.core.convert.converter.GenericConverter;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.service.PizzasService;
 
+/**
+ * Tries to convert a Long (which resembles the primary key of a {@link Pizza} to a Pizza entity using the
+ * {@link PizzasService}. When conversion cannot take place an {@link IllegalArgumentException} is thrown
+ * 
+ * @author Koen Serneels
+ */
+
 public class PizzaConverter implements GenericConverter {
 
 	@Autowired

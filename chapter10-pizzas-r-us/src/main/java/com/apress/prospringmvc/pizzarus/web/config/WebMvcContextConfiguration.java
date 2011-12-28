@@ -3,6 +3,7 @@ package com.apress.prospringmvc.pizzarus.web.config;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.ViewResolver;
@@ -21,18 +22,17 @@ import com.apress.prospringmvc.pizzarus.web.converter.ShopConverter;
 /**
  * WebMvc Configuration.
  * 
- * @author M. Deinum
+ * @author Koen Serneels
  */
+
 @Configuration
 @EnableWebMvc
+@Profile("container")
 public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
-		registry.addResourceHandler("/js/**", "*.js").addResourceLocations("/WEB-INF/js/");
-		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/");
-		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/css/");
 	}
 
 	@Bean

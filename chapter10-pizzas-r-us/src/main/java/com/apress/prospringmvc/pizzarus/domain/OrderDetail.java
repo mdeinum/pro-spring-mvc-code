@@ -10,12 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * Models a "Pizza" in our domain. A pizza has a name, a longer description (possibly describing its ingredients) and a
- * price.
+ * An order detail is the link table between {@link Order} and {@link Pizza} We also store how many pizza's are ordered
+ * in the {@link #amount} field
  * 
- * @author M. Deinum
- * @author C. Yates
- * @author K. Serneels
+ * @author Koen Serneels
  */
 
 @Entity

@@ -6,6 +6,9 @@ import com.apress.prospringmvc.pizzarus.domain.Shop;
 
 public interface ShopRepository {
 
+	/**
+	 * Finds all shops
+	 */
 	List<Shop> findAll();
 
 }

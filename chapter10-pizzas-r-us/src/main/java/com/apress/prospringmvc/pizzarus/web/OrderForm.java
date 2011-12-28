@@ -20,6 +20,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.domain.Shop;
 
+/**
+ * Form to capture all elements of a order creation flow. When all mandatory elements are filled in a new {@link Order}
+ * can be created based upon info
+ * 
+ * @author Koen Serneels
+ */
+
 public class OrderForm implements Serializable {
 
 	private List<Pizza> selectablePizzas = new ArrayList<Pizza>();

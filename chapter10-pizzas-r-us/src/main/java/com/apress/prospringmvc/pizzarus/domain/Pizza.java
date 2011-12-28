@@ -3,6 +3,7 @@ package com.apress.prospringmvc.pizzarus.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,17 +14,20 @@ import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Models a "Pizza" in our domain. A pizza has a name, a longer description (possibly describing its ingredients) and a
- * price.
+ * price. A pizza is also eligible for caching. The business key of a pizza is its name. Two pizza's are considered
+ * equal when the hav the same name
  * 
- * @author M. Deinum
- * @author C. Yates
- * @author K. Serneels
+ * @author Koen Serneels
  */
 
 @Entity
+@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "pizzaCache")
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
 public class Pizza implements Serializable {
 
