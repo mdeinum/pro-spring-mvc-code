@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+
+	<c:if test="${param.orderId !=null}">
+		<div id="orderSuccess"
+			style="color: green; display: block; margin-left: 15px; margin-bottom: 10px;">
+			<table>
+				<tr>
+					<td>
+						<ul style="list-style-type: disc">
+							<li><h3><spring:message code="label.page.ordersoverview.order.success" arguments="${param.orderId}" /></h3></li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</c:if>
+	
+	<h3>Order overview:</h3>
+	<table style="width: 100%;" rules="groups">
+		<thead>
+			<tr>
+				<th align="left"><spring:message code="label.page.ordersoverview.order"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.pizzas"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.order.date"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.delivery.date"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.total.price"/></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr height="10px" />
+			<c:forEach items="${orders}" var="order">
+				<tr>
+					<td>${order.id}</td>
+					<td>${fn:length(order.orderDetails)}</td>
+					<td><spring:eval expression="order.orderDate"/></td>
+					<td><spring:eval expression="order.deliveryDate"/></td>
+					<td>${order.totalOrderPrice}</td>
+				</tr>
+			</c:forEach>
+			<tr height="20px" />
+		</tbody>
+	</table>
+
+	<script>
+		dojo.addOnLoad(function() {
+			function fadeIt() {
+				if (dojo.byId("orderSuccess")) {
+					dojo.style("orderSuccess", "opacity", "1");
+					var fadeOutArgs = {
+						node : "orderSuccess",
+						duration : 15000
+					};
+					dojo.fadeOut(fadeOutArgs).play();
+				}
+			}
+			fadeIt();
+		});
+	</script>
+</jsp:root>
