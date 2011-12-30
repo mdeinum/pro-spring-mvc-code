@@ -1,5 +1,5 @@
 war {
-	archiveName = 'pizzas-r-us-10-swf.war'
+	archiveName = 'pizzas-r-us-11-swf.war'
 }
 
 dependencies() {
