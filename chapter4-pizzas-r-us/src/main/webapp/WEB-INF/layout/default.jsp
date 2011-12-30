@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title>Welcome to Pizzas R Us | <decorator:title /></title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>" >
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/styles.css"/>" >
     <decorator:head />
 </head>
 <body>
@@ -22,7 +22,7 @@
         <li><a href="<c:url value="/order.htm"/>">Place Order</a></li>
     </nav>
 
-    <img src="<c:url value="/images/logo.jpg"/>" width="293" height="80" alt="" id="logo" />
+    <img src="<c:url value="/resources/images/logo.jpg"/>" width="293" height="80" alt="" id="logo" />
 
 </header>
 
