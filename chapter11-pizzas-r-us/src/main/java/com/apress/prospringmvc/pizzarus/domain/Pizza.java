@@ -40,6 +40,8 @@ public class Pizza implements Serializable {
 	private String description;
 	private BigDecimal price;
 
+	private Integer numberInStock;
+
 	@SuppressWarnings("unused")
 	private Pizza() {
 		// For ORM
@@ -75,6 +77,14 @@ public class Pizza implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getNumberInStock() {
+		return numberInStock;
+	}
+
+	public void setNumberInStock(Integer numberInStock) {
+		this.numberInStock = numberInStock;
 	}
 
 	@Override

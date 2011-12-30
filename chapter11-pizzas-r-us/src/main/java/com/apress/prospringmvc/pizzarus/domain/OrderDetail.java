@@ -30,7 +30,7 @@ public class OrderDetail implements Serializable {
 	private Order order;
 
 	private int amount;
-
+	
 	public Long getId() {
 		return id;
 	}

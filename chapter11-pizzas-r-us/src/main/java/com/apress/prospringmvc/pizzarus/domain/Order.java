@@ -38,8 +38,10 @@ public class Order implements Serializable {
 
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date orderDate;
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	private Date deliveryDate;
+
+	@ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+	private DeliverySlot deliverySlot;
+
 	private boolean delivered;
 	private BigDecimal totalOrderPrice;
 
@@ -68,14 +70,6 @@ public class Order implements Serializable {
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
-	}
-
-	public Date getDeliveryDate() {
-		return deliveryDate;
-	}
-
-	public void setDeliveryDate(Date deliveryDate) {
-		this.deliveryDate = deliveryDate;
 	}
 
 	public Customer getCustomer() {
@@ -116,5 +110,13 @@ public class Order implements Serializable {
 
 	public void setShop(Shop shop) {
 		this.shop = shop;
+	}
+
+	public DeliverySlot getDeliverySlot() {
+		return deliverySlot;
+	}
+
+	public void setDeliverySlot(DeliverySlot deliverySlot) {
+		this.deliverySlot = deliverySlot;
 	}
 }
