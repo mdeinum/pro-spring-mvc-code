@@ -1,10 +1,12 @@
 package com.apress.prospringmvc.pizzarus.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.service.PizzaService;
 
 /**
@@ -21,9 +23,7 @@ public class PizzasController {
     private PizzaService pizzaService;
 
     @RequestMapping(value = "/pizzas.htm")
-    public ModelAndView menu() {
-        ModelAndView mav = new ModelAndView("pizzas");
-        mav.addObject("pizzaList", this.pizzaService.findAll());
-        return mav;
+    public List<Pizza> menu() {
+        return this.pizzaService.findAll();
     }
 }

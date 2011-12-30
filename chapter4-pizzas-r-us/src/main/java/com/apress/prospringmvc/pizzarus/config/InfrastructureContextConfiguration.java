@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus.service",
         "com.apress.prospringmvc.pizzarus.repository" })
-public class InfrastructureConfig {
+public class InfrastructureContextConfiguration {
 
     @Autowired
     private DataSource dataSource;

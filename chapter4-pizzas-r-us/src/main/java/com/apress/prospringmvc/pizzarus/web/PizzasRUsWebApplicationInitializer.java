@@ -13,8 +13,8 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.apress.prospringmvc.pizzarus.config.InfrastructureConfig;
-import com.apress.prospringmvc.pizzarus.web.config.WebMvcConfig;
+import com.apress.prospringmvc.pizzarus.config.InfrastructureContextConfiguration;
+import com.apress.prospringmvc.pizzarus.web.config.WebMvcContextConfiguration;
 import com.opensymphony.sitemesh.webapp.SiteMeshFilter;
 
 public class PizzasRUsWebApplicationInitializer implements WebApplicationInitializer {
@@ -27,7 +27,7 @@ public class PizzasRUsWebApplicationInitializer implements WebApplicationInitial
     }
 
     private void registerDispatcherServlet(final ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext dispatcherContext = createContext(WebMvcConfig.class);
+        AnnotationConfigWebApplicationContext dispatcherContext = createContext(WebMvcContextConfiguration.class);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(
                 dispatcherContext));
         dispatcher.setLoadOnStartup(1);
@@ -35,7 +35,7 @@ public class PizzasRUsWebApplicationInitializer implements WebApplicationInitial
     }
 
     private void registerListener(final ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext rootContext = createContext(InfrastructureConfig.class);
+        AnnotationConfigWebApplicationContext rootContext = createContext(InfrastructureContextConfiguration.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
     }
 

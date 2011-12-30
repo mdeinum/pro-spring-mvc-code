@@ -21,13 +21,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus.web", "com.apress.prospringmvc.aop" })
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/*").addResourceLocations("classpath:css/**");
-        registry.addResourceHandler("/images/*").addResourceLocations("classpath:images/**");
-        registry.addResourceHandler("/fonts/*").addResourceLocations("classpath:fonts/**");
+        registry.addResourceHandler("/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
     }
 
     @Override
