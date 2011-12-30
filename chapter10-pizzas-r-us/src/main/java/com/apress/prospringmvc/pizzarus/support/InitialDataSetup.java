@@ -37,7 +37,6 @@ public class InitialDataSetup {
 
 			@Override
 			public Void doInTransaction(TransactionStatus status) {
-				System.err.println("ORRRRRRRRRRRRRRRRRRRRRRRRRRRRR " + orderBuilder);
 				Shop brussels;
 				Customer johnDoe;
 
