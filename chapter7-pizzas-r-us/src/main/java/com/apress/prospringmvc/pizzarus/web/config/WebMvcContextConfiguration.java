@@ -31,7 +31,7 @@ import com.apress.prospringmvc.web.method.annotation.SessionAttributeMethodProce
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus.web", "com.apress.prospringmvc.aop" })
-public class WebMvcConfig extends WebMvcConfigurerAdapter implements BeanFactoryAware {
+public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter implements BeanFactoryAware {
 
     private ConfigurableBeanFactory beanFactory;
 
@@ -78,7 +78,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements BeanFactory
         if (beanFactory instanceof ConfigurableBeanFactory) {
             this.beanFactory = (ConfigurableBeanFactory) beanFactory;
         }
-
     }
 
 }
