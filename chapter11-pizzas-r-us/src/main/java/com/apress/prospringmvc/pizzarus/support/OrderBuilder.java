@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.joda.time.Interval;
 import org.springframework.stereotype.Component;
 
 import com.apress.prospringmvc.pizzarus.domain.Customer;
+import com.apress.prospringmvc.pizzarus.domain.DeliverySlot;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 import com.apress.prospringmvc.pizzarus.domain.OrderDetail;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
@@ -57,8 +59,8 @@ public class OrderBuilder extends EntityBuilder<Order> {
 		return this;
 	}
 
-	public OrderBuilder deliveryDate(Date date) {
-		product.setDeliveryDate(date);
+	public OrderBuilder deliverySlot(Interval interval) {
+		product.setDeliverySlot(new DeliverySlot(interval));
 		return this;
 	}
 

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesView;
 
+import com.apress.prospringmvc.pizzarus.web.converter.IntervalConverter;
 import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
 import com.apress.prospringmvc.pizzarus.web.converter.ShopConverter;
 
@@ -71,6 +72,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
+	public IntervalConverter periodConverter() {
+		return new IntervalConverter();
+	}
+
+	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
 		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
@@ -81,5 +87,6 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	protected void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(pizzaConverter());
 		registry.addConverter(shopConverter());
+		registry.addConverter(periodConverter());
 	}
 }

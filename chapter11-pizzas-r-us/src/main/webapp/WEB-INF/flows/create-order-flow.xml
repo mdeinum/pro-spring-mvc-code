@@ -41,16 +41,10 @@
 		<if test="externalContext.sessionMap.contains('authenticatedCustomer') == true" then="createOrder" else="authenticate"/>
 	</decision-state>	
 
-	<view-state id="authenticate" view="login" model="authenticationForm">
-		<on-entry>
-			<evaluate expression="authenticationController.initializeForm()" result="flowScope.authenticationForm" />
-		</on-entry>
-		<transition on="authenticate" to="createOrder" bind="true">
-			<evaluate expression="authenticationController.authenticate(flowScope.authenticationForm, externalContext, messageContext)"/>
-		</transition>
-
+	<subflow-state id="authenticate" subflow="authentication-flow">
+		<transition on="authenticationOk" to="createOrder"/>
 		<transition on="previous" to="selectDeliveryOptions"/>
-	</view-state>
+	</subflow-state>
 	
 	<action-state id="createOrder">
 		<evaluate expression="orderController.placeOrder(externalContext.sessionMap.get('authenticatedCustomer'), flowScope.orderForm)" result="flowScope.orderId"/>

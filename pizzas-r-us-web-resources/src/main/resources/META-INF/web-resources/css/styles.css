@@ -7,6 +7,7 @@ div, p, ul, h2, h3, h4, img{padding:0px; margin:0px;}
 ul{list-style-type:none;}
 
 .clear {clear: both; margin: 0px; height:0}
+.error{color: red;}
 
 p a{font:10px/14px Tahoma, sans-serif; color:#d50100; text-decoration:none;}
 p a:hover{ color:#000; text-decoration:none;}
@@ -22,6 +23,11 @@ h1 { font-family: romy; font-size: 48px; font-style: bold; color: orange; margin
 /* HEADER */
 
 header{width:617px; height:345px; background: url(../images/b_header.jpg) 0 0 no-repeat; position:relative;}
+
+header nav td a{font-size:12px; font-weight: bold; color: white; display: inline; float: left; text-decoration: none;}
+header nav td a:hover{color: orange;}
+
+header nav td.line{background:url(../images/bullet_m.gif) 0 0 no-repeat}
 
 header nav{position:absolute; top:16px; left:19px; width:585px}
 header nav li{height:16px; margin-right:8px; float:left;list-style-type:none; display: inline}
