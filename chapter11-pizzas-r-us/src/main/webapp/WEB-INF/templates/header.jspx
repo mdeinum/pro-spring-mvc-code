@@ -15,7 +15,7 @@
 			</td>
 			<td class="line" width="15px"/>
 			<td>
-				<spring:url value="/create-order-flow" var="createOrder" />
+				<spring:url value="/pizza-order-flow" var="createOrder" />
 				<a href="${createOrder}">Home delivery</a>
 			</td>	
 			<td class="line" width="15px"/>
