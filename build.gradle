@@ -117,9 +117,9 @@ subprojects {
 	compile "joda-time:joda-time:2.0"
         compile 'opensymphony:sitemesh:2.4.2'
 
-        runtime "jstl:jstl:1.2"
+        compile "jstl:jstl:1.2"
         
-        testCompile 'junit:junit:4.9'
+        testCompile 'junit:junit:4.10'
         testCompile "org.springframework:spring-test:$springVersion"
 
     }
