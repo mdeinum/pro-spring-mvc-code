@@ -2,6 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+                          
 	<on-start>
 		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
 	</on-start>
@@ -9,6 +10,7 @@
 	<view-state id="selectPizzas" view="selectPizzas" model="orderForm" >
 		<transition on="add" >
 			<evaluate expression="orderController.addPizza(flowScope.orderForm)" />
+			<render fragments="selectedPizzas"/>
 		</transition>
 		
 		<transition on="next" to="selectShop" />
@@ -56,5 +58,6 @@
 
 	<end-state id="endOrderCanceled" view="redirect:/index.jspx"/>
 	<end-state id="endOrderOk" view="redirect:/ordersOverview.html?orderOk=true&amp;orderId={orderId}"/>
+
 </flow>	
 	

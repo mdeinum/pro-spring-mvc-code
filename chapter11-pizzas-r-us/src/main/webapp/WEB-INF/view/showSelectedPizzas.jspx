@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+
+	<div id="selectedPizzas" style="margin-top: 10px; margin-bottom: 10px;">
+		<table style="width: 100%;" rules="groups">
+			<thead>
+				<tr>
+					<th width="80%" align="left"><spring:message code="label.page.products.select.pizza.name" /></th>
+					<th width="20%" align="left"><spring:message code="label.page.products.select.pizza.quantity" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr height="10px" />
+				<c:forEach items="${orderForm.pizzas}" var="pizza">
+					<tr>
+						<td>${pizza.key.name}</td>
+						<td>${pizza.value}</td>
+					</tr>
+				</c:forEach>
+				<tr height="20px" />
+			</tbody>
+		</table>
+	</div>
+</jsp:root>

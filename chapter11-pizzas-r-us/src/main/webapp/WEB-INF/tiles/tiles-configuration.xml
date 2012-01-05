@@ -14,10 +14,14 @@
         <put-attribute name="content" value="/WEB-INF/view/main.jspx"/>
     </definition>
 
-	<definition name="selectPizzas" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/selectPizzas.jspx"/>
+	<definition name="show.selected.pizzas" template="/WEB-INF/view/selectPizzas.jspx">
+        <put-attribute name="selectedPizzas" value="/WEB-INF/view/showSelectedPizzas.jspx"/>
     </definition>
-	
+    
+	<definition name="selectPizzas" extends="fullTemplate">
+        <put-attribute name="content" value="show.selected.pizzas"/>
+    </definition>
+
 	<definition name="selectShop" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/view/selectShop.jspx"/>
     </definition>
