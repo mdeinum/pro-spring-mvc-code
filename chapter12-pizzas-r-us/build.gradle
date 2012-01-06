@@ -1,0 +1,11 @@
+war {
+	archiveName = 'pizzas-r-us-12-swf.war'
+}
+
+dependencies() {
+	compile "org.springframework.webflow:spring-webflow:$springSwfVersion"
+	compile "org.springframework.webflow:spring-js:$springSwfVersion"
+	compile "org.springframework.webflow:spring-binding:$springSwfVersion"
+	compile "commons-codec:commons-codec:1.6"
+}
+

@@ -6,6 +6,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 
+import com.apress.prospringmvc.pizzarus.web.converter.IntervalConverter;
 import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
 import com.apress.prospringmvc.pizzarus.web.converter.ShopConverter;
 
@@ -23,10 +24,13 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	private PizzaConverter pizzaConverter;
 	@Autowired
 	private ShopConverter shopConverter;
+	@Autowired
+	private IntervalConverter periodConverter;
 
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		registry.addConverter(pizzaConverter);
 		registry.addConverter(shopConverter);
+		registry.addConverter(periodConverter);
 	}
 }

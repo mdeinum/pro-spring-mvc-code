@@ -9,8 +9,8 @@ def String[] modules = [
 	'chapter5-pizzas-r-us',
     	'chapter7-pizzas-r-us',
 	'chapter8-pizzas-r-us',
-	'chapter10-pizzas-r-us',
 	'chapter11-pizzas-r-us',
+	'chapter12-pizzas-r-us',
 	'pizzas-r-us'
 ]
 

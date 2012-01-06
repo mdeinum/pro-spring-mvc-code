@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -14,8 +15,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles2.TilesView;
+import org.springframework.webflow.mvc.view.FlowAjaxTilesView;
 
+import com.apress.prospringmvc.pizzarus.web.converter.IntervalConverter;
 import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
 import com.apress.prospringmvc.pizzarus.web.converter.ShopConverter;
 
@@ -44,9 +46,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Bean
 	public ViewResolver tilesViewResolver() {
-		UrlBasedViewResolver urlBasedViewResolver = new UrlBasedViewResolver();
+		UrlBasedViewResolver urlBasedViewResolver = new AjaxUrlBasedViewResolver();
 		urlBasedViewResolver.setOrder(1);
-		urlBasedViewResolver.setViewClass(TilesView.class);
+		urlBasedViewResolver.setViewClass(FlowAjaxTilesView.class);
 		return urlBasedViewResolver;
 	}
 
@@ -71,6 +73,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
+	public IntervalConverter periodConverter() {
+		return new IntervalConverter();
+	}
+
+	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
 		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
@@ -81,5 +88,6 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	protected void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(pizzaConverter());
 		registry.addConverter(shopConverter());
+		registry.addConverter(periodConverter());
 	}
 }

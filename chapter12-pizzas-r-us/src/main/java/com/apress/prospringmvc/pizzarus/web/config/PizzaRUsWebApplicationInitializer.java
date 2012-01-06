@@ -15,8 +15,9 @@ import com.apress.prospringmvc.pizzarus.config.TestDataContextConfiguration;
 
 /**
  * The main {@link WebApplicationInitializer} which starts up a {@link AnnotationConfigWebApplicationContext}. Resources
- * for this context are retrieved from annotated classes which are annotated using the {@link Configuration}.
- * The classes loaded are mentioned here are stored in the {@link #configurationClasses}<p/>
+ * for this context are retrieved from annotated classes which are annotated using the {@link Configuration}. The
+ * classes loaded are mentioned here are stored in the {@link #configurationClasses}
+ * <p/>
  * 
  * Finally we also programmatically configure the {@link DispatcherServlet} that listens to /
  * 

@@ -18,6 +18,7 @@ import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
 import com.apress.prospringmvc.pizzarus.domain.Pizza;
 import com.apress.prospringmvc.pizzarus.service.PizzasService;
+import com.apress.prospringmvc.pizzarus.support.IntervalSupport;
 import com.apress.prospringmvc.pizzarus.support.OrderBuilder;
 
 /**
@@ -64,7 +65,8 @@ public class OrderController {
 	}
 
 	public Long placeOrder(Customer customer, OrderForm orderForm) {
-		Order order = new OrderBuilder().addPizzas(orderForm.getPizzas()).deliveryDate(orderForm.getDeliveryDate())
+		Order order = new OrderBuilder().addPizzas(orderForm.getPizzas())
+				.deliverySlot(new IntervalSupport().createInterval(orderForm.getDeliveryDate()))
 				.orderDate(orderForm.getOrderDate()).shop(orderForm.getShop()).build(true);
 		return pizzasService.addOrder(customer, order);
 	}

@@ -37,6 +37,7 @@ public class InitialDataSetup {
 
 			@Override
 			public Void doInTransaction(TransactionStatus status) {
+
 				Shop brussels;
 				Customer johnDoe;
 
@@ -62,27 +63,31 @@ public class InitialDataSetup {
 					orders.add(orderBuilder
 							.buildAndAddPizza("Pizza Margherita",
 									"Tomato, sliced mozzarella, basil and extra-virgin olive oil",
-									new BigDecimal("13.20"), 1).deliveryDate(new Date()).orderDate(new Date())
-							.shop(brussels).customer(johnDoe).build());
+									new BigDecimal("13.20"), 1)
+							.deliverySlot(new IntervalSupport().createInterval(1, 1, 1, 0))
+							.orderDate(new Date()).shop(brussels).customer(johnDoe).build());
 
 					orders.add(orderBuilder
 							.buildAndAddPizza(
 									"Pizza Funghi",
 									"olive oil, garlic, sliced assorted mushrooms, parsley leaves, thyme leaves, fontina cheese, oregano",
-									new BigDecimal("10.00"), 1).deliveryDate(new Date()).orderDate(new Date())
-							.shop(brussels).customer(johnDoe).build());
+									new BigDecimal("10.00"), 1)
+							.deliverySlot(new IntervalSupport().createInterval(2, 1, 1, 0))
+							.orderDate(new Date()).shop(brussels).customer(johnDoe).build());
 
 					orders.add(orderBuilder
 							.buildAndAddPizza("Pizza capricciosa",
 									"mozzarella, tomato, mushrooms, artichokes, cooked ham, olives, oil",
-									new BigDecimal("15.45"), 1).deliveryDate(new Date()).orderDate(new Date())
-							.shop(brussels).customer(johnDoe).build());
+									new BigDecimal("15.45"), 1)
+							.deliverySlot(new IntervalSupport().createInterval(3, 1, 1, 0))
+							.orderDate(new Date()).shop(brussels).customer(johnDoe).build());
 
 					orders.add(orderBuilder
 							.buildAndAddPizza("Pizza quattro formaggi",
 									"tomatoes, and the cheeses mozzarella, stracchino, fontina, and gorgonzola",
-									new BigDecimal("11.24"), 1).deliveryDate(new Date()).orderDate(new Date())
-							.shop(brussels).customer(johnDoe).build());
+									new BigDecimal("11.24"), 1)
+							.deliverySlot(new IntervalSupport().createInterval(4, 1, 1, 0))
+							.orderDate(new Date()).shop(brussels).customer(johnDoe).build());
 				}
 
 				return null;
