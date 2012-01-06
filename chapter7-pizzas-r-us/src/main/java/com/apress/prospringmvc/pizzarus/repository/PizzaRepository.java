@@ -1,8 +1,8 @@
 package com.apress.prospringmvc.pizzarus.repository;
 
-import com.apress.prospringmvc.pizzarus.domain.Pizza;
-
 import java.util.List;
+
+import com.apress.prospringmvc.pizzarus.domain.Pizza;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,5 +14,7 @@ import java.util.List;
 public interface PizzaRepository {
 
     List<Pizza> findAll();
+
+    Pizza getById(Long id);
 
 }

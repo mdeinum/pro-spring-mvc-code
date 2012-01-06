@@ -27,4 +27,9 @@ public class PizzaRepositoryImpl implements PizzaRepository {
         return this.entityManager.createQuery("select p from Pizza p order by p.name", Pizza.class).getResultList();
     }
 
+    @Override
+    public Pizza getById(final Long id) {
+        return this.entityManager.find(Pizza.class, id);
+    }
+
 }

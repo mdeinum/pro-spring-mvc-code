@@ -27,4 +27,10 @@ public class PizzaServiceImpl implements PizzaService {
     public List<Pizza> findAll() {
         return this.pizzaRepository.findAll();
     }
+
+    @Override
+    public Pizza getById(final Long id) {
+        return this.pizzaRepository.getById(id);
+    }
+
 }

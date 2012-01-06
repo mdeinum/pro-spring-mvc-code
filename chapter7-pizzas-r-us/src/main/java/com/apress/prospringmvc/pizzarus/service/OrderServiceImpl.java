@@ -1,5 +1,7 @@
 package com.apress.prospringmvc.pizzarus.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,11 +20,14 @@ import com.apress.prospringmvc.pizzarus.repository.OrderRepository;
 @Transactional
 public class OrderServiceImpl implements OrderService {
 
+    private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Autowired
     private OrderRepository orderRepository;
 
     @Override
     public void newOrder(final Order order) {
+        this.logger.info("Received an order: {}", order);
         this.orderRepository.save(order);
     }
 }

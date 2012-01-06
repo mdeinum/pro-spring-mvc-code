@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -19,6 +20,10 @@ import com.opensymphony.sitemesh.webapp.SiteMeshFilter;
 
 public class PizzasRUsWebApplicationInitializer implements WebApplicationInitializer {
 
+    private static final long MAX_FILE_UPLOAD_SIZE = 1024 * 1024 * 5; //5 Mb file limit
+    private static final int FILE_SIZE_THRESHOLD = 1024 * 1024; // After 1Mb start writing files to disk
+    private static final long MAX_REQUEST_SIZE = -1L; //No request size limit
+
     @Override
     public void onStartup(final ServletContext servletContext) throws ServletException {
         registerListener(servletContext);
@@ -32,6 +37,8 @@ public class PizzasRUsWebApplicationInitializer implements WebApplicationInitial
                 dispatcherContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+        dispatcher.setMultipartConfig(new MultipartConfigElement(null, MAX_FILE_UPLOAD_SIZE, MAX_REQUEST_SIZE,
+                FILE_SIZE_THRESHOLD));
     }
 
     private void registerListener(final ServletContext servletContext) {

@@ -1,15 +1,19 @@
 package com.apress.prospringmvc.pizzarus.domain;
 
 import java.math.BigDecimal;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,18 +24,25 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "orders")
-//Order is a reserved keyword in SQL
+//Order is a reserved keyword in SQL, hence the explicit declaration for the table
 public class Order extends AbstractEntity {
 
     private final Date date = new Date();
+    @NotEmpty(message = "required")
     private String name;
     /* Address Information */
+    @NotEmpty(message = "required")
     private String address;
     private String postcode;
+    @NotEmpty(message = "required")
     private String city;
+    @NotEmpty(message = "required")
     private String country;
 
     /* Payment Information */
+    @NotEmpty(message = "required")
+    @Digits(integer = 16, fraction = 0, message = "invalid")
+    @Size(min = 16, max = 16, message = "invalid")
     private String creditcard;
 
     private String comment;
@@ -39,8 +50,9 @@ public class Order extends AbstractEntity {
     /**
      * Lines for this order.
      */
+    @NotEmpty(message = "required")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Set<OrderLine> lines = new HashSet<OrderLine>();
+    private final List<OrderLine> lines = new ArrayList<OrderLine>();
 
     public String getName() {
         return this.name;
@@ -70,8 +82,8 @@ public class Order extends AbstractEntity {
         return this.date;
     }
 
-    public Set<OrderLine> getLines() {
-        return Collections.unmodifiableSet(this.lines);
+    public List<OrderLine> getLines() {
+        return this.lines;
     }
 
     public String getPostcode() {
@@ -119,6 +131,16 @@ public class Order extends AbstractEntity {
 
     public void addOrderLine(final OrderLine orderLine) {
         this.lines.add(orderLine);
+    }
+
+    public void removeEmptyOrderLines() {
+        Iterator<OrderLine> orderLineIt = this.lines.iterator();
+        while (orderLineIt.hasNext()) {
+            OrderLine line = orderLineIt.next();
+            if (line.getQuantity().signum() <= 0) {
+                orderLineIt.remove();
+            }
+        }
     }
 
 }

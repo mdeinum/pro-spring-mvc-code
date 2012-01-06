@@ -3,6 +3,7 @@ package com.apress.prospringmvc.pizzarus.domain;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * Entity representing a line from an order.
@@ -13,32 +14,25 @@ import javax.persistence.Entity;
 @Entity
 public class OrderLine extends AbstractEntity {
 
-    private int quantity;
-    private BigDecimal price;
-    private String description;
+    private BigDecimal quantity = BigDecimal.ONE;
 
-    public int getQuantity() {
+    @ManyToOne(optional = false)
+    private Pizza pizza;
+
+    public BigDecimal getQuantity() {
         return this.quantity;
     }
 
-    public void setQuantity(final int quantity) {
+    public void setQuantity(final BigDecimal quantity) {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPrice() {
-        return this.price;
+    public void setPizza(final Pizza pizza) {
+        this.pizza = pizza;
     }
 
-    public void setPrice(final BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
+    public Pizza getPizza() {
+        return this.pizza;
     }
 
     /**
@@ -47,7 +41,10 @@ public class OrderLine extends AbstractEntity {
      * @return the calculated price.
      */
     public BigDecimal getTotal() {
-        return this.price.multiply(BigDecimal.valueOf(this.quantity));
+        BigDecimal total = BigDecimal.ZERO;
+        if (this.pizza != null) {
+            total = this.pizza.getPrice().multiply(this.quantity);
+        }
+        return total;
     }
-
 }
