@@ -58,6 +58,6 @@
 	</action-state>
 
 	<end-state id="endOrderCanceled" view="redirect:/index.jspx"/>
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.html?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="endOrderOk" view="ordersOverviewredirect:/ordersOverview.html?orderOk=true&amp;orderId={orderId}"/>
 </flow>	
 	

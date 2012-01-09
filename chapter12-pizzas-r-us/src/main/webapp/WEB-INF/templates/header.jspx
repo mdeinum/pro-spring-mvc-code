@@ -26,7 +26,7 @@
 			<c:if test="${authenticatedCustomer !=null}">
 				<td class="line" width="15px"/>
 				<td>
-					<spring:url value="/ordersOverview.html" var="ordersOverview" />
+					<spring:url value="/view-orders-flow" var="ordersOverview" />
 					<a href="${ordersOverview}">View orders</a>
 				</td>	
 			</c:if>

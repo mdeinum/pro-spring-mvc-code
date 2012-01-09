@@ -27,12 +27,12 @@ import com.apress.prospringmvc.pizzarus.domain.Shop;
 @Component
 public class OrderBuilder extends EntityBuilder<Order> {
 
-	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	private List<OrderDetail> orderDetails;
 
 	@Override
 	void initProduct() {
 		product = new Order();
-
+		orderDetails = new ArrayList<OrderDetail>();
 	}
 
 	public OrderBuilder buildAndAddPizza(String name, String description, BigDecimal price, int amount) {

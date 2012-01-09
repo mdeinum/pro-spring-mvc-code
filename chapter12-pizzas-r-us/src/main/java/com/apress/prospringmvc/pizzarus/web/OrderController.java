@@ -4,15 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.apress.prospringmvc.pizzarus.domain.Customer;
 import com.apress.prospringmvc.pizzarus.domain.Order;
@@ -28,22 +24,15 @@ import com.apress.prospringmvc.pizzarus.support.OrderBuilder;
  * @author Koen Serneels
  */
 
-@Controller
+@Component
 public class OrderController {
 
 	@Autowired
 	private PizzasService pizzasService;
 
-	@RequestMapping("ordersOverview.html")
-	public ModelAndView retrieveOrders(HttpSession httpSession) {
-		List<Order> orders = pizzasService.getOrdersForCustomer((Customer) httpSession
-				.getAttribute(AuthenticationController.AUTHENTICATED_CUSTOMER_KEY));
-
-		ModelAndView mov = new ModelAndView();
-		mov.setViewName("ordersOverview");
-		mov.getModel().put("orders", orders);
-
-		return mov;
+	public List<Order> retrieveOrders(Customer customer) {
+		List<Order> orders = pizzasService.getOrdersForCustomer(customer);
+		return orders;
 	}
 
 	public OrderForm initializeForm() {
