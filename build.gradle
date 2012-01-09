@@ -116,7 +116,7 @@ subprojects {
 
         runtime "jstl:jstl:1.2"
 
-        testCompile 'junit:junit:4.10'
+        testCompile 'junit:junit:4.9'
         testCompile "org.springframework:spring-test:$springVersion"
     }
 }
