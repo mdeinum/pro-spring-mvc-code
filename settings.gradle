@@ -1,17 +1,17 @@
-rootProject.name = 'pizzas-r-us'
+rootProject.name = 'bookstore'
 
 def String[] modules = [
-    'pizzas-r-us-web-resources',
+    'bookstore-shared',
+    'bookstore-web-resources',
+	'chapter1-bookstore',
+	'chapter2-bookstore',
 	'chapter2-samples',
-	'chapter1-pizzas-r-us',
-	'chapter2-pizzas-r-us',
-	'chapter4-pizzas-r-us',
-	'chapter5-pizzas-r-us',
-    	'chapter7-pizzas-r-us',
-	'chapter8-pizzas-r-us',
-	'chapter11-pizzas-r-us',
-	'chapter12-pizzas-r-us',
-	'pizzas-r-us'
+	'chapter4-bookstore',
+	'chapter5-bookstore',
+    'chapter7-bookstore',
+	'chapter8-bookstore',
+	'chapter11-bookstore',
+	'chapter12-bookstore',
 ]
 
 include modules

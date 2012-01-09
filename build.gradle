@@ -16,7 +16,7 @@ allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'idea'
 
-    description='Pizzas-R-Us Sample Application'
+    description='Bookstore Sample Application'
 
     group = 'com.apress.prospringmvc'
 
@@ -34,8 +34,8 @@ allprojects {
 }
 
 
-webProjects = subprojects.findAll { project -> !project.name.endsWith('samples') && !project.name.endsWith('resources')}
-javaProjects = subprojects.findAll { project -> project.name.endsWith('samples') || project.name.endsWith('resources')}
+webProjects = subprojects.findAll { project -> !project.name.endsWith('samples') && !project.name.endsWith('resources') && !project.name.endsWith('shared')}
+javaProjects = subprojects.findAll { project -> project.name.endsWith('samples') || project.name.endsWith('resources') || project.name.endsWith('shared')}
 
 configure(webProjects) {
     apply plugin: 'war'
@@ -44,7 +44,8 @@ configure(webProjects) {
     apply plugin: 'eclipse-wtp'
 
     dependencies() {
-        compile project(':pizzas-r-us-web-resources')
+        compile project(':bookstore-shared')       
+        compile project(':bookstore-web-resources')
 
         providedCompile 'org.glassfish:javax.servlet:3.0'
         providedCompile 'org.glassfish:javax.servlet.jsp:3.0'
