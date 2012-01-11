@@ -8,7 +8,7 @@ buildscript {
         }
     }
 
-    dependencies { classpath 'bmuschko:gradle-tomcat-plugin:0.8.1' }
+    dependencies { classpath 'bmuschko:gradle-tomcat-plugin:0.8.2' }
 }
 
 allprojects {
@@ -34,7 +34,7 @@ allprojects {
 }
 
 
-webProjects = subprojects.findAll { project -> !project.name.endsWith('samples') && !project.name.endsWith('resources') && !project.name.endsWith('shared')}
+webProjects = subprojects.findAll { project -> project.name.endsWith('bookstore')}
 javaProjects = subprojects.findAll { project -> project.name.endsWith('samples') || project.name.endsWith('resources') || project.name.endsWith('shared')}
 
 configure(webProjects) {
@@ -44,8 +44,7 @@ configure(webProjects) {
     apply plugin: 'eclipse-wtp'
 
     dependencies() {
-        compile project(':bookstore-shared')       
-        compile project(':bookstore-web-resources')
+        compile project(':bookstore-shared'), project(':bookstore-web-resources')
 
         providedCompile 'org.glassfish:javax.servlet:3.0'
         providedCompile 'org.glassfish:javax.servlet.jsp:3.0'
@@ -61,11 +60,6 @@ configure(webProjects) {
 
 configure(javaProjects) {
     apply plugin: 'java'
-
-    dependencies() {
-        compile 'org.glassfish:javax.servlet:3.0'
-        compile 'org.glassfish:javax.servlet.jsp:3.0'
-    }
 }
 
 subprojects {
@@ -120,6 +114,8 @@ subprojects {
         testCompile 'junit:junit:4.9'
         testCompile "org.springframework:spring-test:$springVersion"
     }
+    
+    println "Project Name: $project.name"
 }
 
 task wrapper(type: Wrapper) { gradleVersion = '1.0-milestone-7' }
