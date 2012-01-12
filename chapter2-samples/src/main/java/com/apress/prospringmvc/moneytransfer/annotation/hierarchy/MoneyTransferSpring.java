@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.moneytransfer.annotation;
+package com.apress.prospringmvc.moneytransfer.annotation.hierarchy;
 
 import java.math.BigDecimal;
 
@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.apress.prospringmvc.ApplicationContextLogger;
 import com.apress.prospringmvc.moneytransfer.domain.Transaction;
@@ -21,20 +20,23 @@ public class MoneyTransferSpring {
      */
     public static void main(String[] args) {
 
-        ApplicationContext ctx1 = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
-        transfer(ctx1);
+        ApplicationContext parent = new AnnotationConfigApplicationContext(ParentApplicationContextConfiguration.class);
+        AnnotationConfigApplicationContext child = new AnnotationConfigApplicationContext();
+        child.register(ChildApplicationContextConfiguration.class);
+        child.setParent(parent);
+        child.refresh();
 
-        ApplicationContext ctx2 = new ClassPathXmlApplicationContext(
-                "/com/apress/prospringmvc/moneytransfer/annotation/application-context.xml");
-        transfer(ctx2);
+        transfer(child);
 
-        ApplicationContextLogger.log(ctx1);
-        ApplicationContextLogger.log(ctx2);
+        ApplicationContextLogger.log(child);
+        ApplicationContextLogger.log(parent);
     }
 
     private static void transfer(ApplicationContext ctx) {
         MoneyTransferService service = ctx.getBean("moneyTransferService", MoneyTransferService.class);
         Transaction transaction = service.transfer("123456", "654321", new BigDecimal("250.00"));
+
         logger.info("Money Transfered: {}", transaction);
     }
+
 }

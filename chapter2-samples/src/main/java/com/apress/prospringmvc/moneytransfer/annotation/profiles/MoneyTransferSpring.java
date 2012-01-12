@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.moneytransfer.annotation;
+package com.apress.prospringmvc.moneytransfer.annotation.profiles;
 
 import java.math.BigDecimal;
 
@@ -21,15 +21,30 @@ public class MoneyTransferSpring {
      */
     public static void main(String[] args) {
 
-        ApplicationContext ctx1 = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
+        System.setProperty("spring.profiles.active", "test");
+
+        AnnotationConfigApplicationContext ctx1 = new AnnotationConfigApplicationContext(
+                ApplicationContextConfiguration.class);
         transfer(ctx1);
+        ApplicationContextLogger.log(ctx1);
 
         ApplicationContext ctx2 = new ClassPathXmlApplicationContext(
-                "/com/apress/prospringmvc/moneytransfer/annotation/application-context.xml");
+                "/com/apress/prospringmvc/moneytransfer/annotation/profiles/application-context.xml");
         transfer(ctx2);
 
-        ApplicationContextLogger.log(ctx1);
         ApplicationContextLogger.log(ctx2);
+
+        System.setProperty("spring.profiles.active", "local");
+        AnnotationConfigApplicationContext ctx3 = new AnnotationConfigApplicationContext(
+                ApplicationContextConfiguration.class);
+        transfer(ctx3);
+        ApplicationContextLogger.log(ctx3);
+
+        ApplicationContext ctx4 = new ClassPathXmlApplicationContext(
+                "/com/apress/prospringmvc/moneytransfer/annotation/profiles/application-context.xml");
+        transfer(ctx4);
+        ApplicationContextLogger.log(ctx4);
+
     }
 
     private static void transfer(ApplicationContext ctx) {

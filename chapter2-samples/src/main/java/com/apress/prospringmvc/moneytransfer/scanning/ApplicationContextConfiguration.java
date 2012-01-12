@@ -7,5 +7,4 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = { "com.apress.prospringmvc.moneytransfer.scanning",
         "com.apress.prospringmvc.moneytransfer.repository" })
 public class ApplicationContextConfiguration {
-
 }

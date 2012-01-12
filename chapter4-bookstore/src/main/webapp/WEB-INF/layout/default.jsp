@@ -19,7 +19,7 @@
             <li><a href="<c:url value="/book"/>">Books</a></li>
             <li><a href="<c:url value="/customer/account"/>">Your Account</a></li>
             <li><a href="<c:url value="/customer/register"/>">Register</a></li>
-            <li><a href="<c:url valuee="customer/login"/>">Login</a></li>
+            <li><a href="<c:url value="customer/login"/>">Login</a></li>
             </ul>
         </nav>     
     

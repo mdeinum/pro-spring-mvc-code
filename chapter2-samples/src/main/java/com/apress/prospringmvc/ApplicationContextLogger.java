@@ -19,6 +19,7 @@ public class ApplicationContextLogger {
     public static void log(ApplicationContext context) {
         LOG.info("Context: {},{}", context.getClass(), context.getDisplayName());
         LOG.info("Beans: {}", context.getBeanDefinitionCount());
+        LOG.info("Active profiles: {}", context.getEnvironment().getActiveProfiles());
         for (String name : context.getBeanDefinitionNames()) {
             LOG.info("Bean: {}", name);
         }

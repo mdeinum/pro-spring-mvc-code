@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.moneytransfer.annotation;
+package com.apress.prospringmvc.moneytransfer.annotation.hierarchy;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,10 +7,9 @@ import com.apress.prospringmvc.moneytransfer.repository.AccountRepository;
 import com.apress.prospringmvc.moneytransfer.repository.MapBasedAccountRepository;
 import com.apress.prospringmvc.moneytransfer.repository.MapBasedTransactionRepository;
 import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
-import com.apress.prospringmvc.moneytransfer.service.MoneyTransferService;
 
 @Configuration
-public class ApplicationContextConfiguration {
+public class ParentApplicationContextConfiguration {
 
     @Bean
     public AccountRepository accountRepository() {
@@ -22,8 +21,4 @@ public class ApplicationContextConfiguration {
         return new MapBasedTransactionRepository();
     }
 
-    @Bean
-    public MoneyTransferService moneyTransferService() {
-        return new MoneyTransferServiceImpl();
-    }
 }

@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
                 return customer;
             }
         }
-        throw new AuthenticationException();
+        throw new AuthenticationException("Wrong username/password combination.", "invalid.username");
     }
 
 }
