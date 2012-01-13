@@ -19,68 +19,63 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * Configuration class containing our infrastructure beans. 
+ * Configures the main infrastructure related beans such as:
+ * 
+ * <ul>
+ * <li>Creates the {@link EntityManagerFactory} based upon information in the META-INF/persistence.xml
+ * <li>Creates a JPA local transaction manager</li>
+ * <li>Creates a datasource to a local database (if running with the local profile)</li>
+ * </ul>
  * 
  * @author Marten Deinum
+ * @author Koen Serneels
  */
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.service",
-        "com.apress.prospringmvc.bookstore.repository" })
+		"com.apress.prospringmvc.bookstore.repository", "com.apress.prospringmvc.bookstore.domain.support" })
 public class InfrastructureContextConfiguration {
 
-    @Autowired
-    private DataSource dataSource;
+	@Autowired
+	private DataSource dataSource;
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+	@Autowired
+	private EntityManagerFactory entityManagerFactory;
 
-    @Bean
-    public FactoryBean<EntityManagerFactory> entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
-        localContainerEntityManagerFactoryBean.setPackagesToScan("com.apress.prospringmvc.bookstore.domain");
-        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
-        return localContainerEntityManagerFactoryBean;
-    }
+	@Bean
+	public FactoryBean<EntityManagerFactory> entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
+		localContainerEntityManagerFactoryBean.setPackagesToScan("com.apress.prospringmvc.bookstore.domain");
+		localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+		return localContainerEntityManagerFactoryBean;
+	}
 
-    @Bean
-    public JpaVendorAdapter jpaVendorAdapter() {
-        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setGenerateDdl(true);
-        jpaVendorAdapter.setShowSql(true);
-        return jpaVendorAdapter;
-    }
+	@Bean
+	public JpaVendorAdapter jpaVendorAdapter() {
+		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+		jpaVendorAdapter.setGenerateDdl(true);
+		jpaVendorAdapter.setShowSql(true);
+		return jpaVendorAdapter;
+	}
 
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(this.entityManagerFactory);
-        transactionManager.setDataSource(this.dataSource);
-        return transactionManager;
-    }
+	@Bean
+	public PlatformTransactionManager transactionManager() {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(this.entityManagerFactory);
+		transactionManager.setDataSource(this.dataSource);
+		return transactionManager;
+	}
 
-    @Configuration
-    @Profile("test")
-    public static class TestDataSourceConfiguration {
-
-        @Bean
-        public DataSource dataSource() {
-            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-            builder.setType(EmbeddedDatabaseType.H2);
-            return builder.build();
-        }
-    }
-
-    @Configuration
-    @Profile("local")
-    public static class LocalDataSourceConfiguration {
-        @Bean
-        public DataSource dataSource() {
-            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-            builder.setType(EmbeddedDatabaseType.H2);
-            return builder.build();
-        }
-    }
-
+	@Configuration
+	@Profile("local")
+	public static class LocalDataSourceConfiguration {
+		@Bean
+		public DataSource dataSource() {
+			EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+			builder.setType(EmbeddedDatabaseType.H2);
+			return builder.build();
+		}
+	}
 }

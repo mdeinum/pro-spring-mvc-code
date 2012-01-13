@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesView;
 
 import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
-import com.apress.prospringmvc.pizzarus.web.converter.ShopConverter;
+import com.apress.prospringmvc.pizzarus.web.converter.CategoryConverter;
 
 /**
  * WebMvc Configuration.
@@ -66,8 +66,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
-	public ShopConverter shopConverter() {
-		return new ShopConverter();
+	public CategoryConverter shopConverter() {
+		return new CategoryConverter();
 	}
 
 	@Bean

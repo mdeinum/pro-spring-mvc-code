@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.apress.prospringmvc.pizzarus.domain.Customer;
-import com.apress.prospringmvc.pizzarus.domain.Order;
-import com.apress.prospringmvc.pizzarus.domain.Pizza;
-import com.apress.prospringmvc.pizzarus.service.PizzasService;
-import com.apress.prospringmvc.pizzarus.support.OrderBuilder;
+import com.apress.prospringmvc.bookstore.domain.Book;
+import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Order;
+import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
+import com.apress.prospringmvc.bookstore.service.BookstoreService;
+import com.apress.prospringmvc.bookstore.service.CategoryService;
 
 /**
  * Controller to be used to place and view orders using the {@link PizzasService}. This controller can be used using
@@ -31,11 +32,14 @@ import com.apress.prospringmvc.pizzarus.support.OrderBuilder;
 public class OrderController {
 
 	@Autowired
-	private PizzasService pizzasService;
+	private BookstoreService pizzasService;
+
+	@Autowired
+	private CategoryService categoryService;
 
 	@RequestMapping("ordersOverview.html")
 	public ModelAndView retrieveOrders(HttpSession httpSession) {
-		List<Order> orders = pizzasService.getOrdersForCustomer((Customer) httpSession
+		List<Order> orders = pizzasService.findOrdersForCustomer((Customer) httpSession
 				.getAttribute(AuthenticationController.AUTHENTICATED_CUSTOMER_KEY));
 
 		ModelAndView mov = new ModelAndView();
@@ -49,13 +53,12 @@ public class OrderController {
 		OrderForm orderForm = new OrderForm();
 		orderForm.setQuantity(1);
 		orderForm.setOrderDate(new Date());
-		orderForm.setSelectablePizzas(pizzasService.getPizzas());
-		orderForm.setSelectableShops(pizzasService.getShops());
+		orderForm.setSelectableCategories(categoryService.findAll());
 		return orderForm;
 	}
 
 	public void addPizza(OrderForm orderForm) {
-		Pizza pizza = orderForm.getPizza();
+		Book pizza = orderForm.getPizza();
 		if (orderForm.getPizzas().containsKey(pizza)) {
 			orderForm.getPizzas().put(pizza, orderForm.getPizzas().get(pizza) + orderForm.getQuantity());
 		} else {
@@ -64,9 +67,9 @@ public class OrderController {
 	}
 
 	public Long placeOrder(Customer customer, OrderForm orderForm) {
-		Order order = new OrderBuilder().addPizzas(orderForm.getPizzas()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).shop(orderForm.getShop()).build(true);
-		return pizzasService.addOrder(customer, order);
+		Order order = new OrderBuilder().addBooks(orderForm.getPizzas()).deliveryDate(orderForm.getDeliveryDate())
+				.orderDate(orderForm.getOrderDate()).build(true);
+		return pizzasService.createOrder(order, customer).getId();
 	}
 
 	@InitBinder

@@ -49,7 +49,7 @@
 				<tr height="10px"/>
 			<c:forEach items="${orderForm.pizzas}" var="pizza">
 				<tr>
-					<td>${pizza.key.name}</td>
+					<td>${pizza.key.title}</td>
 					<td>${pizza.value}</td>
 				</tr>
 			</c:forEach>

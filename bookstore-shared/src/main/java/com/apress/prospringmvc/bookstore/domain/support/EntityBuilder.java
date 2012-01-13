@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.support;
+package com.apress.prospringmvc.bookstore.domain.support;
 
 import java.io.Serializable;
 
@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.SerializationUtils;
 
 /**
  * Super class for builders that build domain objects. This super class is able to store the product before returning it
@@ -18,7 +17,7 @@ import org.apache.commons.lang3.SerializationUtils;
 public abstract class EntityBuilder<T extends Serializable> {
 
 	protected T product;
-	
+
 	{
 		initProduct();
 	}
@@ -32,7 +31,7 @@ public abstract class EntityBuilder<T extends Serializable> {
 				|| (ArrayUtils.isNotEmpty(doNotPersist) && doNotPersist[0] == Boolean.FALSE)) {
 			entityManager.persist(product);
 		}
-		T temp = SerializationUtils.clone(product);
+		T temp = product;
 		initProduct();
 		return temp;
 	}

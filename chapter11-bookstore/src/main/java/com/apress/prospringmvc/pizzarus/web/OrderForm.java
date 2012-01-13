@@ -17,8 +17,9 @@ import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.validation.ValidationContext;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.apress.prospringmvc.pizzarus.domain.Pizza;
-import com.apress.prospringmvc.pizzarus.domain.Shop;
+import com.apress.prospringmvc.bookstore.domain.Book;
+import com.apress.prospringmvc.bookstore.domain.Category;
+import com.apress.prospringmvc.bookstore.domain.Order;
 
 /**
  * Form to capture all elements of a order creation flow. When all mandatory elements are filled in a new {@link Order}
@@ -29,16 +30,16 @@ import com.apress.prospringmvc.pizzarus.domain.Shop;
 
 public class OrderForm implements Serializable {
 
-	private List<Pizza> selectablePizzas = new ArrayList<Pizza>();
-	private List<Shop> selectableShops = new ArrayList<Shop>();
-	private Map<Pizza, Integer> pizzas = new HashMap<Pizza, Integer>();
+	private List<Book> selectablePizzas = new ArrayList<Book>();
+	private List<Category> selectableCategories = new ArrayList<Category>();
+	private Map<Book, Integer> pizzas = new HashMap<Book, Integer>();
 
-	private Pizza pizza;
+	private Book pizza;
 	@NotNull
 	@Min(1)
 	@Max(99)
 	private Integer quantity;
-	private Shop shop;
+	private Category category;
 
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date deliveryDate;
@@ -60,7 +61,7 @@ public class OrderForm implements Serializable {
 	public void validateSelectShop(ValidationContext context) {
 		if (context.getUserEvent().equals("next")) {
 			MessageContext messages = context.getMessageContext();
-			if (shop == null) {
+			if (category == null) {
 				messages.addMessage(new MessageBuilder().error().source("shop").code("error.page.shop.required")
 						.build());
 			}
@@ -83,20 +84,44 @@ public class OrderForm implements Serializable {
 		}
 	}
 
-	public Map<Pizza, Integer> getPizzas() {
+	public List<Category> getSelectableCategories() {
+		return selectableCategories;
+	}
+
+	public void setSelectableCategories(List<Category> selectableCategories) {
+		this.selectableCategories = selectableCategories;
+	}
+
+	public Map<Book, Integer> getPizzas() {
 		return pizzas;
 	}
 
-	public void setPizzas(Map<Pizza, Integer> pizzas) {
+	public void setPizzas(Map<Book, Integer> pizzas) {
 		this.pizzas = pizzas;
 	}
 
-	public Shop getShop() {
-		return shop;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setShop(Shop shop) {
-		this.shop = shop;
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public void setSelectablePizzas(List<Book> selectablePizzas) {
+		this.selectablePizzas = selectablePizzas;
+	}
+
+	public void setPizza(Book pizza) {
+		this.pizza = pizza;
+	}
+
+	public List<Book> getSelectablePizzas() {
+		return selectablePizzas;
+	}
+
+	public Book getPizza() {
+		return pizza;
 	}
 
 	public Date getDeliveryDate() {
@@ -115,35 +140,11 @@ public class OrderForm implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public Pizza getPizza() {
-		return pizza;
-	}
-
-	public void setPizza(Pizza pizza) {
-		this.pizza = pizza;
-	}
-
 	public Integer getQuantity() {
 		return quantity;
 	}
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
-
-	public List<Pizza> getSelectablePizzas() {
-		return selectablePizzas;
-	}
-
-	public void setSelectablePizzas(List<Pizza> selectablePizzas) {
-		this.selectablePizzas = selectablePizzas;
-	}
-
-	public List<Shop> getSelectableShops() {
-		return selectableShops;
-	}
-
-	public void setSelectableShops(List<Shop> selectableShops) {
-		this.selectableShops = selectableShops;
 	}
 }

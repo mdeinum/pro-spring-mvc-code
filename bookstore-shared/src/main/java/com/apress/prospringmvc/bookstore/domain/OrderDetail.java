@@ -3,6 +3,7 @@ package com.apress.prospringmvc.bookstore.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * An order detail is the link table between {@link Order} and {@link Book} We also store how many books are ordered
- * in the {@link #quantity} field
+ * An order detail is the link table between {@link Order} and {@link Book} We also store how many books are ordered in
+ * the {@link #quantity} field
  * 
  * @author Koen Serneels
  */
@@ -19,40 +20,40 @@ import javax.persistence.ManyToOne;
 @Entity
 public class OrderDetail implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @ManyToOne(optional = false)
-    private Book book;
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	private Book book;
 
-    private int quantity = 1;
+	private int quantity = 1;
 
-    public Long getId() {
-        return this.id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public int getQuantity() {
-        return this.quantity;
-    }
+	public int getQuantity() {
+		return this.quantity;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-    public Book getBook() {
-        return this.book;
-    }
+	public Book getBook() {
+		return this.book;
+	}
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
+	public void setBook(Book book) {
+		this.book = book;
+	}
 
-    public BigDecimal getPrice() {
-        if (this.book != null) {
-            return this.book.getPrice().multiply(new BigDecimal(this.quantity));
-        }
-        return null;
-    }
+	public BigDecimal getPrice() {
+		if (this.book != null) {
+			return this.book.getPrice().multiply(new BigDecimal(this.quantity));
+		}
+		return null;
+	}
 
 }

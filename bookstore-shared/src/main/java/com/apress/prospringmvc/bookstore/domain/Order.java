@@ -1,5 +1,6 @@
 package com.apress.prospringmvc.bookstore.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,125 +15,128 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "orders")
 // order is a reserved SQL keyword, hence the explicit table definition
-public class Order {
+@Table(name = "orders")
+public class Order implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @Embedded
-    @AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "shipping_street")),
-            @AttributeOverride(name = "houseNumber", column = @Column(name = "shipping_houseNumber")),
-            @AttributeOverride(name = "boxNumber", column = @Column(name = "shipping_boxNumber")),
-            @AttributeOverride(name = "city", column = @Column(name = "shipping_city")),
-            @AttributeOverride(name = "postalCode", column = @Column(name = "shipping_postalCode")),
-            @AttributeOverride(name = "country", column = @Column(name = "shipping_country")) })
-    private Address shippingAddress;
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "shipping_street")),
+			@AttributeOverride(name = "houseNumber", column = @Column(name = "shipping_houseNumber")),
+			@AttributeOverride(name = "boxNumber", column = @Column(name = "shipping_boxNumber")),
+			@AttributeOverride(name = "city", column = @Column(name = "shipping_city")),
+			@AttributeOverride(name = "postalCode", column = @Column(name = "shipping_postalCode")),
+			@AttributeOverride(name = "country", column = @Column(name = "shipping_country")) })
+	private Address shippingAddress;
 
-    @Embedded
-    @AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "billing_street")),
-            @AttributeOverride(name = "houseNumber", column = @Column(name = "billing_houseNumber")),
-            @AttributeOverride(name = "boxNumber", column = @Column(name = "billing_boxNumber")),
-            @AttributeOverride(name = "city", column = @Column(name = "billing_city")),
-            @AttributeOverride(name = "postalCode", column = @Column(name = "billing_postalCode")),
-            @AttributeOverride(name = "country", column = @Column(name = "billing_country")) })
-    private Address billingAddress;
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "billing_street")),
+			@AttributeOverride(name = "houseNumber", column = @Column(name = "billing_houseNumber")),
+			@AttributeOverride(name = "boxNumber", column = @Column(name = "billing_boxNumber")),
+			@AttributeOverride(name = "city", column = @Column(name = "billing_city")),
+			@AttributeOverride(name = "postalCode", column = @Column(name = "billing_postalCode")),
+			@AttributeOverride(name = "country", column = @Column(name = "billing_country")) })
+	private Address billingAddress;
 
-    @ManyToOne(optional = false)
-    private Customer customer;
+	@ManyToOne(optional = false)
+	private Customer customer;
 
-    private boolean billingSameAsShipping = true;
+	private boolean billingSameAsShipping = true;
 
-    private Date orderDate;
-    private Date deliveryDate;
+	private Date orderDate;
+	private Date deliveryDate;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	private BigDecimal totalOrderPrice;
 
-    public Order() {
-        super();
-    }
+	// One to many creates a join table by default, prevent this as
+	// order detail is our specific join table
+	@JoinColumn(name = "order_id")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private final List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 
-    public Order(Customer customer) {
-        super();
-        this.customer = customer;
-        this.shippingAddress = new Address(customer.getAddress());
-    }
+	public Order() {
+		super();
+	}
 
-    public Address getShippingAddress() {
-        return this.shippingAddress;
-    }
+	public Order(Customer customer) {
+		super();
+		this.customer = customer;
+		this.shippingAddress = new Address(customer.getAddress());
+	}
 
-    public void setShippingAddress(Address shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
+	public Address getShippingAddress() {
+		return this.shippingAddress;
+	}
 
-    public Address getBillingAddress() {
-        if (this.billingSameAsShipping) {
-            return this.shippingAddress;
-        }
-        return this.billingAddress;
-    }
+	public void setShippingAddress(Address shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
 
-    public void setBillingAddress(Address billingAddress) {
-        this.billingAddress = billingAddress;
-    }
+	public Address getBillingAddress() {
+		if (this.billingSameAsShipping) {
+			return this.shippingAddress;
+		}
+		return this.billingAddress;
+	}
 
-    public boolean isBillingSameAsShipping() {
-        return this.billingSameAsShipping;
-    }
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
+	}
 
-    public void setBillingSameAsShipping(boolean billingSameAsShipping) {
-        this.billingSameAsShipping = billingSameAsShipping;
-    }
+	public boolean isBillingSameAsShipping() {
+		return this.billingSameAsShipping;
+	}
 
-    public Long getId() {
-        return this.id;
-    }
+	public void setBillingSameAsShipping(boolean billingSameAsShipping) {
+		this.billingSameAsShipping = billingSameAsShipping;
+	}
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public Customer getCustomer() {
-        return this.customer;
-    }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-    public List<OrderDetail> getOrderDetails() {
-        return this.orderDetails;
-    }
+	public Customer getCustomer() {
+		return this.customer;
+	}
 
-    public Date getOrderDate() {
-        return this.orderDate;
-    }
+	public List<OrderDetail> getOrderDetails() {
+		return this.orderDetails;
+	}
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
+	public Date getOrderDate() {
+		return this.orderDate;
+	}
 
-    public Date getDeliveryDate() {
-        return this.deliveryDate;
-    }
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
 
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
+	public Date getDeliveryDate() {
+		return this.deliveryDate;
+	}
 
-    public BigDecimal getTotal() {
-        BigDecimal total = BigDecimal.ZERO;
-        for (OrderDetail detail : this.orderDetails) {
-            if (detail.getPrice() != null) {
-                total = total.add(detail.getPrice());
-            }
-        }
-        return total;
-    }
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
 
+	public BigDecimal getTotalOrderPrice() {
+		return totalOrderPrice;
+	}
+
+	public void setTotalOrderPrice(BigDecimal totalOrderPrice) {
+		this.totalOrderPrice = totalOrderPrice;
+	}
 }

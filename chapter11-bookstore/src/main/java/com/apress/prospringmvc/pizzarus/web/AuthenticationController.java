@@ -16,9 +16,9 @@ import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.mvc.servlet.MvcExternalContext;
 
-import com.apress.prospringmvc.pizzarus.domain.Customer;
-import com.apress.prospringmvc.pizzarus.service.InvalidCredentialsException;
-import com.apress.prospringmvc.pizzarus.service.PizzasService;
+import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.service.AuthenticationException;
+import com.apress.prospringmvc.bookstore.service.CustomerService;
 
 /**
  * This controller talks to the {@link PizzasService} to authenticate a user. This controller can be used via Spring MVC
@@ -35,7 +35,7 @@ public class AuthenticationController {
 	private static final String LOGIN_FAILED_KEY = "label.login.failed";
 
 	@Autowired
-	private PizzasService pizzasService;
+	private CustomerService customerService;
 
 	// ----- Spring MVC logic
 
@@ -56,7 +56,7 @@ public class AuthenticationController {
 			mov.addObject("authenticationOk", "true");
 			mov.addObject("username", authenticationForm.getUsername());
 			mov.setViewName("main");
-		} catch (InvalidCredentialsException invalidCredentialsException) {
+		} catch (AuthenticationException authenticationException) {
 			errors.reject(LOGIN_FAILED_KEY);
 			mov.setViewName("login");
 		}
@@ -73,7 +73,7 @@ public class AuthenticationController {
 			MessageContext messageContext) {
 		try {
 			authenticate(authenticationForm, ((HttpServletRequest) externalContext.getNativeRequest()).getSession());
-		} catch (InvalidCredentialsException invalidCredentialsException) {
+		} catch (AuthenticationException authenticationException) {
 			messageContext.addMessage(new MessageBuilder().error().code(LOGIN_FAILED_KEY).build());
 			return new EventFactorySupport().error(this);
 		}
@@ -82,9 +82,8 @@ public class AuthenticationController {
 
 	// ---- Helpers
 	private void authenticate(AuthenticationForm authenticationForm, HttpSession httpSession)
-			throws InvalidCredentialsException {
-		Customer customer = pizzasService.authenticateCustomer(authenticationForm.getUsername(),
-				authenticationForm.getPassword());
+			throws AuthenticationException {
+		Customer customer = customerService.login(authenticationForm.getUsername(), authenticationForm.getPassword());
 		httpSession.setAttribute(AUTHENTICATED_CUSTOMER_KEY, customer);
 	}
 }

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 
-import com.apress.prospringmvc.pizzarus.domain.Shop;
-import com.apress.prospringmvc.pizzarus.service.PizzasService;
+import com.apress.prospringmvc.bookstore.domain.Category;
+import com.apress.prospringmvc.bookstore.service.CategoryService;
 
 /**
  * Tries to convert a Long (which resembles the primary key of a {@link Shop} to a Shop entity using the
@@ -17,16 +17,16 @@ import com.apress.prospringmvc.pizzarus.service.PizzasService;
  * @author Koen Serneels
  */
 
-public class ShopConverter implements GenericConverter {
+public class CategoryConverter implements GenericConverter {
 
 	@Autowired
-	private PizzasService pizzaService;
+	private CategoryService categoryService;
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {
 		Set<ConvertiblePair> set = new HashSet<ConvertiblePair>();
-		set.add(new ConvertiblePair(String.class, Shop.class));
-		set.add(new ConvertiblePair(Shop.class, String.class));
+		set.add(new ConvertiblePair(String.class, Category.class));
+		set.add(new ConvertiblePair(Category.class, String.class));
 		return set;
 	}
 
@@ -36,18 +36,14 @@ public class ShopConverter implements GenericConverter {
 			return null;
 		}
 
-		if (sourceType.getObjectType().isAssignableFrom(Shop.class)) {
-			return ((Shop) source).getShopName();
+		if (sourceType.getObjectType().isAssignableFrom(Category.class)) {
+			return ((Category) source).getName();
 		}
 
 		if (sourceType.getObjectType().isAssignableFrom(String.class)
-				&& targetType.getObjectType().isAssignableFrom(Shop.class)) {
+				&& targetType.getObjectType().isAssignableFrom(Category.class)) {
 
-			for (Shop shop : pizzaService.getShops()) {
-				if (shop.getId().toString().equals(source)) {
-					return shop;
-				}
-			}
+			return categoryService.findById(Long.parseLong((String) source));
 		}
 		throw new IllegalArgumentException(source + " cannot be converted to a Shop object");
 	}

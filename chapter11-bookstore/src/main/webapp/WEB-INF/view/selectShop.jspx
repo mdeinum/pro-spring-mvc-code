@@ -9,7 +9,7 @@
 			<tr>
 				<td width="30%"><spring:message code="label.page.select.shop"/></td>
 				<td>
-					<form:select path="shop" items="${orderForm.selectableShops}" itemLabel="shopName" itemValue="id"/>
+					<form:select path="shop" items="${orderForm.selectableCategories}" itemLabel="shopName" itemValue="id"/>
 					<form:errors path="shop" cssClass="error"/>
 				</td>
 			</tr>

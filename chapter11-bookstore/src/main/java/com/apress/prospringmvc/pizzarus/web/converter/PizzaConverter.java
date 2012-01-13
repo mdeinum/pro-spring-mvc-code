@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 
-import com.apress.prospringmvc.pizzarus.domain.Pizza;
-import com.apress.prospringmvc.pizzarus.service.PizzasService;
+import com.apress.prospringmvc.bookstore.domain.Book;
+import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
 /**
  * Tries to convert a Long (which resembles the primary key of a {@link Pizza} to a Pizza entity using the
@@ -20,13 +20,13 @@ import com.apress.prospringmvc.pizzarus.service.PizzasService;
 public class PizzaConverter implements GenericConverter {
 
 	@Autowired
-	private PizzasService pizzaService;
+	private BookstoreService pizzaService;
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {
 		Set<ConvertiblePair> set = new HashSet<ConvertiblePair>();
-		set.add(new ConvertiblePair(String.class, Pizza.class));
-		set.add(new ConvertiblePair(Pizza.class, String.class));
+		set.add(new ConvertiblePair(String.class, Book.class));
+		set.add(new ConvertiblePair(Book.class, String.class));
 		return set;
 	}
 
@@ -35,18 +35,14 @@ public class PizzaConverter implements GenericConverter {
 		if (source == null) {
 			return null;
 		}
-		if (sourceType.getObjectType().isAssignableFrom(Pizza.class)) {
-			return ((Pizza) source).getName();
+		if (sourceType.getObjectType().isAssignableFrom(Book.class)) {
+			return ((Book) source).getTitle();
 		}
 
 		if (sourceType.getObjectType().isAssignableFrom(String.class)
-				&& targetType.getObjectType().isAssignableFrom(Pizza.class)) {
+				&& targetType.getObjectType().isAssignableFrom(Book.class)) {
 
-			for (Pizza pizza : pizzaService.getPizzas()) {
-				if (pizza.getId().toString().equals(source)) {
-					return pizza;
-				}
-			}
+			return pizzaService.findById(Long.parseLong((String) source));
 		}
 		throw new IllegalArgumentException(source + " cannot be converted to a Pizza object");
 	}

@@ -6,30 +6,38 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
-	
-	<table>
-		<tr>
-			<td>
-				<spring:url value="/index.html" var="home" />
-				<a href="${home}">Home</a>
-			</td>
-			<td class="line" width="15px"/>
-			<td>
-				<spring:url value="/create-order-flow" var="createOrder" />
-				<a href="${createOrder}">Home delivery</a>
-			</td>	
-			<td class="line" width="15px"/>
-			<td>
-				<spring:url value="/login.html" var="login" />
-				<a href="${login}">Login</a>
-			</td>	
-			<c:if test="${authenticatedCustomer !=null}">
-				<td class="line" width="15px"/>
-				<td>
-					<spring:url value="/ordersOverview.html" var="ordersOverview" />
-					<a href="${ordersOverview}">View orders</a>
-				</td>	
-			</c:if>
-		</tr>
-	</table>	
+
+	<header>
+		<div class="logo">
+			<spring:url value="/index.htm" var="home" />
+			<a href="${home}">
+				<spring:url value="/resources/images/logo.gif" var="logo" /> 
+				<img src="${logo }" alt="" title="" border="0" />
+			</a>
+		</div>
+		<nav>
+			<ul>
+				<li>
+					<a href="${home}">Home</a>
+				</li>
+				<li>
+				    <spring:url value="/create-order-flow" var="createOrder" />
+					<a href="${createOrder}">Buy books</a>
+				</li>
+				<li>
+					<c:if test="${authenticatedCustomer !=null}">
+						<spring:url value="/ordersOverview.html" var="ordersOverview" />
+						<a href="${ordersOverview}">View orders</a>
+					</c:if>
+				</li>
+				<li>
+					<spring:url value="/login.html" var="login" /> 
+					<a href="${login}">Login</a>
+				</li>
+				<li>
+					<a href="">About Us</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
 </jsp:root>

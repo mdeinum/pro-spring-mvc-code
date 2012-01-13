@@ -10,13 +10,14 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.apress.prospringmvc.pizzarus.config.InfrastructureContextConfiguration;
-import com.apress.prospringmvc.pizzarus.config.TestDataContextConfiguration;
+import com.apress.prospringmvc.bookstore.config.InfrastructureContextConfiguration;
+import com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration;
 
 /**
  * The main {@link WebApplicationInitializer} which starts up a {@link AnnotationConfigWebApplicationContext}. Resources
- * for this context are retrieved from annotated classes which are annotated using the {@link Configuration}.
- * The classes loaded are mentioned here are stored in the {@link #configurationClasses}<p/>
+ * for this context are retrieved from annotated classes which are annotated using the {@link Configuration}. The
+ * classes loaded are mentioned here are stored in the {@link #configurationClasses}
+ * <p/>
  * 
  * Finally we also programmatically configure the {@link DispatcherServlet} that listens to /
  * 
@@ -34,7 +35,9 @@ public class PizzaRUsWebApplicationInitializer implements WebApplicationInitiali
 
 		// Create the 'root' Spring application context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+
 		rootContext.getEnvironment().addActiveProfile("container");
+		rootContext.getEnvironment().addActiveProfile("test");
 		rootContext.register(configurationClasses);
 
 		servletContext.addListener(new ContextLoaderListener(rootContext));

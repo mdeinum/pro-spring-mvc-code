@@ -6,6 +6,8 @@ import com.apress.prospringmvc.bookstore.domain.Category;
 
 public interface CategoryService {
 
-    List<Category> findAll();
+	Category findById(long id);
+
+	List<Category> findAll();
 
 }

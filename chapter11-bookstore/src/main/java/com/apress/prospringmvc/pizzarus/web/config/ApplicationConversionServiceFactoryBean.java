@@ -7,7 +7,7 @@ import org.springframework.format.support.FormattingConversionService;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 
 import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
-import com.apress.prospringmvc.pizzarus.web.converter.ShopConverter;
+import com.apress.prospringmvc.pizzarus.web.converter.CategoryConverter;
 
 /**
  * Special purpose factory bean that creates an {@link FormattingConversionService}. This service acts as an adapter
@@ -22,7 +22,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	@Autowired
 	private PizzaConverter pizzaConverter;
 	@Autowired
-	private ShopConverter shopConverter;
+	private CategoryConverter shopConverter;
 
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {

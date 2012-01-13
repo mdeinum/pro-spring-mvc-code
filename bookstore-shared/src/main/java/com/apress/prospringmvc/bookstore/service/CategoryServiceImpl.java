@@ -13,12 +13,16 @@ import com.apress.prospringmvc.bookstore.repository.CategoryRepository;
 @Transactional(readOnly = true)
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 
-    @Override
-    public List<Category> findAll() {
-        return this.categoryRepository.findAll();
-    }
+	@Override
+	public Category findById(long id) {
+		return categoryRepository.findById(id);
+	}
 
+	@Override
+	public List<Category> findAll() {
+		return this.categoryRepository.findAll();
+	}
 }

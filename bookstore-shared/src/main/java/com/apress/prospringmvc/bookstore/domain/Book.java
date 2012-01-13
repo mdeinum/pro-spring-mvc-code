@@ -1,7 +1,9 @@
 package com.apress.prospringmvc.bookstore.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,71 +11,71 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    private String title;
-    private String description;
-    private BigDecimal price;
-    private Integer year;
-    private String author;
+	private String title;
+	private String description;
+	private BigDecimal price;
+	private Integer year;
+	private String author;
 
-    @ManyToOne(optional = false)
-    private Category category;
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	private Category category;
 
-    public Long getId() {
-        return this.id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public String getTitle() {
-        return this.title;
-    }
+	public String getTitle() {
+		return this.title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getDescription() {
-        return this.description;
-    }
+	public String getDescription() {
+		return this.description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public BigDecimal getPrice() {
-        return this.price;
-    }
+	public BigDecimal getPrice() {
+		return this.price;
+	}
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 
-    public Integer getYear() {
-        return this.year;
-    }
+	public Integer getYear() {
+		return this.year;
+	}
 
-    public void setYear(Integer year) {
-        this.year = year;
-    }
+	public void setYear(Integer year) {
+		this.year = year;
+	}
 
-    public String getAuthor() {
-        return this.author;
-    }
+	public String getAuthor() {
+		return this.author;
+	}
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
-    public Category getCategory() {
-        return this.category;
-    }
+	public Category getCategory() {
+		return this.category;
+	}
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 }
