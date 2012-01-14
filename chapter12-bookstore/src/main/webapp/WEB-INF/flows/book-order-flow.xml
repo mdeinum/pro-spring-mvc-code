@@ -64,7 +64,7 @@
 	</subflow-state>
 
 	<end-state id="endOrderCanceled" view="redirect:/index.jspx"/>
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/view-orders-flow?orderOk=true&amp;orderId={orderId}"/>
 
 </flow>	
 	
