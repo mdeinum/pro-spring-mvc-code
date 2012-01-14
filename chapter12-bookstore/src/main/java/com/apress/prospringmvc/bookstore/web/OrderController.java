@@ -4,16 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
@@ -31,19 +27,16 @@ import com.apress.prospringmvc.bookstore.service.CategoryService;
  * @author Koen Serneels
  */
 
-@Controller
+@Component
 public class OrderController {
-
 	@Autowired
 	private BookstoreService bookstoreService;
 
 	@Autowired
 	private CategoryService categoryService;
 
-	@RequestMapping("ordersOverview.htm")
-	public ModelAndView retrieveOrders(HttpSession httpSession) {
-		List<Order> orders = bookstoreService.findOrdersForCustomer(
-				(Customer) httpSession.getAttribute(AuthenticationController.AUTHENTICATED_CUSTOMER_KEY),
+	public List<Order> retrieveOrders(Customer customer) {
+		List<Order> orders = bookstoreService.findOrdersForCustomer(customer,
 				new LazyResultInitializerStrategy<Order>() {
 					@Override
 					public Order initialize(Order order) {
@@ -51,12 +44,7 @@ public class OrderController {
 						return order;
 					}
 				});
-
-		ModelAndView mov = new ModelAndView();
-		mov.setViewName("ordersOverview");
-		mov.getModel().put("orders", orders);
-
-		return mov;
+		return orders;
 	}
 
 	public OrderForm initializeForm() {

@@ -39,6 +39,6 @@
     	<constructor-arg ref="applicationConversionSevice"/>
     </bean>
 	
-	<bean id="applicationConversionSevice" class="com.apress.prospringmvc.pizzarus.web.config.ApplicationConversionServiceFactoryBean"/>
+	<bean id="applicationConversionSevice" class="com.apress.prospringmvc.bookstore.web.config.ApplicationConversionServiceFactoryBean"/>
 
 </beans>

@@ -6,7 +6,7 @@
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
 		memoryStoreEvictionPolicy="LRU" statistics="false" />
 
-	<cache name="pizzaCache" maxElementsInMemory="10000" eternal="false"
+	<cache name="booksCache" maxElementsInMemory="10000" eternal="false"
 		overflowToDisk="false" timeToIdleSeconds="86400" timeToLiveSeconds="86400"
 		memoryStoreEvictionPolicy="LFU" transactionalMode="off" />
 </ehcache>

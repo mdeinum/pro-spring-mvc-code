@@ -11,18 +11,18 @@
 		<table style="width: 100%;" rules="groups">
 			<thead>
 				<tr>
-					<th align="left">Pizza name</th>
-					<th align="left">Pizza descriptipon</th>
-					<th align="left">Pizza price</th>
+					<th align="left">Book titile</th>
+					<th align="left">Book descriptipon</th>
+					<th align="left">Book price</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr height="10px" />
 				<c:forEach items="${order.orderDetails}" var="orderDetail" varStatus="status">
 					<tr>
-						<td>${orderDetail.pizza.name}</td>
-						<td>${orderDetail.pizza.description}</td>
-						<td>${orderDetail.pizza.price}</td>
+						<td>${orderDetail.book.title}</td>
+						<td>${orderDetail.book.description}</td>
+						<td>${orderDetail.book.price}</td>
 					</tr>
 				</c:forEach>
 				<tr height="20px" />
