@@ -5,6 +5,6 @@
 	<jsp:output omit-xml-declaration="false" />
 	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 
-	<jsp:forward page="/index.html"/>
+	<jsp:forward page="/index.htm"/>
 	
 </jsp:root>

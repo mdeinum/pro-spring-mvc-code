@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 @Entity
 public class Book implements Serializable {
 
@@ -78,4 +81,22 @@ public class Book implements Serializable {
 		this.category = category;
 	}
 
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object == null || getClass() != object.getClass()) {
+			return false;
+		}
+		Book other = (Book) object;
+
+		return new EqualsBuilder().append(this.getTitle(), other.getTitle())
+				.append(this.getAuthor(), other.getAuthor()).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(getAuthor()).append(getTitle()).toHashCode();
+	}
 }

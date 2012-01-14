@@ -15,7 +15,7 @@
 			<tr>
 				<td><spring:message code="label.page.products.select.book" /></td>
 				<td>
-					<form:select path="book" items="${orderForm.selectableBooks}" itemLabel="title" itemValue="id"/>
+					<form:select path="book" items="${selectableBooks}" itemLabel="title" itemValue="id"/>
 				</td>
 			</tr>
 			<tr>
@@ -49,8 +49,8 @@
 				<tr height="10px"/>
 			<c:forEach items="${orderForm.books}" var="book">
 				<tr>
-					<td>${pizza.key.title}</td>
-					<td>${pizza.value}</td>
+					<td>${book.key.title}</td>
+					<td>${book.value}</td>
 				</tr>
 			</c:forEach>
 			<tr height="20px"/>

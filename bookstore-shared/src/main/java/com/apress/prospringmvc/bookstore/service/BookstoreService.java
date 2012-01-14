@@ -6,6 +6,7 @@ import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.domain.Customer;
 import com.apress.prospringmvc.bookstore.domain.Order;
+import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 
 public interface BookstoreService {
 
@@ -15,7 +16,7 @@ public interface BookstoreService {
 
 	List<Book> findRandomBooks();
 
-	List<Order> findOrdersForCustomer(Customer customer);
+	List<Order> findOrdersForCustomer(Customer customer, LazyResultInitializerStrategy<Order> lazyResultInitializer);
 
-	Order createOrder(Order order, Customer customer);
+	Order createOrder(Order order);
 }

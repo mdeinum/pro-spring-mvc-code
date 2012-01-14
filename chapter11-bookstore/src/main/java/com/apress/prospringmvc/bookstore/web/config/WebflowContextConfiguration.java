@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web.config;
+package com.apress.prospringmvc.bookstore.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

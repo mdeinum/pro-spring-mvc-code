@@ -9,7 +9,7 @@
 			<tr>
 				<td width="30%"><spring:message code="label.page.select.category"/></td>
 				<td>
-					<form:select path="category" items="${orderForm.selectableCategories}" itemLabel="name" itemValue="id"/>
+					<form:select path="category" items="${selectableCategories}" itemLabel="name" itemValue="id"/>
 					<form:errors path="category" cssClass="error"/>
 				</td>
 			</tr>
@@ -17,7 +17,6 @@
 		
 		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
 			<button type="submit" id="return" name="_eventId_return"><spring:message code="label.page.products.select.cancel"/></button>
-			<button type="submit" id="return" name="_eventId_previous"><spring:message code="label.page.select.category.previous"/></button>
 			<button type="submit" id="continue" name="_eventId_next"><spring:message code="label.page.select.category.next"/></button>
 		</div>
 	</form:form>

@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web.config;
+package com.apress.prospringmvc.bookstore.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -6,8 +6,8 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 
-import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
-import com.apress.prospringmvc.pizzarus.web.converter.CategoryConverter;
+import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
+import com.apress.prospringmvc.bookstore.web.converter.BookConverter;
 
 /**
  * Special purpose factory bean that creates an {@link FormattingConversionService}. This service acts as an adapter
@@ -20,13 +20,13 @@ import com.apress.prospringmvc.pizzarus.web.converter.CategoryConverter;
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
 	@Autowired
-	private PizzaConverter pizzaConverter;
+	private BookConverter bookConverter;
 	@Autowired
-	private CategoryConverter shopConverter;
+	private CategoryConverter category;
 
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
-		registry.addConverter(pizzaConverter);
-		registry.addConverter(shopConverter);
+		registry.addConverter(bookConverter);
+		registry.addConverter(category);
 	}
 }

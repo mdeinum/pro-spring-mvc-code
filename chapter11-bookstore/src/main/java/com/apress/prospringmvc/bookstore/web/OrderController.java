@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web;
+package com.apress.prospringmvc.bookstore.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
+import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.domain.Customer;
 import com.apress.prospringmvc.bookstore.domain.Order;
+import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
 
 /**
- * Controller to be used to place and view orders using the {@link PizzasService}. This controller can be used using
+ * Controller to be used to place and view orders using the {@link BookstoreService}. This controller can be used using
  * Spring MVC (view orders) or by POJO access (for example Web Flow) for placing orders
  * 
  * @author Koen Serneels
@@ -32,15 +35,22 @@ import com.apress.prospringmvc.bookstore.service.CategoryService;
 public class OrderController {
 
 	@Autowired
-	private BookstoreService pizzasService;
+	private BookstoreService bookstoreService;
 
 	@Autowired
 	private CategoryService categoryService;
 
-	@RequestMapping("ordersOverview.html")
+	@RequestMapping("ordersOverview.htm")
 	public ModelAndView retrieveOrders(HttpSession httpSession) {
-		List<Order> orders = pizzasService.findOrdersForCustomer((Customer) httpSession
-				.getAttribute(AuthenticationController.AUTHENTICATED_CUSTOMER_KEY));
+		List<Order> orders = bookstoreService.findOrdersForCustomer(
+				(Customer) httpSession.getAttribute(AuthenticationController.AUTHENTICATED_CUSTOMER_KEY),
+				new LazyResultInitializerStrategy<Order>() {
+					@Override
+					public Order initialize(Order order) {
+						Hibernate.initialize(order.getOrderDetails());
+						return order;
+					}
+				});
 
 		ModelAndView mov = new ModelAndView();
 		mov.setViewName("ordersOverview");
@@ -53,23 +63,31 @@ public class OrderController {
 		OrderForm orderForm = new OrderForm();
 		orderForm.setQuantity(1);
 		orderForm.setOrderDate(new Date());
-		orderForm.setSelectableCategories(categoryService.findAll());
 		return orderForm;
 	}
 
-	public void addPizza(OrderForm orderForm) {
-		Book pizza = orderForm.getBook();
-		if (orderForm.getBooks().containsKey(pizza)) {
-			orderForm.getBooks().put(pizza, orderForm.getBooks().get(pizza) + orderForm.getQuantity());
+	public List<Category> initializeCategories() {
+		return categoryService.findAll();
+	}
+
+	public List<Book> initializeBooks(OrderForm orderForm) {
+		return bookstoreService.findBooksByCategory(orderForm.getCategory());
+	}
+
+	public void addBook(OrderForm orderForm) {
+		Book book = orderForm.getBook();
+		if (orderForm.getBooks().containsKey(book)) {
+			orderForm.getBooks().put(book, orderForm.getBooks().get(book) + orderForm.getQuantity());
 		} else {
-			orderForm.getBooks().put(pizza, orderForm.getQuantity());
+			orderForm.getBooks().put(book, orderForm.getQuantity());
 		}
 	}
 
 	public Long placeOrder(Customer customer, OrderForm orderForm) {
 		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).build(true);
-		return pizzasService.createOrder(order, customer).getId();
+				.orderDate(orderForm.getOrderDate()).customer(customer).build(true);
+		System.err.println(bookstoreService.createOrder(order).getId());
+		return bookstoreService.createOrder(order).getId();
 	}
 
 	@InitBinder

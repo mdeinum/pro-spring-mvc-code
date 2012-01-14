@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web.config;
+package com.apress.prospringmvc.bookstore.web.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,7 +24,7 @@ import com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration;
  * @author Koen Serneels
  */
 
-public class PizzaRUsWebApplicationInitializer implements WebApplicationInitializer {
+public class BookstoreWebApplicationInitializer implements WebApplicationInitializer {
 
 	private static final Class<?>[] configurationClasses = new Class<?>[] { TestDataContextConfiguration.class,
 			WebMvcContextConfiguration.class, InfrastructureContextConfiguration.class,
@@ -43,7 +43,7 @@ public class PizzaRUsWebApplicationInitializer implements WebApplicationInitiali
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 
 		// Register and map the dispatcher servlet
-		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("pizza-r-us", new DispatcherServlet(
+		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("bookstore", new DispatcherServlet(
 				rootContext));
 
 		dispatcher.setLoadOnStartup(1);

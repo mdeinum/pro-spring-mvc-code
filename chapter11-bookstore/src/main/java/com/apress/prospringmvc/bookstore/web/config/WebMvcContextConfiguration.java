@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web.config;
+package com.apress.prospringmvc.bookstore.web.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +17,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesView;
 
-import com.apress.prospringmvc.pizzarus.web.converter.CategoryConverter;
-import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
+import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
+import com.apress.prospringmvc.bookstore.web.converter.BookConverter;
 
 /**
  * WebMvc Configuration.
@@ -29,7 +29,7 @@ import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
 @Configuration
 @EnableWebMvc
 @Profile("container")
-@ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus.web" })
+@ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
@@ -63,8 +63,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
-	public PizzaConverter pizzaConverter() {
-		return new PizzaConverter();
+	public BookConverter bookConverter() {
+		return new BookConverter();
 	}
 
 	@Bean
@@ -81,7 +81,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(pizzaConverter());
+		registry.addConverter(bookConverter());
 		registry.addConverter(shopConverter());
 	}
 }

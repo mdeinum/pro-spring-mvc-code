@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web;
+package com.apress.prospringmvc.bookstore.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,10 +18,11 @@ import org.springframework.webflow.mvc.servlet.MvcExternalContext;
 
 import com.apress.prospringmvc.bookstore.domain.Customer;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
+import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CustomerService;
 
 /**
- * This controller talks to the {@link PizzasService} to authenticate a user. This controller can be used via Spring MVC
+ * This controller talks to the {@link BookstoreService} to authenticate a user. This controller can be used via Spring MVC
  * (request mapping login.html) or as POJO for example via Web Flow
  * 
  * @author Koen Serneels
@@ -39,7 +40,7 @@ public class AuthenticationController {
 
 	// ----- Spring MVC logic
 
-	@RequestMapping("login.html")
+	@RequestMapping("login.htm")
 	public ModelAndView authentication() {
 		ModelAndView mov = new ModelAndView();
 
@@ -48,7 +49,7 @@ public class AuthenticationController {
 		return mov;
 	}
 
-	@RequestMapping(value = "authenticate.html", method = RequestMethod.POST)
+	@RequestMapping(value = "authenticate.htm", method = RequestMethod.POST)
 	public ModelAndView authentication(@ModelAttribute
 	AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession) {
 		try {

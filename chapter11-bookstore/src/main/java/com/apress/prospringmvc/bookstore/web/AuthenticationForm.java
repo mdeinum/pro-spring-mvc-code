@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web;
+package com.apress.prospringmvc.bookstore.web;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.pizzarus.web.converter;
+package com.apress.prospringmvc.bookstore.web.converter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,16 +11,16 @@ import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
 /**
- * Tries to convert a Long (which resembles the primary key of a {@link Pizza} to a Pizza entity using the
- * {@link PizzasService}. When conversion cannot take place an {@link IllegalArgumentException} is thrown
+ * Tries to convert a Long (which resembles the primary key of a {@link Book} to a Book entity using the
+ * {@link BookstoreService}. When conversion cannot take place an {@link IllegalArgumentException} is thrown
  * 
  * @author Koen Serneels
  */
 
-public class PizzaConverter implements GenericConverter {
+public class BookConverter implements GenericConverter {
 
 	@Autowired
-	private BookstoreService pizzaService;
+	private BookstoreService bookstoreService;
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {
@@ -42,8 +42,8 @@ public class PizzaConverter implements GenericConverter {
 		if (sourceType.getObjectType().isAssignableFrom(String.class)
 				&& targetType.getObjectType().isAssignableFrom(Book.class)) {
 
-			return pizzaService.findById(Long.parseLong((String) source));
+			return bookstoreService.findById(Long.parseLong((String) source));
 		}
-		throw new IllegalArgumentException(source + " cannot be converted to a Pizza object");
+		throw new IllegalArgumentException(source + " cannot be converted to a Book object");
 	}
 }

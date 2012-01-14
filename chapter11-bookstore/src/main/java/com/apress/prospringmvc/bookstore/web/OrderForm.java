@@ -1,10 +1,8 @@
-package com.apress.prospringmvc.pizzarus.web;
+package com.apress.prospringmvc.bookstore.web;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.Max;
@@ -30,8 +28,6 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 
 public class OrderForm implements Serializable {
 
-	private List<Book> selectableBooks = new ArrayList<Book>();
-	private List<Category> selectableCategories = new ArrayList<Category>();
 	private Map<Book, Integer> books = new HashMap<Book, Integer>();
 
 	private Book book;
@@ -48,7 +44,7 @@ public class OrderForm implements Serializable {
 	private Date orderDate;
 
 	// ---- Form validation methods triggered by webflow according to convention, see reference 5.10. Validating a model
-	public void validateSelectPizzas(ValidationContext context) {
+	public void validateSelectBooks(ValidationContext context) {
 		if (context.getUserEvent().equals("next")) {
 			MessageContext messages = context.getMessageContext();
 			if (books.isEmpty()) {
@@ -58,7 +54,7 @@ public class OrderForm implements Serializable {
 		}
 	}
 
-	public void validateSelectShop(ValidationContext context) {
+	public void validateSelectCategory(ValidationContext context) {
 		if (context.getUserEvent().equals("next")) {
 			MessageContext messages = context.getMessageContext();
 			if (category == null) {
@@ -88,28 +84,12 @@ public class OrderForm implements Serializable {
 		books.clear();
 	}
 
-	public List<Category> getSelectableCategories() {
-		return selectableCategories;
-	}
-
-	public void setSelectableCategories(List<Category> selectableCategories) {
-		this.selectableCategories = selectableCategories;
-	}
-
 	public Category getCategory() {
 		return category;
 	}
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	public void setSelectablePizzas(List<Book> selectablePizzas) {
-		this.selectableBooks = selectablePizzas;
-	}
-
-	public List<Book> getSelectablePizzas() {
-		return selectableBooks;
 	}
 
 	public Date getDeliveryDate() {
@@ -134,14 +114,6 @@ public class OrderForm implements Serializable {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
-
-	public List<Book> getSelectableBooks() {
-		return selectableBooks;
-	}
-
-	public void setSelectableBooks(List<Book> selectableBooks) {
-		this.selectableBooks = selectableBooks;
 	}
 
 	public Map<Book, Integer> getBooks() {

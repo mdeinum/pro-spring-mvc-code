@@ -26,12 +26,12 @@
 				</li>
 				<li>
 					<c:if test="${authenticatedCustomer !=null}">
-						<spring:url value="/ordersOverview.html" var="ordersOverview" />
+						<spring:url value="/ordersOverview.htm" var="ordersOverview" />
 						<a href="${ordersOverview}">View orders</a>
 					</c:if>
 				</li>
 				<li>
-					<spring:url value="/login.html" var="login" /> 
+					<spring:url value="/login.htm" var="login" /> 
 					<a href="${login}">Login</a>
 				</li>
 				<li>
