@@ -12,7 +12,7 @@
 		<webflow:flow-location-pattern value="/**/*-flow.xml" />
 	</webflow:flow-registry>
 
-	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" conversion-service="defaultConversionService" validator="validator" development="true" />
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" conversion-service="conversionService" validator="validator" development="true" />
 
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
@@ -25,10 +25,7 @@
 		</property> 
 	</bean>
 
-	 <bean id="defaultConversionService" class="org.springframework.binding.convert.service.DefaultConversionService">
-    	<constructor-arg ref="applicationConversionSevice"/>
+	<bean id="conversionService" class="org.springframework.binding.convert.service.DefaultConversionService">
+    	<constructor-arg ref="mvcConversionService"/>
     </bean>
-	
-	<bean id="applicationConversionSevice" class="com.apress.prospringmvc.bookstore.web.config.ApplicationConversionServiceFactoryBean"/>
-
 </beans>

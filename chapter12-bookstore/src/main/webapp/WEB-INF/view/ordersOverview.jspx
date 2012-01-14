@@ -43,11 +43,6 @@
 					<td>${order.id}</td>
 					<td>${fn:length(order.orderDetails)}</td>
 					<td><spring:eval expression="order.orderDate" /></td>
-					<td><spring:eval
-							expression="order.deliverySlot.deliveryInterval.getStart().toString('MM/dd/yyyy hh:mm')" />
-						and <spring:eval
-							expression="order.deliverySlot.deliveryInterval.getEnd().toString('MM/dd/yyyy hh:mm')" />
-					</td>
 					<td>${order.totalOrderPrice}</td>
 					<td>
 						<form:form id="orderDetailForm_${status.index}" action="${flowExecutionUrl}">

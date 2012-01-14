@@ -8,12 +8,20 @@
 	</on-start>
 
 	<view-state id="selectCategory" view="selectCategory" model="orderForm">
+		<on-render>
+			<evaluate expression="orderController.initializeCategories()" result="flashScope.selectableCategories" />
+		</on-render>
+	
 		<transition on="next" to="selectBooks"/>
 		
 		<transition on="return" to="endOrderCanceled" />
 	</view-state>
 	
 	<view-state id="selectBooks" view="selectBooks" model="orderForm" >
+		<on-render>
+			<evaluate expression="orderController.initializeBooks(orderForm)" result="flashScope.selectableBooks" />
+		</on-render>
+	
 		<transition on="add" >
 			<evaluate expression="orderController.addBook(flowScope.orderForm)" />
 			<render fragments="selectedBooks"/>
@@ -56,7 +64,7 @@
 	</subflow-state>
 
 	<end-state id="endOrderCanceled" view="redirect:/index.jspx"/>
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.html?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
 
 </flow>	
 	
