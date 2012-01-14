@@ -30,11 +30,11 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 
 public class OrderForm implements Serializable {
 
-	private List<Book> selectablePizzas = new ArrayList<Book>();
+	private List<Book> selectableBooks = new ArrayList<Book>();
 	private List<Category> selectableCategories = new ArrayList<Category>();
-	private Map<Book, Integer> pizzas = new HashMap<Book, Integer>();
+	private Map<Book, Integer> books = new HashMap<Book, Integer>();
 
-	private Book pizza;
+	private Book book;
 	@NotNull
 	@Min(1)
 	@Max(99)
@@ -51,8 +51,8 @@ public class OrderForm implements Serializable {
 	public void validateSelectPizzas(ValidationContext context) {
 		if (context.getUserEvent().equals("next")) {
 			MessageContext messages = context.getMessageContext();
-			if (pizzas.isEmpty()) {
-				messages.addMessage(new MessageBuilder().error().source("pizzas").code("error.page.pizzas.required")
+			if (books.isEmpty()) {
+				messages.addMessage(new MessageBuilder().error().source("books").code("error.page.books.required")
 						.build());
 			}
 		}
@@ -62,8 +62,8 @@ public class OrderForm implements Serializable {
 		if (context.getUserEvent().equals("next")) {
 			MessageContext messages = context.getMessageContext();
 			if (category == null) {
-				messages.addMessage(new MessageBuilder().error().source("shop").code("error.page.shop.required")
-						.build());
+				messages.addMessage(new MessageBuilder().error().source("category")
+						.code("error.page.category.required").build());
 			}
 		}
 	}
@@ -84,20 +84,16 @@ public class OrderForm implements Serializable {
 		}
 	}
 
+	public void resetSelectedBooks() {
+		books.clear();
+	}
+
 	public List<Category> getSelectableCategories() {
 		return selectableCategories;
 	}
 
 	public void setSelectableCategories(List<Category> selectableCategories) {
 		this.selectableCategories = selectableCategories;
-	}
-
-	public Map<Book, Integer> getPizzas() {
-		return pizzas;
-	}
-
-	public void setPizzas(Map<Book, Integer> pizzas) {
-		this.pizzas = pizzas;
 	}
 
 	public Category getCategory() {
@@ -109,19 +105,11 @@ public class OrderForm implements Serializable {
 	}
 
 	public void setSelectablePizzas(List<Book> selectablePizzas) {
-		this.selectablePizzas = selectablePizzas;
-	}
-
-	public void setPizza(Book pizza) {
-		this.pizza = pizza;
+		this.selectableBooks = selectablePizzas;
 	}
 
 	public List<Book> getSelectablePizzas() {
-		return selectablePizzas;
-	}
-
-	public Book getPizza() {
-		return pizza;
+		return selectableBooks;
 	}
 
 	public Date getDeliveryDate() {
@@ -146,5 +134,29 @@ public class OrderForm implements Serializable {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public List<Book> getSelectableBooks() {
+		return selectableBooks;
+	}
+
+	public void setSelectableBooks(List<Book> selectableBooks) {
+		this.selectableBooks = selectableBooks;
+	}
+
+	public Map<Book, Integer> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Map<Book, Integer> books) {
+		this.books = books;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 }

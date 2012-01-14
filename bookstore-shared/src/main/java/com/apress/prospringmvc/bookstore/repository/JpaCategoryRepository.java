@@ -13,19 +13,19 @@ import com.apress.prospringmvc.bookstore.domain.Category;
 @Repository("categoryRepository")
 public class JpaCategoryRepository implements CategoryRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+	@PersistenceContext
+	private EntityManager entityManager;
 
-    @Override
-    public List<Category> findAll() {
-        String hql = "select c from Category c order by c.name";
-        TypedQuery<Category> query = this.entityManager.createQuery(hql, Category.class);
-        return query.getResultList();
-    }
+	@Override
+	public List<Category> findAll() {
+		String hql = "select c from Category c order by c.name";
+		TypedQuery<Category> query = this.entityManager.createQuery(hql, Category.class);
+		return query.getResultList();
+	}
 
-    @Override
-    public Category findById(long id) {
-        return this.entityManager.find(Category.class, id);
-    }
+	@Override
+	public Category findById(long id) {
+		return this.entityManager.find(Category.class, id);
+	}
 
 }

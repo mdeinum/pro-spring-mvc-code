@@ -58,16 +58,16 @@ public class OrderController {
 	}
 
 	public void addPizza(OrderForm orderForm) {
-		Book pizza = orderForm.getPizza();
-		if (orderForm.getPizzas().containsKey(pizza)) {
-			orderForm.getPizzas().put(pizza, orderForm.getPizzas().get(pizza) + orderForm.getQuantity());
+		Book pizza = orderForm.getBook();
+		if (orderForm.getBooks().containsKey(pizza)) {
+			orderForm.getBooks().put(pizza, orderForm.getBooks().get(pizza) + orderForm.getQuantity());
 		} else {
-			orderForm.getPizzas().put(pizza, orderForm.getQuantity());
+			orderForm.getBooks().put(pizza, orderForm.getQuantity());
 		}
 	}
 
 	public Long placeOrder(Customer customer, OrderForm orderForm) {
-		Order order = new OrderBuilder().addBooks(orderForm.getPizzas()).deliveryDate(orderForm.getDeliveryDate())
+		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
 				.orderDate(orderForm.getOrderDate()).build(true);
 		return pizzasService.createOrder(order, customer).getId();
 	}

@@ -2,6 +2,7 @@ package com.apress.prospringmvc.pizzarus.web.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -16,8 +17,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesView;
 
-import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
 import com.apress.prospringmvc.pizzarus.web.converter.CategoryConverter;
+import com.apress.prospringmvc.pizzarus.web.converter.PizzaConverter;
 
 /**
  * WebMvc Configuration.
@@ -28,6 +29,7 @@ import com.apress.prospringmvc.pizzarus.web.converter.CategoryConverter;
 @Configuration
 @EnableWebMvc
 @Profile("container")
+@ComponentScan(basePackages = { "com.apress.prospringmvc.pizzarus.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
