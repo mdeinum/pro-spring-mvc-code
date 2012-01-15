@@ -12,7 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Bookstore - </title>
+		<title>Bookstore - your partner in only books</title>
 		<spring:url value="/resources/css/style.css" var="bookstoreCss" />
 		<link rel="stylesheet" type="text/css" href="${bookstoreCss}" />
 		<spring:url value="/resources/dijit/themes/tundra/tundra.css"	var="tundraCss" />
