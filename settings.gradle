@@ -12,6 +12,7 @@ def String[] modules = [
 	'chapter8-bookstore',
 	'chapter11-bookstore',
 	'chapter12-bookstore',
+    'final-bookstore'
 ]
 
 include modules

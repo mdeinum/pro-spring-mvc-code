@@ -12,7 +12,6 @@ dependencies() {
     compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
     compile "net.sf.ehcache:ehcache-core:$ehCacheVersion"
     
-    compile "commons-codec:commons-codec:1.6"
 
     compile "joda-time:joda-time:2.0"
     compile "joda-time:joda-time-hibernate:1.3"
