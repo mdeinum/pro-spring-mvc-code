@@ -7,10 +7,27 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 
-	<security:http>
-		<security:form-login login-page="login.htm" default-target-url="index.htm"/>
-		<security:intercept-url pattern="/secured/*"/>
+	<security:http access-decision-manager-ref="affirmativeBased" >
+		<security:form-login login-page="/public/login.htm" default-target-url="/public/index.htm"/>
+
+		<security:intercept-url pattern="/secured/**" access="IS_AUTHENTICATED_FULLY" />
+		<security:intercept-url pattern="/public/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<security:intercept-url pattern="/authentication-flow" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/book-order-flow" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/create-order-flow" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		
+		<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
 	</security:http>
+	
+	<bean id="affirmativeBased" class="org.springframework.security.access.vote.AffirmativeBased" >
+		<property name="decisionVoters">
+			<list>
+				<bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
@@ -22,6 +39,5 @@
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
 
 </beans>
