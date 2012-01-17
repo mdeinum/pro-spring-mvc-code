@@ -1,7 +1,5 @@
 package com.apress.prospringmvc.bookstore.domain.support;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,58 +22,50 @@ import com.apress.prospringmvc.bookstore.domain.OrderDetail;
 @Component
 public class OrderBuilder extends EntityBuilder<Order> {
 
-	private List<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails;
 
-	@Override
-	void initProduct() {
-		product = new Order();
-		orderDetails = new ArrayList<OrderDetail>();
-	}
+    @Override
+    void initProduct() {
+        this.product = new Order();
+        this.orderDetails = new ArrayList<OrderDetail>();
+    }
 
-	public OrderBuilder addBook(Book book, int quantity) {
-		OrderDetail orderDetail = new OrderDetail();
-		orderDetail.setQuantity(quantity);
+    public OrderBuilder addBook(Book book, int quantity) {
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setQuantity(quantity);
 
-		orderDetail.setBook(book);
-		orderDetails.add(orderDetail);
-		return this;
-	}
+        orderDetail.setBook(book);
+        this.orderDetails.add(orderDetail);
+        return this;
+    }
 
-	public OrderBuilder addBooks(Map<Book, Integer> map) {
-		for (Entry<Book, Integer> entry : map.entrySet()) {
-			addBook(entry.getKey(), entry.getValue());
-		}
-		return this;
-	}
+    public OrderBuilder addBooks(Map<Book, Integer> map) {
+        for (Entry<Book, Integer> entry : map.entrySet()) {
+            addBook(entry.getKey(), entry.getValue());
+        }
+        return this;
+    }
 
-	public OrderBuilder deliveryDate(Date date) {
-		product.setDeliveryDate(date);
-		return this;
-	}
+    public OrderBuilder deliveryDate(Date date) {
+        this.product.setDeliveryDate(date);
+        return this;
+    }
 
-	public OrderBuilder orderDate(Date date) {
-		product.setOrderDate(date);
-		return this;
-	}
+    public OrderBuilder orderDate(Date date) {
+        this.product.setOrderDate(date);
+        return this;
+    }
 
-	public OrderBuilder customer(Customer customer) {
-		product.setCustomer(customer);
-		return this;
-	}
+    public OrderBuilder customer(Customer customer) {
+        this.product.setCustomer(customer);
+        return this;
+    }
 
-	@Override
-	Order assembleProduct() {
-		BigDecimal totalOrderPrice = new BigDecimal("0");
-		totalOrderPrice.setScale(2, RoundingMode.HALF_UP);
-
-		for (OrderDetail orderDetail : orderDetails) {
-			totalOrderPrice = totalOrderPrice.add(orderDetail.getBook().getPrice()
-					.multiply(new BigDecimal(orderDetail.getQuantity())));
-		}
-
-		product.getOrderDetails().addAll(orderDetails);
-		product.setTotalOrderPrice(totalOrderPrice);
-
-		return product;
-	}
+    @Override
+    Order assembleProduct() {
+        for (OrderDetail orderDetail : this.orderDetails) {
+            this.product.addOrderDetail(orderDetail);
+        }
+        return this.product;
+    }
 }

@@ -1,6 +1,7 @@
 package com.apress.prospringmvc.bookstore.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -27,8 +28,10 @@ public class Customer implements Serializable {
     private String firstName;
     private String lastName;
 
+    private Date dateOfBirth;
+
     @Embedded
-    private Address address;
+    private Address address = new Address();
     private String emailAddress;
     private String username;
     private String password;
@@ -83,5 +86,13 @@ public class Customer implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Date getDateOfBirth() {
+        return this.dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

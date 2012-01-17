@@ -3,6 +3,7 @@ package com.apress.prospringmvc.bookstore.repository;
 import java.util.List;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
+import com.apress.prospringmvc.bookstore.domain.BookSearchCriteria;
 import com.apress.prospringmvc.bookstore.domain.Category;
 
 public interface BookRepository {
@@ -12,5 +13,7 @@ public interface BookRepository {
     List<Book> findByCategory(Category category);
 
     List<Book> findRandom(int count);
+
+    List<Book> findBooks(BookSearchCriteria bookSearchCriteria);
 
 }

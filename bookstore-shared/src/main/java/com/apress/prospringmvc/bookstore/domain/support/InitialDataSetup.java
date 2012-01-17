@@ -23,87 +23,90 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 
 public class InitialDataSetup {
 
-	private TransactionTemplate transactionTemplate;
+    private TransactionTemplate transactionTemplate;
 
-	@Autowired
-	private OrderBuilder orderBuilder;
-	@Autowired
-	private CustomerBuilder customerBuilder;
-	@Autowired
-	private BookBuilder bookBuilder;
+    @Autowired
+    private OrderBuilder orderBuilder;
+    @Autowired
+    private CustomerBuilder customerBuilder;
+    @Autowired
+    private BookBuilder bookBuilder;
+    @Autowired
+    private CategoryBuilder categoryBuilder;
 
-	public InitialDataSetup(TransactionTemplate transactionTemplate) {
-		this.transactionTemplate = transactionTemplate;
-	}
+    public InitialDataSetup(TransactionTemplate transactionTemplate) {
+        this.transactionTemplate = transactionTemplate;
+    }
 
-	public void initialize() {
-		transactionTemplate.execute(new TransactionCallback<Void>() {
-			@Override
-			public Void doInTransaction(TransactionStatus status) {
-				Customer johnDoe;
-				Category category;
+    public void initialize() {
+        this.transactionTemplate.execute(new TransactionCallback<Void>() {
+            @Override
+            public Void doInTransaction(TransactionStatus status) {
+                Customer johnDoe;
+                Category category;
 
-				// Create customer
-				{
-					johnDoe = customerBuilder.address("Brussels", "1000", "Nieuwstraat", "1", "A")
-							.credentials("jd", "secret").name("John", "Doe").build();
-				}
+                // Create customer
+                {
+                    johnDoe = InitialDataSetup.this.customerBuilder
+                            .address("Brussels", "1000", "Nieuwstraat", "1", "A").credentials("jd", "secret")
+                            .name("John", "Doe").build();
+                }
 
-				// Create customer
-				{
-					category = new Category("IT");
-				}
+                // Create customer
+                {
+                    category = InitialDataSetup.this.categoryBuilder.name("IT").build();
+                }
 
-				// Create different books and directly attach them with an order
-				List<Order> orders = new ArrayList<Order>();
-				{
-					Book book = bookBuilder.title("Effective Java")
-							.description("brings together seventy-eight indispensable programmer’s rules of thumb")
-							.author("Joshua Bloch").year(2008).price("31.20").category(category).build();
-					orders.add(orderBuilder.addBook(book, 1).deliveryDate(new Date()).orderDate(new Date())
-							.customer(johnDoe).build());
+                // Create different books and directly attach them with an order
+                List<Order> orders = new ArrayList<Order>();
+                {
+                    Book book = InitialDataSetup.this.bookBuilder.title("Effective Java")
+                            .description("brings together seventy-eight indispensable programmer’s rules of thumb")
+                            .author("Joshua Bloch").year(2008).price("31.20").category(category).build();
+                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
+                            .orderDate(new Date()).customer(johnDoe).build());
 
-					book = bookBuilder
-							.title("Refactoring: Improving the Design of Existing Code")
-							.description(
-									"Refactoring is about improving the design of existing code. It is the process of "
-											+ "changing a software system in such a way that it does not alter the external beha"
-											+ "vior of the code, yet improves its internal structure")
-							.author("Martin Fowler").year(1999).price("41.39").category(category).build();
-					orders.add(orderBuilder.addBook(book, 1).deliveryDate(new Date()).orderDate(new Date())
-							.customer(johnDoe).build());
+                    book = InitialDataSetup.this.bookBuilder
+                            .title("Refactoring: Improving the Design of Existing Code")
+                            .description(
+                                    "Refactoring is about improving the design of existing code. It is the process of "
+                                            + "changing a software system in such a way that it does not alter the external beha"
+                                            + "vior of the code, yet improves its internal structure")
+                            .author("Martin Fowler").year(1999).price("41.39").category(category).build();
+                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
+                            .orderDate(new Date()).customer(johnDoe).build());
 
-					book = bookBuilder
-							.title("Clean Code: A Handbook of Agile Software Craftsmanship")
-							.description(
-									"Even bad code can function. But if code isn’t clean, it can bring a development organization "
-											+ "to its knees. Every year, countless hours and significant resources are lost because of poorly "
-											+ "written code. But it doesn’t have to be that way")
-							.author("Robert C. Martin").year(2008).price("33.32").category(category).build();
-					orders.add(orderBuilder.addBook(book, 1).deliveryDate(new Date()).orderDate(new Date())
-							.customer(johnDoe).build());
+                    book = InitialDataSetup.this.bookBuilder
+                            .title("Clean Code: A Handbook of Agile Software Craftsmanship")
+                            .description(
+                                    "Even bad code can function. But if code isn’t clean, it can bring a development organization "
+                                            + "to its knees. Every year, countless hours and significant resources are lost because of poorly "
+                                            + "written code. But it doesn’t have to be that way")
+                            .author("Robert C. Martin").year(2008).price("33.32").category(category).build();
+                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
+                            .orderDate(new Date()).customer(johnDoe).build());
 
-					book = bookBuilder
-							.title("Agile Software Development, Principles, Patterns, and Practices")
-							.description(
-									"A unique collection of the latest software development methods. Includes OOD, UML, Design Patterns, Agile and XP methods with a "
-											+ "detailed description of a complete software design for reusable programs in C++ and Java.")
-							.author("Robert C. Martin").year(2002).price("54.61").category(category).build();
-					orders.add(orderBuilder.addBook(book, 1).deliveryDate(new Date()).orderDate(new Date())
-							.customer(johnDoe).build());
+                    book = InitialDataSetup.this.bookBuilder
+                            .title("Agile Software Development, Principles, Patterns, and Practices")
+                            .description(
+                                    "A unique collection of the latest software development methods. Includes OOD, UML, Design Patterns, Agile and XP methods with a "
+                                            + "detailed description of a complete software design for reusable programs in C++ and Java.")
+                            .author("Robert C. Martin").year(2002).price("54.61").category(category).build();
+                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
+                            .orderDate(new Date()).customer(johnDoe).build());
 
-					book = bookBuilder
-							.title("Practical API Design: Confessions of a Java Framework Architect")
-							.description(
-									"The definitive guide to API design, this book will be required reading for all designers and engineers involved with the development,"
-											+ "testing, and maintenance of APIs.").author("Jaroslav Tulach").year(2008)
-							.price("56.01").category(category).build();
-					orders.add(orderBuilder.addBook(book, 1).deliveryDate(new Date()).orderDate(new Date())
-							.customer(johnDoe).build());
+                    book = InitialDataSetup.this.bookBuilder
+                            .title("Practical API Design: Confessions of a Java Framework Architect")
+                            .description(
+                                    "The definitive guide to API design, this book will be required reading for all designers and engineers involved with the development,"
+                                            + "testing, and maintenance of APIs.").author("Jaroslav Tulach").year(2008)
+                            .price("56.01").category(category).build();
+                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
+                            .orderDate(new Date()).customer(johnDoe).build());
 
-				}
-				return null;
-			}
-		});
-	}
+                }
+                return null;
+            }
+        });
+    }
 }

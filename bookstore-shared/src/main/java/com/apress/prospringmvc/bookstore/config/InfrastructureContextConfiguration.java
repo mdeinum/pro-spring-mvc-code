@@ -34,48 +34,48 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.service",
-		"com.apress.prospringmvc.bookstore.repository", "com.apress.prospringmvc.bookstore.domain.support" })
+        "com.apress.prospringmvc.bookstore.repository", "com.apress.prospringmvc.bookstore.domain.support" })
 public class InfrastructureContextConfiguration {
 
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@Autowired
-	private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
-	@Bean
-	public FactoryBean<EntityManagerFactory> entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-		localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
-		localContainerEntityManagerFactoryBean.setPackagesToScan("com.apress.prospringmvc.bookstore.domain");
-		localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
-		return localContainerEntityManagerFactoryBean;
-	}
+    @Bean
+    public FactoryBean<EntityManagerFactory> entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
+        localContainerEntityManagerFactoryBean.setPackagesToScan("com.apress.prospringmvc.bookstore.domain");
+        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+        return localContainerEntityManagerFactoryBean;
+    }
 
-	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
-		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-		jpaVendorAdapter.setGenerateDdl(true);
-		jpaVendorAdapter.setShowSql(true);
-		return jpaVendorAdapter;
-	}
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        jpaVendorAdapter.setGenerateDdl(true);
+        jpaVendorAdapter.setShowSql(true);
+        return jpaVendorAdapter;
+    }
 
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(this.entityManagerFactory);
-		transactionManager.setDataSource(this.dataSource);
-		return transactionManager;
-	}
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(this.entityManagerFactory);
+        transactionManager.setDataSource(this.dataSource);
+        return transactionManager;
+    }
 
-	@Configuration
-	@Profile("local")
-	public static class LocalDataSourceConfiguration {
-		@Bean
-		public DataSource dataSource() {
-			EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-			builder.setType(EmbeddedDatabaseType.H2);
-			return builder.build();
-		}
-	}
+    @Configuration
+    @Profile("local")
+    public static class LocalDataSourceConfiguration {
+        @Bean
+        public DataSource dataSource() {
+            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+            builder.setType(EmbeddedDatabaseType.H2);
+            return builder.build();
+        }
+    }
 }

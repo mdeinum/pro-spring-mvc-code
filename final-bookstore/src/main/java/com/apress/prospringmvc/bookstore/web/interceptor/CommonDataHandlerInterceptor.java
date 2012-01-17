@@ -8,16 +8,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
+import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
-import com.apress.prospringmvc.bookstore.service.CategoryService;
 
-public class CommonDataHandlerIntereceptor extends HandlerInterceptorAdapter {
+public class CommonDataHandlerInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private BookstoreService bookstoreService;
 
     @Autowired
-    private CategoryService categoryService;
+    private Cart cart;
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -25,7 +25,8 @@ public class CommonDataHandlerIntereceptor extends HandlerInterceptorAdapter {
 
         if (modelAndView != null) {
             modelAndView.addObject("randomBooks", this.bookstoreService.findRandomBooks());
-            modelAndView.addObject("customer", WebUtils.getSessionAttribute(request, "customer"));
+            modelAndView.addObject("currentUser", WebUtils.getSessionAttribute(request, "customer"));
+            modelAndView.addObject("cart", this.cart);
         }
 
     }

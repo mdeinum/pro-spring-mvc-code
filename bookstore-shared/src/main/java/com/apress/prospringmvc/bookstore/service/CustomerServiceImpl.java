@@ -12,24 +12,30 @@ import com.apress.prospringmvc.bookstore.repository.CustomerRepository;
 @Transactional(readOnly = true)
 public class CustomerServiceImpl implements CustomerService {
 
-	@Autowired
-	private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-	@Override
-	@Transactional(readOnly = false)
-	public Customer save(Customer customer) {
-		return this.customerRepository.save(customer);
-	}
+    @Override
+    @Transactional(readOnly = false)
+    public Customer save(Customer customer) {
+        return this.customerRepository.save(customer);
+    }
 
-	@Override
-	public Customer login(String username, String password) throws AuthenticationException {
-		Customer customer = this.customerRepository.findByUsername(username);
-		if (customer != null) {
-			if (customer.getPassword().equals(DigestUtils.sha512Hex(password))) {
-				return customer;
-			}
-		}
-		throw new AuthenticationException("Wrong username/password combination.", "invalid.username");
-	}
+    @Override
+    public Customer login(String username, String password) throws AuthenticationException {
+        Customer customer = this.customerRepository.findByUsername(username);
+        if (customer != null) {
+            String pwd = DigestUtils.sha512Hex(password);
+            if (!customer.getPassword().equalsIgnoreCase(pwd)) {
+                customer = null;
+            }
+        }
+
+        if (customer == null) {
+            throw new AuthenticationException("Wrong username/password combination.", "invalid.username");
+        } else {
+            return customer;
+        }
+    }
 
 }
