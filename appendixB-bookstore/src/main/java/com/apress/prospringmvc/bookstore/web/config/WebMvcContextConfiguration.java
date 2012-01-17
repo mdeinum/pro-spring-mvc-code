@@ -37,7 +37,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
+		registry.addResourceHandler("/public/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
 	}
 
 	@Bean

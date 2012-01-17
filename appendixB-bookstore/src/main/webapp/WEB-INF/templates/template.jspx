@@ -13,16 +13,16 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Bookstore - </title>
-		<spring:url value="/resources/css/style.css" var="bookstoreCss" />
+		<spring:url value="/public/resources/css/style.css" var="bookstoreCss" />
 		<link rel="stylesheet" type="text/css" href="${bookstoreCss}" />
-		<spring:url value="/resources/dijit/themes/tundra/tundra.css"	var="tundraCss" />
+		<spring:url value="/public/resources/dijit/themes/tundra/tundra.css"	var="tundraCss" />
 		<link type="text/css" rel="stylesheet" href="${tundraCss}" />
 
-		<spring:url value="/resources/dojo/dojo.js"	var="dojo" />
+		<spring:url value="/public/resources/dojo/dojo.js"	var="dojo" />
 		<script type="text/javascript" src="${dojo}"><!----></script>
-		<spring:url value="/resources/spring/Spring.js"	var="springJs" />
+		<spring:url value="/public/resources/spring/Spring.js"	var="springJs" />
 		<script type="text/javascript" src="${springJs}"> <!----></script>
-		<spring:url value="/resources/spring/Spring-Dojo.js" var="springDojo" />
+		<spring:url value="/public/resources/spring/Spring-Dojo.js" var="springDojo" />
 		<script type="text/javascript" src="${springDojo}"><!----></script>
 	</head>
 
@@ -38,11 +38,11 @@
         	<section class="right_content">
             	<section class="languages_box">
             		<span class="red">Languages:</span>
-            		<spring:url value="/resources/images/gb.gif" var="gb" />
+            		<spring:url value="/public/resources/images/gb.gif" var="gb" />
             		<a href="?lang=en" class="selected"><img src="${gb}" alt="" title="" border="0" /></a>
-            		<spring:url value="/resources/images/fr.gif" var="fr" />
+            		<spring:url value="/public/resources/images/fr.gif" var="fr" />
             		<a href="?lang=fr"><img src="${fr}" alt="" title="" border="0" /></a>
-            		<spring:url value="/resources/images/de.gif" var="de" />
+            		<spring:url value="/public/resources/images/de.gif" var="de" />
 			           <a href="?lang=de"><img src="${de}" alt="" title="" border="0" /></a>
             	</section>
                 
@@ -51,7 +51,7 @@
               			<tr>
               				<td>
 								<div class="title"><span class="title_icon">
-                  					<spring:url value="/resources/images/cart.gif" var="cart" />
+                  					<spring:url value="/public/resources/images/cart.gif" var="cart" />
 			                  		<img src="${cart}" alt="" title="" /></span>Your Cart
             			      	</div>
             			    </td>
@@ -72,7 +72,7 @@
 				</section>
 
 				<div class="title"><span class="title_icon">
-					<spring:url value="/resources/images/bullet3.gif" var="bullet3" />
+					<spring:url value="/public/resources/images/bullet3.gif" var="bullet3" />
              		<img src="${bullet3}" alt="" title="" /></span>User</div>
                 <div class="about">
 					<c:if test="${request.principal == null}">
@@ -100,7 +100,7 @@
 				<div class="right_box">
              	   <div class="title">
 						<span class="title_icon">
-                			<spring:url value="/resources/images/bullet4.gif" var="bullet4" />
+                			<spring:url value="/public/resources/images/bullet4.gif" var="bullet4" />
                 			<img src="${bullet4}" alt="" title="" /></span>Random Books
                 	</div> 
                     <c:forEach items="${randomBooks}" var="book">
