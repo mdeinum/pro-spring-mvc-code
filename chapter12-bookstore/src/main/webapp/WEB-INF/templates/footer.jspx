@@ -6,9 +6,19 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
-						
-	<p>
-		<a href="#">HOME PAGE</a> | <a href="#">ABOUT US</a> | <a href="#">HOME DLIVERY</a> | <a href="#">CONTACTS</a><br />Copyright &#174; Pizza-R-Us
-	</p>
 
+	<footer>
+		<div class="left_footer">
+			<spring:url value="/resources/images/footer_logo.gif" var="logo" />
+			<img src="${logo}" alt="" title="" /><br/> 
+			<a href="http://csscreme.com/freecsstemplates/" title="free templates">
+				<spring:url value="/resources/images/csscreme.gif" var="csscreme" /> 
+				<img src="${csscreme}" alt="free templates" title="free templates" border="0" />
+			</a>
+		</div>
+		<div class="right_footer">
+			<a href="#">home</a> <a href="#">about us</a>
+			<a href="#">privacy policy</a> <a href="#">contact us</a>
+		</div>
+	</footer>
 </jsp:root>

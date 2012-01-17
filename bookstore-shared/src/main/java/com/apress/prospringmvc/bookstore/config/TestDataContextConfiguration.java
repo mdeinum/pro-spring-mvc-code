@@ -40,7 +40,7 @@ public class TestDataContextConfiguration {
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
-	@Bean
+	@Bean(initMethod = "initialize")
 	public InitialDataSetup setupData() {
 		return new InitialDataSetup(new TransactionTemplate(transactionManager));
 	}

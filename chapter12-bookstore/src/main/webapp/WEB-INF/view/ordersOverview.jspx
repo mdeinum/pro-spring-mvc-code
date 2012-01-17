@@ -29,9 +29,8 @@
 		<thead>
 			<tr>
 				<th align="left"><spring:message code="label.page.ordersoverview.order" /></th>
-				<th align="left"><spring:message code="label.page.ordersoverview.pizzas" /></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.books" /></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.order.date" /></th>
-				<th align="left"><spring:message code="label.page.ordersoverview.delivery.between" /></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.total.price" /></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.total.detail" /></th>
 			</tr>
@@ -43,11 +42,6 @@
 					<td>${order.id}</td>
 					<td>${fn:length(order.orderDetails)}</td>
 					<td><spring:eval expression="order.orderDate" /></td>
-					<td><spring:eval
-							expression="order.deliverySlot.deliveryInterval.getStart().toString('MM/dd/yyyy hh:mm')" />
-						and <spring:eval
-							expression="order.deliverySlot.deliveryInterval.getEnd().toString('MM/dd/yyyy hh:mm')" />
-					</td>
 					<td>${order.totalOrderPrice}</td>
 					<td>
 						<form:form id="orderDetailForm_${status.index}" action="${flowExecutionUrl}">

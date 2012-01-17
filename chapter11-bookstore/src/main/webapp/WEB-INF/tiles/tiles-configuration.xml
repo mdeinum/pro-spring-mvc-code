@@ -14,12 +14,12 @@
         <put-attribute name="content" value="/WEB-INF/view/main.jspx"/>
     </definition>
 
-	<definition name="selectPizzas" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/selectPizzas.jspx"/>
+	<definition name="selectCategory" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/selectCategory.jspx"/>
     </definition>
 	
-	<definition name="selectShop" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/selectShop.jspx"/>
+	<definition name="selectBooks" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/selectBooks.jspx"/>
     </definition>
 	
 	<definition name="selectDeliveryOptions" extends="fullTemplate">

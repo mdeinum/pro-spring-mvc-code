@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -23,7 +21,7 @@ import com.apress.prospringmvc.bookstore.domain.Order;
  * @author Koen Serneels
  */
 
-public class InitialDataSetup implements ApplicationListener<ContextStartedEvent> {
+public class InitialDataSetup {
 
 	private TransactionTemplate transactionTemplate;
 
@@ -38,8 +36,7 @@ public class InitialDataSetup implements ApplicationListener<ContextStartedEvent
 		this.transactionTemplate = transactionTemplate;
 	}
 
-	@Override
-	public void onApplicationEvent(ContextStartedEvent event) {
+	public void initialize() {
 		transactionTemplate.execute(new TransactionCallback<Void>() {
 			@Override
 			public Void doInTransaction(TransactionStatus status) {

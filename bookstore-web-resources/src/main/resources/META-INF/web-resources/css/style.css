@@ -121,12 +121,12 @@ padding:0px 0 0 0;
 background:url(../images/center_bg.gif) repeat-y center;
 }
 .left_content{
-width:490px;
+width:590px;
 float:left;
 padding:20px 0 20px 20px;
 }
 .right_content{
-width:370px;
+width:270px;
 float:left;
 padding:20px 0 20px 20px;
 }
@@ -155,7 +155,7 @@ font-size:11px;
 padding:0px 15px 0 0 ;
 }
 .about{
-width:337px;
+width:237px;
 clear:both;
 background:url(../images/border.gif) no-repeat bottom center;
 padding:0 0 35px 0;
@@ -352,7 +352,7 @@ border:1px #990000 solid;
 }
 /*------------------------cart---------------------*/
 .cart{
-width:337px;
+width:237px;
 float:left;
 height:40px;
 margin:10px 0 10px 0;

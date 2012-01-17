@@ -7,32 +7,40 @@
 		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
 	</on-start>
 
-	<view-state id="selectPizzas" view="selectPizzas" model="orderForm" >
-		<transition on="add" >
-			<evaluate expression="orderController.addPizza(flowScope.orderForm)" />
-		</transition>
-		
-		<transition on="next" to="selectShop" />
-		
-		<transition on="reset" to="selectPizzas">
-			<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
-		</transition>
+	<view-state id="selectCategory" view="selectCategory" model="orderForm">
+		<on-render>
+			<evaluate expression="orderController.initializeCategories()" result="flashScope.selectableCategories" />
+		</on-render>
+
+		<transition on="next" to="selectBooks"/>
 		
 		<transition on="return" to="endOrderCanceled" />
 	</view-state>
-
-	<view-state id="selectShop" view="selectShop" model="orderForm">
-		<transition on="next" to="selectDeliveryOptions"/>
+	
+	<view-state id="selectBooks" view="selectBooks" model="orderForm" >
+		<on-render>
+			<evaluate expression="orderController.initializeBooks(orderForm)" result="flashScope.selectableBooks" />
+		</on-render>
 		
-		<transition on="previous" to="selectPizzas" />
+		<transition on="add" >
+			<evaluate expression="orderController.addBook(flowScope.orderForm)" />
+		</transition>
 		
+		<transition on="next" to="selectDeliveryOptions" />
+	
+		<transition on="previous" to="selectCategory" />
+			
+		<transition on="reset" to="selectBooks">
+			<evaluate expression="orderForm.resetSelectedBooks()" />
+		</transition>
+	
 		<transition on="return" to="endOrderCanceled" />
 	</view-state>
 	
 	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
 		<transition on="finish" to="loginCheck" bind="true"/>
 			
-		<transition on="previous" to="selectShop" />
+		<transition on="previous" to="selectBooks" />
 		
 		<transition on="return" to="endOrderCanceled" />
 	</view-state>
@@ -58,6 +66,6 @@
 	</action-state>
 
 	<end-state id="endOrderCanceled" view="redirect:/index.jspx"/>
-	<end-state id="endOrderOk" view="ordersOverviewredirect:/ordersOverview.html?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
 </flow>	
 	

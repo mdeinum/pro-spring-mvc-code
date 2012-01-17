@@ -10,6 +10,7 @@ import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.domain.Customer;
 import com.apress.prospringmvc.bookstore.domain.Order;
+import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.repository.BookRepository;
 import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 
@@ -39,13 +40,12 @@ public class BookstoreServiceImpl implements BookstoreService {
 	}
 
 	@Override
-	public List<Order> findOrdersForCustomer(Customer customer) {
-		return orderRepository.findByCustomer(customer);
+	public List<Order> findOrdersForCustomer(Customer customer, LazyResultInitializerStrategy<Order> lazyResultInitializer) {
+		return lazyResultInitializer.initialize(orderRepository.findByCustomer(customer));
 	}
 
 	@Override
-	public Order createOrder(Order order, Customer customer) {
-		orderRepository.save(order);
-		return order;
+	public Order createOrder(Order order) {
+		return orderRepository.save(order);
 	}
 }

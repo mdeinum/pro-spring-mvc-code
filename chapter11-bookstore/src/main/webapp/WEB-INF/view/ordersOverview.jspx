@@ -25,7 +25,7 @@
 		<thead>
 			<tr>
 				<th align="left"><spring:message code="label.page.ordersoverview.order"/></th>
-				<th align="left"><spring:message code="label.page.ordersoverview.pizzas"/></th>
+				<th align="left"><spring:message code="label.page.ordersoverview.books"/></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.order.date"/></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.delivery.date"/></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.total.price"/></th>
