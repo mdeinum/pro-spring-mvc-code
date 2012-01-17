@@ -40,7 +40,7 @@ public class AuthenticationController {
 
 	// ----- Spring MVC logic
 
-	@RequestMapping("login.htm")
+	@RequestMapping("public/login.htm")
 	public ModelAndView authentication() {
 		ModelAndView mov = new ModelAndView();
 
@@ -49,7 +49,7 @@ public class AuthenticationController {
 		return mov;
 	}
 
-	@RequestMapping(value = "authenticate.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "public/authenticate.htm", method = RequestMethod.POST)
 	public ModelAndView authentication(@ModelAttribute
 	AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession) {
 		try {

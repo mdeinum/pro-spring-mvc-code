@@ -9,7 +9,7 @@
 
 	<header>
 		<div class="logo">
-			<spring:url value="/index.htm" var="home" />
+			<spring:url value="/public/index.htm" var="home" />
 			<a href="${home}">
 				<spring:url value="/resources/images/logo.gif" var="logo" /> 
 				<img src="${logo }" alt="" title="" border="0" />

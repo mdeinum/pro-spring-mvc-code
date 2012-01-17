@@ -4,6 +4,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
@@ -31,6 +32,7 @@ import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
 @EnableWebMvc
 @Profile("container")
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
+@ImportResource("classpath:/spring/spring-security.xml")
 public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override

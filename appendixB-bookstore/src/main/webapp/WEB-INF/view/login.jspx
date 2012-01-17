@@ -5,7 +5,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
 	
 	 <spring:url value="/authenticate.htm" var="authenticate" />
-	<form:form modelAttribute="authenticationForm" action="${flowExecutionUrl != null ? flowExecutionUrl  : authenticate}" method="POST">
+	<form:form modelAttribute="authenticationForm" action="${flowExecutionUrl != null ? flowExecutionUrl  : 'authenticate.htm'}" method="POST">
 		<table style="width: 100%">
 			<tr>
 				<td><spring:message code="label.page.login.username" /></td>

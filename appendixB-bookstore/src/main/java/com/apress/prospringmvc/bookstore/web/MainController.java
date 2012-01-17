@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
-	@RequestMapping("index.htm")
+	@RequestMapping("public/index.htm")
 	public ModelAndView main() {
 		ModelAndView mov = new ModelAndView();
 		mov.setViewName("main");
