@@ -8,17 +8,18 @@
 
 
 	<security:http use-expressions="true" >
-		<security:form-login login-page="/public/login.htm" default-target-url="/public/index.htm"/>
+		<security:form-login login-page="/public/login.htm" default-target-url="/public/index.htm?authenticationOk=1" authentication-failure-url="/public/login.htm?authenticationNok=1"  />
 
 		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" />
-		<security:intercept-url pattern="/public/**" access="anonymous" />
+		<security:intercept-url pattern="/index.jspx" access="permitAll" />
+		<security:intercept-url pattern="/public/**" access="permitAll" />
 
-		<security:intercept-url pattern="/authentication-flow" access="anonymous" />
-		<security:intercept-url pattern="/book-order-flow" access="anonymous" />
-		<security:intercept-url pattern="/create-order-flow" access="anonymous" />
+		<security:intercept-url pattern="/book-order-flow" access="permitAll" />
+		
+		<security:intercept-url pattern="/create-order-flow" access="fullyAuthenticated" />
+		<security:intercept-url pattern="/view-orders-flow" access="fullyAuthenticated" />
 		
 		<security:intercept-url pattern="/**" access="denyAll" />
-		
 	</security:http>
 	
 	<security:authentication-manager>
