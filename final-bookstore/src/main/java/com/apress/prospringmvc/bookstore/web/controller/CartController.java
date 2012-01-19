@@ -35,7 +35,7 @@ public class CartController {
 
     @RequestMapping("/add/{bookId}")
     public String addToCart(@PathVariable("bookId") long bookId, @RequestHeader("referer") String referer) {
-        Book book = this.bookstoreService.findById(bookId);
+        Book book = this.bookstoreService.findBook(bookId);
         this.cart.addBook(book);
         return "redirect:" + referer;
     }

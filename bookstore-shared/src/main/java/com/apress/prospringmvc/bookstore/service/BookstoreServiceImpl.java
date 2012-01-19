@@ -28,7 +28,7 @@ public class BookstoreServiceImpl implements BookstoreService {
     private OrderRepository orderRepository;
 
     @Override
-    public Book findById(long id) {
+    public Book findBook(long id) {
         return this.bookRepository.findById(id);
     }
 
@@ -57,5 +57,10 @@ public class BookstoreServiceImpl implements BookstoreService {
     @Override
     public List<Book> findBooks(BookSearchCriteria bookSearchCriteria) {
         return this.bookRepository.findBooks(bookSearchCriteria);
+    }
+
+    @Override
+    public Order findOrder(long id) {
+        return this.orderRepository.findById(id);
     }
 }

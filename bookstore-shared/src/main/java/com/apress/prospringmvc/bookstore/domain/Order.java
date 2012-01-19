@@ -55,7 +55,7 @@ public class Order implements Serializable {
     private Date orderDate;
     private Date deliveryDate;
 
-    BigDecimal totalOrderPrice = null;
+    private BigDecimal totalOrderPrice = null;
 
     // One to many creates a join table by default, prevent this as
     // order detail is our specific join table

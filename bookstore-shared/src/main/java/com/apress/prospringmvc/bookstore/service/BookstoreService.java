@@ -9,9 +9,18 @@ import com.apress.prospringmvc.bookstore.domain.Customer;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 
+/**
+ * Main entry point for the bookstore. 
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 public interface BookstoreService {
 
-    Book findById(long id);
+    Book findBook(long id);
+
+    Order findOrder(long id);
 
     List<Book> findBooksByCategory(Category category);
 
