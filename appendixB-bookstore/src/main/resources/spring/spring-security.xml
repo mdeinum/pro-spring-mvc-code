@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 
-	<security:http use-expressions="true" >
+	<security:http use-expressions="true">
 		<security:form-login login-page="/public/login.htm" default-target-url="/public/index.htm?authenticationOk=1" authentication-failure-url="/public/login.htm?authenticationNok=1"  />
 
 		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" />
@@ -23,14 +23,16 @@
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider>
+		<security:authentication-provider  user-service-ref="bookstoreUserDetailsService" >
 			<security:password-encoder hash="sha-256">
 				<security:salt-source user-property="username"/>
 			</security:password-encoder>
-			<security:user-service >
-				<security:user  name="jd" password="5238377ba2eac049901b54004ee9e03db62c0ab0b48133a4a162ab3aedfc809f" authorities="ROLE_CUSTOMER"/>
+			<!-- 
+			<security:user-service>
+				<security:user name="jd" password="5238377ba2eac049901b54004ee9e03db62c0ab0b48133a4a162ab3aedfc809f" authorities="ROLE_CUSTOMER"/>
 			</security:user-service>
+			-->
 		</security:authentication-provider>
 	</security:authentication-manager>
-
+	
 </beans>

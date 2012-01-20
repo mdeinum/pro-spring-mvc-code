@@ -22,7 +22,7 @@ public class CustomerBuilder extends EntityBuilder<Customer> {
 
 	public CustomerBuilder credentials(String username, String password) {
 		product.setUsername(username);
-		product.setPassword(DigestUtils.sha512Hex(password));
+		product.setPassword(DigestUtils.sha256Hex(password));
 		return this;
 	}
 

@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -19,6 +21,8 @@ import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStr
 import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
+import com.apress.prospringmvc.bookstore.web.security.BookstoreUserDetails;
+import com.apress.prospringmvc.bookstore.web.security.SecurityContextSupport;
 
 /**
  * Controller to be used to place and view orders using the {@link BookstoreService}. This controller can be used using
@@ -35,15 +39,15 @@ public class OrderController {
 	@Autowired
 	private CategoryService categoryService;
 
-	public List<Order> retrieveOrders(Customer customer) {
-		List<Order> orders = bookstoreService.findOrdersForCustomer(customer,
-				new LazyResultInitializerStrategy<Order>() {
-					@Override
-					public Order initialize(Order order) {
-						Hibernate.initialize(order.getOrderDetails());
-						return order;
-					}
-				});
+	public List<Order> retrieveOrders() {
+		List<Order> orders = bookstoreService.findOrdersForCustomer(SecurityContextSupport.getUserDetails()
+				.getCustomer(), new LazyResultInitializerStrategy<Order>() {
+			@Override
+			public Order initialize(Order order) {
+				Hibernate.initialize(order.getOrderDetails());
+				return order;
+			}
+		});
 		return orders;
 	}
 
@@ -71,9 +75,10 @@ public class OrderController {
 		}
 	}
 
-	public Long placeOrder(Customer customer, OrderForm orderForm) {
+	public Long placeOrder(OrderForm orderForm) {
 		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).customer(customer).build(true);
+				.orderDate(orderForm.getOrderDate()).customer(SecurityContextSupport.getUserDetails().getCustomer())
+				.build(true);
 		return bookstoreService.createOrder(order).getId();
 	}
 

@@ -3,11 +3,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	
-	<input name="customer" required="true" type="com.apress.prospringmvc.bookstore.domain.Customer" />
+	<secured attributes="fullyAuthenticated"/>
+	
 	<input name="orderForm" required="true" type="com.apress.prospringmvc.bookstore.web.OrderForm"/>
 	
 	<action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(customer, orderForm)" result="flowScope.orderId"/>
+		<evaluate expression="orderController.placeOrder(orderForm)" result="flowScope.orderId"/>
 		<transition on="success" to="endOrderOk"/>
 	</action-state>
 

@@ -6,7 +6,7 @@
     <input name="orderId" required="false"/>
     
 	<on-start>
-		<evaluate expression="orderController.retrieveOrders(externalContext.sessionMap.authenticatedCustomer)" result="flowScope.orders" />
+		<evaluate expression="orderController.retrieveOrders()" result="flowScope.orders" />
 	</on-start>
 
 	<view-state id="ordersOverview" view="ordersOverview">
