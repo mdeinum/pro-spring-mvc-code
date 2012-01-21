@@ -37,16 +37,8 @@ public class JpaBookRepository implements BookRepository {
     }
 
     @Override
-    public List<Book> findByCategory(Category category) {
-        String hql = "select b from Book b where b.category=:category";
-        TypedQuery<Book> query = this.entityManager.createQuery(hql, Book.class);
-        query.setParameter("category", category);
-        return query.getResultList();
-    }
-
-    @Override
     public List<Book> findRandom(int count) {
-        String hql = "select b from Book b";
+        final String hql = "select b from Book b";
         TypedQuery<Book> query = this.entityManager.createQuery(hql, Book.class);
         query.setMaxResults(count);
         return query.getResultList();

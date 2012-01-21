@@ -1,7 +1,5 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
-import java.util.Map.Entry;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -18,7 +16,6 @@ import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Customer;
 import com.apress.prospringmvc.bookstore.domain.Order;
-import com.apress.prospringmvc.bookstore.domain.OrderDetail;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
 @Controller
@@ -43,12 +40,7 @@ public class CartController {
     @RequestMapping("/checkout")
     public void checkout(HttpServletRequest request, Model model) {
         Customer customer = (Customer) WebUtils.getRequiredSessionAttribute(request, "customer");
-        Order order = new Order(customer);
-        for (Entry<Book, Integer> line : this.cart.getBooks().entrySet()) {
-            OrderDetail detail = new OrderDetail();
-            order.addOrderDetail(new OrderDetail(line.getKey(), line.getValue()));
-        }
-        this.cart.clear();
+        Order order = this.bookstoreService.createOrder(this.cart, customer);
         model.addAttribute("order", order);
     }
 }
