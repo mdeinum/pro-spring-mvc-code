@@ -41,7 +41,13 @@
     <table>    
         <tr><th>#</th><th>Date</th><th>Total</th></tr>
         <c:forEach items="${orders}" var="order">
-            <tr><td>${order.id}</td><td>${order.orderDate}</td><td>${order.totalOrderPrice} $</td></tr>
+            <c:url value="/order.pdf" var="pdfUrl">
+                <c:param name="orderId" value="${order.id}"/>
+            </c:url>
+            <c:url value="/order.xls" var="xlsUrl">
+                <c:param name="orderId" value="${order.id}"/>
+            </c:url>
+            <tr><td>${order.id}</td><td>${order.orderDate}</td><td>${order.totalOrderPrice} $</td><td><a href="${pdfUrl}" target="_blank">PDF</a>|<a href="${xlsUrl}" target="_blank">XLS</a></td></tr>
         </c:forEach>
     </table>
 

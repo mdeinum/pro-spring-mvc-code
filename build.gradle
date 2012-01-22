@@ -110,9 +110,12 @@ subprojects() {
         compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
         compile "net.sf.ehcache:ehcache-core:$ehCacheVersion"
 
-        compile "joda-time:joda-time:2.0"
-        compile "joda-time:joda-time-hibernate:1.3"
-                
+        compile 'joda-time:joda-time:2.0'
+        compile 'joda-time:joda-time-hibernate:1.3'
+        compile 'com.lowagie:itext:2.1.7'
+        compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
+        compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.3'        
+
         testCompile 'junit:junit:4.9'
         testCompile "org.springframework:spring-test:$springVersion"
     }

@@ -1,7 +1,5 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
-import java.util.Map.Entry;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -18,37 +16,33 @@ import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
-import com.apress.prospringmvc.bookstore.domain.OrderDetail;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
-    private final Logger logger = LoggerFactory.getLogger(CartController.class);
+	private final Logger logger = LoggerFactory.getLogger(CartController.class);
 
-    @Autowired
-    private Cart cart;
+	@Autowired
+	private Cart cart;
 
-    @Autowired
-    private BookstoreService bookstoreService;
+	@Autowired
+	private BookstoreService bookstoreService;
 
-    @RequestMapping("/add/{bookId}")
-    public String addToCart(@PathVariable("bookId") long bookId, @RequestHeader("referer") String referer) {
-        Book book = this.bookstoreService.findById(bookId);
-        this.cart.addBook(book);
-        return "redirect:" + referer;
-    }
+	@RequestMapping("/add/{bookId}")
+	public String addToCart(@PathVariable("bookId")
+	long bookId, @RequestHeader("referer")
+	String referer) {
+		Book book = this.bookstoreService.findBook(bookId);
+		this.cart.addBook(book);
+		return "redirect:" + referer;
+	}
 
-    @RequestMapping("/checkout")
-    public void checkout(HttpServletRequest request, Model model) {
-        Account account = (Account) WebUtils.getRequiredSessionAttribute(request, "account");
-        Order order = new Order(account);
-        for (Entry<Book, Integer> line : this.cart.getBooks().entrySet()) {
-            OrderDetail detail = new OrderDetail();
-            order.addOrderDetail(new OrderDetail(line.getKey(), line.getValue()));
-        }
-        this.cart.clear();
-        model.addAttribute("order", order);
-    }
+	@RequestMapping("/checkout")
+	public void checkout(HttpServletRequest request, Model model) {
+		Account customer = (Account) WebUtils.getRequiredSessionAttribute(request, "account");
+		Order order = this.bookstoreService.createOrder(this.cart, customer);
+		model.addAttribute("order", order);
+	}
 }

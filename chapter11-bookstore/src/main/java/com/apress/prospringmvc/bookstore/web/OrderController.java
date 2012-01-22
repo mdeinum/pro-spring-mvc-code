@@ -42,15 +42,8 @@ public class OrderController {
 
 	@RequestMapping("ordersOverview.htm")
 	public ModelAndView retrieveOrders(HttpSession httpSession) {
-		List<Order> orders = bookstoreService.findOrdersForAccount(
-				(Account) httpSession.getAttribute(AuthenticationController.AUTHENTICATED_ACCOUNT_KEY),
-				new LazyResultInitializerStrategy<Order>() {
-					@Override
-					public Order initialize(Order order) {
-						Hibernate.initialize(order.getOrderDetails());
-						return order;
-					}
-				});
+		List<Order> orders = bookstoreService.findOrdersForAccount((Account) httpSession
+				.getAttribute(AuthenticationController.AUTHENTICATED_ACCOUNT_KEY));
 
 		ModelAndView mov = new ModelAndView();
 		mov.setViewName("ordersOverview");

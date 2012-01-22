@@ -42,7 +42,7 @@ public class BookConverter implements GenericConverter {
 		if (sourceType.getObjectType().isAssignableFrom(String.class)
 				&& targetType.getObjectType().isAssignableFrom(Book.class)) {
 
-			return bookstoreService.findById(Long.parseLong((String) source));
+			return bookstoreService.findBook(Long.parseLong((String) source));
 		}
 		throw new IllegalArgumentException(source + " cannot be converted to a Book object");
 	}

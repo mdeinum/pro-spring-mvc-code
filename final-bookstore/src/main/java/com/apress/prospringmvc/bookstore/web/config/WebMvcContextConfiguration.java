@@ -1,5 +1,6 @@
 package com.apress.prospringmvc.bookstore.web.config;
 
+import java.util.Collections;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,11 +25,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
+import com.apress.prospringmvc.bookstore.web.view.OrderExcelView;
+import com.apress.prospringmvc.bookstore.web.view.OrderPdfView;
+import com.apress.prospringmvc.bookstore.web.view.SimpleConfigurableViewResolver;
 import com.apress.prospringmvc.context.RequestHandledEventListener;
 
 /**
@@ -42,6 +47,12 @@ import com.apress.prospringmvc.context.RequestHandledEventListener;
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
+    /**
+     * {@link org.springframework.context.ApplicationListener} implementation that listens 
+     * for {@link org.springframework.web.context.support.RequestHandledEvent} events and logs them.
+     * 
+     * @return the {@link RequestHandledEventListener}.
+     */
     @Bean
     public RequestHandledEventListener requestHandledEventListener() {
         return new RequestHandledEventListener();
@@ -66,7 +77,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
         registry.addInterceptor(commonDataHandlerInterceptor());
-        registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account*", "/cart/checkout");
+        registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account*", "/cart/checkout",
+                "/order/*", "/order.*");
     }
 
     //-- Start Locale Support (I18N) --//
@@ -132,11 +144,45 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
         return exceptionResolver;
     }
 
+    /**
+     * The {@link ContentNegotiatingViewResolver} will detect the other {@link ViewResolver} instances in the application context. 
+     * 
+     * It will delegate the lookup of view resolving to all the detected view resolvers and afterwards will pick the best match
+     * 
+     * @return the {@link ContentNegotiatingViewResolver}
+     */
+    @Bean
+    public ViewResolver contentNegotiatingViewResolver() {
+        ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
+        viewResolver.setOrder(1);
+        return viewResolver;
+    }
+
+    @Bean
+    public ViewResolver pdfViewResolver() {
+        SimpleConfigurableViewResolver viewResolver = new SimpleConfigurableViewResolver();
+        viewResolver.setViews(Collections.singletonMap("order", new OrderPdfView()));
+        return viewResolver;
+    }
+
+    @Bean
+    public ViewResolver xlsViewResolver() {
+        SimpleConfigurableViewResolver viewResolver = new SimpleConfigurableViewResolver();
+        viewResolver.setViews(Collections.singletonMap("order", new OrderExcelView()));
+        return viewResolver;
+    }
+
+    @Bean(name = "order")
+    public OrderPdfView orderPdfView() {
+        return new OrderPdfView();
+    }
+
     @Bean
     public ViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
+        viewResolver.setOrder(2);
         return viewResolver;
     }
 

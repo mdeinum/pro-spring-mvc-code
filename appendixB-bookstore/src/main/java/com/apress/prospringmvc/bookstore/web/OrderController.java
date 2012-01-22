@@ -40,14 +40,8 @@ public class OrderController {
 	private CategoryService categoryService;
 
 	public List<Order> retrieveOrders() {
-		List<Order> orders = bookstoreService.findOrdersForAccount(SecurityContextSupport.getUserDetails()
-				.getAccount(), new LazyResultInitializerStrategy<Order>() {
-			@Override
-			public Order initialize(Order order) {
-				Hibernate.initialize(order.getOrderDetails());
-				return order;
-			}
-		});
+		List<Order> orders = bookstoreService
+				.findOrdersForAccount(SecurityContextSupport.getUserDetails().getAccount());
 		return orders;
 	}
 
