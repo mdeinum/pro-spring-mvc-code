@@ -25,7 +25,7 @@ public class AccountServiceImpl implements AccountService {
 	public Account login(String username, String password) throws AuthenticationException {
 		Account account = this.accountRepository.findByUsername(username);
 		if (account != null) {
-			String pwd = DigestUtils.sha512Hex(password);
+			String pwd = DigestUtils.sha512Hex(password + "{" + username + "}");
 			if (!account.getPassword().equalsIgnoreCase(pwd)) {
 				account = null;
 			}
