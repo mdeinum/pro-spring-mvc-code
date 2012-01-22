@@ -25,7 +25,7 @@ public class CommonDataHandlerIntereceptor extends HandlerInterceptorAdapter {
 
         if (modelAndView != null) {
             modelAndView.addObject("randomBooks", this.bookstoreService.findRandomBooks());
-            modelAndView.addObject("customer", WebUtils.getSessionAttribute(request, "customer"));
+            modelAndView.addObject("account", WebUtils.getSessionAttribute(request, "account"));
         }
 
     }

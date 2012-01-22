@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.apress.prospringmvc.bookstore.domain.Customer;
-import com.apress.prospringmvc.bookstore.repository.CustomerRepository;
+import com.apress.prospringmvc.bookstore.domain.Account;
+import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 
 @Controller
@@ -18,29 +18,29 @@ import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 public class AccountController extends AbstractCustomerController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     private OrderRepository orderRepository;
 
     @ModelAttribute
-    public Customer formObject(HttpSession session) {
-        Customer customer = (Customer) session.getAttribute("customer");
-        return this.customerRepository.findById(customer.getId());
+    public Account formObject(HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        return this.accountRepository.findById(account.getId());
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model, HttpSession session) {
-        Customer customer = (Customer) session.getAttribute("customer");
-        model.addAttribute("orders", this.orderRepository.findByCustomer(customer));
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("orders", this.orderRepository.findByAccount(account));
         return "customer/account";
     }
 
     @RequestMapping(method = { RequestMethod.POST, RequestMethod.PUT })
-    public String update(@ModelAttribute Customer customer, HttpSession session) {
-        this.customerRepository.save(customer);
-        session.setAttribute("customer", customer); //Update customer in session
-        return "redirect:/custome/account";
+    public String update(@ModelAttribute Account account, HttpSession session) {
+        this.accountRepository.save(account);
+        session.setAttribute("account", account); //Update account in session
+        return "redirect:/customer/account";
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import org.springframework.stereotype.Component;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.OrderDetail;
 
@@ -56,8 +56,8 @@ public class OrderBuilder extends EntityBuilder<Order> {
         return this;
     }
 
-    public OrderBuilder customer(Customer customer) {
-        this.product.setCustomer(customer);
+    public OrderBuilder account(Account account) {
+        this.product.setAccount(account);
         return this;
     }
 

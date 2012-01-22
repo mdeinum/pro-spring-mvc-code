@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
@@ -40,8 +40,8 @@ public class OrderController {
 	private CategoryService categoryService;
 
 	public List<Order> retrieveOrders() {
-		List<Order> orders = bookstoreService.findOrdersForCustomer(SecurityContextSupport.getUserDetails()
-				.getCustomer(), new LazyResultInitializerStrategy<Order>() {
+		List<Order> orders = bookstoreService.findOrdersForAccount(SecurityContextSupport.getUserDetails()
+				.getAccount(), new LazyResultInitializerStrategy<Order>() {
 			@Override
 			public Order initialize(Order order) {
 				Hibernate.initialize(order.getOrderDetails());
@@ -77,7 +77,7 @@ public class OrderController {
 
 	public Long placeOrder(OrderForm orderForm) {
 		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).customer(SecurityContextSupport.getUserDetails().getCustomer())
+				.orderDate(orderForm.getOrderDate()).account(SecurityContextSupport.getUserDetails().getAccount())
 				.build(true);
 		return bookstoreService.createOrder(order).getId();
 	}

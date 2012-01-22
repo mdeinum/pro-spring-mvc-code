@@ -25,7 +25,7 @@
 					<a href="${createOrder}">Buy books</a>
 				</li>
 				<li>
-					<c:if test="${authenticatedCustomer !=null}">
+					<c:if test="${authenticatedAccount !=null}">
 						<spring:url value="/view-orders-flow" var="ordersOverview" />
 						<a href="${ordersOverview}">View orders</a>
 					</c:if>

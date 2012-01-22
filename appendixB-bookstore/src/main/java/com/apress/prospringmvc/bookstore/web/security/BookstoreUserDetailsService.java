@@ -11,19 +11,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.apress.prospringmvc.bookstore.service.CustomerService;
+import com.apress.prospringmvc.bookstore.domain.Account;
+import com.apress.prospringmvc.bookstore.domain.Permission;
+import com.apress.prospringmvc.bookstore.domain.Role;
+import com.apress.prospringmvc.bookstore.service.AccountService;
 
 @Component
 public class BookstoreUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	private CustomerService customerService;
+    @Autowired
+    private AccountService accountService;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_CUSTOMER");
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		grantedAuthorities.add(grantedAuthority);
-		return new BookstoreUserDetails(customerService.getCustomer(username), grantedAuthorities);
-	}
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountService.getAccount(username);
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+
+        for (Role role : account.getRoles()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+            for (Permission permission : role.getPermissions()) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(permission.getPermission()));
+            }
+        }
+        return new BookstoreUserDetails(accountService.getAccount(username), grantedAuthorities);
+    }
 }

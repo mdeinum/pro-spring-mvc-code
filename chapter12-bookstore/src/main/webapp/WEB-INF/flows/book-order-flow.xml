@@ -46,7 +46,7 @@
 	</view-state>
 	
 	<decision-state id="loginCheck">
-		<if test="externalContext.sessionMap.contains('authenticatedCustomer') == true" then="createOrder" else="authenticate"/>
+		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
 	</decision-state>	
 
 	<subflow-state id="authenticate" subflow="authentication-flow">
@@ -55,7 +55,7 @@
 	</subflow-state>
 	
 	<subflow-state id="createOrder" subflow="create-order-flow">
-		<input name="customer" value="externalContext.sessionMap.get('authenticatedCustomer')"/>
+		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
 		<input name="orderForm"/>
 		
 		<output name="orderId"/>

@@ -40,13 +40,7 @@
         </div><!--end of left content-->
         
         <div class="right_content">
-              <div class="right_box">
-                  <div class="title"><span class="title_icon"><img src="<c:url value="/resources/images/cart.gif"/>" alt="" title="" /></span><spring:message code="main.title.yourcart" /></div>
-                  <div class="home_cart_content">${cart.books.size()} x items | <span class="red"><spring:message code="main.cart.total" arguments="0.00"/></span></div>
-                  <a href="<c:url value="/cart"/>" class="view_cart"><spring:message code="nav.viewcart"/></a> | <a href="<c:url value="/cart/checkout"/>" class="view_cart"><spring:message code="nav.cartcheckout"/></a>
-                  
-              </div>
-
+         
              <div class="right_box">
              
                 <div class="title"><span class="title_icon"><img src="<c:url value="/resources/images/bullet4.gif"/>" alt="" title="" /></span><spring:message code="main.title.randombooks"/></div> 

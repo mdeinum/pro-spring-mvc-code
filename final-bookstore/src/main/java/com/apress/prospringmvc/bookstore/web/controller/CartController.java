@@ -16,7 +16,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Cart;
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.OrderDetail;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
@@ -42,8 +42,8 @@ public class CartController {
 
     @RequestMapping("/checkout")
     public void checkout(HttpServletRequest request, Model model) {
-        Customer customer = (Customer) WebUtils.getRequiredSessionAttribute(request, "customer");
-        Order order = new Order(customer);
+        Account account = (Account) WebUtils.getRequiredSessionAttribute(request, "account");
+        Order order = new Order(account);
         for (Entry<Book, Integer> line : this.cart.getBooks().entrySet()) {
             OrderDetail detail = new OrderDetail();
             order.addOrderDetail(new OrderDetail(line.getKey(), line.getValue()));

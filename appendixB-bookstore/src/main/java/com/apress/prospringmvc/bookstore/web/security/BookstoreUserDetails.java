@@ -7,15 +7,15 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 
 public class BookstoreUserDetails implements UserDetails {
 
-	private Customer customer;
+	private Account account;
 	private List<? extends GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-	public BookstoreUserDetails(Customer customer, List<? extends GrantedAuthority> authorities) {
-		this.customer = customer;
+	public BookstoreUserDetails(Account account, List<? extends GrantedAuthority> authorities) {
+		this.account = account;
 		this.authorities = authorities;
 	}
 
@@ -26,16 +26,16 @@ public class BookstoreUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return customer.getPassword();
+		return account.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return customer.getUsername();
+		return account.getUsername();
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Account getAccount() {
+		return account;
 	}
 
 	@Override

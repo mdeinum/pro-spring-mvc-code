@@ -4,21 +4,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-<title><spring:message code="customer.title" /></title>
+<title><spring:message code="account.title" /></title>
 </head>
 <body>
-<h1><spring:message code="customer.title" /></h1>
+<h1><spring:message code="account.title" /></h1>
 
 <p>
 
-    <form:form method="POST" modelAttribute="customer">
+    <form:form method="POST" modelAttribute="account">
         <input type="hidden" name="_method" value="PUT" />        
         <fieldset>
-            <legend><spring:message code="customer.personal"/></legend>
+            <legend><spring:message code="account.personal"/></legend>
             <table>
-                <tr><td><form:label path="firstName" cssErrorClass="error"><spring:message code="customer.firstname" /></form:label></td><td><form:input path="firstName" /></td><td><form:errors path="firstName"/></td></tr>
-                <tr><td><form:label path="lastName" cssErrorClass="error"><spring:message code="customer.lastname" /></form:label></td><td><form:input path="lastName" /></td><td><form:errors path="lastName"/></td></tr>
-                <tr><td><form:label path="dateOfBirth" cssErrorClass="error"><spring:message code="customer.dob" /></form:label></td><td><form:input path="dateOfBirth" type="date" /></td><td><form:errors path="dateOfBirth"/></td></tr>
+                <tr><td><form:label path="firstName" cssErrorClass="error"><spring:message code="account.firstname" /></form:label></td><td><form:input path="firstName" /></td><td><form:errors path="firstName"/></td></tr>
+                <tr><td><form:label path="lastName" cssErrorClass="error"><spring:message code="account.lastname" /></form:label></td><td><form:input path="lastName" /></td><td><form:errors path="lastName"/></td></tr>
+                <tr><td><form:label path="dateOfBirth" cssErrorClass="error"><spring:message code="account.dob" /></form:label></td><td><form:input path="dateOfBirth" type="date" /></td><td><form:errors path="dateOfBirth"/></td></tr>
                 <tr><td><form:label path="address.street" cssErrorClass="error"><spring:message code="address.street" /></form:label></td><td><form:input path="address.street" /></td><td><form:errors path="address.street"/></td></tr>
                 <tr><td><form:label path="address.houseNumber" cssErrorClass="error"><spring:message code="address.houseNumber" /></form:label></td><td><form:input path="address.houseNumber" /></td><td><form:errors path="address.houseNumber"/></td></tr>
                 <tr><td><form:label path="address.boxNumber" cssErrorClass="error"><spring:message code="address.boxNumber" /></form:label></td><td><form:input path="address.boxNumber" /></td><td><form:errors path="address.boxNumber"/></td></tr>
@@ -28,16 +28,16 @@
             </table>
         </fieldset>
         <fieldset>
-            <legend><spring:message code="customer.userinfo"/></legend>
+            <legend><spring:message code="account.userinfo"/></legend>
             <table>
-                <tr><td><form:label path="username" cssErrorClass="error"><spring:message code="customer.username" /></form:label></td><td><form:input path="username" /></td><td><form:errors path="username"/></td></tr>
-                <tr><td><form:label path="emailAddress" cssErrorClass="error"><spring:message code="customer.email" /></form:label></td><td><form:input path="emailAddress" /></td><td><form:errors path="emailAddress"/></td></tr>
+                <tr><td><form:label path="username" cssErrorClass="error"><spring:message code="account.username" /></form:label></td><td><form:input path="username" /></td><td><form:errors path="username"/></td></tr>
+                <tr><td><form:label path="emailAddress" cssErrorClass="error"><spring:message code="account.email" /></form:label></td><td><form:input path="emailAddress" /></td><td><form:errors path="emailAddress"/></td></tr>
             </table>
         </fieldset>
         <button id="save"><spring:message code="button.save"/></button>
     </form:form>
 
-    <h1><spring:message code="customer.orders" /></h1>
+    <h1><spring:message code="account.orders" /></h1>
     <table>    
         <tr><th>#</th><th>Date</th><th>Total</th></tr>
         <c:forEach items="${orders}" var="order">

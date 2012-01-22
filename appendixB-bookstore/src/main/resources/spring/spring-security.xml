@@ -6,24 +6,26 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-
-	<security:http use-expressions="true">
+	<security:global-method-security pre-post-annotations="enabled"/>
+	
+	<security:http use-expressions="true" >
 		<security:form-login login-page="/public/login.htm" default-target-url="/public/index.htm?authenticationOk=1" authentication-failure-url="/public/login.htm?authenticationNok=1"  />
 
 		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" />
 		<security:intercept-url pattern="/index.jspx" access="permitAll" />
 		<security:intercept-url pattern="/public/**" access="permitAll" />
-
-		<security:intercept-url pattern="/book-order-flow" access="permitAll" />
 		
-		<security:intercept-url pattern="/create-order-flow" access="fullyAuthenticated" />
-		<security:intercept-url pattern="/view-orders-flow" access="fullyAuthenticated" />
-		
+		<security:intercept-url pattern="/public/login.htm" access="permitAll" requires-channel="http" />
+		<security:intercept-url pattern="/book-order-flow" access="permitAll" requires-channel="http" />
+		<security:intercept-url pattern="/view-orders-flow" access="permitAll" requires-channel="http" />
+	
 		<security:intercept-url pattern="/**" access="denyAll" />
 	</security:http>
 	
+	
+	
 	<security:authentication-manager>
-		<security:authentication-provider  user-service-ref="bookstoreUserDetailsService" >
+		<security:authentication-provider  user-service-ref="bookstoreUserDetailsService">
 			<security:password-encoder hash="sha-256">
 				<security:salt-source user-property="username"/>
 			</security:password-encoder>

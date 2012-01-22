@@ -5,21 +5,23 @@ import java.util.List;
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.BookSearchCriteria;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 
 public interface BookstoreService {
 
-    Book findById(long id);
+	Book findById(long id);
 
-    List<Book> findBooksByCategory(Category category);
+	List<Book> findBooksByCategory(Category category);
 
-    List<Book> findRandomBooks();
+	List<Book> findRandomBooks();
 
-    List<Order> findOrdersForCustomer(Customer customer, LazyResultInitializerStrategy<Order> lazyResultInitializer);
+	List<Order> findOrdersForAccount(Account account, LazyResultInitializerStrategy<Order> lazyResultInitializer);
 
-    Order createOrder(Order order);
+	Order createOrder(Order order);
 
-    List<Book> findBooks(BookSearchCriteria bookSearchCriteria);
+	List<Book> findBooks(BookSearchCriteria bookSearchCriteria);
+
+	void addBook(Book book);
 }

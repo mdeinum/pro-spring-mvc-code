@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	
-	<input name="customer" required="true" type="com.apress.prospringmvc.bookstore.domain.Customer" />
+	<input name="account" required="true" type="com.apress.prospringmvc.bookstore.domain.Account" />
 	<input name="orderForm" required="true" type="com.apress.prospringmvc.bookstore.web.OrderForm"/>
 	
 	<action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(customer, orderForm)" result="flowScope.orderId"/>
+		<evaluate expression="orderController.placeOrder(account, orderForm)" result="flowScope.orderId"/>
 		<transition on="success" to="endOrderOk"/>
 	</action-state>
 

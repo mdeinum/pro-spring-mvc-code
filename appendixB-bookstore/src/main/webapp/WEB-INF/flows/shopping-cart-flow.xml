@@ -4,7 +4,7 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 
-	<input name="customerId" required="true"/>
+	<input name="accountId" required="true"/>
 
 	<on-start>
 			<evaluate expression="authenticationController.initializeForm()" result="flowScope.authenticationForm" />

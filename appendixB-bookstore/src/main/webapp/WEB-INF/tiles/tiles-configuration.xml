@@ -42,5 +42,10 @@
     	<put-attribute name="content" value="/WEB-INF/view/ordersOverview.jspx">
 		</put-attribute>
 	</definition>
-
+	
+	 <definition name="manageBooks" extends="fullTemplate">
+    	<put-attribute name="content" value="/WEB-INF/view/manageBooks.jspx">
+		</put-attribute>
+	</definition>
+	
 </tiles-definitions>

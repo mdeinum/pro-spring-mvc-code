@@ -48,7 +48,7 @@ public class Order implements Serializable {
     private Address billingAddress;
 
     @ManyToOne(optional = false)
-    private Customer customer;
+    private Account account;
 
     private boolean billingSameAsShipping = true;
 
@@ -67,10 +67,10 @@ public class Order implements Serializable {
         super();
     }
 
-    public Order(Customer customer) {
+    public Order(Account account) {
         super();
-        this.customer = customer;
-        this.shippingAddress = new Address(customer.getAddress());
+        this.account = account;
+        this.shippingAddress = new Address(account.getAddress());
     }
 
     public Address getShippingAddress() {
@@ -104,12 +104,12 @@ public class Order implements Serializable {
         return this.id;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public Account getAccount() {
+        return this.account;
     }
 
     public List<OrderDetail> getOrderDetails() {

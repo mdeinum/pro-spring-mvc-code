@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
@@ -42,8 +42,8 @@ public class OrderController {
 
 	@RequestMapping("ordersOverview.htm")
 	public ModelAndView retrieveOrders(HttpSession httpSession) {
-		List<Order> orders = bookstoreService.findOrdersForCustomer(
-				(Customer) httpSession.getAttribute(AuthenticationController.AUTHENTICATED_CUSTOMER_KEY),
+		List<Order> orders = bookstoreService.findOrdersForAccount(
+				(Account) httpSession.getAttribute(AuthenticationController.AUTHENTICATED_ACCOUNT_KEY),
 				new LazyResultInitializerStrategy<Order>() {
 					@Override
 					public Order initialize(Order order) {
@@ -83,9 +83,9 @@ public class OrderController {
 		}
 	}
 
-	public Long placeOrder(Customer customer, OrderForm orderForm) {
+	public Long placeOrder(Account account, OrderForm orderForm) {
 		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).customer(customer).build(true);
+				.orderDate(orderForm.getOrderDate()).account(account).build(true);
 		return bookstoreService.createOrder(order).getId();
 	}
 

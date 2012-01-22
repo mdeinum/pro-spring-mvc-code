@@ -4,6 +4,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -11,6 +12,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -21,6 +23,7 @@ import org.springframework.webflow.mvc.view.FlowAjaxTilesView;
 
 import com.apress.prospringmvc.bookstore.web.converter.BookConverter;
 import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
+import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 
 /**
  * WebMvc Configuration.
@@ -37,13 +40,15 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/public/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
+		registry.addResourceHandler("/public/resources/**/*")
+				.addResourceLocations("classpath:/META-INF/web-resources/");
 	}
 
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("messages");
+		messageSource.setBasenames(new String[] { "messages",
+				"org/springframework/security/messages" });
 		return messageSource;
 	}
 
@@ -78,13 +83,24 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
-		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
+		tilesConfigurer
+				.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
 		return tilesConfigurer;
+	}
+
+	@Bean
+	public CommonDataHandlerInterceptor commonDataHandlerInterceptor() {
+		return new CommonDataHandlerInterceptor();
 	}
 
 	@Override
 	protected void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(bookConverter());
 		registry.addConverter(categoryConverter());
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(commonDataHandlerInterceptor());
 	}
 }

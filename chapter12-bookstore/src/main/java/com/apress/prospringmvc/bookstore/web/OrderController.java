@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
@@ -35,8 +35,8 @@ public class OrderController {
 	@Autowired
 	private CategoryService categoryService;
 
-	public List<Order> retrieveOrders(Customer customer) {
-		List<Order> orders = bookstoreService.findOrdersForCustomer(customer,
+	public List<Order> retrieveOrders(Account account) {
+		List<Order> orders = bookstoreService.findOrdersForAccount(account,
 				new LazyResultInitializerStrategy<Order>() {
 					@Override
 					public Order initialize(Order order) {
@@ -71,9 +71,9 @@ public class OrderController {
 		}
 	}
 
-	public Long placeOrder(Customer customer, OrderForm orderForm) {
+	public Long placeOrder(Account account, OrderForm orderForm) {
 		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).customer(customer).build(true);
+				.orderDate(orderForm.getOrderDate()).account(account).build(true);
 		return bookstoreService.createOrder(order).getId();
 	}
 

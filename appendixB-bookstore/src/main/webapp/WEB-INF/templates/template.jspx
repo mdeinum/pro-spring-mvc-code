@@ -30,93 +30,29 @@
 		<div id="wrap">
 			<tiles:insertAttribute name="header"/>
 
-       	<section class="center_content">
-			<section class="left_content">
+       	<div class="center_content">
+			<div class="left_content">
             	<tiles:insertAttribute name="content"/>            
-        	</section><!--end of left content-->
+        	</div><!--end of left content-->
         
-        	<section class="right_content">
-            	<section class="languages_box">
-            		<span class="red">Languages:</span>
-            		<spring:url value="/public/resources/images/gb.gif" var="gb" />
-            		<a href="?lang=en" class="selected"><img src="${gb}" alt="" title="" border="0" /></a>
-            		<spring:url value="/public/resources/images/fr.gif" var="fr" />
-            		<a href="?lang=fr"><img src="${fr}" alt="" title="" border="0" /></a>
-            		<spring:url value="/public/resources/images/de.gif" var="de" />
-			           <a href="?lang=de"><img src="${de}" alt="" title="" border="0" /></a>
-            	</section>
-                
-              	<section class="cart">
-              		<table>
-              			<tr>
-              				<td>
-								<div class="title"><span class="title_icon">
-                  					<spring:url value="/public/resources/images/cart.gif" var="cart" />
-			                  		<img src="${cart}" alt="" title="" /></span>Your Cart
-            			      	</div>
-            			    </td>
-            			</tr>
-            			<tr>
-            			    <td>
-                  				<div class="home_cart_content">
-                  					0 x items | <span class="red">TOTAL: 0.00$</span>
-                  				</div>
-                  			</td>
-                  		</tr>
-                  		<tr>
-                  			<td>
-                  				<a href="cart.html" class="view_cart">view cart</a>
-                  			</td>
-                  		</tr>
-                  	</table>
-				</section>
-
-				<div class="title"><span class="title_icon">
-					<spring:url value="/public/resources/images/bullet3.gif" var="bullet3" />
-             		<img src="${bullet3}" alt="" title="" /></span>User</div>
-                <div class="about">
-					<c:if test="${request.principal == null}">
-						<form id="loginForm" method="post" action="">
-							<table>
-								<tr>
-									<td><input type="text" id="username" placeholder="Username" maxlength="12" size="10" /></td>
-								</tr>
-								<tr>
-									<td><input type="password" id="password" placeholder="Password" /></td>
-								</tr>
-								<tr>
-									<td><button name="login">Login</button></td>
-								</tr>
-								<tr>
-									<td>No Account Yet! <a href="">register</a></td>
-								</tr>
-                           	 </table>
-                        	</form>
-                    	</c:if>
-                    	<c:if test="${request.principal != null }">
-                       	 <a href="">My Account</a>                        
-                   	 </c:if>
-                </div>
-				<div class="right_box">
-             	   <div class="title">
-						<span class="title_icon">
-                			<spring:url value="/public/resources/images/bullet4.gif" var="bullet4" />
-                			<img src="${bullet4}" alt="" title="" /></span>Random Books
-                	</div> 
+        	<div class="right_content">
+      	     <div class="right_box">
+      	     	   <spring:url value="/public/resources/images/bullet4.gif" var="bullet4"/>
+			       <div class="title"><span class="title_icon"><img src="${bullet4}" alt="" title="" /></span><spring:message code="main.title.randombooks"/></div> 
                     <c:forEach items="${randomBooks}" var="book">
                         <div class="new_prod_box">
                             <c:url value="/book/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
                             <div class="new_prod_bg">
-                            <spring:url value="/book/${book.id}/image" var="book" />
-                            <a href="${bookUrl}"><img src="${book}" alt="" title="" class="thumb" border="0" /></a>
+                            <c:url value="/public/resources/images/books/${book.id}/image.png" var="bookImage"/>
+                            <a href="${bookUrl}"><img src="${bookImage}" alt="" title="" class="thumb" border="0" /></a>
                             </div>           
                         </div>
                     </c:forEach>
-             	</div>
-    	    </section><!--end of right content-->
+           	  		</div>
+           	  </div>
 			<div class="clear"></div>
-			</section><!--end of center content-->
+			</div><!--end of center content-->
 			<tiles:insertAttribute name="footer"/>         
     	</div>
 	</body>

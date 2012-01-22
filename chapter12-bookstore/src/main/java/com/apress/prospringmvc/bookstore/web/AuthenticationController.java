@@ -16,10 +16,10 @@ import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.mvc.servlet.MvcExternalContext;
 
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
-import com.apress.prospringmvc.bookstore.service.CustomerService;
+import com.apress.prospringmvc.bookstore.service.AccountService;
 
 /**
  * This controller talks to the {@link BookstoreService} to authenticate a user. This controller can be used via Spring MVC
@@ -31,12 +31,12 @@ import com.apress.prospringmvc.bookstore.service.CustomerService;
 @Controller
 public class AuthenticationController {
 
-	public static final String AUTHENTICATED_CUSTOMER_KEY = "authenticatedCustomer";
+	public static final String AUTHENTICATED_ACCOUNT_KEY = "authenticatedAccount";
 
 	private static final String LOGIN_FAILED_KEY = "label.login.failed";
 
 	@Autowired
-	private CustomerService customerService;
+	private AccountService accountService;
 
 	// ----- Spring MVC logic
 
@@ -84,7 +84,7 @@ public class AuthenticationController {
 	// ---- Helpers
 	private void authenticate(AuthenticationForm authenticationForm, HttpSession httpSession)
 			throws AuthenticationException {
-		Customer customer = customerService.login(authenticationForm.getUsername(), authenticationForm.getPassword());
-		httpSession.setAttribute(AUTHENTICATED_CUSTOMER_KEY, customer);
+		Account account = accountService.login(authenticationForm.getUsername(), authenticationForm.getPassword());
+		httpSession.setAttribute(AUTHENTICATED_ACCOUNT_KEY, account);
 	}
 }

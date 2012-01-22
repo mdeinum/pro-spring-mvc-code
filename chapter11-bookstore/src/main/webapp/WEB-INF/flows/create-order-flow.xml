@@ -46,7 +46,7 @@
 	</view-state>
 	
 	<decision-state id="loginCheck">
-		<if test="externalContext.sessionMap.contains('authenticatedCustomer') == true" then="createOrder" else="authenticate"/>
+		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
 	</decision-state>	
 
 	<view-state id="authenticate" view="login" model="authenticationForm">
@@ -61,7 +61,7 @@
 	</view-state>
 	
 	<action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(externalContext.sessionMap.get('authenticatedCustomer'), flowScope.orderForm)" result="flowScope.orderId"/>
+		<evaluate expression="orderController.placeOrder(externalContext.sessionMap.get('authenticatedAccount'), flowScope.orderForm)" result="flowScope.orderId"/>
 		<transition on="success" to="endOrderOk"/>
 	</action-state>
 

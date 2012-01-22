@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.BookSearchCriteria;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.repository.BookRepository;
@@ -19,43 +19,47 @@ import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 @Transactional(readOnly = true)
 public class BookstoreServiceImpl implements BookstoreService {
 
-    private static final int RANDOM_BOOKS = 2;
+	private static final int RANDOM_BOOKS = 2;
 
-    @Autowired
-    private BookRepository bookRepository;
+	@Autowired
+	private BookRepository bookRepository;
 
-    @Autowired
-    private OrderRepository orderRepository;
+	@Autowired
+	private OrderRepository orderRepository;
 
-    @Override
-    public Book findById(long id) {
-        return this.bookRepository.findById(id);
-    }
+	@Override
+	public Book findById(long id) {
+		return this.bookRepository.findById(id);
+	}
 
-    @Override
-    public List<Book> findBooksByCategory(Category category) {
-        return this.bookRepository.findByCategory(category);
-    }
+	@Override
+	public List<Book> findBooksByCategory(Category category) {
+		return this.bookRepository.findByCategory(category);
+	}
 
-    @Override
-    public List<Book> findRandomBooks() {
-        return this.bookRepository.findRandom(RANDOM_BOOKS);
-    }
+	@Override
+	public List<Book> findRandomBooks() {
+		return this.bookRepository.findRandom(RANDOM_BOOKS);
+	}
 
-    @Override
-    public List<Order> findOrdersForCustomer(Customer customer,
-            LazyResultInitializerStrategy<Order> lazyResultInitializer) {
-        return lazyResultInitializer.initialize(this.orderRepository.findByCustomer(customer));
-    }
+	@Override
+	public List<Order> findOrdersForAccount(Account account, LazyResultInitializerStrategy<Order> lazyResultInitializer) {
+		return lazyResultInitializer.initialize(this.orderRepository.findByAccount(account));
+	}
 
-    @Override
-    @Transactional(readOnly = false)
-    public Order createOrder(Order order) {
-        return this.orderRepository.save(order);
-    }
+	@Override
+	@Transactional(readOnly = false)
+	public Order createOrder(Order order) {
+		return this.orderRepository.save(order);
+	}
 
-    @Override
-    public List<Book> findBooks(BookSearchCriteria bookSearchCriteria) {
-        return this.bookRepository.findBooks(bookSearchCriteria);
-    }
+	@Override
+	public List<Book> findBooks(BookSearchCriteria bookSearchCriteria) {
+		return this.bookRepository.findBooks(bookSearchCriteria);
+	}
+
+	@Override
+	public void addBook(Book book) {
+		bookRepository.storeBook(book);
+	}
 }
