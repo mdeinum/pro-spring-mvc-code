@@ -44,7 +44,7 @@
                             <c:url value="/book/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
                             <div class="new_prod_bg">
-                            <c:url value="/public/resources/images/books/${book.id}/image.png" var="bookImage"/>
+                            <c:url value="/resources/images/books/${book.isbn}/book_front_cover.png" var="bookImage"/>
                             <a href="${bookUrl}"><img src="${bookImage}" alt="" title="" class="thumb" border="0" /></a>
                             </div>           
                         </div>

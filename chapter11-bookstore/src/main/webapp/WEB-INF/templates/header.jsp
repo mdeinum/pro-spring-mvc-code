@@ -20,7 +20,7 @@
 					<a href="${home}">Home</a>
 				</li>
 				<li>
-				    <spring:url value="/create-order-flow" var="createOrder" />
+				    <spring:url value="/createOrders" var="createOrder" />
 					<a href="${createOrder}">Buy books</a>
 				</li>
 				<li>

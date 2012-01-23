@@ -15,23 +15,19 @@
     </definition>
 
 	<definition name="selectCategory" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/selectCategory.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectCategory.jsp"/>
     </definition>
 	
 	<definition name="selectBooks" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/selectBooks.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectBooks.jsp"/>
     </definition>
 	
 	<definition name="selectDeliveryOptions" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/selectDeliveryOptions.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectDeliveryOptions.jsp"/>
     </definition>
-
-	<definition name="login" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/login.jsp"/>
-    </definition>
-    
+	
     <definition name="ordersOverview" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/ordersOverview.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/ordersOverview/ordersOverview.jsp"/>
     </definition>
 
 </tiles-definitions>
