@@ -35,6 +35,7 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 
 		// Create the 'root' Spring application context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+
 		rootContext.getEnvironment().addActiveProfile("container");
 		rootContext.getEnvironment().addActiveProfile("test");
 		rootContext.register(configurationClasses);

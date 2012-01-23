@@ -58,8 +58,8 @@ public class OrderForm implements Serializable {
 		if (context.getUserEvent().equals("next")) {
 			MessageContext messages = context.getMessageContext();
 			if (category == null) {
-				messages.addMessage(new MessageBuilder().error().source("category").code("error.page.category.required")
-						.build());
+				messages.addMessage(new MessageBuilder().error().source("category")
+						.code("error.page.category.required").build());
 			}
 		}
 	}
@@ -78,6 +78,18 @@ public class OrderForm implements Serializable {
 				}
 			}
 		}
+	}
+
+	public void resetSelectedBooks() {
+		books.clear();
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public Date getDeliveryDate() {
@@ -118,13 +130,5 @@ public class OrderForm implements Serializable {
 
 	public void setBook(Book book) {
 		this.book = book;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 }

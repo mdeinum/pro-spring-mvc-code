@@ -30,13 +30,13 @@
 		<div id="wrap">
 			<tiles:insertAttribute name="header"/>
 
-       	<div class="center_content">
-			<div class="left_content">
+       	<section class="center_content">
+			<section class="left_content">
             	<tiles:insertAttribute name="content"/>            
-        	</div><!--end of left content-->
+        	</section><!--end of left content-->
         
-        	<div class="right_content">
-            	<div class="languages_box">
+        	<section class="right_content">
+            	<section class="languages_box">
             		<span class="red">Languages:</span>
             		<spring:url value="/resources/images/gb.gif" var="gb" />
             		<a href="?lang=en" class="selected"><img src="${gb}" alt="" title="" border="0" /></a>
@@ -44,9 +44,9 @@
             		<a href="?lang=fr"><img src="${fr}" alt="" title="" border="0" /></a>
             		<spring:url value="/resources/images/de.gif" var="de" />
 			           <a href="?lang=de"><img src="${de}" alt="" title="" border="0" /></a>
-            	</div>
+            	</section>
                 
-              	<div class="cart">
+              	<section class="cart">
               		<table>
               			<tr>
               				<td>
@@ -69,7 +69,7 @@
                   			</td>
                   		</tr>
                   	</table>
-				</div>
+				</section>
 
 				<div class="title"><span class="title_icon">
 					<spring:url value="/resources/images/bullet3.gif" var="bullet3" />
@@ -114,9 +114,9 @@
                         </div>
                     </c:forEach>
              	</div>
-    	    </div><!--end of right content-->
+    	    </section><!--end of right content-->
 			<div class="clear"></div>
-			</div><!--end of center content-->
+			</section><!--end of center content-->
 			<tiles:insertAttribute name="footer"/>         
     	</div>
 	</body>

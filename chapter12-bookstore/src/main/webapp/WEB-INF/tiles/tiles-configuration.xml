@@ -14,16 +14,12 @@
         <put-attribute name="content" value="/WEB-INF/view/main.jspx"/>
     </definition>
 
-	<definition name="show.selected.books" template="/WEB-INF/view/selectBooks.jspx">
-        <put-attribute name="selectedBooks" value="/WEB-INF/view/showSelectedBooks.jspx"/>
-    </definition>
-    
-	<definition name="selectBooks" extends="fullTemplate">
-        <put-attribute name="content" value="show.selected.books"/>
-    </definition>
-
 	<definition name="selectCategory" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/view/selectCategory.jspx"/>
+    </definition>
+	
+	<definition name="selectBooks" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/selectBooks.jspx"/>
     </definition>
 	
 	<definition name="selectDeliveryOptions" extends="fullTemplate">
@@ -33,14 +29,9 @@
 	<definition name="login" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/view/login.jspx"/>
     </definition>
-
-	<definition name="orderDetail" extends="contentOnlyTemplate">
-		<put-attribute name="content" value="/WEB-INF/view/orderDetail.jspx"/>
-	</definition>
-
+    
     <definition name="ordersOverview" extends="fullTemplate">
-    	<put-attribute name="content" value="/WEB-INF/view/ordersOverview.jspx">
-		</put-attribute>
-	</definition>
+        <put-attribute name="content" value="/WEB-INF/view/ordersOverview.jspx"/>
+    </definition>
 
 </tiles-definitions>

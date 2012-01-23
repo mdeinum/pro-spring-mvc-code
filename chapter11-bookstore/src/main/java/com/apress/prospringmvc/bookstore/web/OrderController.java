@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.webflow.context.ExternalContextHolder;
 
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
@@ -43,7 +45,7 @@ public class OrderController {
 	@RequestMapping("ordersOverview.htm")
 	public ModelAndView retrieveOrders(HttpSession httpSession) {
 		List<Order> orders = bookstoreService.findOrdersForAccount((Account) httpSession
-				.getAttribute(AuthenticationController.AUTHENTICATED_ACCOUNT_KEY));
+				.getAttribute(AuthenticationSessionListener.AUTHENTICATED_ACCOUNT_KEY));
 
 		ModelAndView mov = new ModelAndView();
 		mov.setViewName("ordersOverview");
@@ -64,11 +66,11 @@ public class OrderController {
 	}
 
 	public List<Book> initializeBooks(OrderForm orderForm) {
-		return bookstoreService.findBooksByCategory(orderForm.getCategory());
+		return bookstoreService.findBooksByCategory(categoryService.findById(orderForm.getCategoryId()));
 	}
 
 	public void addBook(OrderForm orderForm) {
-		Book book = orderForm.getBook();
+		Book book = bookstoreService.findBook(orderForm.getBookId());
 		if (orderForm.getBooks().containsKey(book)) {
 			orderForm.getBooks().put(book, orderForm.getBooks().get(book) + orderForm.getQuantity());
 		} else {
@@ -76,9 +78,14 @@ public class OrderController {
 		}
 	}
 
-	public Long placeOrder(Account account, OrderForm orderForm) {
-		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).account(account).build(true);
+	public Long placeOrder(OrderForm orderForm) {
+		Order order = new OrderBuilder()
+				.addBooks(orderForm.getBooks())
+				.deliveryDate(orderForm.getDeliveryDate())
+				.orderDate(orderForm.getOrderDate())
+				.account(
+						(Account) ExternalContextHolder.getExternalContext().getGlobalSessionMap()
+								.get(AuthenticationSessionListener.AUTHENTICATED_ACCOUNT_KEY)).build(true);
 		return bookstoreService.createOrder(order).getId();
 	}
 

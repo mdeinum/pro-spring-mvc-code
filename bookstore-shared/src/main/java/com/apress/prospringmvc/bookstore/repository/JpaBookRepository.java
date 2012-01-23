@@ -47,7 +47,7 @@ public class JpaBookRepository implements BookRepository {
 
 	@Override
 	public List<Book> findRandom(int count) {
-		String hql = "select b from Book b";
+		String hql = "select b from Book b order by rand()";
 		TypedQuery<Book> query = this.entityManager
 				.createQuery(hql, Book.class);
 		query.setMaxResults(count);

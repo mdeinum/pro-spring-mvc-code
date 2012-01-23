@@ -224,13 +224,13 @@ color:#b5b5b6;
 text-decoration:none;
 display:block;
 }
-.new_prod_bg{
-width:132px;
-height:119px;
-text-align:center;
-background:url(../images/new_prod_box.gif) no-repeat center;
+
+.new_prod_img{
+width:100px;
+height:125px;
 position:relative;
 }
+
 .new_icon{
 position:absolute;
 top:0px;

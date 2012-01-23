@@ -21,17 +21,17 @@
 					<a href="${home}">Home</a>
 				</li>
 				<li>
-				    <spring:url value="/book-order-flow" var="createOrder" />
+				    <spring:url value="/create-order-flow" var="createOrder" />
 					<a href="${createOrder}">Buy books</a>
 				</li>
 				<li>
 					<c:if test="${authenticatedAccount !=null}">
-						<spring:url value="/view-orders-flow" var="ordersOverview" />
+						<spring:url value="/ordersOverview.htm" var="ordersOverview" />
 						<a href="${ordersOverview}">View orders</a>
 					</c:if>
 				</li>
 				<li>
-					<spring:url value="/authentication-flow" var="login" /> 
+					<spring:url value="/login.htm" var="login" /> 
 					<a href="${login}">Login</a>
 				</li>
 				<li>

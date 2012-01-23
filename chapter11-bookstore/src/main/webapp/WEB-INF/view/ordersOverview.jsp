@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	<c:if test="${flowScope.orderId !=null}">
 		<div id="orderSuccess"
@@ -61,4 +59,3 @@
 			fadeIt();
 		});
 	</script>
-</jsp:root>
