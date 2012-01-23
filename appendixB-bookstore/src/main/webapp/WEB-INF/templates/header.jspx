@@ -35,10 +35,22 @@
 					<spring:url value="/public/login.htm" var="login" /> 
 					<a href="${login}">Login</a>
 				</li>
+				<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR') ">
+					<li>
+						<spring:url value="/secured/manageBooks.htm" var="manageBooks" /> 
+						<a href="${manageBooks}">Manage books</a>
+					</li>
+				</sec:authorize>
 				<li>
 					<a href="">About Us</a>
 				</li>
 			</ul>
+			 <ul style="float: right;">
+			 	<c:url value="/public/resources/images/gb.gif" var="gb"/>
+			 	<c:url value="/public/resources/images/nl.gif" var="nl"/>
+                <li><a href="?lang=en" class="selected"><img src="${gb}" alt="" title="" border="0" /></a></li>
+                <li><a href="?lang=nl"><img src="${nl}" alt="" title="" border="0" /></a></li>
+            </ul>
 		</nav>
 	</header>
 </jsp:root>

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.util.WebUtils;
 
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Cart;
-import com.apress.prospringmvc.bookstore.domain.Customer;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
@@ -42,7 +42,7 @@ public class CartController {
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
     @ModelAttribute("order")
     public Order checkout(HttpServletRequest request) {
-        Customer customer = (Customer) WebUtils.getRequiredSessionAttribute(request, "customer");
+        Account customer = (Account) WebUtils.getRequiredSessionAttribute(request, "customer");
         Order order = this.bookstoreService.createOrder(this.cart, customer);
         return order;
     }

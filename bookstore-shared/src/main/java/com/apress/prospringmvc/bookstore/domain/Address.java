@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 /**
- * A component which resembles the address of a {@link Customer}
+ * A component which resembles the address of a {@link Account}
  * 
  * @author Koen Serneels
  */

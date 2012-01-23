@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.apress.prospringmvc.bookstore.domain.Customer;
-import com.apress.prospringmvc.bookstore.service.CustomerService;
+import com.apress.prospringmvc.bookstore.domain.Account;
+import com.apress.prospringmvc.bookstore.service.AccountService;
 
 /**
- * Controller to handle the registration of a new {@link Customer}
+ * Controller to handle the registration of a new {@link Account}
  * @author marten
  *
  */
@@ -22,22 +22,22 @@ import com.apress.prospringmvc.bookstore.service.CustomerService;
 public class RegistrationController extends AbstractCustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ModelAttribute
-    public Customer register(Locale currentLocale) {
-        Customer customer = new Customer();
-        customer.getAddress().setCountry(currentLocale.getCountry());
-        return customer;
+    public Account register(Locale currentLocale) {
+        Account account = new Account();
+        account.getAddress().setCountry(currentLocale.getCountry());
+        return account;
     }
 
     @RequestMapping(method = { RequestMethod.POST, RequestMethod.PUT })
-    public String handleRegistration(@ModelAttribute Customer customer, BindingResult result) {
+    public String handleRegistration(@ModelAttribute Account account, BindingResult result) {
         if (result.hasErrors()) {
             return "customer/register";
         }
-        this.customerService.save(customer);
+        this.accountService.save(account);
         return "redirect:/customer/account";
     }
 }

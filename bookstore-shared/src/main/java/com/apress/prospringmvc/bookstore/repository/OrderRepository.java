@@ -2,7 +2,7 @@ package com.apress.prospringmvc.bookstore.repository;
 
 import java.util.List;
 
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 
 public interface OrderRepository {
@@ -21,10 +21,10 @@ public interface OrderRepository {
     Order save(Order order);
 
     /**
-     * Find the orders for the given {@link Customer}.
-     * @param customer the customer
-     * @return list of orders for the customer, never <code>null</code>
+     * Find the orders for the given {@link Account}.
+     * @param customer the account
+     * @return list of orders for the account, never <code>null</code>
      */
-    List<Order> findByCustomer(Customer customer);
+    List<Order> findByAccount(Account account);
 
 }

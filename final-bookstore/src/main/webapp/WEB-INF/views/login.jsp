@@ -18,12 +18,12 @@
             <legend><spring:message code="login.title" /></legend>
             <table>
             <tr>
-                <td><spring:message code="customer.username"/></td>
-                <td><input type="text" id="username" name="username" placeholder="<spring:message code="customer.username"/>"/></td>
+                <td><spring:message code="account.username"/></td>
+                <td><input type="text" id="username" name="username" placeholder="<spring:message code="account.username"/>"/></td>
             </tr>
             <tr>
-                <td><spring:message code="customer.password"/></td>
-                <td><input type="password" id="password" name="password" placeholder="<spring:message code="customer.password"/>"/></td>
+                <td><spring:message code="account.password"/></td>
+                <td><input type="password" id="password" name="password" placeholder="<spring:message code="account.password"/>"/></td>
             </tr>
             <tr><td colspan="2" align="center"><button id="login"><spring:message code="button.login"/></button></td></tr>
             </table>

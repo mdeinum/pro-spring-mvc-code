@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.security.config.BeanIds;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -49,8 +50,12 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("bookstore", new DispatcherServlet(
 				rootContext));
 
-		FilterRegistration.Dynamic springSecurityFilterChain = servletContext.addFilter(BeanIds.SPRING_SECURITY_FILTER_CHAIN,
-				new DelegatingFilterProxy());
+		FilterRegistration.Dynamic penEntityManagerInViewFilter = servletContext.addFilter(
+				"openEntityManagerInViewFilter", new OpenEntityManagerInViewFilter());
+		penEntityManagerInViewFilter.addMappingForUrlPatterns(null, false, "/*");
+
+		FilterRegistration.Dynamic springSecurityFilterChain = servletContext.addFilter(
+				BeanIds.SPRING_SECURITY_FILTER_CHAIN, new DelegatingFilterProxy());
 		springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
 
 		dispatcher.setLoadOnStartup(1);

@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
-import com.apress.prospringmvc.bookstore.service.CustomerService;
+import com.apress.prospringmvc.bookstore.service.AccountService;
 
 @Controller
 @RequestMapping("/customer/login")
 public class CustomerLoginController {
 
-    private static final String CUSTOMER_SESSION_ATTRIBUTE = "customer";
+    private static final String ACCOUNT_SESSION_ATTRIBUTE = "account";
 
     @Autowired
-    private CustomerService customerService;
+    private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
     public void login() {
@@ -28,8 +28,8 @@ public class CustomerLoginController {
     @RequestMapping(method = RequestMethod.POST)
     public void handleLogin(@RequestParam String username, @RequestParam String password, HttpSession session)
             throws AuthenticationException {
-        Customer customer = this.customerService.login(username, password);
-        session.setAttribute(CUSTOMER_SESSION_ATTRIBUTE, customer); //store customer in the session
+        Account account = this.accountService.login(username, password);
+        session.setAttribute(ACCOUNT_SESSION_ATTRIBUTE, account); //store account in the session
     }
 
 }

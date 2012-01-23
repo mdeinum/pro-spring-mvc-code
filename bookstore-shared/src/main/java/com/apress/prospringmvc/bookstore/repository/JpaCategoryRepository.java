@@ -28,4 +28,8 @@ public class JpaCategoryRepository implements CategoryRepository {
 		return this.entityManager.find(Category.class, id);
 	}
 
+	@Override
+	public void storeCategory(Category category) {
+		entityManager.persist(category);
+	}
 }

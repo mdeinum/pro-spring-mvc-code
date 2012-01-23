@@ -2,7 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
-                          
+      
+    <secured attributes="permitAll" />
+	                    
 	<on-start>
 		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
 	</on-start>
@@ -38,24 +40,15 @@
 	</view-state>
 	
 	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
-		<transition on="finish" to="loginCheck" bind="true"/>
+		<transition on="finish" to="createOrder" bind="true"/>
 			
 		<transition on="previous" to="selectBooks" />
 		
 		<transition on="return" to="endOrderCanceled" />
 	</view-state>
 	
-	<decision-state id="loginCheck">
-		<if test="externalContext.sessionMap.contains('authenticatedCustomer') == true" then="createOrder" else="authenticate"/>
-	</decision-state>	
-
-	<subflow-state id="authenticate" subflow="authentication-flow">
-		<transition on="authenticationOk" to="createOrder"/>
-		<transition on="previous" to="selectDeliveryOptions"/>
-	</subflow-state>
 	
 	<subflow-state id="createOrder" subflow="create-order-flow">
-		<input name="customer" value="externalContext.sessionMap.get('authenticatedCustomer')"/>
 		<input name="orderForm"/>
 		
 		<output name="orderId"/>

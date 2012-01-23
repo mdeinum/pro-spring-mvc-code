@@ -47,6 +47,11 @@ public class BookBuilder extends EntityBuilder<Book> {
 		return this;
 	}
 
+	public BookBuilder isbn(String isbn) {
+		product.setIsbn(isbn);
+		return this;
+	}
+
 	@Override
 	Book assembleProduct() {
 		return product;

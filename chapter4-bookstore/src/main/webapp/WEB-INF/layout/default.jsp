@@ -69,8 +69,9 @@
                         <div class="new_prod_box">
                             <c:url value="/book/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
-                            <div class="new_prod_bg">
-                            <a href="${bookUrl}"><img src="<c:url value="/book/${book.id}/image"/>" alt="" title="" class="thumb" border="0" /></a>
+                            <div class="new_prod_img">
+                            <c:url value="/resources/images/books/${book.isbn}/book_front_cover.png" var="bookImage"/>
+                            <a href="${bookUrl}"><img src="${bookImage}" alt="" title="" class="thumb" border="0" /></a>
                             </div>           
                         </div>
                     </c:forEach>

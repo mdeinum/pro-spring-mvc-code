@@ -40,13 +40,7 @@
         </div><!--end of left content-->
         
         <div class="right_content">
-              <div class="right_box">
-                  <div class="title"><span class="title_icon"><img src="<c:url value="/resources/images/cart.gif"/>" alt="" title="" /></span><spring:message code="main.title.yourcart" /></div>
-                  <div class="home_cart_content">${cart.books.size()} x items | <span class="red"><spring:message code="main.cart.total" arguments="0.00"/></span></div>
-                  <a href="<c:url value="/cart"/>" class="view_cart"><spring:message code="nav.viewcart"/></a> | <a href="<c:url value="/cart/checkout"/>" class="view_cart"><spring:message code="nav.cartcheckout"/></a>
-                  
-              </div>
-
+         
              <div class="right_box">
              
                 <div class="title"><span class="title_icon"><img src="<c:url value="/resources/images/bullet4.gif"/>" alt="" title="" /></span><spring:message code="main.title.randombooks"/></div> 
@@ -54,8 +48,9 @@
                         <div class="new_prod_box">
                             <c:url value="/book/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
-                            <div class="new_prod_bg">
-                            <a href="${bookUrl}"><img src="<c:url value="/book/${book.id}/image"/>" alt="" title="" class="thumb" border="0" /></a>
+                            <div class="new_prod_img">
+                            <c:url value="/resources/images/books/${book.isbn}/book_front_cover.png" var="bookImage"/>
+                            <a href="${bookUrl}"><img src="${bookImage}" alt="" title="" class="thumb" border="0" /></a>
                             </div>           
                         </div>
                     </c:forEach>

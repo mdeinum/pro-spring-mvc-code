@@ -10,36 +10,36 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.apress.prospringmvc.bookstore.domain.Customer;
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
-import com.apress.prospringmvc.bookstore.service.CustomerService;
+import com.apress.prospringmvc.bookstore.service.AccountService;
 
 @Controller
 @RequestMapping("/customer/register")
 public class CustomerRegistrationController {
 
     @Autowired
-    private CustomerService customerService;
+    private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ModelAttribute
-    public Customer register() {
-        return new Customer();
+    public Account register() {
+        return new Account();
     }
 
     @RequestMapping(method = { RequestMethod.POST, RequestMethod.PUT })
     @ModelAttribute
-    public String handleRegistration(@ModelAttribute Customer customer, BindingResult result) {
-        this.customerService.save(customer);
+    public String handleRegistration(@ModelAttribute Account account, BindingResult result) {
+        this.accountService.save(account);
         return "redirect:/customer/account";
     }
 
     public String account(HttpSession session) {
-        Customer customer = null;
-        if (session != null && session.getAttribute("customer") != null) {
-            customer = (Customer) session.getAttribute("customer");
+        Account account = null;
+        if (session != null && session.getAttribute("account") != null) {
+            account = (Account) session.getAttribute("account");
         }
-        if (customer == null) {
+        if (account == null) {
             return "redirect:/customer/login";
         }
 
