@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>    
+    <definition name="fullTemplate" template="/WEB-INF/templates/template.jsp">
+        <put-attribute name="header" value="/WEB-INF/templates/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/templates/footer.jsp"/>
+    </definition>	
+
+    <definition name="contentOnlyTemplate" template="/WEB-INF/templates/contentOnly.jsp">
+    </definition>	
+
+	<definition name="main" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/main.jsp"/>
+    </definition>
+
+	<definition name="selectCategory" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectCategory.jsp"/>
+    </definition>
+	
+	<definition name="selectBooks" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectBooks.jsp"/>
+    </definition>
+	
+	<definition name="selectDeliveryOptions" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectDeliveryOptions.jsp"/>
+    </definition>
+	
+    <definition name="ordersOverview" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/ordersOverview/ordersOverview.jsp"/>
+    </definition>
+
+</tiles-definitions>
