@@ -107,7 +107,7 @@
                         <div class="new_prod_box">
                             <c:url value="/book/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
-                            <div class="new_prod_bg">
+                            <div>
                             <spring:url value="/book/${book.id}/image" var="book" />
                             <a href="${bookUrl}"><img src="${book}" alt="" title="" class="thumb" border="0" /></a>
                             </div>           
