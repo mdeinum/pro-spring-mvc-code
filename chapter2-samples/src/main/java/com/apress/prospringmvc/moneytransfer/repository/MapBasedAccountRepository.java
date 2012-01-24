@@ -15,7 +15,7 @@ import com.apress.prospringmvc.moneytransfer.domain.Account;
 @Repository("accountRepository")
 public class MapBasedAccountRepository implements AccountRepository {
 
-    private final Logger logger = LoggerFactory.getLogger(MapBasedTransactionRepository.class);
+    private final Logger logger = LoggerFactory.getLogger(MapBasedAccountRepository.class);
 
     private final ConcurrentMap<String, Account> storage = new ConcurrentHashMap<String, Account>();
 
