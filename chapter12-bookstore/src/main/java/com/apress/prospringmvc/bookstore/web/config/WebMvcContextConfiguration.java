@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -15,10 +16,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles2.TilesView;
+import org.springframework.webflow.mvc.view.FlowAjaxTilesView;
 
-import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
 import com.apress.prospringmvc.bookstore.web.converter.BookConverter;
+import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
 
 /**
  * WebMvc Configuration.
@@ -46,9 +47,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Bean
 	public ViewResolver tilesViewResolver() {
-		UrlBasedViewResolver urlBasedViewResolver = new UrlBasedViewResolver();
+		UrlBasedViewResolver urlBasedViewResolver = new AjaxUrlBasedViewResolver();
 		urlBasedViewResolver.setOrder(1);
-		urlBasedViewResolver.setViewClass(TilesView.class);
+		urlBasedViewResolver.setViewClass(FlowAjaxTilesView.class);
 		return urlBasedViewResolver;
 	}
 

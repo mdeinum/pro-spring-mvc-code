@@ -2,32 +2,36 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>    
-    <definition name="fullTemplate" template="/WEB-INF/templates/template.jsp">
-        <put-attribute name="header" value="/WEB-INF/templates/header.jsp"/>
-        <put-attribute name="footer" value="/WEB-INF/templates/footer.jsp"/>
+    <definition name="fullTemplate" template="/WEB-INF/templates/template.jspx">
+        <put-attribute name="header" value="/WEB-INF/templates/header.jspx"/>
+        <put-attribute name="footer" value="/WEB-INF/templates/footer.jspx"/>
     </definition>	
 
-    <definition name="contentOnlyTemplate" template="/WEB-INF/templates/contentOnly.jsp">
+    <definition name="contentOnlyTemplate" template="/WEB-INF/templates/contentOnly.jspx">
     </definition>	
 
 	<definition name="main" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/main.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/main.jspx"/>
     </definition>
 
 	<definition name="selectCategory" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectCategory.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/selectCategory.jspx"/>
     </definition>
 	
 	<definition name="selectBooks" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectBooks.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/selectBooks.jspx"/>
     </definition>
 	
 	<definition name="selectDeliveryOptions" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/createOrders/selectDeliveryOptions.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/selectDeliveryOptions.jspx"/>
     </definition>
-	
+
+	<definition name="login" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/login.jspx"/>
+    </definition>
+    
     <definition name="ordersOverview" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/ordersOverview/ordersOverview.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/ordersOverview.jspx"/>
     </definition>
 
 </tiles-definitions>

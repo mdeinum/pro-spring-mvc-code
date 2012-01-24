@@ -38,7 +38,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 
 		rootContext.getEnvironment().addActiveProfile("container");
 		rootContext.getEnvironment().addActiveProfile("test");
-		rootContext.getEnvironment().addActiveProfile("local");
 		rootContext.register(configurationClasses);
 
 		servletContext.addListener(new ContextLoaderListener(rootContext));

@@ -4,12 +4,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -18,7 +17,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesView;
 
-import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
+import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
+import com.apress.prospringmvc.bookstore.web.converter.BookConverter;
 
 /**
  * WebMvc Configuration.
@@ -45,21 +45,31 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-		internalResourceViewResolver.setOrder(2);
-		internalResourceViewResolver.setPrefix("/WEB-INF/view/");
-		internalResourceViewResolver.setSuffix(".jsp");
-		internalResourceViewResolver.setViewClass(JstlView.class);
-		return internalResourceViewResolver;
-	}
-
-	@Bean
 	public ViewResolver tilesViewResolver() {
 		UrlBasedViewResolver urlBasedViewResolver = new UrlBasedViewResolver();
 		urlBasedViewResolver.setOrder(1);
 		urlBasedViewResolver.setViewClass(TilesView.class);
 		return urlBasedViewResolver;
+	}
+
+	@Bean
+	public ViewResolver viewResolver() {
+		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+		internalResourceViewResolver.setOrder(2);
+		internalResourceViewResolver.setPrefix("/WEB-INF/view/");
+		internalResourceViewResolver.setSuffix(".jspx");
+		internalResourceViewResolver.setViewClass(JstlView.class);
+		return internalResourceViewResolver;
+	}
+
+	@Bean
+	public BookConverter bookConverter() {
+		return new BookConverter();
+	}
+
+	@Bean
+	public CategoryConverter categoryConverter() {
+		return new CategoryConverter();
 	}
 
 	@Bean
@@ -69,13 +79,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 		return tilesConfigurer;
 	}
 
-	@Bean
-	public CommonDataHandlerInterceptor commonDataHandlerInterceptor() {
-		return new CommonDataHandlerInterceptor();
-	}
-
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(commonDataHandlerInterceptor());
+	protected void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(bookConverter());
+		registry.addConverter(categoryConverter());
 	}
 }
