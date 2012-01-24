@@ -1,10 +1,12 @@
 package com.apress.prospringmvc.bookstore.web.config;
 
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -42,6 +44,11 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 		rootContext.register(configurationClasses);
 
 		servletContext.addListener(new ContextLoaderListener(rootContext));
+
+		// OEMIV
+		FilterRegistration.Dynamic penEntityManagerInViewFilter = servletContext.addFilter(
+				"openEntityManagerInViewFilter", new OpenEntityManagerInViewFilter());
+		penEntityManagerInViewFilter.addMappingForUrlPatterns(null, false, "/*");
 
 		// Register and map the dispatcher servlet
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("bookstore", new DispatcherServlet(

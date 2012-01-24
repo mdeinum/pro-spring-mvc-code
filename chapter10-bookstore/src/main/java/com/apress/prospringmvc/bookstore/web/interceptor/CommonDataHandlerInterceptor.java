@@ -18,7 +18,6 @@ public class CommonDataHandlerInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-
 		if (modelAndView != null) {
 			modelAndView.addObject("randomBooks",
 					this.bookstoreService.findRandomBooks());

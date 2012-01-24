@@ -5,18 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.apache.commons.lang3.time.DateUtils;
-import org.springframework.binding.message.MessageBuilder;
-import org.springframework.binding.message.MessageContext;
-import org.springframework.binding.validation.ValidationContext;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.apress.prospringmvc.bookstore.domain.Book;
-import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.domain.Order;
 
 /**
@@ -28,32 +17,32 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 
 public class OrderForm implements Serializable {
 
-	private Map<Book, Integer> books = new HashMap<Book, Integer>();
+	private Map<Book, Integer> selectedBooks = new HashMap<Book, Integer>();
 
 	private Long bookId;
 	private Integer quantity;
 	private Long categoryId;
 
-	private Date deliveryDate;
-	private Date orderDate;
+	private String deliveryDate;
+	private String orderDate;
 
 	public void resetSelectedBooks() {
-		books.clear();
+		selectedBooks.clear();
 	}
 
-	public Date getDeliveryDate() {
+	public String getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -65,12 +54,12 @@ public class OrderForm implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public Map<Book, Integer> getBooks() {
-		return books;
+	public Map<Book, Integer> getSelectedBooks() {
+		return selectedBooks;
 	}
 
-	public void setBooks(Map<Book, Integer> books) {
-		this.books = books;
+	public void setSelectedBooks(Map<Book, Integer> selectedBooks) {
+		this.selectedBooks = selectedBooks;
 	}
 
 	public Long getBookId() {

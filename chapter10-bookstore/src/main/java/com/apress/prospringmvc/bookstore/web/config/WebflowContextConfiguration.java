@@ -11,6 +11,8 @@ import org.springframework.webflow.executor.FlowExecutor;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 
+import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
+
 /**
  * The glue between Web Flow and Spring MVC, registers the {@link FlowHandlerAdapter} and {@link FlowHandlerMapping}
  * which will enable the {@link DispatcherServlet} to recognize Web Flow requests and send them to the

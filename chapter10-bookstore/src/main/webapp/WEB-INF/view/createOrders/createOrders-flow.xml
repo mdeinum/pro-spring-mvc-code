@@ -4,50 +4,44 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<on-start>
-		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
+		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm"/>
+		<evaluate expression="orderController.initializeSelectableCategories()" result="flowScope.selectableCategories"/>
 	</on-start>
 
 	<view-state id="selectCategory" view="selectCategory" model="orderForm">
-		<on-render>
-			<evaluate expression="orderController.initializeCategories()" result="flashScope.selectableCategories" />
-		</on-render>
-
-		<transition on="next" to="selectBooks"/>
+		<transition on="next" to="selectBooks" >
+			<evaluate expression="orderController.initializeSelectableBooks(flowScope.orderForm)" result="flowScope.selectableBooks" />
+		</transition>
 		
-		<transition on="return" to="endOrderCanceled" />
+		<transition on="cancel" to="end" />
 	</view-state>
 	
 	<view-state id="selectBooks" view="selectBooks" model="orderForm" >
-		<on-render>
-			<evaluate expression="orderController.initializeBooks(orderForm)" result="flashScope.selectableBooks" />
-		</on-render>
-		
+		<transition on="previous" to="selectCategory" />
+			
 		<transition on="add" >
 			<evaluate expression="orderController.addBook(flowScope.orderForm)" />
 		</transition>
 		
 		<transition on="next" to="selectDeliveryOptions" />
 	
-		<transition on="previous" to="selectCategory" />
-			
 		<transition on="reset" to="selectBooks">
 			<evaluate expression="orderForm.resetSelectedBooks()" />
 		</transition>
 	
-		<transition on="return" to="endOrderCanceled" />
+		<transition on="cancel" to="end" />
 	</view-state>
 	
 	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
-		<transition on="finish" to="end">
-			<evaluate expression="orderController.placeOrder(flowScope.orderForm)" result="flowScope.orderId"/>
-		</transition>
-			
 		<transition on="previous" to="selectBooks" />
+
+		<transition on="finish" to="end">
+			<evaluate expression="orderController.placeOrder(flowScope.orderForm, externalContext.sessionMap.authenticatedAccount)"/>
+		</transition>
 		
-		<transition on="return" to="endOrderCanceled" />
+		<transition on="cancel" to="end" />
 	</view-state>
 	
-	<end-state id="endOrderCanceled" view="redirect:/main.htm"/>
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	
