@@ -20,7 +20,7 @@ import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
 
 @Controller
-@SessionAttributes("manageBookForm")
+//@SessionAttributes("manageBookForm")
 public class ManageBookController {
 
 	@Autowired
@@ -74,7 +74,7 @@ public class ManageBookController {
 	}
 
 	@RequestMapping("secured/addCategory.htm")
-	@PreAuthorize("hasRole('PERM_ADD_CATEGORY')")
+	@PreAuthorize("hasRole('PERM_ADD_CATEGORIES')")
 	public ModelAndView addCategory(
 			@ModelAttribute @Valid ManageCategoryForm manageCategoryForm,
 			BindingResult bindingResult,
