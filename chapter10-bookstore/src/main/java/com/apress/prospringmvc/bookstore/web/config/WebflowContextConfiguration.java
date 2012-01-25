@@ -30,6 +30,8 @@ public class WebflowContextConfiguration {
 	private FlowExecutor flowExecutor;
 	@Autowired
 	private FlowDefinitionRegistry flowRegistry;
+	@Autowired
+	private CommonDataHandlerInterceptor commonDataHandlerInterceptor;
 
 	@Bean
 	public FlowHandlerAdapter flowHandlerAdapter() {
@@ -41,6 +43,7 @@ public class WebflowContextConfiguration {
 	@Bean
 	public FlowHandlerMapping flowHandlerMapping() {
 		FlowHandlerMapping flowHandlerMapping = new FlowHandlerMapping();
+		flowHandlerMapping.setInterceptors(new Object[] { commonDataHandlerInterceptor });
 		flowHandlerMapping.setFlowRegistry(flowRegistry);
 		flowHandlerMapping.setOrder(0);
 		return flowHandlerMapping;

@@ -34,7 +34,7 @@
 			<c:forEach items="${orders}" var="order">
 				<tr>
 					<td>${order.id}</td>
-					<td>${fn:length(order.orderDetails)}</td>
+					<td>${order.totalNumberOfbooks}</td>
 					<td><spring:eval expression="order.orderDate"/></td>
 					<td><spring:eval expression="order.deliveryDate"/></td>
 					<td>${order.totalOrderPrice}</td>
