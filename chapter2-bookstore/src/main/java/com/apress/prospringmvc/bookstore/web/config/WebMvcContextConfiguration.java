@@ -20,4 +20,18 @@ public class WebMvcContextConfiguration {
         return new IndexController();
     }
 
+    //    public HandlerMapping controllerBeanNameHandlerMapping() {
+    //        ControllerBeanNameHandlerMapping mapping = new ControllerBeanNameHandlerMapping();
+    //        mapping.setUrlSuffix(".htm");
+    //        return mapping;
+    //    }
+    //
+    //    public HandlerMapping simpleUrlHandlerMapping() {
+    //        SimpleUrlHandlerMapping urlMapping = new SimpleUrlHandlerMapping();
+    //        Properties mappings = new Properties();
+    //        mappings.put("/index.htm", "indexController");
+    //        urlMapping.setMappings(mappings);
+    //        return urlMapping;
+    //    }
+
 }

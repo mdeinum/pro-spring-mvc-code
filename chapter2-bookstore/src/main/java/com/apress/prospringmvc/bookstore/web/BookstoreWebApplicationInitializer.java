@@ -31,18 +31,17 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
         DispatcherServlet dispatcherServlet = new DispatcherServlet(dispatcherContext);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+        dispatcher.addMapping("/*");
     }
 
     /**
-     * Factory method to create {@link AnnotationConfigWebApplicationContext} instances. 
+     * Helper method to create {@link AnnotationConfigWebApplicationContext} instances. 
      * @param annotatedClasses
      * @return
      */
     private WebApplicationContext createContext(final Class<?>... annotatedClasses) {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(annotatedClasses);
-        context.getEnvironment().setActiveProfiles("local");
         return context;
     }
 }
