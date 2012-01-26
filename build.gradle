@@ -8,7 +8,7 @@ hibernateVersion='4.0.1.Final'
 hibernateValidatorVersion='4.2.0.Final'
 ehCacheVersion='2.5.0'
 
-tomcatVersion = '7.0.23'
+tomcatVersion = '7.0.25'
 
 buildscript {
     repositories {

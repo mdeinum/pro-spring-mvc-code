@@ -1,6 +1,12 @@
+<!DOCTYPE HTML>
+<html>
 <head>
-<title>Welcome to Pizzas R Us</title>
+<title>Home</title>
 </head>
 <body>
-<p>How exciting!  Our first vertical slice!</p>
+<h1>Welcome!</h1>
+
+<p>Welcome to the Bookstore</p>
+
 </body>
+</html>
