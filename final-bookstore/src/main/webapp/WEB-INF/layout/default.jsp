@@ -12,12 +12,14 @@
 <body>
     <div id="wrap">
     <header>
-        <div class="logo"><a href="<c:url value="/index.htm"/>"><img src="<c:url value="/resources/images/logo.gif"/>" alt="" title="" border="0" /></a></div>            
+        <c:url value="/index.htm" var="homeUrl"/>
+        <div class="logo"><a href="${homeUrl}"><img src="<c:url value="/resources/images/logo.gif"/>" alt="" title="" border="0" /></a></div>            
         <nav>
             <ul style="float: left;">                                                                       
-                <li class="selected"><a href="index.html"><spring:message code="nav.home"/></a></li>
+                <li class="selected"><a href="${homeUrl}"><spring:message code="nav.home"/></a></li>
                 <li><a href="<c:url value="/book"/>"><spring:message code="nav.books"/></a></li>
                 <li><a href="<c:url value="/customer/account"/>"><spring:message code="nav.account"/></a></li>
+                <li><a href="<c:url value="/cart/checkout"/>"><spring:message code="nav.checkout"/></a></li>
                 <c:if test="${currentUser eq null}">
                     <li><a href="<c:url value="/customer/register"/>"><spring:message code="nav.register"/></a></li>
                     <li><a href="<c:url value="/login"/>"><spring:message code="nav.login"/></a></li>
@@ -49,8 +51,8 @@
                             <c:url value="/book/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
                             <div class="new_prod_img">
-                            <c:url value="/resources/images/books/${book.isbn}/book_front_cover.png" var="bookImage"/>
-                            <a href="${bookUrl}"><img src="${bookImage}" alt="" title="" class="thumb" border="0" /></a>
+                            <c:url value="/book/${book.isbn}/image" var="bookImage"/>
+                            <a href="${bookUrl}"><img src="${bookImage}" alt="${book.title}" title="${book.title}" class="thumb" border="0" width="100px"/></a>
                             </div>           
                         </div>
                     </c:forEach>

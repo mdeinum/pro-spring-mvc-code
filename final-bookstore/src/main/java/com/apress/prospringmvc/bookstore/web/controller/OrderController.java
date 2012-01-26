@@ -1,5 +1,7 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
 /**
@@ -31,7 +34,13 @@ public class OrderController {
 
     private ModelAndView handleOrderInternal(long orderId) {
         ModelAndView mav = new ModelAndView("order");
-        mav.addObject("order", this.bookstoreService.findOrder(orderId));
+        Order order = this.bookstoreService.findOrder(orderId);
+        // Do some ugly hibernate stuff here
+        Hibernate.initialize(order);
+        if (order instanceof HibernateProxy) {
+            order = (Order) ((HibernateProxy) order).getHibernateLazyInitializer().getImplementation();
+        }
+        mav.addObject("order", order);
         return mav;
 
     }

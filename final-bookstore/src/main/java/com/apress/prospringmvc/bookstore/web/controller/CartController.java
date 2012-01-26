@@ -20,6 +20,7 @@ import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
+import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 
 @Controller
 @RequestMapping("/cart")
@@ -42,7 +43,8 @@ public class CartController {
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
     @ModelAttribute("order")
     public Order checkout(HttpServletRequest request) {
-        Account customer = (Account) WebUtils.getRequiredSessionAttribute(request, "customer");
+        Account customer = (Account) WebUtils.getRequiredSessionAttribute(request,
+                SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE);
         Order order = this.bookstoreService.createOrder(this.cart, customer);
         return order;
     }

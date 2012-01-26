@@ -1,6 +1,8 @@
 package com.apress.prospringmvc.bookstore.web.config;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +15,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -27,8 +31,11 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.xml.MarshallingView;
 
 import com.apress.prospringmvc.bookstore.domain.Cart;
+import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 import com.apress.prospringmvc.bookstore.web.view.OrderExcelView;
@@ -154,8 +161,27 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver contentNegotiatingViewResolver() {
         ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
+        List<View> defaultViews = new ArrayList<View>();
+        MappingJacksonJsonView json = new MappingJacksonJsonView();
+        json.setModelKey("order");
+        defaultViews.add(json); //JSON support
+        MarshallingView xml = new MarshallingView(xstreamMarshaller());
+        xml.setModelKey("order");
+        defaultViews.add(xml); // XML Support
+        viewResolver.setDefaultViews(defaultViews);
         viewResolver.setOrder(1);
         return viewResolver;
+    }
+
+    @Bean
+    public XStreamMarshaller xstreamMarshaller() {
+        XStreamMarshaller marshaller = new XStreamMarshaller();
+        try {
+            marshaller.setAliases(Collections.singletonMap("order", Order.class));
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException(e);
+        }
+        return marshaller;
     }
 
     @Bean

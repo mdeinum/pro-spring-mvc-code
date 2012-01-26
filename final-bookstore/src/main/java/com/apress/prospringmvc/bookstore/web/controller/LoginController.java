@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
-import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 import com.apress.prospringmvc.bookstore.service.AccountService;
+import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 
 @Controller
 public class LoginController {
-
-    private static final String ACCOUNT_SESSION_ATTRIBUTE = "account";
 
     @Autowired
     private AccountService accountService;
@@ -31,10 +29,10 @@ public class LoginController {
     public String handleLogin(@RequestParam String username, @RequestParam String password, HttpServletRequest request)
             throws AuthenticationException {
         Account account = this.accountService.login(username, password);
-        WebUtils.setSessionAttribute(request, ACCOUNT_SESSION_ATTRIBUTE, account);
+        WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, account);
         String url = (String) WebUtils.getSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL);
         WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL, null); // Remove the attribute
-        if (StringUtils.hasText(url)) {
+        if (StringUtils.hasText(url) && !url.contains("login")) {
             return "redirect:" + url;
         } else {
             return "/index.htm";
