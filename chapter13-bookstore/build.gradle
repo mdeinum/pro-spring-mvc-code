@@ -1,5 +1,5 @@
 war {
-	archiveName = 'appendix-b-spring-security.war'
+	archiveName = 'bookstore-13-swf.war'
 }
 
 dependencies() {
