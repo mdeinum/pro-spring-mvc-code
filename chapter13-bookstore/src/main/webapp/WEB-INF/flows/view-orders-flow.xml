@@ -7,11 +7,10 @@
               
     <input name="orderId" required="false"/>
     
-	<on-start>
-		<evaluate expression="orderController.retrieveOrders()" result="flowScope.orders" />
-	</on-start>
-
 	<view-state id="ordersOverview" view="ordersOverview">
+		<on-render>
+			<evaluate expression="orderController.retrieveOrders()" result="flowScope.orders" />
+		</on-render>
 		<transition on="showOrderDetail" to="orderDetail">
 			<set name="flashScope.order" value="orders[requestParameters.index]"></set>
 		</transition>

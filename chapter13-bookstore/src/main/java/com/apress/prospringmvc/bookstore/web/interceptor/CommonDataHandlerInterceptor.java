@@ -15,13 +15,8 @@ public class CommonDataHandlerInterceptor extends HandlerInterceptorAdapter {
 	private BookstoreService bookstoreService;
 
 	@Override
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-
-		if (modelAndView != null) {
-			modelAndView.addObject("randomBooks",
-					this.bookstoreService.findRandomBooks());
-		}
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		request.setAttribute("randomBooks", this.bookstoreService.findRandomBooks());
+		return super.preHandle(request, response, handler);
 	}
 }
