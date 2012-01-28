@@ -20,7 +20,7 @@ public class JpaCategoryRepository implements CategoryRepository {
 	public List<Category> findAll() {
 		String hql = "select c from Category c order by c.name";
 		TypedQuery<Category> query = this.entityManager.createQuery(hql, Category.class);
-		return query.getResultList();
+		return query.setHint("org.hibernate.cacheable", true).getResultList();
 	}
 
 	@Override

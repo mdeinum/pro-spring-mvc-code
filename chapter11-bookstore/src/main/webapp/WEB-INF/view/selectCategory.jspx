@@ -9,9 +9,9 @@
 			<tr>
 				<td width="30%"><spring:message code="label.page.select.category"/></td>
 				<td>
+				</td>
 					<form:select path="category" items="${selectableCategories}" itemLabel="name" itemValue="id"/>
 					<form:errors path="category" cssClass="error"/>
-				</td>
 			</tr>
 		</table>
 		

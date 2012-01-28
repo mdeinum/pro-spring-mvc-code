@@ -39,17 +39,15 @@ public class JpaBookRepository implements BookRepository {
 	@Override
 	public List<Book> findByCategory(Category category) {
 		String hql = "select b from Book b where b.category=:category";
-		TypedQuery<Book> query = this.entityManager
-				.createQuery(hql, Book.class);
+		TypedQuery<Book> query = this.entityManager.createQuery(hql, Book.class);
 		query.setParameter("category", category);
-		return query.getResultList();
+		return query.setHint("org.hibernate.cacheable", true).getResultList();
 	}
 
 	@Override
 	public List<Book> findRandom(int count) {
 		String hql = "select b from Book b order by rand()";
-		TypedQuery<Book> query = this.entityManager
-				.createQuery(hql, Book.class);
+		TypedQuery<Book> query = this.entityManager.createQuery(hql, Book.class);
 		query.setMaxResults(count);
 		return query.getResultList();
 	}
@@ -63,15 +61,12 @@ public class JpaBookRepository implements BookRepository {
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		if (StringUtils.hasText(bookSearchCriteria.getTitle())) {
 			String title = bookSearchCriteria.getTitle().toUpperCase();
-			predicates.add(builder.like(
-					builder.upper(book.<String> get("title")), "%" + title
-							+ "%"));
+			predicates.add(builder.like(builder.upper(book.<String> get("title")), "%" + title + "%"));
 		}
 
 		if (bookSearchCriteria.getCategory() != null) {
 			Category category = bookSearchCriteria.getCategory();
-			predicates.add(builder.equal(book.<Category> get("category"),
-					category));
+			predicates.add(builder.equal(book.<Category> get("category"), category));
 		}
 
 		if (!predicates.isEmpty()) {
@@ -79,7 +74,7 @@ public class JpaBookRepository implements BookRepository {
 		}
 
 		query.orderBy(builder.asc(book.get("title")));
-		return this.entityManager.createQuery(query).getResultList();
+		return this.entityManager.createQuery(query).setHint("org.hibernate.cacheable", true).getResultList();
 	}
 
 	@Override

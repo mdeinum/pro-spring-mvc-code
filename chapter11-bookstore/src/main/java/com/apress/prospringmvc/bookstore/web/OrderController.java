@@ -59,11 +59,11 @@ public class OrderController {
 		return orderForm;
 	}
 
-	public List<Category> initializeCategories() {
+	public List<Category> initializeSelectableCategories() {
 		return categoryService.findAll();
 	}
 
-	public List<Book> initializeBooks(OrderForm orderForm) {
+	public List<Book> initializeSelectableBooks(OrderForm orderForm) {
 		return bookstoreService.findBooksByCategory(orderForm.getCategory());
 	}
 

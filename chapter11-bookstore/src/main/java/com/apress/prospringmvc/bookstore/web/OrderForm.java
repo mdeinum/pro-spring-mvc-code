@@ -28,107 +28,103 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 
 public class OrderForm implements Serializable {
 
-	private Map<Book, Integer> books = new HashMap<Book, Integer>();
+    private Map<Book, Integer> books = new HashMap<Book, Integer>();
 
-	private Book book;
-	@NotNull
-	@Min(1)
-	@Max(99)
-	private Integer quantity;
-	private Category category;
+    private Book book;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	private Date deliveryDate;
+    @NotNull
+    @Min(1)
+    @Max(999)
+    private Integer quantity;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	private Date orderDate;
+    private Category category;
 
-	// ---- Form validation methods triggered by webflow according to convention, see reference 5.10. Validating a model
-	public void validateSelectBooks(ValidationContext context) {
-		if (context.getUserEvent().equals("next")) {
-			MessageContext messages = context.getMessageContext();
-			if (books.isEmpty()) {
-				messages.addMessage(new MessageBuilder().error().source("books").code("error.page.books.required")
-						.build());
-			}
-		}
-	}
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    private Date deliveryDate;
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    private Date orderDate;
 
-	public void validateSelectCategory(ValidationContext context) {
-		if (context.getUserEvent().equals("next")) {
-			MessageContext messages = context.getMessageContext();
-			if (category == null) {
-				messages.addMessage(new MessageBuilder().error().source("category")
-						.code("error.page.category.required").build());
-			}
-		}
-	}
+    // ---- Form validation methods triggered by webflow according to convention, see reference 5.10. Validating a model
+    public void validateSelectBooks(ValidationContext context) {
+        if (context.getUserEvent().equals("next")) {
+            MessageContext messages = context.getMessageContext();
+            if (books.isEmpty()) {
+                messages.addMessage(new MessageBuilder().error().source("books").code("error.page.books.required")
+                        .build());
+            }
+        }
+    }
 
-	public void validateSelectDeliveryOptions(ValidationContext context) {
-		if (context.getUserEvent().equals("finish")) {
-			MessageContext messages = context.getMessageContext();
-			if (deliveryDate == null) {
-				messages.addMessage(new MessageBuilder().error().source("deliveryDate")
-						.code("error.page.selectdeliveryoptions.deliverydate.required").build());
-			} else {
-				if (deliveryDate.before(DateUtils.setHours(
-						DateUtils.setMinutes(DateUtils.setSeconds(DateUtils.setMilliseconds(new Date(), 0), 0), 0), 0))) {
-					messages.addMessage(new MessageBuilder().error().source("deliveryDate")
-							.code("error.page.selectdeliveryoptions.deliverydate.in.past").build());
-				}
-			}
-		}
-	}
+    public void validateSelectCategory(ValidationContext context) {
+        if (context.getUserEvent().equals("next")) {
+            MessageContext messages = context.getMessageContext();
+            if (category == null) {
+                messages.addMessage(new MessageBuilder().error().source("category")
+                        .code("error.page.category.required").build());
+            }
+        }
+    }
 
-	public void resetSelectedBooks() {
-		books.clear();
-	}
+    public void validateSelectDeliveryOptions(ValidationContext context) {
+        if (context.getUserEvent().equals("finish")) {
+            MessageContext messages = context.getMessageContext();
+            if (deliveryDate.before(DateUtils.setHours(
+                    DateUtils.setMinutes(DateUtils.setSeconds(DateUtils.setMilliseconds(new Date(), 0), 0), 0), 0))) {
+                messages.addMessage(new MessageBuilder().error().source("deliveryDate")
+                        .code("error.page.selectdeliveryoptions.deliverydate.in.past").build());
+            }
+        }
+    }
 
-	public Category getCategory() {
-		return category;
-	}
+    public void resetSelectedBooks() {
+        books.clear();
+    }
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    public Category getCategory() {
+        return category;
+    }
 
-	public Date getDeliveryDate() {
-		return deliveryDate;
-	}
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-	public void setDeliveryDate(Date deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
+    public Date getDeliveryDate() {
+        return deliveryDate;
+    }
 
-	public Date getOrderDate() {
-		return orderDate;
-	}
+    public void setDeliveryDate(Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
+    public Date getOrderDate() {
+        return orderDate;
+    }
 
-	public Integer getQuantity() {
-		return quantity;
-	}
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
+    public Integer getQuantity() {
+        return quantity;
+    }
 
-	public Map<Book, Integer> getBooks() {
-		return books;
-	}
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setBooks(Map<Book, Integer> books) {
-		this.books = books;
-	}
+    public Map<Book, Integer> getBooks() {
+        return books;
+    }
 
-	public Book getBook() {
-		return book;
-	}
+    public void setBooks(Map<Book, Integer> books) {
+        this.books = books;
+    }
 
-	public void setBook(Book book) {
-		this.book = book;
-	}
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 }
