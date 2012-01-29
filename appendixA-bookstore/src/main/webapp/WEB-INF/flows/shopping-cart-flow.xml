@@ -1,0 +1,29 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+
+	<input name="accountId" required="true"/>
+
+	<on-start>
+			<evaluate expression="authenticationController.initializeForm()" result="flowScope.authenticationForm" />
+	</on-start>
+
+	<view-state id="authenticate" view="login" model="authenticationForm">
+
+		<transition on="authenticate" to="authenticationOk" bind="true">
+			<evaluate expression="authenticationController.authenticate(flowScope.authenticationForm, externalContext, messageContext)"/>
+		</transition>
+
+		<transition on="previous" to="previous"/>
+	</view-state>
+
+	<end-state id="previous">
+		<output name=""/>
+	</end-state>	
+	<end-state id="authenticationOk"/>
+	
+	<output name=""/>
+</flow>	
+	
