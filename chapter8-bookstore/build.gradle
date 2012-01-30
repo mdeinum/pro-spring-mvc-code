@@ -1,3 +1,4 @@
-war {
-	archiveName = 'pizzas-r-us.war'
+dependencies() {
+    compile 'org.freemarker:freemarker:2.3.18'
+    compile 'org.apache.velocity:velocity:1.7'
 }
