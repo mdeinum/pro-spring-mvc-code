@@ -2,7 +2,7 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.1">
 	
 	<spring:url value="/j_spring_security_check" var="login" /> 
 	<form action="${login}" method="POST">
