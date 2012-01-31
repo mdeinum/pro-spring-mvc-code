@@ -10,6 +10,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -20,6 +21,7 @@ import org.springframework.webflow.mvc.view.FlowAjaxTilesView;
 
 import com.apress.prospringmvc.bookstore.web.converter.BookConverter;
 import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
+import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 
 /**
  * WebMvc Configuration.
@@ -84,5 +86,15 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	protected void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(bookConverter());
 		registry.addConverter(categoryConverter());
+	}
+
+	@Bean
+	public CommonDataHandlerInterceptor commonDataHandlerInterceptor() {
+		return new CommonDataHandlerInterceptor();
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(commonDataHandlerInterceptor());
 	}
 }

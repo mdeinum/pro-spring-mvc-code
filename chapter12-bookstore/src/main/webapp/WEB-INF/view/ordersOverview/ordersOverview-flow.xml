@@ -4,12 +4,11 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
                 
     <input name="orderId" required="false"/>
-    
-	<on-start>
-		<evaluate expression="orderController.retrieveOrders(externalContext.sessionMap.authenticatedAccount)" result="flowScope.orders" />
-	</on-start>
 
 	<view-state id="ordersOverview" view="ordersOverview">
+		<on-render>
+			<evaluate expression="orderController.retrieveOrders(externalContext.sessionMap.authenticatedAccount)" result="viewScope.orders" />
+		</on-render>
 		<transition on="showOrderDetail" to="orderDetail">
 			<set name="flashScope.order" value="orders[requestParameters.index]"></set>
 		</transition>
