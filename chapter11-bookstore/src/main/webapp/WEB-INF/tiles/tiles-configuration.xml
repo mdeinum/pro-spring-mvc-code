@@ -27,7 +27,7 @@
     </definition>
 
 	<definition name="login" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/view/login.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/authentication/login.jsp"/>
     </definition>
     
 	<definition name="ordersOverview" extends="fullTemplate">

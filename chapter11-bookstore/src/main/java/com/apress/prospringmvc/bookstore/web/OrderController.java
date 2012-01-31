@@ -1,32 +1,36 @@
 package com.apress.prospringmvc.bookstore.web;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Hibernate;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.webflow.action.EventFactorySupport;
+import org.springframework.webflow.execution.Event;
 
+import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
-import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
 
 /**
  * Controller to be used to place and view orders using the {@link BookstoreService}. This controller can be used using
- * Spring MVC (view orders) or by POJO access (for example Web Flow) for placing orders
+ * Spring MVC (view orders) or by POJO access (for example Web Flow) for placing orders.
  * 
  * @author Koen Serneels
  */
@@ -82,11 +86,22 @@ public class OrderController {
 		return bookstoreService.createOrder(order).getId();
 	}
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-	}
+	public Event validateDeliveryDate(OrderForm orderForm, MessageContext messageContext) {
+		if (orderForm.getDeliveryDate() == null) {
+			MessageBuilder errorMessageBuidler = new MessageBuilder().error();
+			errorMessageBuidler.source("deliveryDate");
+			errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.required");
+			messageContext.addMessage(errorMessageBuidler.build());
+			return new EventFactorySupport().error(this);
+		}
 
+		if (orderForm.getDeliveryDate().before(DateUtils.truncate(orderForm.getOrderDate(), Calendar.DAY_OF_MONTH))) {
+			MessageBuilder errorMessageBuidler = new MessageBuilder().error();
+			errorMessageBuidler.source("deliveryDate");
+			errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.in.past");
+			messageContext.addMessage(errorMessageBuidler.build());
+			return new EventFactorySupport().error(this);
+		}
+		return new EventFactorySupport().success(this);
+	}
 }

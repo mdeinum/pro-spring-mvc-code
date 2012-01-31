@@ -21,7 +21,7 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 
 /**
  * Form to capture all elements of a order creation flow. When all mandatory elements are filled in a new {@link Order}
- * can be created based upon info
+ * can be created based upon this information contained in this form
  * 
  * @author Koen Serneels
  */
@@ -45,15 +45,6 @@ public class OrderForm implements Serializable {
     private Date orderDate;
 
     // ---- Form validation methods triggered by webflow according to convention, see reference 5.10. Validating a model
-    public void validateSelectBooks(ValidationContext context) {
-        if (context.getUserEvent().equals("next")) {
-            MessageContext messages = context.getMessageContext();
-            if (books.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("books").code("error.page.books.required")
-                        .build());
-            }
-        }
-    }
 
     public void validateSelectCategory(ValidationContext context) {
         if (context.getUserEvent().equals("next")) {
@@ -65,13 +56,12 @@ public class OrderForm implements Serializable {
         }
     }
 
-    public void validateSelectDeliveryOptions(ValidationContext context) {
-        if (context.getUserEvent().equals("finish")) {
+    public void validateSelectBooks(ValidationContext context) {
+        if (context.getUserEvent().equals("next")) {
             MessageContext messages = context.getMessageContext();
-            if (deliveryDate.before(DateUtils.setHours(
-                    DateUtils.setMinutes(DateUtils.setSeconds(DateUtils.setMilliseconds(new Date(), 0), 0), 0), 0))) {
-                messages.addMessage(new MessageBuilder().error().source("deliveryDate")
-                        .code("error.page.selectdeliveryoptions.deliverydate.in.past").build());
+            if (books.isEmpty()) {
+                messages.addMessage(new MessageBuilder().error().source("books").code("error.page.books.required")
+                        .build());
             }
         }
     }

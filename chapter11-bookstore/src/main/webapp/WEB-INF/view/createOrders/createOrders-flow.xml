@@ -36,17 +36,44 @@
 	
 		<transition on="cancel" to="end" />
 	</view-state>
-	
+
 	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
 		<transition on="previous" to="selectBooks" />
 
-		<transition on="finish" to="end">
-			<evaluate expression="orderController.placeOrder(flowScope.orderForm, externalContext.sessionMap.authenticatedAccount)"/>
+		<transition on="finish" to="loginCheck">
+			<evaluate expression="orderController.validateDeliveryDate(flowScope.orderForm, messageContext)"/>
 		</transition>
 		
 		<transition on="cancel" to="end" />
 	</view-state>
 	
+	<decision-state id="loginCheck">
+		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
+	</decision-state>	
+
+	<subflow-state id="authenticate" subflow="authentication">
+		<transition on="authenticationOk" to="createOrder"/>
+		<transition on="previous" to="selectDeliveryOptions"/>
+	</subflow-state>
+	
+<!-- Refactored to a sub flow: placeOrders-flow.xml:
+
+     <action-state id="createOrder">
+		<evaluate expression="orderController.placeOrder(flowScope.orderForm, externalContext.sessionMap.authenticatedAccount)" result="flowScope.orderId"/>
+		<transition on="success" to="end"/>
+	</action-state>
+-->
+			
+	<subflow-state id="createOrder" subflow="placeOrders">
+		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
+		<input name="orderForm"/>
+		
+		<output name="orderId"/>
+		
+		<transition on="endOrderOk" to="endOrderOk"/>
+	</subflow-state>
+
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
 	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	

@@ -5,17 +5,25 @@
 
 	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
 		<table style="width: 100%">
-			<tr style="height: 10px;"/>
+			<tr>
+				<td colspan="2">
+					<form:errors path="books" cssClass="error"/>
+				</td>
+			</tr>
+ 			<tr style="height: 10px;"/>
 			<tr>
 				<td><spring:message code="label.page.books.select.book" /></td>
 				<td>
-					<form:select path="bookId" items="${selectableBooks}" itemLabel="description" itemValue="id"/>
+					<form:select path="book" items="${selectableBooks}" itemLabel="title" itemValue="id"/>
 				</td>
 			</tr>
 			<tr>
 				<td><spring:message code="label.page.books.select.quantity"/></td>
 				<td>
 					<form:input path="quantity" />
+					<span style="margin-left: 5px">
+						<form:errors path="quantity" cssClass="error"/>
+					</span>
 				</td>
 			</tr>
 			<tr height="10px"/>
@@ -39,7 +47,7 @@
 				</thead>
 				<tbody>
 				<tr height="10px"/>
-			<c:forEach items="${orderForm.selectedBooks}" var="book">
+			<c:forEach items="${orderForm.books}" var="book">
 				<tr>
 					<td>${book.key.title}</td>
 					<td>${book.value}</td>

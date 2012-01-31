@@ -30,6 +30,10 @@
 					</c:if>
 				</li>
 				<li>
+					<spring:url value="/login.htm" var="login" />
+					<a href="${login}">Login</a>
+				</li>
+				<li>
 					<a href="">About Us</a>
 				</li>
 			</ul>

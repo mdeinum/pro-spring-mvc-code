@@ -13,7 +13,9 @@
 				<td><spring:message code="label.page.selectdeliveryoptions.select.delivery.date" /></td>
 				<td>
 					<form:input path="deliveryDate" />
-
+					<span style="margin-left: 5px">
+						<form:errors path="deliveryDate" cssClass="error"/>
+					</span>
 					<script type="text/javascript">
 							Spring.addDecoration(new Spring.ElementDecoration({
 								elementId : "deliveryDate",

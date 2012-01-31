@@ -6,11 +6,12 @@
 	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
 		<table style="width: 100%">
 			<tr>
-				<td width="30%"><spring:message code="label.page.category"/></td>
+				<td width="30%">
+					<spring:message code="label.page.category"/>
+				</td>
 				<td>
 					<form:select path="category" items="${selectableCategories}" itemLabel="name" itemValue="id"/>
 					<form:errors path="category" cssClass="error"/>
-					<form:errors path="*" cssClass="error"/>
 				</td>
 			</tr>
 		</table>
