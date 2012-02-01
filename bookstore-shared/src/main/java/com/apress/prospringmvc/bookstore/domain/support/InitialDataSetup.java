@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -35,6 +38,8 @@ public class InitialDataSetup {
 	private BookBuilder bookBuilder;
 	@Autowired
 	private CategoryBuilder categoryBuilder;
+	@Autowired
+	private EntityManager entityManager;
 
 	public InitialDataSetup(TransactionTemplate transactionTemplate) {
 		this.transactionTemplate = transactionTemplate;
@@ -44,6 +49,10 @@ public class InitialDataSetup {
 		this.transactionTemplate.execute(new TransactionCallback<Void>() {
 			@Override
 			public Void doInTransaction(TransactionStatus status) {
+				if(dataIsAlreadyPresent()) {
+					return null;
+				}
+				
 				Account johnDoe;
 				Category category;
 
@@ -127,6 +136,10 @@ public class InitialDataSetup {
 
 				}
 				return null;
+			}
+
+			private boolean dataIsAlreadyPresent() {
+				return entityManager.createQuery("select count(a.id) from Account a", Long.class).getSingleResult().longValue() > 0;
 			}
 		});
 	}
