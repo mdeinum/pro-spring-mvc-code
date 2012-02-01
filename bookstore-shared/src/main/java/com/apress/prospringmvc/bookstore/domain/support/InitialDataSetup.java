@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -21,7 +20,7 @@ import com.apress.prospringmvc.bookstore.domain.Role;
 
 /**
  * Sets up initial data so the application can be used straight away. The data setup is executed in a separate
- * transaction, and commited when the {@link #setupData()} method returns
+ * transaction, and committed when the {@link #setupData()} method returns
  * 
  * @author Koen Serneels
  */
