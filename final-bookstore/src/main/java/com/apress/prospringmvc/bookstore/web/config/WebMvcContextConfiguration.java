@@ -1,8 +1,5 @@
 package com.apress.prospringmvc.bookstore.web.config;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,11 +12,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.oxm.xstream.XStreamMarshaller;
+import org.springframework.core.convert.converter.GenericConverter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -29,18 +25,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
-import org.springframework.web.servlet.view.xml.MarshallingView;
 
+import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
 import com.apress.prospringmvc.bookstore.domain.Cart;
-import com.apress.prospringmvc.bookstore.domain.Order;
+import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
-import com.apress.prospringmvc.bookstore.web.view.OrderExcelView;
-import com.apress.prospringmvc.bookstore.web.view.OrderPdfView;
-import com.apress.prospringmvc.bookstore.web.view.SimpleConfigurableViewResolver;
 import com.apress.prospringmvc.context.RequestHandledEventListener;
 
 /**
@@ -151,65 +141,14 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
         return exceptionResolver;
     }
 
-    /**
-     * The {@link ContentNegotiatingViewResolver} will detect the other {@link ViewResolver} instances in the application context. 
-     * 
-     * It will delegate the lookup of view resolving to all the detected view resolvers and afterwards will pick the best match
-     * 
-     * @return the {@link ContentNegotiatingViewResolver}
-     */
-    @Bean
-    public ViewResolver contentNegotiatingViewResolver() {
-        ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
-        List<View> defaultViews = new ArrayList<View>();
-        MappingJacksonJsonView json = new MappingJacksonJsonView();
-        json.setModelKey("order");
-        defaultViews.add(json); //JSON support
-        MarshallingView xml = new MarshallingView(xstreamMarshaller());
-        xml.setModelKey("order");
-        defaultViews.add(xml); // XML Support
-        viewResolver.setDefaultViews(defaultViews);
-        viewResolver.setOrder(1);
-        return viewResolver;
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(categoryConverter());
     }
 
     @Bean
-    public XStreamMarshaller xstreamMarshaller() {
-        XStreamMarshaller marshaller = new XStreamMarshaller();
-        try {
-            marshaller.setAliases(Collections.singletonMap("order", Order.class));
-        } catch (ClassNotFoundException e) {
-            throw new IllegalStateException(e);
-        }
-        return marshaller;
-    }
-
-    @Bean
-    public ViewResolver pdfViewResolver() {
-        SimpleConfigurableViewResolver viewResolver = new SimpleConfigurableViewResolver();
-        viewResolver.setViews(Collections.singletonMap("order", new OrderPdfView()));
-        return viewResolver;
-    }
-
-    @Bean
-    public ViewResolver xlsViewResolver() {
-        SimpleConfigurableViewResolver viewResolver = new SimpleConfigurableViewResolver();
-        viewResolver.setViews(Collections.singletonMap("order", new OrderExcelView()));
-        return viewResolver;
-    }
-
-    @Bean(name = "order")
-    public OrderPdfView orderPdfView() {
-        return new OrderPdfView();
-    }
-
-    @Bean
-    public ViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        viewResolver.setOrder(2);
-        return viewResolver;
+    public GenericConverter categoryConverter() {
+        return new StringToEntityConverter(Category.class);
     }
 
     @Bean

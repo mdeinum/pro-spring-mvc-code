@@ -18,7 +18,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 import com.apress.prospringmvc.bookstore.config.InfrastructureContextConfiguration;
 import com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration;
 import com.apress.prospringmvc.bookstore.web.config.WebMvcContextConfiguration;
-import com.opensymphony.sitemesh.webapp.SiteMeshFilter;
 
 public class BookstoreWebApplicationInitializer implements WebApplicationInitializer {
 
@@ -29,8 +28,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
         registerListener(servletContext);
         registerDispatcherServlet(servletContext);
         registerOpenEntityManagerInViewFilter(servletContext);
-        configureSiteMesh(servletContext);
-
     }
 
     private void registerDispatcherServlet(ServletContext servletContext) {
@@ -47,11 +44,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
         servletContext.addListener(new ContextLoaderListener(rootContext));
 
         servletContext.addListener(new RequestContextListener());
-    }
-
-    private void configureSiteMesh(ServletContext servletContext) {
-        FilterRegistration.Dynamic registration = servletContext.addFilter("sitemesh", new SiteMeshFilter());
-        registration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
     }
 
     private void registerOpenEntityManagerInViewFilter(ServletContext servletContext) {

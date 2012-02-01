@@ -1,8 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<title>Place Order</title>
-</head>
 <body>
     <form method="post" id="orderForm">
         <h1 style="{padding-left: 12px;}">Order</h1>

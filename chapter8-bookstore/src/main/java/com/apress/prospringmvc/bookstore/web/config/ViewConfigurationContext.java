@@ -3,10 +3,10 @@ package com.apress.prospringmvc.bookstore.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesViewResolver;
+import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
+import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 
 @Configuration
 public class ViewConfigurationContext {
@@ -24,16 +24,16 @@ public class ViewConfigurationContext {
     }
 
     @Bean
-    public FreeMarkerConfigurer velocityConfigurer() {
-        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-        freeMarkerConfigurer.setTemplateLoaderPath("WEB-INF/freemarker");
-        return freeMarkerConfigurer;
+    public VelocityConfigurer velocityConfigurer() {
+        VelocityConfigurer velocityConfigurer = new VelocityConfigurer();
+        velocityConfigurer.setResourceLoaderPath("WEB-INF/velocity");
+        return velocityConfigurer;
     }
 
     @Bean
     public ViewResolver velocityViewResolver() {
-        FreeMarkerViewResolver viewResolver = new FreeMarkerViewResolver();
-        viewResolver.setSuffix(".ftl");
+        VelocityViewResolver viewResolver = new VelocityViewResolver();
+        viewResolver.setSuffix(".vm");
         viewResolver.setExposeSpringMacroHelpers(true);
         viewResolver.setOrder(1);
         return viewResolver;

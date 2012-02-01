@@ -12,6 +12,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.convert.converter.GenericConverter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -24,7 +26,9 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
 import com.apress.prospringmvc.bookstore.domain.Cart;
+import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 import com.apress.prospringmvc.context.RequestHandledEventListener;
@@ -135,6 +139,16 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
         exceptionResolver.setExceptionMappings(mappings);
         exceptionResolver.setStatusCodes(statusCodes);
         return exceptionResolver;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(categoryConverter());
+    }
+
+    @Bean
+    public GenericConverter categoryConverter() {
+        return new StringToEntityConverter(Category.class);
     }
 
     @Bean
