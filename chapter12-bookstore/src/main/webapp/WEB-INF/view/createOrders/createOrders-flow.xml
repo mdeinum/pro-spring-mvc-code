@@ -2,59 +2,70 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
-                          
+
 	<on-start>
-		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
+		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm"/>
 	</on-start>
 
 	<view-state id="selectCategory" view="selectCategory" model="orderForm">
 		<on-render>
-			<evaluate expression="orderController.initializeCategories()" result="flashScope.selectableCategories" />
+			<evaluate expression="orderController.initializeSelectableCategories()" result="requestScope.selectableCategories"/>
 		</on-render>
-	
+		
 		<transition on="next" to="selectBooks"/>
 		
-		<transition on="return" to="endOrderCanceled" />
+		<transition on="cancel" to="end" />
 	</view-state>
 	
 	<view-state id="selectBooks" view="selectBooks" model="orderForm" >
 		<on-render>
-			<evaluate expression="orderController.initializeBooks(orderForm)" result="flashScope.selectableBooks" />
+			<evaluate expression="orderController.initializeSelectableBooks(orderForm)" result="flashScope.selectableBooks" />
 		</on-render>
 	
 		<transition on="add" >
 			<evaluate expression="orderController.addBook(flowScope.orderForm)" />
 			<render fragments="selectedBooks"/>
 		</transition>
-		
 		<transition on="next" to="selectDeliveryOptions" />
-		
+	
 		<transition on="reset" to="selectBooks">
-			<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm" />
+			<evaluate expression="orderForm.resetSelectedBooks()" />
 		</transition>
-
+		
 		<transition on="previous" to="selectCategory" />
+	
+		<transition on="cancel" to="end" />
 		
 	</view-state>
-	
+
 	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
-		<transition on="finish" to="loginCheck" bind="true"/>
-			
 		<transition on="previous" to="selectBooks" />
+
+		<transition on="finish" to="loginCheck">
+			<evaluate expression="orderController.validateDeliveryDate(flowScope.orderForm, messageContext)"/>
+		</transition>
 		
-		<transition on="return" to="endOrderCanceled" />
+		<transition on="cancel" to="end" />
 	</view-state>
 	
 	<decision-state id="loginCheck">
 		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
 	</decision-state>	
 
-	<subflow-state id="authenticate" subflow="authentication-flow">
+	<subflow-state id="authenticate" subflow="authentication">
 		<transition on="authenticationOk" to="createOrder"/>
 		<transition on="previous" to="selectDeliveryOptions"/>
 	</subflow-state>
 	
-	<subflow-state id="createOrder" subflow="create-order-flow">
+<!-- Refactored to a sub flow: placeOrders-flow.xml:
+
+     <action-state id="createOrder">
+		<evaluate expression="orderController.placeOrder(flowScope.orderForm, externalContext.sessionMap.authenticatedAccount)" result="flowScope.orderId"/>
+		<transition on="success" to="end"/>
+	</action-state>
+-->
+			
+	<subflow-state id="createOrder" subflow="placeOrders">
 		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
 		<input name="orderForm"/>
 		
@@ -63,8 +74,7 @@
 		<transition on="endOrderOk" to="endOrderOk"/>
 	</subflow-state>
 
-	<end-state id="endOrderCanceled" view="redirect:/index.jspx"/>
-	<end-state id="endOrderOk" view="redirect:/view-orders-flow?orderOk=true&amp;orderId={orderId}"/>
-
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	

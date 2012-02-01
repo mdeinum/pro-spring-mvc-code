@@ -3,7 +3,7 @@
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:sec="http://www.springframework.org/security/tags"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.1">
 
 	<c:if test="${not empty param.authenticationOk}">
 		<div id="authenticationOk"

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:tiles="http://tiles.apache.org/tags-tiles"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
 
@@ -17,8 +16,8 @@
 			</a>
 		</div>
 		<div class="right_footer">
-			<a href="#">home</a> <a href="#">about us</a>
+			<a href="#">home</a> <a href="#">about us</a> <a href="#">services</a>
 			<a href="#">privacy policy</a> <a href="#">contact us</a>
 		</div>
 	</footer>
-</jsp:root>
+

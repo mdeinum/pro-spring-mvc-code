@@ -3,7 +3,7 @@
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.1">
 	<jsp:directive.page import="java.util.Enumeration" />
 
 	<h2>Order detail</h2>

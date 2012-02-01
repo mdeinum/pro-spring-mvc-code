@@ -35,7 +35,6 @@ import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterc
 @EnableWebMvc
 @Profile("container")
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
-@ImportResource("classpath:/spring/spring-security.xml")
 public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
