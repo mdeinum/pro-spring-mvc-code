@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:tiles="http://tiles.apache.org/tags-tiles"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	<c:if test="${orderId !=null}">
 		<div id="orderSuccess"
@@ -31,7 +28,6 @@
 				<th align="left"><spring:message code="label.page.ordersoverview.order" /></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.books" /></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.order.date" /></th>
-				<th align="left"><spring:message code="label.page.ordersoverview.delivery.between" /></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.total.price" /></th>
 				<th align="left"><spring:message code="label.page.ordersoverview.total.detail" /></th>
 			</tr>
@@ -78,4 +74,3 @@
 
 		});
 	</script>
-</jsp:root>

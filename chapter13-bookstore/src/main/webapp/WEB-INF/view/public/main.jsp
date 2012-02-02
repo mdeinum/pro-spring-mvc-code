@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:sec="http://www.springframework.org/security/tags"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-	<c:if test="${not empty param.authenticationOk}">
+  <c:if test="${not empty param.authenticationOk}">
 		<div id="authenticationOk"
 			style="color: green; display: block; margin-left: 15px; margin-bottom: 10px;">
 			<table>
@@ -37,4 +36,3 @@
    			fadeIt();
 		});
 	</script>
-</jsp:root>

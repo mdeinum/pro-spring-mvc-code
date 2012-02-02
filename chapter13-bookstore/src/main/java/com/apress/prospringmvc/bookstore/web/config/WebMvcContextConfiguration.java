@@ -4,7 +4,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -47,8 +46,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasenames(new String[] { "messages",
-				"org/springframework/security/messages" });
+		messageSource.setBasenames(new String[] { "messages", "org/springframework/security/messages" });
 		return messageSource;
 	}
 
@@ -83,8 +81,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
-		tilesConfigurer
-				.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
+		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles-configuration.xml" });
 		return tilesConfigurer;
 	}
 

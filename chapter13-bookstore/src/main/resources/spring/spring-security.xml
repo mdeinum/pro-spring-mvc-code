@@ -9,32 +9,35 @@
 	<security:global-method-security pre-post-annotations="enabled"/>
 	
 	<security:http use-expressions="true" >
-		<security:form-login login-page="/public/login.htm" default-target-url="/public/index.htm?authenticationOk=1" authentication-failure-url="/public/login.htm?authenticationNok=1"  />
+		<security:form-login login-page="/public/authentication/login.htm" default-target-url="/public/main.htm?authenticationOk=1" authentication-failure-url="/public/authentication/login.htm?authenticationNok=1"  />
 
-		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" />
-		<security:intercept-url pattern="/index.jspx" access="permitAll" />
+		<security:intercept-url pattern="/index.jsp" access="permitAll" />
+		<security:intercept-url pattern="/public/authentication/**" access="permitAll" requires-channel="https" />
+		<security:intercept-url pattern="/public/createOrders/**" access="permitAll" requires-channel="https" />
 		<security:intercept-url pattern="/public/**" access="permitAll" />
+
+		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" requires-channel="https" />
 		
-		<security:intercept-url pattern="/public/login.htm" access="permitAll" requires-channel="http" />
-		<security:intercept-url pattern="/book-order-flow" access="permitAll" requires-channel="http" />
-		<security:intercept-url pattern="/view-orders-flow" access="permitAll" requires-channel="http" />
-	
+		<!--  !!! REFACTORED !!! left here for completeness:  using Spring Web Flow SecurityFlowExecutionListener
+			  and Web Flow security attributes
+			  
+		<security:intercept-url pattern="/public/createOders/createOrders-flow" access="permitAll" requires-channel="http" />
+		<security:intercept-url pattern="/secured/ordersOverview/ordersOverview-flow" access="permitAll" requires-channel="http" />
+		-->
+
 		<security:intercept-url pattern="/**" access="denyAll" />
 	</security:http>
-	
-	
 	
 	<security:authentication-manager>
 		<security:authentication-provider  user-service-ref="bookstoreUserDetailsService">
 			<security:password-encoder hash="sha-256">
 				<security:salt-source user-property="username"/>
 			</security:password-encoder>
-			<!-- 
+			<!--  !!! REFACTORED !!! left here for completeness:  now using Database driven BookstoreUserDetailsService
 			<security:user-service>
 				<security:user name="jd" password="5238377ba2eac049901b54004ee9e03db62c0ab0b48133a4a162ab3aedfc809f" authorities="ROLE_CUSTOMER"/>
 			</security:user-service>
 			-->
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
 </beans>

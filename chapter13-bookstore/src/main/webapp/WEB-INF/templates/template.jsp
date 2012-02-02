@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:tiles="http://tiles.apache.org/tags-tiles"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+<!DOCTYPE HTML>
 
-	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
-	<jsp:output omit-xml-declaration="false" />
-	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -45,7 +43,7 @@
                             <a href="${bookUrl}">${book.title}</a>
                             <div>
                             <c:url value="/public/resources/images/books/${book.isbn}/book_front_cover.png" var="bookImage"/>
-                            <a href="${bookUrl}"><img class="new_prod_img" src="${bookImage}" alt="" title="" border="0" /></a>
+                            <a href="${bookUrl}"><img class="new_prod_img" src="${bookImage}" alt="" title="" class="thumb" border="0"  /></a>
                             </div>           
                         </div>
                     </c:forEach>
@@ -57,4 +55,3 @@
     	</div>
 	</body>
 </html>
-</jsp:root>

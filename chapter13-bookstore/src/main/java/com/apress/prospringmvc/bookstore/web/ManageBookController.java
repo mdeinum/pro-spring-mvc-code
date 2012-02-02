@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,7 +19,6 @@ import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
 
 @Controller
-//@SessionAttributes("manageBookForm")
 public class ManageBookController {
 
 	@Autowired
@@ -35,9 +33,9 @@ public class ManageBookController {
 		return manageBookForm;
 	}
 
-	@RequestMapping("secured/manageBooks.htm")
-	public ModelAndView manageBooks(
-			@ModelAttribute ManageBookForm manageBookForm, ModelAndView mov) {
+	@RequestMapping("secured/manageBooks/manageBooks.htm")
+	public ModelAndView manageBooks(@ModelAttribute
+	ManageBookForm manageBookForm, ModelAndView mov) {
 
 		mov.setViewName("manageBooks");
 		return mov;
@@ -45,9 +43,9 @@ public class ManageBookController {
 
 	@RequestMapping("secured/addBooks.htm")
 	@PreAuthorize("hasRole('PERM_ADD_BOOKS')")
-	public ModelAndView addBooks(
-			@ModelAttribute @Valid ManageBookForm manageBookForm,
-			BindingResult bindingResult, ModelAndView mov, SessionStatus status) {
+	public ModelAndView addBooks(@ModelAttribute
+	@Valid
+	ManageBookForm manageBookForm, BindingResult bindingResult, ModelAndView mov, SessionStatus status) {
 		mov.setViewName("manageBooks");
 		manageBookForm.setSelectableCategories(categoryService.findAll());
 
@@ -56,12 +54,9 @@ public class ManageBookController {
 		}
 
 		BookBuilder bookBuilder = new BookBuilder();
-		bookBuilder.title(manageBookForm.getTitle())
-				.description(manageBookForm.getDescription())
-				.price(manageBookForm.getPrice().toString())
-				.author(manageBookForm.getAuthor())
-				.year(manageBookForm.getYear())
-				.category(manageBookForm.getCategory());
+		bookBuilder.title(manageBookForm.getTitle()).description(manageBookForm.getDescription())
+				.price(manageBookForm.getPrice().toString()).author(manageBookForm.getAuthor())
+				.year(manageBookForm.getYear()).category(manageBookForm.getCategory());
 
 		Book book = bookBuilder.build(true);
 
@@ -75,19 +70,17 @@ public class ManageBookController {
 
 	@RequestMapping("secured/addCategory.htm")
 	@PreAuthorize("hasRole('PERM_ADD_CATEGORIES')")
-	public ModelAndView addCategory(
-			@ModelAttribute @Valid ManageCategoryForm manageCategoryForm,
-			BindingResult bindingResult,
-			@ModelAttribute ManageBookForm manageBookForm, ModelAndView mov,
-			Errors errors) {
+	public ModelAndView addCategory(@ModelAttribute
+	@Valid
+	ManageCategoryForm manageCategoryForm, BindingResult bindingResult, @ModelAttribute
+	ManageBookForm manageBookForm, ModelAndView mov, Errors errors) {
 		mov.setViewName("manageBooks");
 
 		if (bindingResult.hasErrors()) {
 			return mov;
 		}
 
-		categoryService.addCategory(new Category(manageCategoryForm
-				.getCategory()));
+		categoryService.addCategory(new Category(manageCategoryForm.getCategory()));
 		manageBookForm.setSelectableCategories(categoryService.findAll());
 		mov.addObject("actionSuccess", "category");
 		return mov;

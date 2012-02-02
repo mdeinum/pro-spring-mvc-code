@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:sec="http://www.springframework.org/security/tags"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.2">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 	<c:if test="${not empty actionSuccess}">
 		<div id="actionSuccess"
@@ -24,6 +24,7 @@
 		</div>
 	</c:if>
 
+	<sec:authorize access="hasRole('PERM_ADD_CATEGORIES')">
 		<spring:url value="/secured/addCategory.htm" var="addCategory"/>
 		<form:form  action="${addCategory}" commandName="manageCategoryForm">
 			<table style="width: 100%">
@@ -41,7 +42,8 @@
 				<button type="reset" id="clear"><spring:message code="label.page.managebooks.clear.category"/></button>
 			</div>
 		</form:form>
- <sec:authorize access="hasRole('PERM_ADD_BOOKS')">
+	</sec:authorize>
+	 <sec:authorize access="hasRole('PERM_ADD_BOOKS')">
 		<spring:url value="/secured/addBooks.htm" var="addBook"/>
 		<form:form modelAttribute="manageBookForm" action="${addBook}" method="POST">
 			<table style="width: 100%">
@@ -107,4 +109,3 @@
    			fadeIt();
 		});
 	</script>
-</jsp:root>

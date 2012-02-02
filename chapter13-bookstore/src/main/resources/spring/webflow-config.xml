@@ -14,7 +14,7 @@
 	 	</webflow:flow-execution-listeners>
 	</webflow:flow-executor>
 
-	<webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows" flow-builder-services="flowBuilderServices">
+	<webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/view" flow-builder-services="flowBuilderServices">
 		<webflow:flow-location-pattern value="/**/*-flow.xml" />
 	</webflow:flow-registry>
 
@@ -25,7 +25,7 @@
     	<constructor-arg ref="transactionManager" />
 	</bean>
 	
-	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" conversion-service="conversionService" validator="validator"  />
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" conversion-service="conversionService" validator="validator" development="true"/>
 
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
