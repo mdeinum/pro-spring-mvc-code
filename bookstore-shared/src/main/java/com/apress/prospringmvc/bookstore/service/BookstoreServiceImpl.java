@@ -14,7 +14,6 @@ import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.OrderDetail;
-import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 import com.apress.prospringmvc.bookstore.repository.BookRepository;
 import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 
@@ -71,7 +70,6 @@ public class BookstoreServiceImpl implements BookstoreService {
 	public Order createOrder(Cart cart, Account customer) {
 		Order order = new Order(customer);
 		for (Entry<Book, Integer> line : cart.getBooks().entrySet()) {
-			OrderDetail detail = new OrderDetail();
 			order.addOrderDetail(new OrderDetail(line.getKey(), line.getValue()));
 		}
 		cart.clear();

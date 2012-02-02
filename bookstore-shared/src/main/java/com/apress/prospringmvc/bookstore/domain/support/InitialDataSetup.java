@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionStatus;
@@ -37,7 +38,7 @@ public class InitialDataSetup {
 	private BookBuilder bookBuilder;
 	@Autowired
 	private CategoryBuilder categoryBuilder;
-	@Autowired
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	public InitialDataSetup(TransactionTemplate transactionTemplate) {

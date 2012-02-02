@@ -7,7 +7,12 @@
 			<evaluate expression="authenticationController.initializeForm()" result="flowScope.authenticationForm" />
 	</on-start>
 
-	<view-state id="authenticate" view="login" model="authenticationForm">	
+	<view-state id="authenticate" view="login" model="authenticationForm">
+		<binder>
+			<binding property="username" required="true"/>
+			<binding property="password" required="true"/>
+		</binder>
+		
 		<transition on="authenticate" to="authenticationOk" >
 			<evaluate expression="authenticationController.authenticate(flowScope.authenticationForm, externalContext, messageContext)"/>
 		</transition>

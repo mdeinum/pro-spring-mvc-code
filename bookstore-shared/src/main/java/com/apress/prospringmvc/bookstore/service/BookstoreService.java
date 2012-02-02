@@ -8,7 +8,6 @@ import com.apress.prospringmvc.bookstore.domain.BookSearchCriteria;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.domain.Order;
-import com.apress.prospringmvc.bookstore.domain.support.LazyResultInitializerStrategy;
 
 /**
  * Main entry point for the bookstore.
