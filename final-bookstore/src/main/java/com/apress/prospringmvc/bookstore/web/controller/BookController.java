@@ -10,7 +10,7 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +40,7 @@ public class BookController implements ResourceLoaderAware {
     }
 
     @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
-    public String list(@ModelAttribute BookSearchCriteria searchCriteria, ModelMap model) {
+    public String list(@ModelAttribute BookSearchCriteria searchCriteria, Model model) {
         model.addAttribute(this.bookstoreService.findBooks(searchCriteria));
         model.addAttribute("categories", this.categoryService.findAll());
         return "book/search";

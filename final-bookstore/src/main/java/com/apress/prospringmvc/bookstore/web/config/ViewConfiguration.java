@@ -41,10 +41,6 @@ public class ViewConfiguration {
     @Bean
     public ContentNegotiatingViewResolver contentNegotiatingViewResolver() {
         ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
-        List<ViewResolver> viewResolvers = new ArrayList<ViewResolver>();
-        viewResolvers.add(pdfViewResolver());
-        viewResolvers.add(xlsViewResolver());
-        viewResolver.setViewResolvers(viewResolvers);
         List<View> defaultViews = new ArrayList<View>();
         defaultViews.add(jsonOrderView());
         defaultViews.add(xmlOrderView());
