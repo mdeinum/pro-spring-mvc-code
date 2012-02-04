@@ -3,14 +3,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-	<c:if test="${flowScope.orderId !=null}">
+	<c:if test="${not empty param['orderId']}">
 		<div id="orderSuccess"
 			style="color: green; display: block; margin-left: 15px; margin-bottom: 10px;">
 			<table>
 				<tr>
 					<td>
 						<ul style="list-style-type: disc">
-							<li><h3><spring:message code="label.page.ordersoverview.order.success" arguments="${flowScope.orderId}" /></h3></li>
+							<li><h3><spring:message code="label.page.ordersoverview.order.success" arguments="${param['orderId']}" /></h3></li>
 						</ul>
 					</td>
 				</tr>

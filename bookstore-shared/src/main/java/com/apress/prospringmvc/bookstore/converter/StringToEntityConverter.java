@@ -46,7 +46,7 @@ public class StringToEntityConverter implements GenericConverter {
                 if (source == null) {
                     return "";
                 } else {
-                    return FieldUtils.readField(source, ID_FIELD, true);
+                    return FieldUtils.readField(source, ID_FIELD, true).toString();
                 }
             } catch (IllegalAccessException e) {
             }

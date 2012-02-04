@@ -22,8 +22,9 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.webflow.mvc.view.FlowAjaxTilesView;
 
-import com.apress.prospringmvc.bookstore.web.converter.BookConverter;
-import com.apress.prospringmvc.bookstore.web.converter.CategoryConverter;
+import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
+import com.apress.prospringmvc.bookstore.domain.Book;
+import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 
 /**
@@ -102,13 +103,13 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
-	public BookConverter bookConverter() {
-		return new BookConverter();
+	public StringToEntityConverter bookConverter() {
+		return new StringToEntityConverter(Book.class);
 	}
 
 	@Bean
-	public CategoryConverter categoryConverter() {
-		return new CategoryConverter();
+	public StringToEntityConverter categoryConverter() {
+		return new StringToEntityConverter(Category.class);
 	}
 
 	@Bean
