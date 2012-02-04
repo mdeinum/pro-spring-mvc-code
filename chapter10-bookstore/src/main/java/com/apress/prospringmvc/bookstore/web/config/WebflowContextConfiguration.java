@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.executor.FlowExecutor;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
@@ -22,7 +22,6 @@ import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterc
  */
 
 @Configuration
-@Profile("container")
 @ImportResource("classpath:/spring/webflow-config.xml")
 public class WebflowContextConfiguration {
 
@@ -32,6 +31,9 @@ public class WebflowContextConfiguration {
 	private FlowDefinitionRegistry flowRegistry;
 	@Autowired
 	private CommonDataHandlerInterceptor commonDataHandlerInterceptor;
+	@Autowired
+	private LocaleChangeInterceptor localeChangeInterceptor;
+
 
 	@Bean
 	public FlowHandlerAdapter flowHandlerAdapter() {
@@ -43,7 +45,7 @@ public class WebflowContextConfiguration {
 	@Bean
 	public FlowHandlerMapping flowHandlerMapping() {
 		FlowHandlerMapping flowHandlerMapping = new FlowHandlerMapping();
-		flowHandlerMapping.setInterceptors(new Object[] { commonDataHandlerInterceptor });
+		flowHandlerMapping.setInterceptors(new Object[] { commonDataHandlerInterceptor,localeChangeInterceptor });
 		flowHandlerMapping.setFlowRegistry(flowRegistry);
 		flowHandlerMapping.setOrder(0);
 		return flowHandlerMapping;
