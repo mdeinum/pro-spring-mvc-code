@@ -15,31 +15,33 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Category implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@Basic(optional = false)
-	private String name;
+    @Basic(optional = false)
+    private String name;
 
-	@SuppressWarnings("unused")
-	private Category() {
-		// FOR ORM
-	}
+    public Category() {
+    }
 
-	public Category(String name) {
-		this.name = name;
-	}
+    public Category(String name) {
+        this.name = name;
+    }
 
-	public Long getId() {
-		return this.id;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }

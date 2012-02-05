@@ -4,9 +4,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.convert.converter.GenericConverter;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -78,7 +78,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * The {@link LocaleResolver} implementation to use. Specifies where to store the current selectd locale.
+     * The {@link LocaleResolver} implementation to use. Specifies where to store the current selected locale.
      * 
      * @return the {@link LocaleResolver}
      */
@@ -94,9 +94,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
      */
     @Bean
     public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages");
-        messageSource.setUseCodeAsDefaultMessage(false);
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:/messages");
+        messageSource.setUseCodeAsDefaultMessage(true);
         return messageSource;
     }
 
@@ -105,10 +105,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(categoryConverter());
+        registry.addFormatter(new DateFormatter("dd-MM-yyyy"));
     }
 
     @Bean
-    public GenericConverter categoryConverter() {
+    public StringToEntityConverter categoryConverter() {
         return new StringToEntityConverter(Category.class);
     }
 

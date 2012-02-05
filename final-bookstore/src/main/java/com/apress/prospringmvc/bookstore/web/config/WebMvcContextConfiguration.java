@@ -12,7 +12,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
@@ -147,7 +146,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public GenericConverter categoryConverter() {
+    public StringToEntityConverter categoryConverter() {
         return new StringToEntityConverter(Category.class);
     }
 

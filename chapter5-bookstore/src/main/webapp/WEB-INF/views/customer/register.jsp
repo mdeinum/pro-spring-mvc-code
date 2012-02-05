@@ -22,7 +22,7 @@
         <legend><spring:message code="account.userinfo"/></legend>
         <table>
             <tr><td><form:label path="username" cssErrorClass="error"><spring:message code="account.username" /></form:label></td><td><form:input path="username" /></td><td><form:errors path="username"/></td></tr>
-            <tr><td><form:label path="password" cssErrorClass="error"><spring:message code="account.password" /></form:label></td><td><form:input path="password" /></td><td><form:errors path="password"/></td></tr>
+            <tr><td><form:label path="password" cssErrorClass="error"><spring:message code="account.password" /></form:label></td><td><form:password path="password" /></td><td><form:errors path="password"/></td></tr>
             <tr><td><form:label path="emailAddress" cssErrorClass="error"><spring:message code="account.email" /></form:label></td><td><form:input path="emailAddress" /></td><td><form:errors path="emailAddress"/></td></tr>
         </table>
     </fieldset>
