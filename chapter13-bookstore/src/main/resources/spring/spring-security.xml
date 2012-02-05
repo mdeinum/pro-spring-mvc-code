@@ -17,14 +17,7 @@
 		<security:intercept-url pattern="/public/**" access="permitAll" />
 
 		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" requires-channel="https" />
-		
-		<!--  !!! REFACTORED !!! left here for completeness:  using Spring Web Flow SecurityFlowExecutionListener
-			  and Web Flow security attributes
-			  
-		<security:intercept-url pattern="/public/createOders/createOrders-flow" access="permitAll" requires-channel="http" />
-		<security:intercept-url pattern="/secured/ordersOverview/ordersOverview-flow" access="permitAll" requires-channel="http" />
-		-->
-
+	
 		<security:intercept-url pattern="/**" access="denyAll" />
 	</security:http>
 	
