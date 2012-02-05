@@ -4,7 +4,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
@@ -36,7 +35,6 @@ import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterc
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
-@ImportResource("classpath:/spring/spring-security.xml")
 public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 
 	@Override

@@ -3,23 +3,19 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
 	<welcome-file-list>
-		<welcome-file>index.jspx</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
       <param-name>contextClass</param-name>
       <param-value>
-          org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+          org.springframework.web.context.support.XmlWebApplicationContext
       </param-value>
   </context-param>
 
    <context-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>com.apress.prospringmvc.bookstore.config,com.apress.prospringmvc.bookstore.web.config.SpringSecurityConfiguration</param-value>
-  </context-param>
-    <context-param>
-      <param-name>spring.profiles.active</param-name>
-      <param-value>test,container,local</param-value>
+      <param-value>classpath:/spring/context.xml</param-value>
   </context-param>
  
   <listener>
@@ -37,7 +33,7 @@
       </init-param>
       <init-param>
           <param-name>contextConfigLocation</param-name>
-          <param-value>com.apress.prospringmvc.bookstore.web.config.WebflowContextConfiguration,com.apress.prospringmvc.bookstore.web.config.WebMvcContextConfiguration</param-value>
+          <param-value>com.apress.prospringmvc.bookstore.web.config.WebflowContextConfiguration com.apress.prospringmvc.bookstore.web.config.WebMvcContextConfiguration</param-value>
       </init-param>
       <load-on-startup>1</load-on-startup>
   </servlet>

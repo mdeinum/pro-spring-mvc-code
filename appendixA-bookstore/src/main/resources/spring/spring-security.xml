@@ -8,15 +8,13 @@
 
 	<security:global-method-security pre-post-annotations="enabled"/>
 	
-	<security:http use-expressions="true" >
+	<security:http use-expressions="true">
 		<security:form-login login-page="/public/authentication/login.htm" default-target-url="/public/main.htm?authenticationOk=1" authentication-failure-url="/public/authentication/login.htm?authenticationNok=1"  />
 
 		<security:intercept-url pattern="/index.jsp" access="permitAll" />
-		<security:intercept-url pattern="/public/authentication/**" access="permitAll" requires-channel="https" />
-		<security:intercept-url pattern="/public/createOrders/**" access="permitAll" requires-channel="https" />
 		<security:intercept-url pattern="/public/**" access="permitAll" />
 
-		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" requires-channel="https" />
+		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated"/>
 	
 		<security:intercept-url pattern="/**" access="denyAll" />
 	</security:http>

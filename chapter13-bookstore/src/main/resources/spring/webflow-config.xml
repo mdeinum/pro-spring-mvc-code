@@ -5,10 +5,6 @@
 
 	<webflow:flow-executor id="flowExecutor" flow-registry="flowRegistry" >
 	 	<webflow:flow-execution-repository max-executions="3" max-execution-snapshots="10" />
-	 	<!-- <webflow:flow-execution-listeners>
-	 		<webflow:listener ref="jpaFlowExecutionListener"/>
-	 	</webflow:flow-execution-listeners>
-	 	-->
 	 	 <webflow:flow-execution-listeners>
 	 		<webflow:listener ref="securityFlowExecutionListener"/>
 	 	</webflow:flow-execution-listeners>

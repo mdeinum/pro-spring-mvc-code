@@ -13,7 +13,6 @@
 
 		<security:intercept-url pattern="/index.jsp" access="permitAll" />
 		<security:intercept-url pattern="/public/authentication/**" access="permitAll" requires-channel="https" />
-		<security:intercept-url pattern="/public/createOrders/**" access="permitAll" requires-channel="https" />
 		<security:intercept-url pattern="/public/**" access="permitAll" />
 
 		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" requires-channel="https" />
