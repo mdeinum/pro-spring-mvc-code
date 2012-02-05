@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	
-	<secured attributes="fullyAuthenticated" />
+	<secured attributes="fullyAuthenticated"/>
 	
 	<input name="orderForm" required="true" type="com.apress.prospringmvc.bookstore.web.OrderForm"/>
 	

@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.1">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	<form:form modelAttribute="orderForm" action="${flowExecutionUrl}">
 		<table style="width: 100%">
 			<tr>
-				<td><spring:message code="label.page.selectdeliveryoptions.select.order.date" /></td>
+				<td><spring:message code="label.page.selectdeliveryoptions.select.order.date"/></td>
 				<td><form:input path="orderDate" disabled="true" /></td>
 			</tr>
 			<tr>
@@ -28,9 +27,8 @@
 		</table>
 		
 		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
-			<button type="submit" id="return" name="_eventId_return"><spring:message code="label.page.products.select.cancel"/></button>
-			<button type="submit" id="previous" name="_eventId_previous"><spring:message code="label.page.selectdeliveryoptions.previous"/></button>
-			<button type="submit" id="placeOrder" name="_eventId_finish"><spring:message code="label.page.selectdeliveryoptions.order"/></button>
+			<button type="submit" id="previous" name="_eventId_previous"><spring:message code="button.previous"/></button>
+			<button type="submit" id="cancel" name="_eventId_cancel"><spring:message code="button.cancel"/></button>
+			<button type="submit" id="finish" name="_eventId_finish"><spring:message code="label.page.selectdeliveryoptions.order"/></button>
 		</div>
 	</form:form>
-</jsp:root>

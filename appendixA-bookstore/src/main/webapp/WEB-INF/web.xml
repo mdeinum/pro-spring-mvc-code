@@ -5,6 +5,7 @@
 	<welcome-file-list>
 		<welcome-file>index.jspx</welcome-file>
 	</welcome-file-list>
+	
 	<context-param>
       <param-name>contextClass</param-name>
       <param-value>

@@ -2,14 +2,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
-      
-    <secured attributes="fullyAuthenticated"  />
-              
+
+	<secured attributes="fullyAuthenticated"/>
+               
     <input name="orderId" required="false"/>
-    
+
 	<view-state id="ordersOverview" view="ordersOverview">
 		<on-render>
-			<evaluate expression="orderController.retrieveOrders()" result="flowScope.orders" />
+			<evaluate expression="orderController.retrieveOrders()" result="viewScope.orders" />
 		</on-render>
 		<transition on="showOrderDetail" to="orderDetail">
 			<set name="flashScope.order" value="orders[requestParameters.index]"></set>
