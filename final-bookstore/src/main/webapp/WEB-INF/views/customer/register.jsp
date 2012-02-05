@@ -6,7 +6,8 @@
     <fieldset>
         <legend><spring:message code="account.personal"/></legend>
         <table>
-            <tr><td><form:label path="firstName" cssErrorClass="error"><spring:message code="account.firstname" /></form:label></td><td><form:input path="firstName" /></td><td><form:errors path="firstName"/></td></tr>
+            <tr>
+                <td><form:label path="firstName" cssErrorClass="error"><spring:message code="account.firstname" /></form:label></td><td><form:input path="firstName" /></td><td><form:errors path="firstName"/></td></tr>
             <tr><td><form:label path="lastName" cssErrorClass="error"><spring:message code="account.lastname" /></form:label></td><td><form:input path="lastName" /></td><td><form:errors path="lastName"/></td></tr>
             <tr><td><form:label path="dateOfBirth" cssErrorClass="error"><spring:message code="account.dob" /></form:label></td><td><form:input path="dateOfBirth" type="date" /></td><td><form:errors path="dateOfBirth"/></td></tr>
             <tr><td><form:label path="address.street" cssErrorClass="error"><spring:message code="address.street" /></form:label></td><td><form:input path="address.street" /></td><td><form:errors path="address.street"/></td></tr>

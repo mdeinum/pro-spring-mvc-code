@@ -1,30 +1,24 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.ServletWebRequest;
 
+import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.BookSearchCriteria;
+import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
 
 @Controller
 @RequestMapping("/book")
-public class BookController implements ResourceLoaderAware {
+public class BookController {
 
     @Autowired
     private BookstoreService bookstoreService;
@@ -34,36 +28,22 @@ public class BookController implements ResourceLoaderAware {
 
     private ResourceLoader resourceLoader;
 
-    @ModelAttribute("searchCriteria")
-    public BookSearchCriteria searchCriteria() {
+    /**
+     * 
+     * @return the model object
+     */
+    @ModelAttribute
+    public BookSearchCriteria criteria() {
         return new BookSearchCriteria();
     }
 
-    @RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
-    public String list(@ModelAttribute BookSearchCriteria searchCriteria, Model model) {
-        model.addAttribute(this.bookstoreService.findBooks(searchCriteria));
-        model.addAttribute("categories", this.categoryService.findAll());
-        return "book/search";
+    @ModelAttribute("categories")
+    public Collection<Category> categories() {
+        return this.categoryService.findAll();
     }
 
-    @RequestMapping(value = "{isbn}/image", method = RequestMethod.GET)
-    public void image(@PathVariable("isbn") String isbn, HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        Resource resource = this.resourceLoader.getResource("classpath:/META-INF/web-resources/images/books/" + isbn
-                + "/book_front_cover.png");
-        if (resource.exists()) {
-            if (new ServletWebRequest(request, response).checkNotModified(resource.lastModified())) {
-                return;
-            }
-            FileCopyUtils.copy(resource.getInputStream(), response.getOutputStream());
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-        }
+    @RequestMapping(value="/search", method = { RequestMethod.GET })
+    public Collection<Book> list(@ModelAttribute BookSearchCriteria criteria, Model model) {
+        return this.bookstoreService.findBooks(criteria));
     }
-
-    @Override
-    public void setResourceLoader(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
-
 }
