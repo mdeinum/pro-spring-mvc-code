@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * A component which resembles the address of a {@link Account}
  * 
@@ -13,11 +15,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address implements Serializable {
 
+    @NotEmpty
     private String street;
     private String houseNumber;
     private String boxNumber;
+
+    @NotEmpty
     private String city;
     private String postalCode;
+
+    @NotEmpty
     private String country;
 
     public Address() {

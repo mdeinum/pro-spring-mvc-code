@@ -12,6 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * A account resembles an authenticated user of our system. A account is able to submit orders. A account is identified
@@ -24,89 +28,95 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Account implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	private String firstName;
-	private String lastName;
+    private String firstName;
+    private String lastName;
 
-	private Date dateOfBirth;
+    private Date dateOfBirth;
 
-	@Embedded
-	private Address address = new Address();
-	private String emailAddress;
-	private String username;
-	private String password;
+    @Embedded
+    @Valid
+    private Address address = new Address();
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Role> roles = new ArrayList<Role>();
+    @NotEmpty
+    @Email
+    private String emailAddress;
+    @NotEmpty
+    private String username;
+    @NotEmpty
+    private String password;
 
-	public Long getId() {
-		return this.id;
-	}
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Role> roles = new ArrayList<Role>();
 
-	public String getFirstName() {
-		return this.firstName;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return this.firstName;
+    }
 
-	public String getLastName() {
-		return this.lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return this.lastName;
+    }
 
-	public String getEmailAddress() {
-		return this.emailAddress;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
+    public String getEmailAddress() {
+        return this.emailAddress;
+    }
 
-	public String getUsername() {
-		return this.username;
-	}
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return this.username;
+    }
 
-	public String getPassword() {
-		return this.password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return this.password;
+    }
 
-	public Address getAddress() {
-		return this.address;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    public Address getAddress() {
+        return this.address;
+    }
 
-	public Date getDateOfBirth() {
-		return this.dateOfBirth;
-	}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public Date getDateOfBirth() {
+        return this.dateOfBirth;
+    }
 
-	public List<Role> getRoles() {
-		return roles;
-	}
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
+    public List<Role> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }
