@@ -5,6 +5,7 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -30,21 +31,19 @@ import org.springframework.webflow.security.SecurityFlowExecutionListener;
 import org.springframework.webflow.security.SecurityRule;
 
 /**
- * Custom {@link SecurityFlowExecutionListener} falling back to the super
- * behavior in case expressions are not used in combination with Spring
- * Security. If expressions are used, contacts the {@link AccessDecisionManager}
- * the right way so that the attributes can be treated as SpEL expressions.
+ * Custom {@link SecurityFlowExecutionListener} falling back to the super behavior in case expressions are not used in
+ * combination with Spring Security. If expressions are used, contacts the {@link AccessDecisionManager} the right way
+ * so that the attributes can be treated as SpEL expressions.
  * <p/>
  * 
- * <b>Note</b>: Before using this class, please check <a
- * href="https://jira.springsource.org/browse/SWF-1508"/> to make sure this
- * issue isn't resolved yet. This class will become obsolete once Web Flow has
- * adapted to the latest Spring Security features.
+ * <b>Note</b>: Before using this class, please check <a href="https://jira.springsource.org/browse/SWF-1508"/> to make
+ * sure this issue isn't resolved yet. This class will become obsolete once Web Flow has adapted to the latest Spring
+ * Security features.
  * 
  * @author Koen Serneels
  */
-public class BookstoreSecurityFlowExecutionListener extends
-		SecurityFlowExecutionListener implements ApplicationContextAware {
+public class BookstoreSecurityFlowExecutionListener extends SecurityFlowExecutionListener implements
+		ApplicationContextAware {
 
 	private DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler;
 
@@ -53,70 +52,57 @@ public class BookstoreSecurityFlowExecutionListener extends
 		// If we don't have an AccessDecisionManager or we are not using
 		// expressions
 		// fall back to the the default behavior
-		if (getAccessDecisionManager() == null
-				|| defaultWebSecurityExpressionHandler == null) {
+		if (getAccessDecisionManager() == null || defaultWebSecurityExpressionHandler == null) {
 			super.decide(rule, object);
 			return;
 		}
 
 		// We are using expressions and want to contact the
 		// AccessDecisionManager the right way
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		@SuppressWarnings("unchecked")
 		Collection<ConfigAttribute> configAttributes = buildWebExpressionConfigAttribute(getConfigAttributes(rule));
 
-		HttpServletRequest request = (HttpServletRequest) RequestContextHolder
-				.getRequestContext().getExternalContext().getNativeRequest();
-		HttpServletResponse response = (HttpServletResponse) RequestContextHolder
-				.getRequestContext().getExternalContext().getNativeResponse();
+		HttpServletRequest request = (HttpServletRequest) RequestContextHolder.getRequestContext().getExternalContext()
+				.getNativeRequest();
+		HttpServletResponse response = (HttpServletResponse) RequestContextHolder.getRequestContext()
+				.getExternalContext().getNativeResponse();
 
-		getAccessDecisionManager().decide(authentication,
-				new FilterInvocation(request, response, new FilterChain() {
-					@Override
-					public void doFilter(ServletRequest request,
-							ServletResponse response) throws IOException,
-							ServletException {
-						throw new UnsupportedOperationException();
-					}
-				}), configAttributes);
+		getAccessDecisionManager().decide(authentication, new FilterInvocation(request, response, new FilterChain() {
+			@Override
+			public void doFilter(ServletRequest request, ServletResponse response) throws IOException, ServletException {
+				throw new UnsupportedOperationException();
+			}
+		}), configAttributes);
 
 	}
 
 	/**
-	 * Convert the expressions which are entered in the "attributes" attribute
-	 * of the flow &lt;security&gt; element to {@link ConfigAttribute}s.
-	 * Unfortunately, the type of {@link ConfigAttribute} required is a class
-	 * with package visibility
-	 * (org.springframework.security.web.access.expression
-	 * .WebExpressionConfigAttribute) so we need to use some reflection to
-	 * instantiate an instance of that class. When done so, we pass along a
-	 * Spring {@link Expression} created by the
-	 * {@link DefaultWebSecurityExpressionHandler} from the "attributes" String
-	 * provided by this flow
+	 * Convert the expressions which are entered in the "attributes" attribute of the flow &lt;security&gt; element to
+	 * {@link ConfigAttribute}s. Unfortunately, the type of {@link ConfigAttribute} required is a class with package
+	 * visibility (org.springframework.security.web.access.expression .WebExpressionConfigAttribute) so we need to use
+	 * some reflection to instantiate an instance of that class. When done so, we pass along a Spring {@link Expression}
+	 * created by the {@link DefaultWebSecurityExpressionHandler} from the "attributes" String provided by this flow
 	 */
-	private Collection<ConfigAttribute> buildWebExpressionConfigAttribute(
-			Collection<SecurityConfig> configAttributes) {
+	private Collection<ConfigAttribute> buildWebExpressionConfigAttribute(Collection<SecurityConfig> configAttributes) {
 		Collection<ConfigAttribute> result = new ArrayList<ConfigAttribute>();
 
 		for (SecurityConfig configAttribute : configAttributes) {
-			result.add(createWebExpressionConfigAttribute(configAttribute
-					.getAttribute()));
+			result.add(createWebExpressionConfigAttribute(configAttribute.getAttribute()));
 		}
 		return result;
 	}
 
 	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 
 		this.defaultWebSecurityExpressionHandler = applicationContext
 				.getBean(DefaultWebSecurityExpressionHandler.class);
-		for (AccessDecisionManager accessDecisionManager : applicationContext
-				.getBeansOfType(AccessDecisionManager.class).values()) {
+
+		for (AccessDecisionManager accessDecisionManager : getAccessDecisionManager(applicationContext,
+				new ArrayList<AccessDecisionManager>())) {
 			try {
-				if (accessDecisionManager
-						.supports(createWebExpressionConfigAttribute(""))) {
+				if (accessDecisionManager.supports(createWebExpressionConfigAttribute(""))) {
 					setAccessDecisionManager(accessDecisionManager);
 				}
 			} catch (Exception exception) {
@@ -125,17 +111,24 @@ public class BookstoreSecurityFlowExecutionListener extends
 		}
 	}
 
+	private List<AccessDecisionManager> getAccessDecisionManager(ApplicationContext applicationContext,
+			List<AccessDecisionManager> accessDecisionManagers) {
+		accessDecisionManagers.addAll(applicationContext.getBeansOfType(AccessDecisionManager.class).values());
+
+		if (applicationContext.getParent() != null) {
+			getAccessDecisionManager(applicationContext.getParent(), accessDecisionManagers);
+		}
+		return accessDecisionManagers;
+	}
+
 	private ConfigAttribute createWebExpressionConfigAttribute(String expression) {
 		try {
-			Constructor<?> constructor = ClassUtils
-					.getClass(
-							"org.springframework.security.web.access.expression.WebExpressionConfigAttribute")
-					.getConstructor(Expression.class);
-			AccessibleObject.setAccessible(
-					new AccessibleObject[] { constructor }, true);
-			return (ConfigAttribute) constructor
-					.newInstance(defaultWebSecurityExpressionHandler
-							.getExpressionParser().parseExpression(expression));
+			Constructor<?> constructor = ClassUtils.getClass(
+					"org.springframework.security.web.access.expression.WebExpressionConfigAttribute").getConstructor(
+					Expression.class);
+			AccessibleObject.setAccessible(new AccessibleObject[] { constructor }, true);
+			return (ConfigAttribute) constructor.newInstance(defaultWebSecurityExpressionHandler.getExpressionParser()
+					.parseExpression(expression));
 		} catch (Exception exception) {
 			throw new RuntimeException(exception);
 		}
