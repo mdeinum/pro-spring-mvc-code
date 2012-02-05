@@ -17,20 +17,17 @@
 		<nav>
 			<ul>
 				<li>
-					<a href="${home}">Home</a>
+					<a href="${home}"><spring:message code="nav.home"/></a>
 				</li>
 				<li>
 				    <spring:url value="/createOrders" var="createOrder" />
-					<a href="${createOrder}">Buy books</a>
+					<a href="${createOrder}"><spring:message code="nav.books"/></a>
 				</li>
 				<li>
 					<c:if test="${authenticatedAccount !=null}">
 						<spring:url value="/ordersOverview.htm" var="ordersOverview" />
-						<a href="${ordersOverview}">View orders</a>
+						<a href="${ordersOverview}"><spring:message code="nav.ordersOverview"/></a>
 					</c:if>
-				</li>
-				<li>
-					<a href="">About Us</a>
 				</li>
 			</ul>
 			<ul style="float: right;">
