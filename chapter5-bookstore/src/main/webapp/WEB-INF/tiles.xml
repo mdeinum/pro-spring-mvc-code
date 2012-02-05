@@ -24,6 +24,11 @@
         <put-attribute name="body" value="/WEB-INF/views/book/search.jsp" />
     </definition>
 
+    <definition name="book/detail" extends="template">
+        <put-attribute name="title" value="book.title" />
+        <put-attribute name="body" value="/WEB-INF/views/book/detail.jsp" />
+    </definition>
+
     <definition name="customer/account" extends="template">
         <put-attribute name="title" value="account.title" />
         <put-attribute name="body" value="/WEB-INF/views/customer/account.jsp" />

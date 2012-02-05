@@ -7,7 +7,7 @@
     <nav>
         <ul style="float: left;">                                                                       
             <li class="selected"><a href="${homeUrl}"><spring:message code="nav.home"/></a></li>
-            <li><a href="<c:url value="/book"/>"><spring:message code="nav.books"/></a></li>
+            <li><a href="<c:url value="/book/search"/>"><spring:message code="nav.books"/></a></li>
             <li><a href="<c:url value="/customer/account"/>"><spring:message code="nav.account"/></a></li>
             <li><a href="<c:url value="/cart/checkout"/>"><spring:message code="nav.checkout"/></a></li>
             <c:if test="${currentUser eq null}">
