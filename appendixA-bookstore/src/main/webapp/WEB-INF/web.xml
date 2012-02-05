@@ -8,8 +8,7 @@
 
 	<context-param>
 		<param-name>contextClass</param-name>
-		<param-value>
-          org.springframework.web.context.support.XmlWebApplicationContext
+		<param-value>org.springframework.web.context.support.XmlWebApplicationContext
       </param-value>
 	</context-param>
 
@@ -27,8 +26,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextClass</param-name>
-			<param-value>
-              org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
           </param-value>
 		</init-param>
 		<init-param>
