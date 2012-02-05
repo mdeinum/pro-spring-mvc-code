@@ -19,31 +19,28 @@
 		<nav>
 			<ul>
 				<li>
-					<a href="${home}">Home</a>
+					<a href="${home}"><spring:message code="nav.home"/></a>
 				</li>
 				<li>
 				    <spring:url value="/public/createOrders" var="createOrder" />
-					<a href="${createOrder}">Buy books</a>
+					<a href="${createOrder}"><spring:message code="nav.books"/></a>
 				</li>
 				<li>
 					<sec:authorize access="fullyAuthenticated">
 						<spring:url value="/secured/ordersOverview" var="ordersOverview" />
-						<a href="${ordersOverview}">View orders</a>
+						<a href="${ordersOverview}"><spring:message code="nav.ordersOverview"/></a>
 					</sec:authorize>
 				</li>
 				<li>
 					<spring:url value="/public/authentication/login.htm" var="login" />
-					<a href="${login}">Login</a>
+					<a href="${login}"><spring:message code="nav.login"/></a>
 				</li>
 				<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR') ">
 					<li>
 						<spring:url value="/secured/manageBooks/manageBooks.htm" var="manageBooks" /> 
-						<a href="${manageBooks}">Manage books</a>
+						<a href="${manageBooks}"><spring:message code="nav.manageBooks"/></a>
 					</li>
 				</sec:authorize>
-				<li>
-					<a href="">About Us</a>
-				</li>
 			</ul>
 			<ul style="float: right;">
 			 	<c:url value="/public/resources/images/gb.gif" var="gb"/>
