@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC 
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>    
+    <definition name="template" template="/WEB-INF/templates/template.jsp">
+        <put-attribute name="header" value="/WEB-INF/templates/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/templates/footer.jsp"/>
+    </definition>   
+
+    <definition name="index" extends="template">
+        <put-attribute name="title" value="home.title" />
+        <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+    </definition>
+
+    <definition name="login" extends="template">
+        <put-attribute name="title" value="login.title" />
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+    </definition>
+
+    <definition name="book/search" extends="template">
+        <put-attribute name="title" value="book.title" />
+        <put-attribute name="body" value="/WEB-INF/views/book/search.jsp" />
+    </definition>
+
+    <definition name="book/detail" extends="template">
+        <put-attribute name="title" value="book.title" />
+        <put-attribute name="body" value="/WEB-INF/views/book/detail.jsp" />
+    </definition>
+
+    <definition name="customer/account" extends="template">
+        <put-attribute name="title" value="account.title" />
+        <put-attribute name="body" value="/WEB-INF/views/customer/account.jsp" />
+    </definition>
+
+    <definition name="customer/register" extends="template">
+        <put-attribute name="title" value="account.title" />
+        <put-attribute name="body" value="/WEB-INF/views/customer/register.jsp" />
+    </definition>
+
+    <definition name="customer/order" extends="template">
+        <put-attribute name="title" value="order.title" />
+        <put-attribute name="body" value="/WEB-INF/views/customer/order.jsp" />
+    </definition>
+
+    <definition name="cart/checkout" extends="template">
+        <put-attribute name="title" value="checkout.title" />
+        <put-attribute name="body" value="/WEB-INF/views/cart/checkout.jsp" />
+    </definition>
+
+</tiles-definitions>

@@ -1,18 +1,14 @@
 package com.apress.prospringmvc.bookstore.web.config;
 
-import java.util.Properties;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -21,15 +17,12 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
-import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 import com.apress.prospringmvc.context.RequestHandledEventListener;
 
 /**
@@ -39,7 +32,6 @@ import com.apress.prospringmvc.context.RequestHandledEventListener;
  */
 @Configuration
 @EnableWebMvc
-@EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
@@ -72,9 +64,6 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
-        registry.addInterceptor(commonDataHandlerInterceptor());
-        registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account*", "/cart/checkout",
-                "/order/*", "/order.*");
     }
 
     //-- Start Locale Support (I18N) --//
@@ -92,7 +81,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * The {@link LocaleResolver} implementation to use. Specifies where to store the current selectd locale.
+     * The {@link LocaleResolver} implementation to use. Specifies where to store the current selected locale.
      * 
      * @return the {@link LocaleResolver}
      */
@@ -108,41 +97,18 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
      */
     @Bean
     public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages");
-        messageSource.setUseCodeAsDefaultMessage(false);
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:/messages");
+        messageSource.setUseCodeAsDefaultMessage(true);
         return messageSource;
     }
 
     //-- End Locale Support (I18N) --//
 
-    @Bean
-    public CommonDataHandlerInterceptor commonDataHandlerInterceptor() {
-        return new CommonDataHandlerInterceptor();
-    }
-
-    @Bean
-    public SecurityHandlerInterceptor securityHandlerInterceptor() {
-        return new SecurityHandlerInterceptor();
-    }
-
-    @Bean
-    public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
-        Properties mappings = new Properties();
-        mappings.setProperty("AuthenticationException", "login");
-
-        Properties statusCodes = new Properties();
-        mappings.setProperty("login", String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
-
-        exceptionResolver.setExceptionMappings(mappings);
-        exceptionResolver.setStatusCodes(statusCodes);
-        return exceptionResolver;
-    }
-
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(categoryConverter());
+        registry.addFormatter(new DateFormatter("dd-MM-yyyy"));
     }
 
     @Bean
@@ -155,4 +121,5 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     public Cart cart() {
         return new Cart();
     }
+
 }
