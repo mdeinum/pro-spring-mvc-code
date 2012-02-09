@@ -11,6 +11,7 @@ def String[] modules = [
 	'chapter6-bookstore',
 	'chapter7-bookstore',
 	'chapter8-bookstore',
+	'chapter9-bookstore',
 	'chapter10-bookstore',
 	'chapter11-bookstore',
 	'chapter12-bookstore',
