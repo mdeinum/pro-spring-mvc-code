@@ -10,7 +10,11 @@
 	
 	<security:http use-expressions="true" >
 		<security:form-login login-page="/public/authentication/login.htm" default-target-url="/public/main.htm?authenticationOk=1" authentication-failure-url="/public/authentication/login.htm?authenticationNok=1"  />
-
+		<!--  Some browsers lookup a "favicon.ico" in the root of the application. This can cause problems as being redirected
+			  to the (non existing) favicon.ico after login, or getting a 405 not allowed.
+			  By making this (again non existing) resource public we avoid these problems.
+		 -->
+		<security:intercept-url pattern="/favicon.ico" access="permitAll"/>
 		<security:intercept-url pattern="/index.jsp" access="permitAll" />
 		<security:intercept-url pattern="/public/authentication/**" access="permitAll" requires-channel="https" />
 		<security:intercept-url pattern="/public/createOrders/**" access="permitAll" requires-channel="https" />
