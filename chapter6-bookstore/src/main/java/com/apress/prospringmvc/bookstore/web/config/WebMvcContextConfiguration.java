@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
+import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Category;
+import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataInterceptor;
+import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 import com.apress.prospringmvc.context.RequestHandledEventListener;
 
 /**
@@ -64,6 +67,14 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addWebRequestInterceptor(commonDataInterceptor());
+        registry.addInterceptor(new SecurityHandlerInterceptor())
+                .addPathPatterns("/customer/account", "/cart/checkout");
+    }
+
+    @Bean
+    public WebRequestInterceptor commonDataInterceptor() {
+        return new CommonDataInterceptor();
     }
 
     //-- Start Locale Support (I18N) --//

@@ -7,7 +7,7 @@ import org.springframework.web.context.request.WebRequestInterceptor;
 
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
-public class CommonDataHandlerInterceptor implements WebRequestInterceptor {
+public class CommonDataInterceptor implements WebRequestInterceptor {
 
     @Autowired
     private BookstoreService bookstoreService;
