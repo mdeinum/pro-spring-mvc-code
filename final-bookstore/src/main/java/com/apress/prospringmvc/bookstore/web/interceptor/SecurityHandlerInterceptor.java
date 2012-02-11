@@ -19,7 +19,6 @@ import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 public class SecurityHandlerInterceptor extends HandlerInterceptorAdapter {
 
     public static final String REQUESTED_URL = "REQUESTED_URL";
-    public static final String REQUESTED_PARAMS = "REQUESTED_PARAMS";
     public static final String ACCOUNT_ATTRIBUTE = "account";
 
     @Override
@@ -30,7 +29,6 @@ public class SecurityHandlerInterceptor extends HandlerInterceptorAdapter {
             //Retrieve and store the original URL.
             String url = request.getRequestURL().toString();
             WebUtils.setSessionAttribute(request, REQUESTED_URL, url);
-
             throw new AuthenticationException("Authentication required.", "authentication.required");
         }
         return true;

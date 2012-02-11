@@ -1,34 +1,29 @@
 package com.apress.prospringmvc.bookstore.web.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.util.WebUtils;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.WebRequestInterceptor;
 
-import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
-public class CommonDataHandlerInterceptor extends HandlerInterceptorAdapter {
+public class CommonDataHandlerInterceptor implements WebRequestInterceptor {
 
     @Autowired
     private BookstoreService bookstoreService;
 
-    @Autowired
-    private Cart cart;
+    @Override
+    public void preHandle(WebRequest request) throws Exception {
+    }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
+    public void postHandle(WebRequest request, ModelMap model) throws Exception {
+        model.addAttribute("randomBooks", this.bookstoreService.findRandomBooks());
 
-        if (modelAndView != null) {
-            modelAndView.addObject("randomBooks", this.bookstoreService.findRandomBooks());
-            modelAndView.addObject("currentUser", WebUtils.getSessionAttribute(request, "account"));
-            modelAndView.addObject("cart", this.cart);
-        }
+    }
 
+    @Override
+    public void afterCompletion(WebRequest request, Exception ex) throws Exception {
     }
 
 }
