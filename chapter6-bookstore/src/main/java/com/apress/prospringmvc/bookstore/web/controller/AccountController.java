@@ -4,8 +4,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +18,7 @@ import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
+import com.apress.prospringmvc.bookstore.web.method.support.SessionAttribute;
 
 @Controller
 @RequestMapping("/customer/account")
@@ -48,9 +47,9 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index(Model model, HttpSession session) {
-        Account account = (Account) session.getAttribute(SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE);
-        model.addAttribute(account);
+    public String index(
+            Model model,
+            @SessionAttribute(value = SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, exposeAsModelAttribute = true) Account account) {
         model.addAttribute("orders", this.orderRepository.findByAccount(account));
         return "customer/account";
     }
