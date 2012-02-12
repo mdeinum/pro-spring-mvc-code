@@ -28,7 +28,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
+import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataInterceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 import com.apress.prospringmvc.context.RequestHandledEventListener;
 
@@ -72,9 +72,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
-        registry.addInterceptor(commonDataHandlerInterceptor());
-        registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account*", "/cart/checkout",
-                "/order/*", "/order.*");
+        registry.addWebRequestInterceptor(commonDataHandlerInterceptor());
+        registry.addInterceptor(new SecurityHandlerInterceptor()).addPathPatterns("/customer/account*",
+                "/cart/checkout", "/order/*", "/order.*");
     }
 
     //-- Start Locale Support (I18N) --//
@@ -117,13 +117,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     //-- End Locale Support (I18N) --//
 
     @Bean
-    public CommonDataHandlerInterceptor commonDataHandlerInterceptor() {
-        return new CommonDataHandlerInterceptor();
-    }
-
-    @Bean
-    public SecurityHandlerInterceptor securityHandlerInterceptor() {
-        return new SecurityHandlerInterceptor();
+    public CommonDataInterceptor commonDataHandlerInterceptor() {
+        return new CommonDataInterceptor();
     }
 
     @Bean
