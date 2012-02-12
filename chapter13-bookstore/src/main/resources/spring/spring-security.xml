@@ -8,9 +8,7 @@
 
 	<security:global-method-security pre-post-annotations="enabled"/>
 	
-	<security:http use-expressions="true" >
-		<security:custom-filter ref="cloudFoundryHttpServletRequestWrappingFilter"  before="FIRST"/>
-		
+	<security:http use-expressions="true" >		
 		<security:form-login login-page="/public/authentication/login.htm" default-target-url="/public/main.htm?authenticationOk=1" authentication-failure-url="/public/authentication/login.htm?authenticationNok=1"  />
 
 		<security:intercept-url pattern="/index.jsp" access="permitAll" />
@@ -23,8 +21,6 @@
 	
 		<security:intercept-url pattern="/**" access="denyAll" />
 	</security:http>
-	
-	<bean id="cloudFoundryHttpServletRequestWrappingFilter" class="com.apress.prospringmvc.bookstore.web.security.CloudFoundryHttpServletRequestWrappingFilter"/>
 	
 	<security:authentication-manager>
 		<security:authentication-provider  user-service-ref="bookstoreUserDetailsService">
