@@ -1,6 +1,7 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,8 +41,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request) {
-        WebUtils.setSessionAttribute(request, "account", null);
+    public String logout(HttpSession session) {
+        session.invalidate();
         return "redirect:/index.htm";
     }
 
