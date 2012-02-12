@@ -16,11 +16,12 @@
 
     <logger name="org.springframework" level="INFO" />
 	<logger name="com.apress" level="DEBUG" />
+    <logger name="com.apress.prospringmvc.context" level="WARN" />
+    
 
 	<root level="WARN">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 	</root>
-
 
 </configuration>

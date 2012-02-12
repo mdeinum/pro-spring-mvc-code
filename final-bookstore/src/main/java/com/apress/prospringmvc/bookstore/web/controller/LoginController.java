@@ -32,7 +32,7 @@ public class LoginController {
         WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, account);
         String url = (String) WebUtils.getSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL);
         WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL, null); // Remove the attribute
-        if (StringUtils.hasText(url) && !url.contains("login")) {
+        if (StringUtils.hasText(url) && !url.contains("login")) { // Prevent loops for the login page.
             return "redirect:" + url;
         } else {
             return "/index.htm";
@@ -43,7 +43,6 @@ public class LoginController {
     public String logout(HttpServletRequest request) {
         WebUtils.setSessionAttribute(request, "account", null);
         return "redirect:/index.htm";
-
     }
 
 }
