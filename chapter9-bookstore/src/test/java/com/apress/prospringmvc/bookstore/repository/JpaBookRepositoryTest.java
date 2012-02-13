@@ -64,6 +64,7 @@ public class JpaBookRepositoryTest {
         assertEquals(1, books.size());
 
         for (Book book : books) {
+            assertEquals(this.book.getCategory().getId(), category.getId());
             assertEquals(this.book.getAuthor(), book.getAuthor());
             assertEquals(this.book.getDescription(), book.getDescription());
             assertEquals(this.book.getIsbn(), book.getIsbn());
