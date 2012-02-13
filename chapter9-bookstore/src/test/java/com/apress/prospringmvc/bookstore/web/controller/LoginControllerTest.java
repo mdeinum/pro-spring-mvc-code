@@ -2,6 +2,7 @@ package com.apress.prospringmvc.bookstore.web.controller;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 
 import org.junit.After;
 import org.junit.Before;
@@ -53,7 +54,7 @@ public class LoginControllerTest {
         assertNotNull(account);
         assertEquals("John", account.getFirstName());
         assertEquals("Doe", account.getLastName());
-
+        assertNull(mockHttpServletRequest.getSession().getAttribute(SecurityHandlerInterceptor.REQUESTED_URL));
         assertEquals("redirect:someUrl", view);
 
         // Test the different view selection choices
