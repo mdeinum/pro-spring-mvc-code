@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * <ul>
  * <li>Creates the {@link EntityManagerFactory} based upon information in the META-INF/persistence.xml
  * <li>Creates a JPA local transaction manager</li>
- * <li>Creates a datasource to a local database (if running with the local profile)</li>
+ * <li>Creates a datasource to a local database</li>
  * </ul>
  * 
  * @author Marten Deinum
@@ -65,13 +65,10 @@ public class InfrastructureContextConfiguration {
         return transactionManager;
     }
 
-    @Configuration
-    public static class LocalDataSourceConfiguration {
-        @Bean
-        public DataSource dataSource() {
-            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-            builder.setType(EmbeddedDatabaseType.H2);
-            return builder.build();
-        }
+    @Bean
+    public DataSource dataSource() {
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        builder.setType(EmbeddedDatabaseType.H2);
+        return builder.build();
     }
 }

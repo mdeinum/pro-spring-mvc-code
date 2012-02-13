@@ -45,18 +45,13 @@ public class BookstoreServiceImpl implements BookstoreService {
 
     @Override
     @Transactional(readOnly = false)
-    public Order createOrder(Order order) {
+    public Order store(Order order) {
         return this.orderRepository.save(order);
     }
 
     @Override
     public List<Book> findBooks(BookSearchCriteria bookSearchCriteria) {
         return this.bookRepository.findBooks(bookSearchCriteria);
-    }
-
-    @Override
-    public void addBook(Book book) {
-        this.bookRepository.storeBook(book);
     }
 
     @Override
@@ -78,12 +73,6 @@ public class BookstoreServiceImpl implements BookstoreService {
         }
         cart.clear();
         return order;
-    }
-
-    @Override
-    @Transactional(readOnly = false)
-    public Order store(Order order) {
-        return this.orderRepository.save(order);
     }
 
     @Override

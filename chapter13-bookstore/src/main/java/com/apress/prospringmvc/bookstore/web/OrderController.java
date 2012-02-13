@@ -73,7 +73,7 @@ public class OrderController {
 		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
 				.orderDate(orderForm.getOrderDate()).account(SecurityContextSupport.getUserDetails().getAccount())
 				.build(true);
-		return bookstoreService.createOrder(order).getId();
+		return bookstoreService.store(order).getId();
 	}
 
 	public Event validateDeliveryDate(OrderForm orderForm, MessageContext messageContext) {

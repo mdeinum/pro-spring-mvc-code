@@ -31,7 +31,6 @@ import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
-import com.apress.prospringmvc.context.RequestHandledEventListener;
 
 /**
  * WebMvc Configuration.
@@ -43,17 +42,6 @@ import com.apress.prospringmvc.context.RequestHandledEventListener;
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
-
-    /**
-     * {@link org.springframework.context.ApplicationListener} implementation that listens 
-     * for {@link org.springframework.web.context.support.RequestHandledEvent} events and logs them.
-     * 
-     * @return the {@link RequestHandledEventListener}.
-     */
-    @Bean
-    public RequestHandledEventListener requestHandledEventListener() {
-        return new RequestHandledEventListener();
-    }
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
