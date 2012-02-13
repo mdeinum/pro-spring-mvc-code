@@ -20,7 +20,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerIntereceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
-import com.apress.prospringmvc.context.RequestHandledEventListener;
 
 /**
  * WebMvc Configuration.
@@ -32,11 +31,6 @@ import com.apress.prospringmvc.context.RequestHandledEventListener;
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
-
-    @Bean
-    public RequestHandledEventListener requestHandledEventListener() {
-        return new RequestHandledEventListener();
-    }
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {

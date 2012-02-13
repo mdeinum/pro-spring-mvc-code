@@ -34,10 +34,6 @@ public interface BookstoreService {
      */
     List<Order> findOrdersForAccount(Account account);
 
-    Order createOrder(Order order);
-
-    void addBook(Book book);
-
     /**
      * Persist or update the given {@link Order} in the database.
      * 

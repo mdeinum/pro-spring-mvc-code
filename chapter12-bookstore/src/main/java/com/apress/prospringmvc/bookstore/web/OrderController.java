@@ -71,7 +71,7 @@ public class OrderController {
 	public Long placeOrder(Account account, OrderForm orderForm) {
 		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
 				.orderDate(orderForm.getOrderDate()).account(account).build(true);
-		return bookstoreService.createOrder(order).getId();
+		return bookstoreService.store(order).getId();
 	}
 
 	public Event validateDeliveryDate(OrderForm orderForm, MessageContext messageContext) {
