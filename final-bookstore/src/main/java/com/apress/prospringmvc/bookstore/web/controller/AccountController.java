@@ -1,5 +1,9 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +19,30 @@ import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 
 @Controller
 @RequestMapping("/customer/account")
-public class AccountController extends AbstractCustomerController {
+public class AccountController {
 
     @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @ModelAttribute("countries")
+    public Map<String, String> countries(Locale currentLocale) {
+        Map<String, String> countries = new TreeMap<String, String>();
+        for (Locale locale : Locale.getAvailableLocales()) {
+            countries.put(locale.getCountry(), locale.getDisplayCountry(currentLocale));
+        }
+        return countries;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    @ModelAttribute
+    public Account register(Locale currentLocale) {
+        Account account = new Account();
+        account.getAddress().setCountry(currentLocale.getCountry());
+        return account;
+    }
 
     @ModelAttribute
     public Account formObject(HttpSession session) {
