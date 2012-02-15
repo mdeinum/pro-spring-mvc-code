@@ -3,6 +3,7 @@ package com.apress.prospringmvc.moneytransfer.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.apress.prospringmvc.moneytransfer.domain.Account;
@@ -10,6 +11,12 @@ import com.apress.prospringmvc.moneytransfer.domain.Account;
 public class MapBasedAccountRepositoryTests {
 
     private final MapBasedAccountRepository repository = new MapBasedAccountRepository();
+
+    @Before
+    public void setup() {
+        //Need to simulate calling of @PostContruct annotated method.
+        this.repository.initialize();
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void nonExistingAccount() {

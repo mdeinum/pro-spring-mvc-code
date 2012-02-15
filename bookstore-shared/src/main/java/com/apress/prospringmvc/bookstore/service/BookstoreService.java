@@ -65,4 +65,11 @@ public interface BookstoreService {
      * @return list with all the categories
      */
     List<Category> findAllCategories();
+
+    /**
+     * Store a book in the repository.
+     * 
+     * @param book the book to store.
+     */
+    void addBook(Book book);
 }

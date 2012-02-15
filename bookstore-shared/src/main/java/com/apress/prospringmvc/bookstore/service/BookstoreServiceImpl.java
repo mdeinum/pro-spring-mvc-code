@@ -84,4 +84,11 @@ public class BookstoreServiceImpl implements BookstoreService {
     public List<Category> findAllCategories() {
         return this.categoryRepository.findAll();
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void addBook(Book book) {
+        this.bookRepository.storeBook(book);
+
+    }
 }

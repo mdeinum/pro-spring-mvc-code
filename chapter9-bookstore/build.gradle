@@ -1,8 +1,8 @@
 dependencies() {
-    compile 'org.freemarker:freemarker:2.3.18'
-    compile 'org.apache.velocity:velocity:1.7'
-    compile 'org.mockito:mockito-all:1.9.0'
-    compile 'net.sourceforge.jwebunit:jwebunit-core:3.0'
-    compile 'net.sourceforge.jwebunit:jwebunit-htmlunit-plugin:3.0'
-    compile 'net.sourceforge.htmlunit:htmlunit:2.9'
+    testCompile 'org.freemarker:freemarker:2.3.18'
+    testCompile 'org.apache.velocity:velocity:1.7'
+    testCompile 'org.mockito:mockito-all:1.9.0'
+    testCompile 'net.sourceforge.jwebunit:jwebunit-core:3.0'
+    testCompile 'net.sourceforge.jwebunit:jwebunit-htmlunit-plugin:3.0'
+    testCompile 'net.sourceforge.htmlunit:htmlunit:2.9'
 }
