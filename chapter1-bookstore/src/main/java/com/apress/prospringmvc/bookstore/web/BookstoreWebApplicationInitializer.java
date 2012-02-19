@@ -5,12 +5,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.apress.prospringmvc.bookstore.config.InfrastructureContextConfiguration;
 import com.apress.prospringmvc.bookstore.web.config.WebMvcContextConfiguration;
 
 /**
@@ -25,7 +23,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 
     @Override
     public void onStartup(final ServletContext servletContext) throws ServletException {
-        registerListener(servletContext);
         registerDispatcherServlet(servletContext);
     }
 
@@ -34,12 +31,7 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
         DispatcherServlet dispatcherServlet = new DispatcherServlet(dispatcherContext);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
-    }
-
-    private void registerListener(final ServletContext servletContext) {
-        WebApplicationContext rootContext = createContext(InfrastructureContextConfiguration.class);
-        servletContext.addListener(new ContextLoaderListener(rootContext));
+        dispatcher.addMapping("*.htm");
     }
 
     /**

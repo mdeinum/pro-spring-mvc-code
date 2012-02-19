@@ -31,7 +31,7 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
         DispatcherServlet dispatcherServlet = new DispatcherServlet(dispatcherContext);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/*");
+        dispatcher.addMapping("*.htm");
     }
 
     /**

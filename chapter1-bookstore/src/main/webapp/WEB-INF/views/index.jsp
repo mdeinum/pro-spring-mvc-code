@@ -7,5 +7,6 @@
 <head>
 <body>
     <p>How exciting!  Our first bookstore page!</p>
+    <br/><p>The model says ${theModelKey}</p>
 </body>
 </html>

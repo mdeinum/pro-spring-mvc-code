@@ -1,6 +1,6 @@
 apply plugin: 'base'
 
-springVersion='3.1.0.RELEASE'
+springVersion='3.1.1.RELEASE'
 tilesVersion='2.2.2'
 springSecurityVersion='3.1.0.RELEASE'
 springSwfVersion='2.3.0.RELEASE'
@@ -30,7 +30,7 @@ allprojects {
 
     group = 'com.apress.prospringmvc'
 
-    version = '1.0.0-SNAPSHOT'
+    version = '1.0.0'
 
     repositories {
         mavenRepo url: 'http://maven.springframework.org/release'
