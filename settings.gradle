@@ -16,8 +16,7 @@ def String[] modules = [
 	'chapter11-bookstore',
 	'chapter12-bookstore',
 	'chapter13-bookstore',
-	'appendixA-bookstore',
-    'final-bookstore'
+	'appendixA-bookstore'
 ]
 
 include modules
