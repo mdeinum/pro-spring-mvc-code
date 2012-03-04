@@ -34,7 +34,6 @@ public class WebflowContextConfiguration {
 	@Autowired
 	private LocaleChangeInterceptor localeChangeInterceptor;
 
-
 	@Bean
 	public FlowHandlerAdapter flowHandlerAdapter() {
 		FlowHandlerAdapter flowHandlerAdapter = new FlowHandlerAdapter();
@@ -45,9 +44,8 @@ public class WebflowContextConfiguration {
 	@Bean
 	public FlowHandlerMapping flowHandlerMapping() {
 		FlowHandlerMapping flowHandlerMapping = new FlowHandlerMapping();
-		flowHandlerMapping.setInterceptors(new Object[] { commonDataHandlerInterceptor,localeChangeInterceptor });
+		flowHandlerMapping.setInterceptors(new Object[] { commonDataHandlerInterceptor, localeChangeInterceptor });
 		flowHandlerMapping.setFlowRegistry(flowRegistry);
-		flowHandlerMapping.setOrder(0);
 		return flowHandlerMapping;
 	}
 }

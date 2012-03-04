@@ -44,8 +44,8 @@
 			<tiles:insertAttribute name="selectedBooks"/>
 			
 		<div align="right" style="margin-bottom: 20px;" >
-			<button type="submit" id="previoys" name="_eventId_previous"><spring:message code="button.previous"/></button>
-			<button type="submit" id="previoys" name="_eventId_cancel"><spring:message code="button.cancel"/></button>
+			<button type="submit" id="previous" name="_eventId_previous"><spring:message code="button.previous"/></button>
+			<button type="submit" id="previous" name="_eventId_cancel"><spring:message code="button.cancel"/></button>
 			<button type="submit" id="next" name="_eventId_next"><spring:message code="button.next"/></button>
 		</div>
 	</form:form>

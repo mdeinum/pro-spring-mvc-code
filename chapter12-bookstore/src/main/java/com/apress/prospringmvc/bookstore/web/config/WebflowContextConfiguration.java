@@ -47,7 +47,6 @@ public class WebflowContextConfiguration {
 		FlowHandlerMapping flowHandlerMapping = new FlowHandlerMapping();
 		flowHandlerMapping.setInterceptors(new Object[] { commonDataHandlerInterceptor ,localeChangeInterceptor});
 		flowHandlerMapping.setFlowRegistry(flowRegistry);
-		flowHandlerMapping.setOrder(0);
 		return flowHandlerMapping;
 	}
 }
