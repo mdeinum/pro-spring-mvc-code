@@ -78,7 +78,7 @@ public class JpaBookRepositoryTest {
                 .isbn("1234567890123").category(category).build();
         bookRepository.storeBook(book);
 
-        // Explicitly flush so any CUD query that is left behind is send to the database before rollingback
+        // Explicitly flush so any CUD query that is left behind is send to the database before rolling back
         entityManager.flush();
     }
 }
