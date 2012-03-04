@@ -45,9 +45,7 @@ public class InfrastructureContextConfiguration {
     @Bean
     public FactoryBean<EntityManagerFactory> entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        localContainerEntityManagerFactoryBean.setPersistenceUnitName("bookstore");
         localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
-        localContainerEntityManagerFactoryBean.setPackagesToScan("com.apress.prospringmvc.bookstore.domain");
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         return localContainerEntityManagerFactoryBean;
     }
