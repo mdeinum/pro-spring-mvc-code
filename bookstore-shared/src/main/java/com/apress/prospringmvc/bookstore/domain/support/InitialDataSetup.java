@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -18,6 +17,7 @@ import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.Permission;
 import com.apress.prospringmvc.bookstore.domain.Role;
+import com.apress.prospringmvc.bookstore.domain.support.EntityBuilder.EntityBuilderManager;
 
 /**
  * Sets up initial data so the application can be used straight away. The data setup is executed in a separate
@@ -28,123 +28,208 @@ import com.apress.prospringmvc.bookstore.domain.Role;
 
 public class InitialDataSetup {
 
-    private TransactionTemplate transactionTemplate;
+	private TransactionTemplate transactionTemplate;
 
-    @Autowired
-    private OrderBuilder orderBuilder;
-    @Autowired
-    private AccountBuilder accountBuilder;
-    @Autowired
-    private BookBuilder bookBuilder;
-    @Autowired
-    private CategoryBuilder categoryBuilder;
-    @PersistenceContext
-    private EntityManager entityManager;
+	@PersistenceContext
+	private EntityManager entityManager;
 
-    public InitialDataSetup(TransactionTemplate transactionTemplate) {
-        this.transactionTemplate = transactionTemplate;
-    }
+	private Permission permissionAddCategories = new Permission("PERM_ADD_CATEGORIES");
+	private Permission permissionAddBooks = new Permission("PERM_ADD_BOOKS");
+	private Permission permissionCreateOrders = new Permission("PERM_CREATE_ORDER");
 
-    public void initialize() {
-        this.transactionTemplate.execute(new TransactionCallback<Void>() {
-            @Override
-            public Void doInTransaction(TransactionStatus status) {
-                if (dataIsAlreadyPresent()) {
-                    return null;
-                }
+	private Role roleCustomer = new Role("ROLE_CUSTOMER");
+	private Role roleAdmin = new Role("ROLE_ADMIN");
+	private Role roleAuthor = new Role("ROLE_AUTHOR");
 
-                Account johnDoe;
-                Category category;
+	private Account johnDoe;
+	private Category category;
 
-                // Create account for JD and admin
-                {
-                    Permission permissionAddCategories = new Permission("PERM_ADD_CATEGORIES");
-                    Permission permissionAddBooks = new Permission("PERM_ADD_BOOKS");
-                    Permission permissionCreateOrders = new Permission("PERM_CREATE_ORDER");
-                    Role roleCustomer = new Role("ROLE_CUSTOMER");
-                    Role roleAdmin = new Role("ROLE_ADMIN");
-                    Role roleAuthor = new Role("ROLE_AUTHOR");
+	public InitialDataSetup(TransactionTemplate transactionTemplate) {
+		this.transactionTemplate = transactionTemplate;
+	}
 
-                    johnDoe = InitialDataSetup.this.accountBuilder
-                            .address("Brussels", "1000", "Nieuwstraat", "1", "A", "BE").email("foo@test.com")
-                            .credentials("jd", "secret").name("John", "Doe")
-                            .roleWithPermissions(roleCustomer, permissionCreateOrders).build();
+	public void initialize() {
+		EntityBuilderManager.setEntityManager(entityManager);
 
-                    InitialDataSetup.this.accountBuilder.address("Antwerp", "2000", "Meir", "1", "A", "BE")
-                            .email("bar@test.com").credentials("admin", "secret").name("Super", "User")
-                            .roleWithPermissions(roleAdmin, permissionAddBooks, permissionAddCategories).build();
+		this.transactionTemplate.execute(new TransactionCallback<Void>() {
+			@Override
+			public Void doInTransaction(TransactionStatus status) {
+				if (dataIsAlreadyPresent()) {
+					return null;
+				}
 
-                    InitialDataSetup.this.accountBuilder.address("Gent", "9000", "Abdijlaan", "1", "A", "BE")
-                            .email("baz@test.com").credentials("author", "secret").name("Some", "Author")
-                            .roleWithPermissions(roleAuthor, permissionAddBooks).build();
-                }
+				// Create accounts
+				{
+					johnDoe = new AccountBuilder() {
+						{
+							address("Brussels", "1000", "Nieuwstraat", "1", "A", "BE");
+							email("foo@test.com");
+							credentials("jd", "secret");
+							name("John", "Doe");
+							roleWithPermissions(roleCustomer, permissionCreateOrders);
+						}
+					}.build();
 
-                // Create category
-                {
-                    category = InitialDataSetup.this.categoryBuilder.name("IT").build();
-                    InitialDataSetup.this.categoryBuilder.name("Java").build();
-                    InitialDataSetup.this.categoryBuilder.name("Web").build();
-                }
+					new AccountBuilder() {
+						{
+							address("Antwerp", "2000", "Meir", "1", "A", "BE");
+							email("bar@test.com");
+							credentials("admin", "secret");
+							name("Super", "User");
+							roleWithPermissions(roleAdmin, permissionAddBooks, permissionAddCategories);
+						}
+					}.build();
 
-                // Create different books and directly attach them with an order
-                List<Order> orders = new ArrayList<Order>();
-                {
-                    Book book = InitialDataSetup.this.bookBuilder.title("Effective Java").isbn("9780321356680")
-                            .description("brings together seventy-eight indispensable programmer’s rules of thumb")
-                            .author("Joshua Bloch").year(2008).price("31.20").category(category).build();
-                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
-                            .orderDate(new Date()).account(johnDoe).build());
+					new AccountBuilder() {
+						{
+							address("Gent", "9000", "Abdijlaan", "1", "A", "BE");
+							email("baz@test.com");
+							credentials("author", "secret");
+							name("Some", "Author");
+							roleWithPermissions(roleAuthor, permissionAddBooks);
+						}
+					}.build();
+				}
 
-                    book = InitialDataSetup.this.bookBuilder
-                            .title("Refactoring: Improving the Design of Existing Code")
-                            .isbn("9780201485677")
-                            .description(
-                                    "Refactoring is about improving the design of existing code. It is the process of "
-                                            + "changing a software system in such a way that it does not alter the external beha"
-                                            + "vior of the code, yet improves its internal structure")
-                            .author("Martin Fowler").year(1999).price("41.39").category(category).build();
-                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
-                            .orderDate(new Date()).account(johnDoe).build());
+				// Create categories
+				{
+					category = new CategoryBuilder() {
+						{
+							name("IT");
+						}
+					}.build();
 
-                    book = InitialDataSetup.this.bookBuilder
-                            .title("Clean Code: A Handbook of Agile Software Craftsmanship")
-                            .isbn("9780132350884")
-                            .description(
-                                    "Even bad code can function. But if code isn’t clean, it can bring a development organization "
-                                            + "to its knees. Every year, countless hours and significant resources are lost because of poorly "
-                                            + "written code. But it doesn’t have to be that way")
-                            .author("Robert C. Martin").year(2008).price("33.32").category(category).build();
-                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
-                            .orderDate(new Date()).account(johnDoe).build());
+					new CategoryBuilder() {
+						{
+							name("Java");
+						}
+					}.build();
 
-                    book = InitialDataSetup.this.bookBuilder
-                            .title("Agile Software Development, Principles, Patterns, and Practices")
-                            .isbn("9780135974445")
-                            .description(
-                                    "A unique collection of the latest software development methods. Includes OOD, UML, Design Patterns, Agile and XP methods with a "
-                                            + "detailed description of a complete software design for reusable programs in C++ and Java.")
-                            .author("Robert C. Martin").year(2002).price("54.61").category(category).build();
-                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
-                            .orderDate(new Date()).account(johnDoe).build());
+					new CategoryBuilder() {
+						{
+							name("Web");
+						}
+					}.build();
+				}
 
-                    book = InitialDataSetup.this.bookBuilder
-                            .title("Practical API Design: Confessions of a Java Framework Architect")
-                            .isbn("9781430209737")
-                            .description(
-                                    "The definitive guide to API design, this book will be required reading for all designers and engineers involved with the development,"
-                                            + "testing, and maintenance of APIs.").author("Jaroslav Tulach").year(2008)
-                            .price("56.01").category(category).build();
-                    orders.add(InitialDataSetup.this.orderBuilder.addBook(book, 1).deliveryDate(new Date())
-                            .orderDate(new Date()).account(johnDoe).build());
+				// Create different books
+				List<Order> orders = new ArrayList<Order>();
+				{
+					final Book effectiveJava = new BookBuilder() {
+						{
+							title("Effective Java");
+							isbn("9780321356680");
+							description("brings together seventy-eight indispensable programmer’s rules of thumb");
+							author("Joshua Bloch");
+							year(2008);
+							price("31.20");
+							category(category);
+						}
+					}.build();
 
-                }
-                return null;
-            }
+					final Book refactoring = new BookBuilder() {
+						{
+							title("Refactoring: Improving the Design of Existing Code");
+							isbn("9780201485677");
+							description("Refactoring is about improving the design of existing code. It is the process of "
+									+ "changing a software system in such a way that it does not alter the external beha"
+									+ "vior of the code, yet improves its internal structure");
+							author("Martin Fowler");
+							year(1999);
+							price("41.39");
+							category(category);
+						}
+					}.build();
 
-            private boolean dataIsAlreadyPresent() {
-                return InitialDataSetup.this.entityManager.createQuery("select count(a.id) from Account a", Long.class)
-                        .getSingleResult().longValue() > 0;
-            }
-        });
-    }
+					final Book cleanCode = new BookBuilder() {
+						{
+							title("Clean Code: A Handbook of Agile Software Craftsmanship");
+							isbn("9780132350884");
+							description("Even bad code can function. But if code isn’t clean, it can bring a development organization "
+									+ "to its knees. Every year, countless hours and significant resources are lost because of poorly "
+									+ "written code. But it doesn’t have to be that way");
+							author("Robert C. Martin");
+							year(2008);
+							price("33.32");
+							category(category);
+						}
+					}.build();
+
+					final Book agileSoftware = new BookBuilder() {
+						{
+							title("Agile Software Development, Principles, Patterns, and Practices");
+							isbn("9780135974445");
+							description("A unique collection of the latest software development methods. Includes OOD, UML, Design Patterns, Agile and XP methods with a "
+									+ "detailed description of a complete software design for reusable programs in C++ and Java.");
+							author("Robert C. Martin");
+							year(2002);
+							price("54.61");
+							category(category);
+						}
+					}.build();
+
+					final Book practicalApiDesign = new BookBuilder() {
+						{
+							title("Practical API Design: Confessions of a Java Framework Architect");
+							isbn("9781430209737");
+							description("The definitive guide to API design, this book will be required reading for all designers and engineers involved with the development,"
+									+ "testing, and maintenance of APIs.");
+							author("Jaroslav Tulach");
+							year(2008);
+							price("56.01");
+							category(category);
+						}
+					}.build();
+
+					// For the first three books we create a separate order for each book.
+					// For the final two books we create a single order but add two books to them
+					orders.add(new OrderBuilder() {
+						{
+							addBook(effectiveJava, 1);
+							deliveryDate(new Date());
+							orderDate(new Date());
+							account(johnDoe);
+						}
+					}.build());
+
+					orders.add(new OrderBuilder() {
+						{
+							addBook(refactoring, 1);
+							deliveryDate(new Date());
+							orderDate(new Date());
+							account(johnDoe);
+						}
+					}.build());
+
+					orders.add(new OrderBuilder() {
+						{
+							addBook(cleanCode, 1);
+							deliveryDate(new Date());
+							orderDate(new Date());
+							account(johnDoe);
+						}
+					}.build());
+
+					orders.add(new OrderBuilder() {
+						{
+							addBook(agileSoftware, 1);
+							addBook(practicalApiDesign, 1);
+							deliveryDate(new Date());
+							orderDate(new Date());
+							account(johnDoe);
+						}
+					}.build());
+
+				}
+	
+				return null;
+			}
+
+			private boolean dataIsAlreadyPresent() {
+				return InitialDataSetup.this.entityManager.createQuery("select count(a.id) from Account a", Long.class)
+						.getSingleResult().longValue() > 0;
+			}
+		});
+		EntityBuilderManager.clearEntityManager();
+	}
 }

@@ -76,9 +76,15 @@ public class OrderController {
 		}
 	}
 
-	public Long placeOrder(Account account, OrderForm orderForm) {
-		Order order = new OrderBuilder().addBooks(orderForm.getBooks()).deliveryDate(orderForm.getDeliveryDate())
-				.orderDate(orderForm.getOrderDate()).account(account).build(true);
+	public Long placeOrder(final Account account, final OrderForm orderForm) {
+		Order order = new OrderBuilder() {
+			{
+				addBooks(orderForm.getBooks());
+				deliveryDate(orderForm.getDeliveryDate());
+				orderDate(orderForm.getOrderDate()).account(account);
+			}
+
+		}.build(true);
 		return bookstoreService.store(order).getId();
 	}
 

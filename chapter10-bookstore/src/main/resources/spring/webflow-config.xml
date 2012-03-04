@@ -4,9 +4,7 @@
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
 
-	<webflow:flow-executor id="flowExecutor">
-	
-	</webflow:flow-executor>
+	<webflow:flow-executor id="flowExecutor"/>
 
 	<webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/view" flow-builder-services="flowBuilderServices">
 		<webflow:flow-location-pattern value="/**/*-flow.xml" />

@@ -3,7 +3,6 @@ package com.apress.prospringmvc.bookstore.domain.support;
 import java.io.Serializable;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -22,14 +21,11 @@ public abstract class EntityBuilder<T extends Serializable> {
 		initProduct();
 	}
 
-	@PersistenceContext
-	private EntityManager entityManager;
-
 	public T build(Boolean... doNotPersist) {
 		T product = assembleProduct();
 		if (ArrayUtils.isEmpty(doNotPersist)
 				|| (ArrayUtils.isNotEmpty(doNotPersist) && doNotPersist[0] == Boolean.FALSE)) {
-			entityManager.persist(product);
+			EntityBuilderManager.getEntityManager().persist(product);
 		}
 		T temp = product;
 		initProduct();
@@ -39,4 +35,20 @@ public abstract class EntityBuilder<T extends Serializable> {
 	abstract void initProduct();
 
 	abstract T assembleProduct();
+
+	public static class EntityBuilderManager {
+		private static ThreadLocal<EntityManager> entityManagerHolder = new ThreadLocal<EntityManager>();
+
+		public static void setEntityManager(EntityManager entityManager) {
+			entityManagerHolder.set(entityManager);
+		}
+
+		public static void clearEntityManager() {
+			entityManagerHolder.remove();
+		}
+
+		public static EntityManager getEntityManager() {
+			return entityManagerHolder.get();
+		}
+	}
 }
