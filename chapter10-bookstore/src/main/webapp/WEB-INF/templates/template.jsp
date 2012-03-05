@@ -39,7 +39,7 @@
 			       <div class="title"><span class="title_icon"><img src="${bullet4}" alt="" title="" /></span><spring:message code="main.title.randombooks"/></div> 
                     <c:forEach items="${randomBooks}" var="book">
                         <div class="new_prod_box">
-                            <c:url value="/book/${book.id}" var="bookUrl" />
+                            <c:url value="/book/detail/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
                             <div>
                             <c:url value="/resources/images/books/${book.isbn}/book_front_cover.png" var="bookImage"/>

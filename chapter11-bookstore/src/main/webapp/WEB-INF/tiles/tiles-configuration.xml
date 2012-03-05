@@ -10,6 +10,10 @@
     <definition name="contentOnlyTemplate" template="/WEB-INF/templates/contentOnly.jspx">
     </definition>	
 
+	<definition name="book/detail" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/book/detail.jsp"/>
+    </definition>
+
 	<definition name="main" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/view/main.jsp"/>
     </definition>
