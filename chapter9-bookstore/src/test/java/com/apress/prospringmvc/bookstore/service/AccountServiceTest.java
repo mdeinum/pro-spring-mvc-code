@@ -15,36 +15,41 @@ import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 
 public class AccountServiceTest {
 
-    private AccountService accountService;
-    private AccountRepository accountRepository;
+	private AccountService accountService;
+	private AccountRepository accountRepository;
 
-    @Before
-    public void setup() {
-        accountService = new AccountServiceImpl();
+	@Before
+	public void setup() {
+		accountService = new AccountServiceImpl();
 
-        Account account = new AccountBuilder().address("Herve", "4650", "Rue de la station", "1", null, "Belgium")
-                .credentials("john", "secret").name("John", "Doe").build(true);
+		Account account = new AccountBuilder() {
+			{
+				address("Herve", "4650", "Rue de la station", "1", null, "Belgium");
+				credentials("john", "secret");
+				name("John", "Doe");
+			}
+		}.build(true);
 
-        accountRepository = Mockito.mock(AccountRepository.class);
-        Mockito.when(accountRepository.findByUsername(Mockito.anyString())).thenReturn(account);
+		accountRepository = Mockito.mock(AccountRepository.class);
+		Mockito.when(accountRepository.findByUsername(Mockito.anyString())).thenReturn(account);
 
-        ReflectionTestUtils.setField(accountService, "accountRepository", accountRepository);
-    }
+		ReflectionTestUtils.setField(accountService, "accountRepository", accountRepository);
+	}
 
-    @After
-    public void verify() {
-        Mockito.verify(accountRepository, VerificationModeFactory.times(1)).findByUsername(Mockito.anyString());
-    }
+	@After
+	public void verify() {
+		Mockito.verify(accountRepository, VerificationModeFactory.times(1)).findByUsername(Mockito.anyString());
+	}
 
-    @Test(expected = AuthenticationException.class)
-    public void testLoginFailure() throws AuthenticationException {
-        accountService.login("john", "fail");
-    }
+	@Test(expected = AuthenticationException.class)
+	public void testLoginFailure() throws AuthenticationException {
+		accountService.login("john", "fail");
+	}
 
-    @Test()
-    public void testLoginSuccess() throws AuthenticationException {
-        Account account = accountService.login("john", "secret");
-        assertEquals("John", account.getFirstName());
-        assertEquals("Doe", account.getLastName());
-    }
+	@Test()
+	public void testLoginSuccess() throws AuthenticationException {
+		Account account = accountService.login("john", "secret");
+		assertEquals("John", account.getFirstName());
+		assertEquals("Doe", account.getLastName());
+	}
 }
