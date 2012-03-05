@@ -47,6 +47,8 @@ public class InfrastructureContextConfiguration {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+
+        // foo bar fuck eclipse.
         return localContainerEntityManagerFactoryBean;
     }
 
