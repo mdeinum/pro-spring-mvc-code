@@ -1,6 +1,5 @@
-package com.apress.prospringmvc.pizzarus.web;
+package com.apress.prospringmvc.bookstore.web;
 
-import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -10,34 +9,33 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.apress.prospringmvc.pizzarus.config.InfrastructureContextConfiguration;
-import com.apress.prospringmvc.pizzarus.web.config.WebMvcContextConfiguration;
+import com.apress.prospringmvc.bookstore.config.InfrastructureContextConfiguration;
+import com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration;
+import com.apress.prospringmvc.bookstore.web.config.WebMvcContextConfiguration;
 
-public class PizzasRUsWebApplicationInitializer implements WebApplicationInitializer {
+public class BookstoreWebApplicationInitializer implements WebApplicationInitializer {
 
-    private static final long MAX_FILE_UPLOAD_SIZE = 1024 * 1024 * 5; //5 Mb file limit
-    private static final int FILE_SIZE_THRESHOLD = 1024 * 1024; // After 1Mb start writing files to disk
-    private static final long MAX_REQUEST_SIZE = -1L; //No request size limit
+    private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
 
     @Override
-    public void onStartup(final ServletContext servletContext) throws ServletException {
+    public void onStartup(ServletContext servletContext) throws ServletException {
         registerListener(servletContext);
         registerDispatcherServlet(servletContext);
     }
 
-    private void registerDispatcherServlet(final ServletContext servletContext) {
+    private void registerDispatcherServlet(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext dispatcherContext = createContext(WebMvcContextConfiguration.class);
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(
-                dispatcherContext));
+        ServletRegistration.Dynamic dispatcher = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
+                new DispatcherServlet(dispatcherContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
-        dispatcher.setMultipartConfig(new MultipartConfigElement(null, MAX_FILE_UPLOAD_SIZE, MAX_REQUEST_SIZE,
-                FILE_SIZE_THRESHOLD));
     }
 
-    private void registerListener(final ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext rootContext = createContext(InfrastructureContextConfiguration.class);
+    private void registerListener(ServletContext servletContext) {
+        AnnotationConfigWebApplicationContext rootContext = createContext(InfrastructureContextConfiguration.class,
+                TestDataContextConfiguration.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
+
     }
 
     /**
