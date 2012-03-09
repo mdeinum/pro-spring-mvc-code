@@ -11,10 +11,12 @@ import javax.servlet.ServletRegistration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.security.config.BeanIds;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.apress.prospringmvc.bookstore.config.InfrastructureContextConfiguration;
@@ -28,6 +30,10 @@ import com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration;
  * The application context is then passed on to a {@link ContextLoaderListener} which is manually registered using the
  * JEE API for registering {@link ServletContextListener}. Using the same API we also programmatically configure the
  * {@link DispatcherServlet} that listens to / and register the {@link OpenEntityManagerInViewFilter}.
+ * <p>
+ * 
+ * Finally we also register the Spring {@link DelegatingFilterProxy} filter which will be used by Spring security to add
+ * the security filters.
  * 
  * @author Koen Serneels
  */
@@ -45,7 +51,7 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 		registerListener(servletContext);
 		registerDispatcherServlet(servletContext);
 		registerOpenEntityManagerInViewFilter(servletContext);
-
+		registerSpringSecurityFilterChain(servletContext);
 	}
 
 	private void registerDispatcherServlet(ServletContext servletContext) {
@@ -67,6 +73,12 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 				new OpenEntityManagerInViewFilter());
 		registration.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true,
 				DISPATCHER_SERVLET_NAME);
+	}
+
+	private void registerSpringSecurityFilterChain(ServletContext servletContext) {
+		FilterRegistration.Dynamic springSecurityFilterChain = servletContext.addFilter(
+				BeanIds.SPRING_SECURITY_FILTER_CHAIN, new DelegatingFilterProxy());
+		springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
 	}
 
 	/**
