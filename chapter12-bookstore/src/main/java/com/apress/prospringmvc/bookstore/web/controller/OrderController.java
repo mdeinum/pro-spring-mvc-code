@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.bookstore.web;
+package com.apress.prospringmvc.bookstore.web.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

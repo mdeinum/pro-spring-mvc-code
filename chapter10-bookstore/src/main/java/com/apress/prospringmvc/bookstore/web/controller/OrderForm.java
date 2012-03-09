@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.bookstore.web;
+package com.apress.prospringmvc.bookstore.web.controller;
 
 import java.io.Serializable;
 import java.util.HashMap;

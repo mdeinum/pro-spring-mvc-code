@@ -1,4 +1,4 @@
-package com.apress.prospringmvc.bookstore.web;
+package com.apress.prospringmvc.bookstore.web.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +25,7 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.support.OrderBuilder;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
+import com.apress.prospringmvc.bookstore.web.AuthenticationSessionListener;
 
 /**
  * Controller to be used to place and view orders using the {@link BookstoreService}. This controller can be used using

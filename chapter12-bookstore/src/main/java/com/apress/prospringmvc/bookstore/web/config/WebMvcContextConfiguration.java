@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -35,10 +35,10 @@ import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterc
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
-public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
+public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
-	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
 	}
 
@@ -94,7 +94,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
 		internalResourceViewResolver.setOrder(2);
 		internalResourceViewResolver.setPrefix("/WEB-INF/view/");
-		internalResourceViewResolver.setSuffix(".jspx");
+		internalResourceViewResolver.setSuffix(".jsp");
 		internalResourceViewResolver.setViewClass(JstlView.class);
 		return internalResourceViewResolver;
 	}
@@ -117,7 +117,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Override
-	protected void addFormatters(FormatterRegistry registry) {
+	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(bookConverter());
 		registry.addConverter(categoryConverter());
 	}

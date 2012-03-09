@@ -5,7 +5,7 @@
 	
 	<secured attributes="fullyAuthenticated"/>
 	
-	<input name="orderForm" required="true" type="com.apress.prospringmvc.bookstore.web.OrderForm"/>
+	<input name="orderForm" required="true" type="com.apress.prospringmvc.bookstore.web.controller.OrderForm"/>
 	
 	<action-state id="createOrder">
 		<evaluate expression="orderController.placeOrder(orderForm)" result="flowScope.orderId"/>

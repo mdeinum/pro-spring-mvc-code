@@ -1,7 +1,11 @@
 package com.apress.prospringmvc.bookstore.web.config;
 
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
@@ -9,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -18,10 +23,11 @@ import com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration;
 /**
  * The main {@link WebApplicationInitializer} which starts up a {@link AnnotationConfigWebApplicationContext}. Resources
  * for this context are retrieved from annotated classes which are annotated using the {@link Configuration}. The
- * classes loaded are mentioned here are stored in the {@link #configurationClasses}
- * <p/>
+ * classes loaded are mentioned here are stored in the {@link #configurationClasses}</p>
  * 
- * Finally we also programmatically configure the {@link DispatcherServlet} that listens to /
+ * The application context is then passed on to a {@link ContextLoaderListener} which is manually registered using the
+ * JEE API for registering {@link ServletContextListener}. Using the same API we also programmatically configure the
+ * {@link DispatcherServlet} that listens to / and register the {@link OpenEntityManagerInViewFilter}.
  * 
  * @author Koen Serneels
  */
@@ -32,25 +38,45 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 			WebMvcContextConfiguration.class, InfrastructureContextConfiguration.class,
 			WebflowContextConfiguration.class };
 
+	private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
+
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
+		registerListener(servletContext);
+		registerDispatcherServlet(servletContext);
+		registerOpenEntityManagerInViewFilter(servletContext);
 
-		// Create the 'root' Spring application context
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(configurationClasses);
+	}
 
-		servletContext.addListener(new ContextLoaderListener(rootContext));
-
-		// OEMIV
-		FilterRegistration.Dynamic penEntityManagerInViewFilter = servletContext.addFilter(
-				"openEntityManagerInViewFilter", new OpenEntityManagerInViewFilter());
-		penEntityManagerInViewFilter.addMappingForUrlPatterns(null, false, "/*");
-
-		// Register and map the dispatcher servlet
-		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("bookstore", new DispatcherServlet(
-				rootContext));
-
+	private void registerDispatcherServlet(ServletContext servletContext) {
+		AnnotationConfigWebApplicationContext dispatcherContext = createContext(WebMvcContextConfiguration.class);
+		ServletRegistration.Dynamic dispatcher = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
+				new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
+	}
+
+	private void registerListener(ServletContext servletContext) {
+		AnnotationConfigWebApplicationContext rootContext = createContext(configurationClasses);
+		servletContext.addListener(new ContextLoaderListener(rootContext));
+		servletContext.addListener(new RequestContextListener());
+	}
+
+	private void registerOpenEntityManagerInViewFilter(ServletContext servletContext) {
+		FilterRegistration.Dynamic registration = servletContext.addFilter("openEntityManagerInView",
+				new OpenEntityManagerInViewFilter());
+		registration.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true,
+				DISPATCHER_SERVLET_NAME);
+	}
+
+	/**
+	 * Factory method to create {@link AnnotationConfigWebApplicationContext} instances.
+	 * @param annotatedClasses
+	 * @return
+	 */
+	private AnnotationConfigWebApplicationContext createContext(final Class<?>... annotatedClasses) {
+		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+		context.register(annotatedClasses);
+		return context;
 	}
 }
