@@ -71,8 +71,7 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 	private void registerOpenEntityManagerInViewFilter(ServletContext servletContext) {
 		FilterRegistration.Dynamic registration = servletContext.addFilter("openEntityManagerInView",
 				new OpenEntityManagerInViewFilter());
-		registration.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true,
-				DISPATCHER_SERVLET_NAME);
+		registration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
 	}
 
 	private void registerSpringSecurityFilterChain(ServletContext servletContext) {
