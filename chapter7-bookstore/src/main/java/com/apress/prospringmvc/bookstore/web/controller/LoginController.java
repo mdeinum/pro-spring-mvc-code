@@ -36,7 +36,7 @@ public class LoginController {
         if (StringUtils.hasText(url) && !url.contains("login")) { // Prevent loops for the login page.
             return "redirect:" + url;
         } else {
-            return "/index.htm";
+            return "redirect:/index.htm";
         }
     }
 

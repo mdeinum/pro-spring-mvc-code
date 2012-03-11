@@ -10,11 +10,11 @@
             <li><a href="<c:url value="/book/search"/>"><spring:message code="nav.books"/></a></li>
             <li><a href="<c:url value="/customer/account"/>"><spring:message code="nav.account"/></a></li>
             <li><a href="<c:url value="/cart/checkout"/>"><spring:message code="nav.checkout"/></a></li>
-            <c:if test="${currentUser eq null}">
+            <c:if test="${sessionScope.account eq null}">
                 <li><a href="<c:url value="/customer/register"/>"><spring:message code="nav.register"/></a></li>
                 <li><a href="<c:url value="/login"/>"><spring:message code="nav.login"/></a></li>
             </c:if>
-            <c:if test="${currentUser ne null}">
+            <c:if test="${sessionScope.account ne null}">
                 <li><a href="<c:url value="/logout"/>"><spring:message code="nav.logout"/></a></li>
             </c:if>
             
