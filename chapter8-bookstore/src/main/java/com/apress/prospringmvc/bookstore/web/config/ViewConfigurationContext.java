@@ -19,7 +19,7 @@ public class ViewConfigurationContext {
     @Bean
     public TilesViewResolver tilesViewResolver() {
         TilesViewResolver tilesViewResolver = new TilesViewResolver();
-        tilesViewResolver.setOrder(2);
+        tilesViewResolver.setOrder(0);
         return tilesViewResolver;
     }
 

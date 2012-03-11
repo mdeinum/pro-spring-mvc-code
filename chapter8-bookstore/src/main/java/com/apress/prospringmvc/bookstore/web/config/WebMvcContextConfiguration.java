@@ -1,5 +1,6 @@
 package com.apress.prospringmvc.bookstore.web.config;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
@@ -8,12 +9,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -29,8 +31,9 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.domain.Category;
-import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
+import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataInterceptor;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
+import com.apress.prospringmvc.bookstore.web.method.support.SessionAttributeProcessor;
 
 /**
  * WebMvc Configuration.
@@ -39,7 +42,6 @@ import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerIntercep
  */
 @Configuration
 @EnableWebMvc
-@EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
@@ -61,8 +63,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
-        registry.addInterceptor(commonDataHandlerInterceptor());
-        registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account*", "/cart/checkout",
+        registry.addWebRequestInterceptor(commonDataHandlerInterceptor());
+        registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account", "/cart/checkout",
                 "/order/*", "/order.*");
     }
 
@@ -106,13 +108,28 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     //-- End Locale Support (I18N) --//
 
     @Bean
-    public CommonDataHandlerInterceptor commonDataHandlerInterceptor() {
-        return new CommonDataHandlerInterceptor();
+    public CommonDataInterceptor commonDataHandlerInterceptor() {
+        return new CommonDataInterceptor();
     }
 
     @Bean
     public SecurityHandlerInterceptor securityHandlerInterceptor() {
         return new SecurityHandlerInterceptor();
+    }
+
+    @Bean
+    public SessionAttributeProcessor sessionAttributeProcessor() {
+        return new SessionAttributeProcessor();
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(sessionAttributeProcessor());
+    }
+
+    @Override
+    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
+        returnValueHandlers.add(sessionAttributeProcessor());
     }
 
     @Bean

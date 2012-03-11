@@ -1,6 +1,7 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,18 +33,17 @@ public class LoginController {
         WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, account);
         String url = (String) WebUtils.getSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL);
         WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL, null); // Remove the attribute
-        if (StringUtils.hasText(url) && !url.contains("login")) {
+        if (StringUtils.hasText(url) && !url.contains("login")) { // Prevent loops for the login page.
             return "redirect:" + url;
         } else {
-            return "/index.htm";
+            return "redirect:/index.htm";
         }
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request) {
-        WebUtils.setSessionAttribute(request, "account", null);
+    public String logout(HttpSession session) {
+        session.invalidate();
         return "redirect:/index.htm";
-
     }
 
 }
