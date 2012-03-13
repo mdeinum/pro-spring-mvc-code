@@ -44,7 +44,7 @@ height: auto;
 margin:auto;
 background-color:#FFFFFF;
 }
-header{
+.header{
 width:900px;
 height:181px;
 background:url(../images/header.jpg) no-repeat center;
@@ -53,24 +53,24 @@ background:url(../images/header.jpg) no-repeat center;
 padding:50px 0 0 130px;
 }
 /*-----------------------------menu-------------------*/
-nav{
+.nav{
 width:900px;
 height:30px;
 padding:52px 0 0 10px;
 }
-nav ul{
+.nav ul{
 display:block;
 list-style:none;
 padding:9px 0 0 10px;
 margin:0px;
 }
-nav ul li{
+.nav ul li{
 display:inline;
 padding:0px;
 margin:0px;
 height:20px;
 }
-nav ul li a{
+.nav ul li a{
 height:27px;
 display:block;
 padding:0px 10px 0 10px;
@@ -83,7 +83,7 @@ color:#fff;
 font-size:13px;
 line-height:25px;
 }
-nav ul li.selected a{
+.nav ul li.selected a{
 height:27px;
 display:block;
 padding:0px 10px 0 10px;
@@ -95,7 +95,7 @@ color:#f7a849;
 font-size:13px;
 line-height:25px;
 }
-nav ul li a:hover{
+.nav ul li a:hover{
 color:#f7a849;
 }
 /*----------------crumb_nav------------------*/
@@ -539,7 +539,7 @@ border: 1px solid #f3f3f3;
 color: #ccc;
 }
 /*---------------footer------------------------*/
-footer{
+.footer{
 height:100px;
 border-top:1px #b2b2b2 dashed;
 background:url(../images/footer_bg.gif) no-repeat bottom;
@@ -552,7 +552,7 @@ padding:10px 0 0 10px;
 float:right;
 padding:10px 10px 0 0;
 }
-footer a{
+.footer a{
 text-decoration:none;
 padding:0 5px 0 5px;
 color:#afaeaf;

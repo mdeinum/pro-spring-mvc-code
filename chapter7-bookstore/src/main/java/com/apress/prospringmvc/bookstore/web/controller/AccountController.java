@@ -43,7 +43,7 @@ public class AccountController {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setDisallowedFields("id");
-        binder.setRequiredFields("username", "password", "emailAddress");
+        binder.setRequiredFields("username", "emailAddress");
     }
 
     @RequestMapping(method = RequestMethod.GET)

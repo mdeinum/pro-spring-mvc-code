@@ -24,6 +24,7 @@ public class ViewConfiguration {
     public TilesViewResolver tilesViewResolver() {
         TilesViewResolver tilesViewResolver = new TilesViewResolver();
         tilesViewResolver.setOrder(2);
+        tilesViewResolver.setRedirectHttp10Compatible(false);
         return tilesViewResolver;
     }
 
