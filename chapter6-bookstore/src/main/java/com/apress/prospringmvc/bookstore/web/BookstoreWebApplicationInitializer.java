@@ -1,9 +1,5 @@
 package com.apress.prospringmvc.bookstore.web;
 
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -11,7 +7,6 @@ import javax.servlet.ServletRegistration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.apress.prospringmvc.bookstore.config.InfrastructureContextConfiguration;
@@ -26,7 +21,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
     public void onStartup(ServletContext servletContext) throws ServletException {
         registerListener(servletContext);
         registerDispatcherServlet(servletContext);
-        registerFilter(servletContext);
     }
 
     private void registerDispatcherServlet(ServletContext servletContext) {
@@ -42,13 +36,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
                 TestDataContextConfiguration.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
 
-    }
-
-    private void registerFilter(ServletContext servletContext) {
-        FilterRegistration.Dynamic registration = servletContext.addFilter("hiddenHttpMethodFilter",
-                HiddenHttpMethodFilter.class);
-        registration.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), false,
-                DISPATCHER_SERVLET_NAME);
     }
 
     /**

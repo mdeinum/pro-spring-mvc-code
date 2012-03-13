@@ -11,6 +11,7 @@
     </c:set>
     <title>Bookstore | <spring:message code="${titleKey}" text="Your Home in Books"/></title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>" >
+    <script src="<c:url value="/resources/jquery/jquery-1.7.1.min.js"/>"></script>
 </head>
 <body>
     <div id="wrap">

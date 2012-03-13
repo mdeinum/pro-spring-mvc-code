@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<form:form method="POST" modelAttribute="account">
+<form:form method="POST" modelAttribute="account" id="accountForm">
     <input type="hidden" name="_method" value="PUT" />        
     <fieldset>
         <legend><spring:message code="account.personal"/></legend>
@@ -27,7 +27,17 @@
     </fieldset>
     <button id="save"><spring:message code="button.save"/></button>
 </form:form>
-
+<script>
+$('#accountForm').submit(function(){
+        formData = $('#accountForm').serialize();
+        $.ajax({
+        	url: $('#accountForm').action,
+        	type: 'PUT',
+        	data: formData
+        });
+        return false;
+});
+</script>
 <h1><spring:message code="account.orders" /></h1>
 <table>    
     <tr><th>#</th><th>Date</th><th>Total</th></tr>
