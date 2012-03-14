@@ -28,15 +28,15 @@
     <button id="save"><spring:message code="button.save"/></button>
 </form:form>
 <script>
-$('#accountForm').submit(function(){
+$('#accountForm').submit(function(evt){
+	    evt.preventDefault();
         formData = $('#accountForm').serialize();
         $.ajax({
         	url: $('#accountForm').action,
         	type: 'PUT',
         	data: formData
         });
-        return false;
-});
+});        
 </script>
 <h1><spring:message code="account.orders" /></h1>
 <table>    
