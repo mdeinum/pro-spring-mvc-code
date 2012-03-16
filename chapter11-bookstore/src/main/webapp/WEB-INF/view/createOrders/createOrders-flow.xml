@@ -46,24 +46,24 @@
 		
 		<transition on="cancel" to="end" />
 	</view-state>
-	
 	<decision-state id="loginCheck">
 		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
+		<if then="" test="" />
 	</decision-state>	
 
 	<subflow-state id="authenticate" subflow="authentication">
 		<transition on="authenticationOk" to="createOrder"/>
 		<transition on="previous" to="selectDeliveryOptions"/>
 	</subflow-state>
-	
-<!-- Refactored to a sub flow: placeOrders-flow.xml:
 
-     <action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(flowScope.orderForm, externalContext.sessionMap.authenticatedAccount)" result="flowScope.orderId"/>
-		<transition on="success" to="end"/>
+	<!-- Introduced in chapter 11 "action state" but  refactored by subflow later on in "subflow input/output mapping. 
+		 Left this in the sample for consistency with the book. 
+	<action-state id="createOrder">
+		<evaluate expression="orderController.placeOrder(account, orderForm)" result="flowScope.orderId"/>
+		<transition on="success" to="endOrderOk"/>
 	</action-state>
--->
-			
+	-->
+	
 	<subflow-state id="createOrder" subflow="placeOrders">
 		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
 		<input name="orderForm"/>
