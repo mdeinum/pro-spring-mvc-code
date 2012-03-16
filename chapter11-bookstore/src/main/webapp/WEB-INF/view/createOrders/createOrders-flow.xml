@@ -48,7 +48,6 @@
 	</view-state>
 	<decision-state id="loginCheck">
 		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
-		<if then="" test="" />
 	</decision-state>	
 
 	<subflow-state id="authenticate" subflow="authentication">
