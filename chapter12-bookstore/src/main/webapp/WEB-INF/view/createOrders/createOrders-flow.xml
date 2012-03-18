@@ -56,17 +56,16 @@
 		<transition on="authenticationOk" to="createOrder"/>
 		<transition on="previous" to="selectDeliveryOptions"/>
 	</subflow-state>
-
+	
 	<subflow-state id="createOrder" subflow="placeOrders">
-		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
-		<input name="orderForm"/>
+		<input name="flowScope.orderForm"/>
 		
-		<output name="orderId"/>
+		<output name="requestScope.orderId"/>
 		
 		<transition on="endOrderOk" to="endOrderOk"/>
 	</subflow-state>
 
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={requestScope.orderId}"/>
 	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	

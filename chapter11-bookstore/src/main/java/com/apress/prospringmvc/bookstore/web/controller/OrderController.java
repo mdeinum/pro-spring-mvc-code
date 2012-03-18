@@ -34,76 +34,77 @@ import com.apress.prospringmvc.bookstore.service.CategoryService;
 @Controller
 public class OrderController {
 
-	@Autowired
-	private BookstoreService bookstoreService;
+    @Autowired
+    private BookstoreService bookstoreService;
 
-	@Autowired
-	private CategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
-	@RequestMapping("ordersOverview.htm")
-	public ModelAndView retrieveOrders(HttpSession httpSession) {
-		List<Order> orders = bookstoreService.findOrdersForAccount((Account) httpSession
-				.getAttribute(AuthenticationController.AUTHENTICATED_ACCOUNT_KEY));
+    @RequestMapping("ordersOverview.htm")
+    public ModelAndView retrieveOrders(HttpSession httpSession) {
+        List<Order> orders = bookstoreService.findOrdersForAccount((Account) httpSession
+                .getAttribute(AuthenticationController.AUTHENTICATED_ACCOUNT_KEY));
 
-		ModelAndView mov = new ModelAndView();
-		mov.setViewName("ordersOverview");
-		mov.getModel().put("orders", orders);
+        ModelAndView mov = new ModelAndView();
+        mov.setViewName("ordersOverview");
+        mov.getModel().put("orders", orders);
 
-		return mov;
-	}
+        return mov;
+    }
 
-	public OrderForm initializeForm() {
-		OrderForm orderForm = new OrderForm();
-		orderForm.setQuantity(1);
-		orderForm.setOrderDate(new Date());
-		return orderForm;
-	}
+    public OrderForm initializeForm() {
+        OrderForm orderForm = new OrderForm();
+        orderForm.setQuantity(1);
+        orderForm.setOrderDate(new Date());
+        return orderForm;
+    }
 
-	public List<Category> initializeSelectableCategories() {
-		return categoryService.findAll();
-	}
+    public List<Category> initializeSelectableCategories() {
+        return categoryService.findAll();
+    }
 
-	public List<Book> initializeSelectableBooks(OrderForm orderForm) {
-		return bookstoreService.findBooksByCategory(orderForm.getCategory());
-	}
+    public List<Book> initializeSelectableBooks(OrderForm orderForm) {
+        return bookstoreService.findBooksByCategory(orderForm.getCategory());
+    }
 
-	public void addBook(OrderForm orderForm) {
-		Book book = orderForm.getBook();
-		if (orderForm.getBooks().containsKey(book)) {
-			orderForm.getBooks().put(book, orderForm.getBooks().get(book) + orderForm.getQuantity());
-		} else {
-			orderForm.getBooks().put(book, orderForm.getQuantity());
-		}
-	}
+    public void addBook(OrderForm orderForm) {
+        Book book = orderForm.getBook();
+        if (orderForm.getBooks().containsKey(book)) {
+            orderForm.getBooks().put(book, orderForm.getBooks().get(book) + orderForm.getQuantity());
+        } else {
+            orderForm.getBooks().put(book, orderForm.getQuantity());
+        }
+    }
 
-	public Long placeOrder(final Account account, final OrderForm orderForm) {
-		Order order = new OrderBuilder() {
-			{
-				addBooks(orderForm.getBooks());
-				deliveryDate(orderForm.getDeliveryDate());
-				orderDate(orderForm.getOrderDate()).account(account);
-			}
+    public Long placeOrder(final Account account, final OrderForm orderForm) {
+        Order order = new OrderBuilder() {
+            {
+                addBooks(orderForm.getBooks());
+                deliveryDate(orderForm.getDeliveryDate());
+                orderDate(orderForm.getOrderDate()).account(account);
+            }
 
-		}.build(true);
-		return bookstoreService.store(order).getId();
-	}
+        }.build(true);
+        
+        return bookstoreService.store(order).getId();
+    }
 
-	public Event validateDeliveryDate(OrderForm orderForm, MessageContext messageContext) {
-		if (orderForm.getDeliveryDate() == null) {
-			MessageBuilder errorMessageBuidler = new MessageBuilder().error();
-			errorMessageBuidler.source("deliveryDate");
-			errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.required");
-			messageContext.addMessage(errorMessageBuidler.build());
-			return new EventFactorySupport().error(this);
-		}
+    public Event validateDeliveryDate(OrderForm orderForm, MessageContext messageContext) {
+        if (orderForm.getDeliveryDate() == null) {
+            MessageBuilder errorMessageBuidler = new MessageBuilder().error();
+            errorMessageBuidler.source("deliveryDate");
+            errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.required");
+            messageContext.addMessage(errorMessageBuidler.build());
+            return new EventFactorySupport().error(this);
+        }
 
-		if (orderForm.getDeliveryDate().before(DateUtils.truncate(orderForm.getOrderDate(), Calendar.DAY_OF_MONTH))) {
-			MessageBuilder errorMessageBuidler = new MessageBuilder().error();
-			errorMessageBuidler.source("deliveryDate");
-			errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.in.past");
-			messageContext.addMessage(errorMessageBuidler.build());
-			return new EventFactorySupport().error(this);
-		}
-		return new EventFactorySupport().success(this);
-	}
+        if (orderForm.getDeliveryDate().before(DateUtils.truncate(orderForm.getOrderDate(), Calendar.DAY_OF_MONTH))) {
+            MessageBuilder errorMessageBuidler = new MessageBuilder().error();
+            errorMessageBuidler.source("deliveryDate");
+            errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.in.past");
+            messageContext.addMessage(errorMessageBuidler.build());
+            return new EventFactorySupport().error(this);
+        }
+        return new EventFactorySupport().success(this);
+    }
 }

@@ -8,7 +8,7 @@
 	<input name="orderForm" required="true" type="com.apress.prospringmvc.bookstore.web.controller.OrderForm"/>
 	
 	<action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(orderForm)" result="flowScope.orderId"/>
+		<evaluate expression="orderController.placeOrder(flowScope.orderForm)" result="flowScope.orderId"/>
 		<transition on="success" to="endOrderOk"/>
 	</action-state>
 

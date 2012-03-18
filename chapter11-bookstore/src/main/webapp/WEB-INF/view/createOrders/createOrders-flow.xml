@@ -58,21 +58,20 @@
 	<!-- Introduced in chapter 11 "action state" but  refactored by subflow later on in "subflow input/output mapping. 
 		 Left this in the sample for consistency with the book. 
 	<action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(account, orderForm)" result="flowScope.orderId"/>
+		<evaluate expression="orderController.placeOrder(externalContext.sessionMap.authenticatedAccount, orderForm)" result="flowScope.orderId"/>
 		<transition on="success" to="endOrderOk"/>
 	</action-state>
 	-->
 	
 	<subflow-state id="createOrder" subflow="placeOrders">
-		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
-		<input name="orderForm"/>
+		<input name="flowScope.orderForm"/>
 		
-		<output name="orderId"/>
+		<output name="requestScope.orderId"/>
 		
 		<transition on="endOrderOk" to="endOrderOk"/>
 	</subflow-state>
 
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={requestScope.orderId}"/>
 	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	
