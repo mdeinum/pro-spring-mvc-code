@@ -21,7 +21,7 @@
 	
 	<view-state id="selectBooks" view="selectBooks" model="orderForm" >
 		<on-render>
-			<evaluate expression="orderController.initializeSelectableBooks(orderForm)" result="flashScope.selectableBooks" />
+			<evaluate expression="orderController.initializeSelectableBooks(orderForm)" result="requestScope.selectableBooks" />
 		</on-render>
 	
 		<transition on="add" >

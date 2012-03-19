@@ -6,7 +6,7 @@
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
 
-	<header>
+	<div class="header">
 		<div class="logo">
 			<spring:url value="/index.htm" var="home" />
 			<a href="${home}">
@@ -14,7 +14,7 @@
 				<img src="${logo }" alt="" title="" border="0" />
 			</a>
 		</div>
-		<nav>
+		<div class="nav">
 			<ul>
 				<li>
 					<a href="${home}"><spring:message code="nav.home"/></a>
@@ -36,5 +36,5 @@
                 <li><a href="?lang=en" class="selected"><img src="${gb}" alt="" title="" border="0" /></a></li>
                 <li><a href="?lang=nl"><img src="${nl}" alt="" title="" border="0" /></a></li>
             </ul>
-		</nav>
-	</header>
+		</div>
+	</div>

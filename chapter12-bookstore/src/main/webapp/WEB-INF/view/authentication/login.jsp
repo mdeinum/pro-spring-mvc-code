@@ -21,6 +21,6 @@
 		
 		<div align="right" style="margin-bottom: 20px; margin-top: 10px" >
 			<button type="submit" id="previous" name="_eventId_previous"><spring:message code="label.page.login.previous"/></button>
-			<button type="submit" id="placeOrder" name="_eventId_authenticate"><spring:message code="label.page.login.login"/></button>
+			<button type="submit" id="login" name="_eventId_authenticate"><spring:message code="label.page.login.login"/></button>
 		</div>
 	</form:form>

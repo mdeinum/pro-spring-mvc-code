@@ -17,9 +17,9 @@ import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.mvc.servlet.MvcExternalContext;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
+import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
-import com.apress.prospringmvc.bookstore.service.AccountService;
 
 /**
  * This controller talks to the {@link BookstoreService} to authenticate a user. This controller can be used via Spring
@@ -66,6 +66,12 @@ public class AuthenticationController {
             mov.setViewName("login");
         }
 
+        return mov;
+    }
+
+    @RequestMapping(value = "authenticate.htm", params = "_eventId_previous", method = RequestMethod.POST)
+    public ModelAndView previous(ModelAndView mov) {
+        mov.setViewName("main");
         return mov;
     }
 

@@ -19,7 +19,7 @@
 	
 	<view-state id="selectBooks" view="selectBooks" model="orderForm" >
 		<on-render>
-			<evaluate expression="orderController.initializeSelectableBooks(flowScope.orderForm)" result="flowScope.selectableBooks" />
+			<evaluate expression="orderController.initializeSelectableBooks(flowScope.orderForm)" result="requestScope.selectableBooks" />
 		</on-render>
 
 		<transition on="previous" to="selectCategory" />
