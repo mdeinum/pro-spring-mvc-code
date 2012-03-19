@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<form:form method="GET" modelAttribute="bookSearchCriteria">
+<form:form method="GET" modelAttribute="bookSearchCriteria" id="bookSearchForm">
     <fieldset>
         <legend><spring:message code="book.searchcriteria"/></legend>
         <table>
@@ -17,9 +17,19 @@
     </fieldset>
     <button id="search"><spring:message code="button.search"/></button>
 </form:form>
-
+<script>
+$("#bookSearchForm').submit(function(evt){
+	evt.preventDefault();
+	formData = $('#bookSearchForm').serialize();
+	$.ajax({
+		url: $('#bookSearchForm').action,
+		type: 'GET',
+		data: formData;
+	});	
+});
+</script>
 <c:if test="${not empty bookList}">
-    <table>
+    <table id="bookSearchResults">
         <tr>
             <th><spring:message code="book.title"/></th>
             <th><spring:message code="book.description"/></th>
