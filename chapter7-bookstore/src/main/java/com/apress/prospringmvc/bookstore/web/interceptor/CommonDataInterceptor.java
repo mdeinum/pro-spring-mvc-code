@@ -18,8 +18,9 @@ public class CommonDataInterceptor implements WebRequestInterceptor {
 
     @Override
     public void postHandle(WebRequest request, ModelMap model) throws Exception {
-        model.addAttribute("randomBooks", this.bookstoreService.findRandomBooks());
-
+        if (model != null) {
+            model.addAttribute("randomBooks", this.bookstoreService.findRandomBooks());
+        }
     }
 
     @Override

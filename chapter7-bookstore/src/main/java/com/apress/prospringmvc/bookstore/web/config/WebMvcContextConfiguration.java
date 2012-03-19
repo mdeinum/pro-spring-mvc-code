@@ -17,6 +17,8 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
@@ -163,6 +165,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
         exceptionResolver.setExceptionMappings(mappings);
         exceptionResolver.setStatusCodes(statusCodes);
         return exceptionResolver;
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 
 }

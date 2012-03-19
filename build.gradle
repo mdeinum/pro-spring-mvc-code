@@ -4,7 +4,7 @@ springVersion='3.1.1.RELEASE'
 tilesVersion='2.2.2'
 springSecurityVersion='3.1.0.RELEASE'
 springSwfVersion='2.3.0.RELEASE'
-hibernateVersion='4.1.0.Final'
+hibernateVersion='4.1.1.Final'
 hibernateValidatorVersion='4.2.0.Final'
 ehCacheVersion='2.5.0'
 
@@ -108,7 +108,7 @@ subprojects() {
 
         compile 'com.lowagie:itext:2.1.7'
         compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
-        compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.4'  
+        compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.5'  
         compile 'commons-codec:commons-codec:1.6'
         compile 'joda-time:joda-time:2.0'
         

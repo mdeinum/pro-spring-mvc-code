@@ -65,7 +65,7 @@ public class JpaBookRepository implements BookRepository {
         }
 
         if (bookSearchCriteria.getCategory() != null) {
-            Category category = bookSearchCriteria.getCategory();
+            Category category = this.entityManager.find(Category.class, bookSearchCriteria.getCategory().getId());
             predicates.add(builder.equal(book.<Category> get("category"), category));
         }
 
