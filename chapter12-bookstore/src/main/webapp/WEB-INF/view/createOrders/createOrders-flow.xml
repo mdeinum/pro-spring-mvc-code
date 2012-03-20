@@ -1,7 +1,7 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
-                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" parent="parent-flow">
 
 	<on-start>
 		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm"/>
@@ -58,14 +58,14 @@
 	</subflow-state>
 	
 	<subflow-state id="createOrder" subflow="placeOrders">
-		<input name="flowScope.orderForm"/>
+		<input name="orderForm"/>
 		
-		<output name="requestScope.orderId"/>
+		<output name="orderId"/>
 		
 		<transition on="endOrderOk" to="endOrderOk"/>
 	</subflow-state>
 
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={requestScope.orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
 	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	

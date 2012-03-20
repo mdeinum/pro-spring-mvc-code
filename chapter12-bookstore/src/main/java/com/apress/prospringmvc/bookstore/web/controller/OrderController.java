@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.webflow.action.EventFactorySupport;
@@ -31,7 +31,7 @@ import com.apress.prospringmvc.bookstore.service.CategoryService;
  * @author Koen Serneels
  */
 
-@Component
+@Controller
 public class OrderController {
 	@Autowired
 	private BookstoreService bookstoreService;

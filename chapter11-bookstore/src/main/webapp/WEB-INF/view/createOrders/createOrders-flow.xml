@@ -64,14 +64,14 @@
 	-->
 	
 	<subflow-state id="createOrder" subflow="placeOrders">
-		<input name="flowScope.orderForm"/>
+		<input name="orderForm"/>
 		
-		<output name="requestScope.orderId"/>
+		<output name="orderId"/>
 		
 		<transition on="endOrderOk" to="endOrderOk"/>
 	</subflow-state>
 
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={requestScope.orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
 	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	
