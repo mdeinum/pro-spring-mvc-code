@@ -27,6 +27,15 @@
     </fieldset>
     <button id="save"><spring:message code="button.save"/></button>
 </form:form>
+
+<form id="orderForm" action="<c:url value="/order/upload"/>" method="POST" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Upload order</legend>
+        <input type="file" placeholder="Select File" id="order" name="order"/>
+        <button id="upload"><spring:message code="button.upload"/></button>
+    </fieldset>
+</form>
+
 <script>
 $('#accountForm').submit(function(evt){
 	    evt.preventDefault();
