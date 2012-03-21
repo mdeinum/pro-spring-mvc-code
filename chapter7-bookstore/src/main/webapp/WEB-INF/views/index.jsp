@@ -1,1 +1,1 @@
-<p>Welcome to the Bookstore</p>
+<p>Welcome to the Book Store</p>
