@@ -57,16 +57,7 @@
 		<transition on="previous" to="selectDeliveryOptions"/>
 	</subflow-state>
 	
-<!-- Refactored to a sub flow: placeOrders-flow.xml:
-
-     <action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(flowScope.orderForm, externalContext.sessionMap.authenticatedAccount)" result="flowScope.orderId"/>
-		<transition on="success" to="end"/>
-	</action-state>
--->
-			
 	<subflow-state id="createOrder" subflow="placeOrders">
-		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
 		<input name="orderForm"/>
 		
 		<output name="orderId"/>
