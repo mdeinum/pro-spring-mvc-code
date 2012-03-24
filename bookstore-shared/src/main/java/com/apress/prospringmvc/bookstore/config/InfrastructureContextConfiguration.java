@@ -44,12 +44,10 @@ public class InfrastructureContextConfiguration {
 
     @Bean
     public FactoryBean<EntityManagerFactory> entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        localContainerEntityManagerFactoryBean.setDataSource(this.dataSource);
-        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
-
-        // foo bar fuck eclipse.
-        return localContainerEntityManagerFactoryBean;
+        LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
+        emfb.setDataSource(this.dataSource);
+        emfb.setJpaVendorAdapter(jpaVendorAdapter());
+        return emfb;
     }
 
     @Bean
@@ -59,10 +57,10 @@ public class InfrastructureContextConfiguration {
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(this.entityManagerFactory);
-        transactionManager.setDataSource(this.dataSource);
-        return transactionManager;
+        JpaTransactionManager txManager = new JpaTransactionManager();
+        txManager.setEntityManagerFactory(this.entityManagerFactory);
+        txManager.setDataSource(this.dataSource);
+        return txManager;
     }
 
     @Bean
