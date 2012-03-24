@@ -1,14 +1,17 @@
 apply plugin: 'base'
 
-springVersion='3.1.1.RELEASE'
-tilesVersion='2.2.2'
-springSecurityVersion='3.1.0.RELEASE'
-springSwfVersion='2.3.0.RELEASE'
-hibernateVersion='4.1.1.Final'
-hibernateValidatorVersion='4.2.0.Final'
-ehCacheVersion='2.5.0'
+ext.springVersion='3.1.1.RELEASE'
+ext.tilesVersion='2.2.2'
+ext.springSecurityVersion='3.1.0.RELEASE'
+ext.springSwfVersion='2.3.0.RELEASE'
+ext.hibernateVersion='4.1.1.Final'
+ext.hibernateValidatorVersion='4.2.0.Final'
+ext.ehCacheVersion='2.5.0'
 
-tomcatVersion = '7.0.26'
+ext.tomcatVersion = '7.0.26'
+
+ext.webProjects = subprojects.findAll { project -> project.name.endsWith('bookstore')}
+
 
 buildscript {
     repositories {
@@ -44,7 +47,6 @@ allprojects {
 }
 
 
-webProjects = subprojects.findAll { project -> project.name.endsWith('bookstore')}
 
 configure(webProjects) {
     apply plugin: 'war'
@@ -122,4 +124,4 @@ configure(subprojects.findAll {it.name == 'chapter2-samples'}) {
 }
 
 
-task wrapper(type: Wrapper) { gradleVersion = '1.0-milestone-8a' }
+task wrapper(type: Wrapper) { gradleVersion = '1.0-milestone-9' }
