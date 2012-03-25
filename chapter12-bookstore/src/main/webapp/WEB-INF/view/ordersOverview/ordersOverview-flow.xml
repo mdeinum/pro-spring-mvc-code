@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
                 
-    <input name="orderId" required="false"/>
-
+ 	<persistence-context/>
+	
 	<view-state id="ordersOverview" view="ordersOverview">
 		<on-render>
 			<evaluate expression="orderController.retrieveOrders(externalContext.sessionMap.authenticatedAccount)" result="viewScope.orders" />

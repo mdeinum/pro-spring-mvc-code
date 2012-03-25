@@ -4,7 +4,9 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<secured attributes="permitAll"/>
-	
+
+	<persistence-context/>
+		
 	<on-start>
 		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm"/>
 	</on-start>

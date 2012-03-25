@@ -44,7 +44,8 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		registerListener(servletContext);
 		registerDispatcherServlet(servletContext);
-		registerOpenEntityManagerInViewFilter(servletContext);
+		// We are using JpaFlowExecutionListener instead
+		//registerOpenEntityManagerInViewFilter(servletContext);
 
 	}
 

@@ -3,6 +3,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+	<persistence-context/>
+	
 	<on-start>
 		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm"/>
 	</on-start>
@@ -65,7 +67,7 @@
 		<transition on="endOrderOk" to="endOrderOk"/>
 	</subflow-state>
 
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}" commit="true"/>
 	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	
