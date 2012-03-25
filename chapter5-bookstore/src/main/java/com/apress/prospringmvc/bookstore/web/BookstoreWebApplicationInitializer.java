@@ -25,15 +25,15 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 
     private void registerDispatcherServlet(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext dispatcherContext = createContext(WebMvcContextConfiguration.class);
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
-                new DispatcherServlet(dispatcherContext));
+        ServletRegistration.Dynamic dispatcher;
+        dispatcher = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(dispatcherContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
     }
 
     private void registerListener(ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext rootContext = createContext(InfrastructureContextConfiguration.class,
-                TestDataContextConfiguration.class);
+        AnnotationConfigWebApplicationContext rootContext;
+        rootContext = createContext(InfrastructureContextConfiguration.class, TestDataContextConfiguration.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
 
     }
