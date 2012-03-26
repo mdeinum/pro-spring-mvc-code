@@ -1,6 +1,5 @@
 package com.apress.prospringmvc.bookstore.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,41 +8,37 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.WebUtils;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
-import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 
 @Controller
+@RequestMapping(value = "/login")
 public class LoginController {
+
+    public static final String ACCOUNT_ATTRIBUTE = "account";
+    public static final String REQUESTED_URL = "REQUESTED_URL";
 
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public void login() {
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String handleLogin(@RequestParam String username, @RequestParam String password, HttpServletRequest request)
+    @RequestMapping(method = RequestMethod.POST)
+    public String handleLogin(@RequestParam String username, @RequestParam String password, HttpSession session)
             throws AuthenticationException {
         Account account = this.accountService.login(username, password);
-        WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, account);
-        String url = (String) WebUtils.getSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL);
-        WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL, null); // Remove the attribute
+        session.setAttribute(ACCOUNT_ATTRIBUTE, account);
+        String url = (String) session.getAttribute(REQUESTED_URL);
+        session.removeAttribute(REQUESTED_URL); // Remove the attribute
         if (StringUtils.hasText(url) && !url.contains("login")) { // Prevent loops for the login page.
             return "redirect:" + url;
         } else {
             return "redirect:/index.htm";
         }
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/index.htm";
     }
 
 }
