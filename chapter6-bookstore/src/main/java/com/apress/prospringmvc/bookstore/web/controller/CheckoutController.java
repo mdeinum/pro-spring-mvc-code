@@ -4,7 +4,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -51,7 +50,7 @@ public class CheckoutController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public void checkout(HttpSession session, Model model) {
+    public void show(HttpSession session, Model model) {
         Account account = (Account) session.getAttribute(LoginController.ACCOUNT_ATTRIBUTE);
         Order order = this.bookstoreService.createOrder(this.cart, account);
         model.addAttribute(order);
@@ -76,7 +75,7 @@ public class CheckoutController {
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder, HttpServletRequest request) {
+    public void initBinder(WebDataBinder binder) {
         binder.setValidator(new OrderValidator());
     }
 
