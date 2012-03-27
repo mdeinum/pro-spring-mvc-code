@@ -13,7 +13,6 @@ import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
 @Controller
-@RequestMapping("/cart")
 public class CartController {
 
     private final Logger logger = LoggerFactory.getLogger(CartController.class);
@@ -24,7 +23,7 @@ public class CartController {
     @Autowired
     private BookstoreService bookstoreService;
 
-    @RequestMapping("/add/{bookId}")
+    @RequestMapping("/cart/add/{bookId}")
     public String addToCart(@PathVariable("bookId") long bookId, @RequestHeader("referer") String referer) {
         Book book = this.bookstoreService.findBook(bookId);
         this.cart.addBook(book);

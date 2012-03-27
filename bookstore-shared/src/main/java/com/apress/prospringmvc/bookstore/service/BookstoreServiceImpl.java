@@ -1,5 +1,6 @@
 package com.apress.prospringmvc.bookstore.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -71,7 +72,7 @@ public class BookstoreServiceImpl implements BookstoreService {
         for (Entry<Book, Integer> line : cart.getBooks().entrySet()) {
             order.addOrderDetail(new OrderDetail(line.getKey(), line.getValue()));
         }
-        cart.clear();
+        order.setOrderDate(new Date());
         return order;
     }
 

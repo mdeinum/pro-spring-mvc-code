@@ -2,8 +2,6 @@ package com.apress.prospringmvc.bookstore.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,8 +60,7 @@ public class OrderDetail implements Serializable {
 
     public BigDecimal getPrice() {
         if (this.book != null) {
-            return this.book.getPrice().multiply(new BigDecimal(this.quantity),
-                    new MathContext(2, RoundingMode.HALF_UP));
+            return this.book.getPrice().multiply(new BigDecimal(this.quantity));
         }
         return BigDecimal.ZERO;
     }
