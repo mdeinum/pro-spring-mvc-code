@@ -41,6 +41,12 @@
 						<a href="${manageBooks}"><spring:message code="nav.manageBooks"/></a>
 					</li>
 				</sec:authorize>
+				<sec:authorize access="fullyAuthenticated">
+					<li>
+	                	<spring:url value="/logout" var="logout" />
+    	            	<a href="${logout}"><spring:message code="nav.logout"/></a>
+        	        </li>
+				</sec:authorize>
 			</ul>
 			<ul style="float: right;">
 			 	<c:url value="/public/resources/images/gb.gif" var="gb"/>

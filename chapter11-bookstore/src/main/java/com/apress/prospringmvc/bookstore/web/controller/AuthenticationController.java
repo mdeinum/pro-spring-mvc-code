@@ -74,6 +74,13 @@ public class AuthenticationController {
         mov.setViewName("main");
         return mov;
     }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/index.htm";
+    }
+
 
     // ---- POJO logic
     public Event authenticate(AuthenticationForm authenticationForm, MvcExternalContext externalContext,

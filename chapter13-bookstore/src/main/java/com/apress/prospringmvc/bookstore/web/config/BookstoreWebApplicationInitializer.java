@@ -50,8 +50,9 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		registerListener(servletContext);
 		registerDispatcherServlet(servletContext);
-		// We are using JpaFlowExecutionListener instead
-		//registerOpenEntityManagerInViewFilter(servletContext);
+		// We are using JpaFlowExecutionListener instead, but we enable it for Spring MVC served pages
+		registerOpenEntityManagerInViewFilter(servletContext);
+		registerSpringSecurityFilterChain(servletContext);
 	}
 
 	private void registerDispatcherServlet(ServletContext servletContext) {
@@ -71,7 +72,10 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 	private void registerOpenEntityManagerInViewFilter(ServletContext servletContext) {
 		FilterRegistration.Dynamic registration = servletContext.addFilter("openEntityManagerInView",
 				new OpenEntityManagerInViewFilter());
-		registration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
+		registration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), false,
+				"*.htm");
+		registration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), false,
+				"/j_spring_security_check");
 	}
 
 	private void registerSpringSecurityFilterChain(ServletContext servletContext) {

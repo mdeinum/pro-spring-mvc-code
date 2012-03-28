@@ -22,8 +22,9 @@ import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
 /**
- * This controller talks to the {@link BookstoreService} to authenticate a user. This controller can be used via Spring MVC
- * (request mapping login.html) or as POJO for example via Web Flow
+ * This controller talks to the {@link BookstoreService} to authenticate a user.
+ * This controller can be used via Spring MVC (request mapping login.html) or as
+ * POJO for example via Web Flow
  * 
  * @author Koen Serneels
  */
@@ -40,6 +41,10 @@ public class AuthenticationController {
 
 	// ----- Spring MVC logic
 
+	public AuthenticationForm initializeForm() {
+		return new AuthenticationForm();
+	}
+
 	@RequestMapping("public/authentication/login.htm")
 	public ModelAndView authentication() {
 		ModelAndView mov = new ModelAndView();
@@ -50,8 +55,9 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value = "public/authentication/authenticate.htm", method = RequestMethod.POST)
-	public ModelAndView authentication(@ModelAttribute
-	AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession) {
+	public ModelAndView authentication(
+			@ModelAttribute AuthenticationForm authenticationForm,
+			Errors errors, ModelAndView mov, HttpSession httpSession) {
 		try {
 			authenticate(authenticationForm, httpSession);
 			mov.addObject("authenticationOk", "true");
@@ -65,26 +71,27 @@ public class AuthenticationController {
 		return mov;
 	}
 
-	public AuthenticationForm initializeForm() {
-		return new AuthenticationForm();
-	}
-
 	// ---- POJO logic
-	public Event authenticate(AuthenticationForm authenticationForm, MvcExternalContext externalContext,
-			MessageContext messageContext) {
+	public Event authenticate(AuthenticationForm authenticationForm,
+			MvcExternalContext externalContext, MessageContext messageContext) {
 		try {
-			authenticate(authenticationForm, ((HttpServletRequest) externalContext.getNativeRequest()).getSession());
+			authenticate(authenticationForm,
+					((HttpServletRequest) externalContext.getNativeRequest())
+							.getSession());
 		} catch (AuthenticationException authenticationException) {
-			messageContext.addMessage(new MessageBuilder().error().code(LOGIN_FAILED_KEY).build());
+			messageContext.addMessage(new MessageBuilder().error()
+					.code(LOGIN_FAILED_KEY).build());
 			return new EventFactorySupport().error(this);
 		}
 		return new EventFactorySupport().success(this);
 	}
 
 	// ---- Helpers
-	private void authenticate(AuthenticationForm authenticationForm, HttpSession httpSession)
-			throws AuthenticationException {
-		Account account = accountService.login(authenticationForm.getUsername(), authenticationForm.getPassword());
+	private void authenticate(AuthenticationForm authenticationForm,
+			HttpSession httpSession) throws AuthenticationException {
+		Account account = accountService.login(
+				authenticationForm.getUsername(),
+				authenticationForm.getPassword());
 		httpSession.setAttribute(AUTHENTICATED_ACCOUNT_KEY, account);
 	}
 }

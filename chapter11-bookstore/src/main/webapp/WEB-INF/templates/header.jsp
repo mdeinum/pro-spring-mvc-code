@@ -33,6 +33,13 @@
 					<spring:url value="/login.htm" var="login" />
 					<a href="${login}"><spring:message code="nav.login"/></a>
 				</li>
+				<c:if test="${sessionScope.authenticatedAccount ne null}">
+					<li>
+	                	<spring:url value="/logout" var="logout" />
+    	            	<a href="${logout}"><spring:message code="nav.logout"/></a>
+        	        </li>
+				</c:if>
+				
 			</ul>
 			<ul style="float: right;">
 			 	<c:url value="/resources/images/gb.gif" var="gb"/>

@@ -40,6 +40,10 @@ public class AuthenticationController {
 
 	// ----- Spring MVC logic
 
+	public AuthenticationForm initializeForm() {
+		return new AuthenticationForm();
+	}
+	
 	@RequestMapping("login.htm")
 	public ModelAndView authentication() {
 		ModelAndView mov = new ModelAndView();
@@ -65,9 +69,11 @@ public class AuthenticationController {
 		return mov;
 	}
 
-	public AuthenticationForm initializeForm() {
-		return new AuthenticationForm();
-	}
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/index.htm";
+    }
 
 	// ---- POJO logic
 	public Event authenticate(AuthenticationForm authenticationForm, MvcExternalContext externalContext,

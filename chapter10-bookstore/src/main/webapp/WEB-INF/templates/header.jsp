@@ -29,6 +29,11 @@
 						<a href="${ordersOverview}"><spring:message code="nav.ordersOverview"/></a>
 					</c:if>
 				</li>
+                <li>
+                	<spring:url value="/logout" var="logout" />
+                	<a href="${logout}"><spring:message code="nav.logout"/></a>
+                </li>
+				
 			</ul>
 			<ul style="float: right;">
 			 	<c:url value="/resources/images/gb.gif" var="gb"/>

@@ -9,7 +9,7 @@
 	<security:global-method-security pre-post-annotations="enabled"/>
 	
 	<security:http use-expressions="true" >		
-		<security:form-login login-page="/public/authentication/login.htm" default-target-url="/public/main.htm?authenticationOk=1" authentication-failure-url="/public/authentication/login.htm?authenticationNok=1"  />
+		<security:form-login login-page="/public/authentication/login.htm" default-target-url="/public/main.htm?authenticationOk=1" authentication-failure-url="/public/authentication/login.htm?authenticationNok=1" />
 		<!--  Some browsers lookup a "favicon.ico" in the root of the application. This can cause problems as being redirected
 			  to the (non existing) favicon.ico after login, or getting a 405 not allowed.
 			  By making this (again non existing) resource public we avoid these problems.
@@ -24,6 +24,8 @@
 		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" requires-channel="https" />
 	
 		<security:intercept-url pattern="/**" access="denyAll" />
+		
+		<security:logout logout-success-url="/public/main.htm" logout-url="/logout" invalidate-session="true"/>
 	</security:http>
 	
 	<security:authentication-manager>
