@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContext;
 import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.mvc.servlet.MvcExternalContext;
@@ -22,8 +23,8 @@ import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.AccountService;
 
 /**
- * This controller talks to the {@link BookstoreService} to authenticate a user. This controller can be used via Spring MVC
- * (request mapping login.html) or as POJO for example via Web Flow
+ * This controller talks to the {@link BookstoreService} to authenticate a user. This controller can be used via Spring
+ * MVC (request mapping login.html) or as POJO for example via Web Flow
  * 
  * @author Koen Serneels
  */
@@ -43,7 +44,7 @@ public class AuthenticationController {
 	public AuthenticationForm initializeForm() {
 		return new AuthenticationForm();
 	}
-	
+
 	@RequestMapping("login.htm")
 	public ModelAndView authentication() {
 		ModelAndView mov = new ModelAndView();
@@ -55,25 +56,29 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "authenticate.htm", method = RequestMethod.POST)
 	public ModelAndView authentication(@ModelAttribute
-	AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession) {
+	AuthenticationForm authenticationForm, Errors errors, ModelAndView mov, HttpSession httpSession,
+			HttpServletRequest httpServletRequest) {
 		try {
 			authenticate(authenticationForm, httpSession);
 			mov.addObject("authenticationOk", "true");
 			mov.addObject("username", authenticationForm.getUsername());
 			mov.setViewName("main");
 		} catch (AuthenticationException authenticationException) {
-			errors.reject(LOGIN_FAILED_KEY);
+			errors.reject(
+					LOGIN_FAILED_KEY,
+					new Object[] { new RequestContext(httpServletRequest).getMessage(authenticationException.getCode()) },
+					null);
 			mov.setViewName("login");
 		}
 
 		return mov;
 	}
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/index.htm";
-    }
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/index.htm";
+	}
 
 	// ---- POJO logic
 	public Event authenticate(AuthenticationForm authenticationForm, MvcExternalContext externalContext,

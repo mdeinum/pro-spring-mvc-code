@@ -77,7 +77,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasenames(new String[] { "messages", "org/springframework/security/messages" });
+		messageSource.setBasenames(new String[] { "messages", "org.springframework.security.messages" });
 		messageSource.setUseCodeAsDefaultMessage(true);
 		return messageSource;
 	}

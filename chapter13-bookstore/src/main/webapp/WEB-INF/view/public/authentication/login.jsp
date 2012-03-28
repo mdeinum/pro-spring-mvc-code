@@ -12,11 +12,12 @@
 			<td><input type="password" name="j_password" /></td>
 		</tr>
 		<tr>
-			<td colspan="4"><c:if
-					test="${not empty param.authenticationNok}">
+			<td colspan="4">
+				<c:if test="${not empty param.authenticationNok}">
 					<font color="red"> <spring:message code="label.login.failed" arguments="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
 					</font>
-				</c:if></td>
+				</c:if>
+			</td>
 		</tr>
 	</table>
 

@@ -27,15 +27,13 @@ public class AccountServiceImpl implements AccountService {
 		if (account != null) {
 			String pwd = DigestUtils.sha256Hex(password + "{" + username + "}");
 			if (!account.getPassword().equalsIgnoreCase(pwd)) {
-				account = null;
+				throw new AuthenticationException("Wrong username/password combination.", "invalid.password");
 			}
+		} else {
+			throw new AuthenticationException("Wrong username/password combination.", "invalid.username");
 		}
 
-		if (account == null) {
-			throw new AuthenticationException("Wrong username/password combination.", "invalid.username");
-		} else {
-			return account;
-		}
+		return account;
 	}
 
 	@Override
