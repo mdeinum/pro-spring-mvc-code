@@ -3,7 +3,7 @@ apply plugin: 'base'
 ext.springVersion='3.1.1.RELEASE'
 ext.tilesVersion='2.2.2'
 ext.springSecurityVersion='3.1.0.RELEASE'
-ext.springSwfVersion='2.3.0.RELEASE'
+ext.springSwfVersion='2.3.1.RELEASE'
 ext.hibernateVersion='4.1.1.Final'
 ext.hibernateValidatorVersion='4.2.0.Final'
 ext.ehCacheVersion='2.5.0'
@@ -21,7 +21,7 @@ buildscript {
         }
     }
 
-    dependencies { classpath 'bmuschko:gradle-tomcat-plugin:0.9' }
+    dependencies { classpath 'bmuschko:gradle-tomcat-plugin:0.9.1' }
 }
 
 allprojects {
@@ -37,6 +37,7 @@ allprojects {
 
     repositories {
         mavenRepo url: 'http://maven.springframework.org/release'
+	mavenRepo url: 'http://maven.springframework.org/snapshot'
         mavenCentral()
         mavenRepo url: 'http://maven.springframework.org/milestone'
         mavenRepo url: 'https://repository.jboss.org/nexus/content/repositories/releases/'

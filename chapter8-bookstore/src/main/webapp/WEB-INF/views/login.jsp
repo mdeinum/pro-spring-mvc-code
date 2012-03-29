@@ -18,7 +18,7 @@
             <td><spring:message code="account.password"/></td>
             <td><input type="password" id="password" name="password" placeholder="<spring:message code="account.password"/>"/></td>
         </tr>
-        <tr><td colspan="2" align="center"><button id="login"><spring:message code="button.login"/></button></td></tr>
+        <tr><td colspan="2" align="center"><button id="loginButton"><spring:message code="button.login"/></button></td></tr>
         </table>
     </fieldset>
 </form>

@@ -27,8 +27,10 @@ public class LoginFrontendTest {
 		webTester.clickLink("login");
 		webTester.assertTextPresent("Username");
 		webTester.assertTextPresent("Password");
-		webTester.setTextField("username", "john");
+		webTester.setTextField("username", "jd");
 		webTester.setTextField("password", "secret");
-		webTester.clickButton("startLogin");
+		webTester.clickButton("loginButton");
+		webTester.clickLink("account");
+		webTester.assertTextFieldEquals("firstName", "John");
 	}
 }

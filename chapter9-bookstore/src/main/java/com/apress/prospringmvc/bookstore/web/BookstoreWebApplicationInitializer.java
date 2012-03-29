@@ -11,7 +11,6 @@ import javax.servlet.ServletRegistration;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -43,8 +42,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
         AnnotationConfigWebApplicationContext rootContext = createContext(InfrastructureContextConfiguration.class,
                 TestDataContextConfiguration.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
-
-        servletContext.addListener(new RequestContextListener());
     }
 
     private void registerOpenEntityManagerInViewFilter(ServletContext servletContext) {
@@ -61,7 +58,6 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
      */
     private AnnotationConfigWebApplicationContext createContext(final Class<?>... annotatedClasses) {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.getEnvironment().setActiveProfiles("local");
         context.register(annotatedClasses);
         return context;
     }
