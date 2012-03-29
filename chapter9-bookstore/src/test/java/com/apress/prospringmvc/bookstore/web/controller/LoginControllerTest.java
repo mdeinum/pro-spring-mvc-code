@@ -65,11 +65,11 @@ public class LoginControllerTest {
 		// Test the different view selection choices
 		mockHttpServletRequest = new MockHttpServletRequest();
 		view = loginController.handleLogin("john", "secret", mockHttpServletRequest);
-		assertEquals("/index.htm", view);
+		assertEquals("redirect:/index.htm", view);
 
 		mockHttpServletRequest = new MockHttpServletRequest();
 		mockHttpServletRequest.getSession().setAttribute(SecurityHandlerInterceptor.REQUESTED_URL, "abclogindef");
 		view = loginController.handleLogin("john", "secret", mockHttpServletRequest);
-		assertEquals("/index.htm", view);
+		assertEquals("redirect:/index.htm", view);
 	}
 }
