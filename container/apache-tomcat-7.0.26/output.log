@@ -1,0 +1,83 @@
+Mar 31, 2012 5:24:07 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [/tmp/cargo/conf/common/classes], exists: [false], isDirectory: [false], canRead: [false]
+Mar 31, 2012 5:24:07 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [/tmp/cargo/conf/common/lib], exists: [false], isDirectory: [false], canRead: [false]
+Mar 31, 2012 5:24:07 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [/tmp/cargo/conf/shared/classes], exists: [false], isDirectory: [false], canRead: [false]
+Mar 31, 2012 5:24:07 PM org.apache.catalina.startup.ClassLoaderFactory validateFile
+WARNING: Problem with directory [/tmp/cargo/conf/shared/lib], exists: [false], isDirectory: [false], canRead: [false]
+Mar 31, 2012 5:24:07 PM org.apache.catalina.core.AprLifecycleListener init
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /home/koen/devel/apps/jdk1.6.0_24/jre/lib/amd64/server:/home/koen/devel/apps/jdk1.6.0_24/jre/lib/amd64:/home/koen/devel/apps/jdk1.6.0_24/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+Mar 31, 2012 5:24:07 PM org.apache.catalina.startup.SetAllPropertiesRule begin
+WARNING: [SetAllPropertiesRule]{Server/Service/Connector} Setting property 'emptySessionPath' to 'true' did not find a matching property.
+Mar 31, 2012 5:24:07 PM org.apache.tomcat.util.digester.SetPropertiesRule begin
+WARNING: [SetPropertiesRule]{Server/Service/Engine/Host} Setting property 'xmlValidation' to 'false' did not find a matching property.
+Mar 31, 2012 5:24:07 PM org.apache.tomcat.util.digester.SetPropertiesRule begin
+WARNING: [SetPropertiesRule]{Server/Service/Engine/Host} Setting property 'xmlNamespaceAware' to 'false' did not find a matching property.
+Mar 31, 2012 5:24:08 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+Mar 31, 2012 5:24:08 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+Mar 31, 2012 5:24:08 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 622 ms
+Mar 31, 2012 5:24:08 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+Mar 31, 2012 5:24:08 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.26
+Mar 31, 2012 5:24:08 PM org.apache.catalina.startup.HostConfig deployWAR
+INFO: Deploying web application archive /tmp/cargo/conf/webapps/chapter9-bookstore.war
+Mar 31, 2012 5:24:16 PM org.apache.catalina.core.ApplicationContext log
+INFO: Spring WebApplicationInitializers detected on classpath: [com.apress.prospringmvc.bookstore.web.BookstoreWebApplicationInitializer@6eecb3f1]
+17:24:16.666 [pool-2-thread-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+17:24:16Mar 31, 2012 5:24:16 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+.669 [pool-2-thread-1] INFO  o.s.w.c.s.AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Mar 31 17:24:16 CEST 2012]; root of context hierarchy
+17:24:16.736 [pool-2-thread-1] INFO  o.s.w.c.s.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.apress.prospringmvc.bookstore.config.InfrastructureContextConfiguration,class com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration]
+17:24:17.224 [pool-2-thread-1] INFO  o.s.b.f.s.DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@21e3cc77: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,infrastructureContextConfiguration,testDataContextConfiguration,org.springframework.context.annotation.ConfigurationClassPostProcessor$ImportAwareBeanPostProcessor#0,categoryService,bookstoreService,accountServiceImpl,categoryRepository,bookRepository,accountRepository,orderRepository,orderBuilder,bookBuilder,categoryBuilder,accountBuilder,org.springframework.aop.config.internalAutoProxyCreator,proxyTransactionManagementConfiguration,org.springframework.transaction.config.internalTransactionAdvisor,transactionAttributeSource,transactionInterceptor,dataSource,entityManagerFactory,jpaVendorAdapter,transactionManager,setupData,dataSourceTcpConnector]; root of factory hierarchy
+17:24:17.368 [pool-2-thread-1] INFO  o.s.j.d.e.EmbeddedDatabaseFactory - Creating embedded database 'testdb'
+17:24:17.663 [pool-2-thread-1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'bookstore'
+log4j:WARN No appenders could be found for logger (org.jboss.logging).
+log4j:WARN Please initialize the log4j system properly.
+17:24:20.126 [pool-2-thread-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 3457 ms
+Mar 31, 2012 5:24:24 PM org.apache.catalina.util.SessionIdGenerator createSecureRandom
+INFO: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [4,756] milliseconds.
+Mar 31, 2012 5:24:24 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring FrameworkServlet 'dispatcher'
+17:24:24.905 [pool-2-thread-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcher': initialization started
+17:24:24.907 [pool-2-thread-1] INFO  o.s.w.c.s.AnnotationConfigWebApplicationContext - Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Sat Mar 31 17:24:24 CEST 2012]; parent: Root WebApplicationContext
+17:24:24.909 [pool-2-thread-1] INFO  o.s.w.c.s.AnnotationConfigWebApplicationContext - Registering annotated classes: [class com.apress.prospringmvc.bookstore.web.config.WebMvcContextConfiguration]
+17:24:25.107 [pool-2-thread-1] INFO  o.s.b.f.s.DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@7d05e560: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,webMvcContextConfiguration,org.springframework.context.annotation.ConfigurationClassPostProcessor$ImportAwareBeanPostProcessor#0,viewConfigurationContext,loginController,registrationController,cartController,bookSearchController,accountController,bookDetailController,orderController,tilesConfigurer,tilesViewResolver,delegatingWebMvcConfiguration,requestMappingHandlerMapping,viewControllerHandlerMapping,beanNameHandlerMapping,resourceHandlerMapping,defaultServletHandlerMapping,requestMappingHandlerAdapter,mvcConversionService,mvcValidator,httpRequestHandlerAdapter,simpleControllerHandlerAdapter,handlerExceptionResolver,messageSource,localeChangeInterceptor,localeResolver,commonDataHandlerInterceptor,securityHandlerInterceptor,sessionAttributeProcessor,simpleMappingExceptionResolver,categoryConverter,scopedTarget.cart,cart]; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@21e3cc77
+17:24:25.488 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/login],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public void com.apress.prospringmvc.bookstore.web.controller.LoginController.login()
+17:24:25.489 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/logout],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.LoginController.logout(javax.servlet.http.HttpSession)
+17:24:25.489 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.LoginController.handleLogin(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.apress.prospringmvc.bookstore.service.AuthenticationException
+17:24:25.490 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/customer/register],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public com.apress.prospringmvc.bookstore.domain.Account com.apress.prospringmvc.bookstore.web.controller.RegistrationController.register(java.util.Locale)
+17:24:25.490 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/customer/register],methods=[POST || PUT],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.RegistrationController.handleRegistration(com.apress.prospringmvc.bookstore.domain.Account,org.springframework.validation.BindingResult)
+17:24:25.492 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/cart/add/{bookId}],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.CartController.addToCart(long,java.lang.String)
+17:24:25.492 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/cart/checkout],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public com.apress.prospringmvc.bookstore.domain.Order com.apress.prospringmvc.bookstore.web.controller.CartController.checkout(javax.servlet.http.HttpServletRequest)
+17:24:25.493 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/cart/checkout],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.CartController.checkout(com.apress.prospringmvc.bookstore.domain.Order,org.springframework.validation.BindingResult,org.springframework.web.bind.support.SessionStatus)
+17:24:25.493 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/book/search],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.util.Collection<com.apress.prospringmvc.bookstore.domain.Book> com.apress.prospringmvc.bookstore.web.controller.BookSearchController.list(com.apress.prospringmvc.bookstore.domain.BookSearchCriteria)
+17:24:25.494 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/customer/account],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.AccountController.index(org.springframework.ui.Model,com.apress.prospringmvc.bookstore.domain.Account)
+17:24:25.494 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/customer/account],methods=[POST || PUT],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.AccountController.update(com.apress.prospringmvc.bookstore.domain.Account)
+17:24:25.495 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/book/detail/{bookId}],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.apress.prospringmvc.bookstore.web.controller.BookDetailController.details(long,org.springframework.ui.Model)
+17:24:25.495 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/order/{orderId}],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.apress.prospringmvc.bookstore.web.controller.OrderController.indexWithContentType(long)
+17:24:25.495 [pool-2-thread-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/order.*],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.apress.prospringmvc.bookstore.web.controller.OrderController.indexWithRequestParameter(long)
+17:24:25.519 [pool-2-thread-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/index.htm] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+17:24:25.556 [pool-2-thread-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/resources/**/*] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+17:24:25.567 [pool-2-thread-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler]
+Mar 31, 2012 5:24:25 PM org.apache.catalina.startup.HostConfig deployWAR
+INFO: Deploying web application archive /tmp/cargo/conf/webapps/cargocpc.war
+17:24:25.977 [pool-2-thread-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcher': initialization completed in 1072 ms
+Mar 31, 2012 5:24:26 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /tmp/cargo/conf/webapps/host-manager
+Mar 31, 2012 5:24:26 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /tmp/cargo/conf/webapps/manager
+Mar 31, 2012 5:24:26 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]
+Mar 31, 2012 5:24:26 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+Mar 31, 2012 5:24:26 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 17932 ms
+Mar 31, 2012 5:25:32 PM org.apache.jasper.compiler.TldLocationsCache tldScanJar
+INFO: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+Mar 31, 2012 5:26:02 PM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-8080"]
