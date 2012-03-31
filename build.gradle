@@ -47,7 +47,10 @@ allprojects {
         mavenRepo url: 'http://download.java.net/maven/glassfish/org/glassfish/'
     }
 
-    eclipse { project.natures "org.springframework.ide.eclipse.core.springnature" }
+    eclipse { 
+        project.natures "org.springframework.ide.eclipse.core.springnature" 
+    }
+
 }
 
 configure(webProjects) {

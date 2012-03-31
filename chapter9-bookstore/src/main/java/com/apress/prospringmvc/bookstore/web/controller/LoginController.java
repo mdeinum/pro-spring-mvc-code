@@ -27,8 +27,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String handleLogin(@RequestParam("username") String username, @RequestParam("password")String password, HttpServletRequest request)
-            throws AuthenticationException {
+    public String handleLogin(@RequestParam
+    String username, @RequestParam
+    String password, HttpServletRequest request) throws AuthenticationException {
         Account account = this.accountService.login(username, password);
         WebUtils.setSessionAttribute(request, SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, account);
         String url = (String) WebUtils.getSessionAttribute(request, SecurityHandlerInterceptor.REQUESTED_URL);
