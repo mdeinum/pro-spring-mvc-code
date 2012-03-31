@@ -1,7 +1,3 @@
-war {
-	archiveName = 'bookstore-10-swf.war'
-}
-
 dependencies() {
 	compile "org.springframework.webflow:spring-webflow:$springSwfVersion"
 	compile "org.springframework.webflow:spring-js:$springSwfVersion"
