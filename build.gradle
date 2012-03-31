@@ -51,6 +51,9 @@ allprojects {
         project.natures "org.springframework.ide.eclipse.core.springnature" 
     }
 
+    tasks.withType(Compile) {
+        options.compilerArgs << "-g"
+    }
 }
 
 configure(webProjects) {
@@ -93,7 +96,7 @@ configure(webProjects) {
     }
 
     war {   
-        version = '' //We do this to make the wars versionless, to when they are deployed with tomcat the context
+        version = '' //We do this to make the wars versionless, when they are deployed with cargo, the context
                      //root of the app is equal to the file name, which is equal to the sample directory name.
      }
 
