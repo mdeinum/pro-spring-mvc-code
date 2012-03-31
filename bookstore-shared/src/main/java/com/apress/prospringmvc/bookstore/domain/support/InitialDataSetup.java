@@ -123,7 +123,7 @@ public class InitialDataSetup {
                         {
                             title("Effective Java");
                             isbn("9780321356680");
-                            description("brings together seventy-eight indispensable programmer’s rules of thumb");
+                            description("Brings together seventy-eight indispensable programmer's rules of thumb.");
                             author("Joshua Bloch");
                             year(2008);
                             price("31.20");
@@ -137,7 +137,7 @@ public class InitialDataSetup {
                             isbn("9780201485677");
                             description("Refactoring is about improving the design of existing code. It is the process of "
                                     + "changing a software system in such a way that it does not alter the external beha"
-                                    + "vior of the code, yet improves its internal structure");
+                                    + "vior of the code, yet improves its internal structure.");
                             author("Martin Fowler");
                             year(1999);
                             price("41.39");
@@ -149,9 +149,9 @@ public class InitialDataSetup {
                         {
                             title("Clean Code: A Handbook of Agile Software Craftsmanship");
                             isbn("9780132350884");
-                            description("Even bad code can function. But if code isn�t clean, it can bring a development organization "
+                            description("Even bad code can function. But if code isn't clean, it can bring a development organization "
                                     + "to its knees. Every year, countless hours and significant resources are lost because of poorly "
-                                    + "written code. But it doesn’t have to be that way");
+                                    + "written code. But it doesn't have to be that way.");
                             author("Robert C. Martin");
                             year(2008);
                             price("33.32");
