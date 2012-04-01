@@ -5,51 +5,71 @@ import static junit.framework.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.support.AccountBuilder;
 import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration
 public class AccountServiceTest {
 
-	private AccountService accountService;
-	private AccountRepository accountRepository;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private AccountRepository accountRepository;
 
-	@Before
-	public void setup() {
-		accountService = new AccountServiceImpl();
+    @Before
+    public void setup() {
+        Account account = new AccountBuilder() {
+            {
+                address("Herve", "4650", "Rue de la gare", "1", null, "Belgium");
+                credentials("john", "secret");
+                name("John", "Doe");
+            }
+        }.build(true);
 
-		Account account = new AccountBuilder() {
-			{
-				address("Herve", "4650", "Rue de la station", "1", null, "Belgium");
-				credentials("john", "secret");
-				name("John", "Doe");
-			}
-		}.build(true);
+        Mockito.when(accountRepository.findByUsername("john")).thenReturn(account);
+    }
 
-		accountRepository = Mockito.mock(AccountRepository.class);
-		Mockito.when(accountRepository.findByUsername(Mockito.anyString())).thenReturn(account);
+    @After
+    public void verify() {
+        Mockito.verify(accountRepository, VerificationModeFactory.times(1)).findByUsername(Mockito.anyString());
+        // This is allowed here: using container injected mocks
+        Mockito.reset(accountRepository);
+    }
 
-		ReflectionTestUtils.setField(accountService, "accountRepository", accountRepository);
-	}
+    @Test(expected = AuthenticationException.class)
+    public void testLoginFailure() throws AuthenticationException {
+        accountService.login("john", "fail");
+    }
 
-	@After
-	public void verify() {
-		Mockito.verify(accountRepository, VerificationModeFactory.times(1)).findByUsername(Mockito.anyString());
-	}
+    @Test()
+    public void testLoginSuccess() throws AuthenticationException {
+        Account account = accountService.login("john", "secret");
+        assertEquals("John", account.getFirstName());
+        assertEquals("Doe", account.getLastName());
+    }
 
-	@Test(expected = AuthenticationException.class)
-	public void testLoginFailure() throws AuthenticationException {
-		accountService.login("john", "fail");
-	}
+    @Configuration
+    static class AccountServiceTestContextConfiguration {
 
-	@Test()
-	public void testLoginSuccess() throws AuthenticationException {
-		Account account = accountService.login("john", "secret");
-		assertEquals("John", account.getFirstName());
-		assertEquals("Doe", account.getLastName());
-	}
+        @Bean
+        public AccountService accountService() {
+            return new AccountServiceImpl();
+        }
+
+        @Bean
+        public AccountRepository accountRepository() {
+            return Mockito.mock(AccountRepository.class);
+        }
+    }
 }
