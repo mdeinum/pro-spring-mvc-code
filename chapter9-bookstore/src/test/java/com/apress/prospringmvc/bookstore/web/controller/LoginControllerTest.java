@@ -7,10 +7,15 @@ import static junit.framework.Assert.assertNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.support.AccountBuilder;
@@ -18,15 +23,17 @@ import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration
 public class LoginControllerTest {
 
+	@Autowired
 	private LoginController loginController;
+	@Autowired
 	private AccountService accountService;
 
 	@Before
 	public void setup() throws AuthenticationException {
-		loginController = new LoginController();
-
 		Account account = new AccountBuilder() {
 			{
 				address("Herve", "4650", "Rue de la station", "1", null, "Belgium");
@@ -35,14 +42,13 @@ public class LoginControllerTest {
 			}
 		}.build(true);
 
-		accountService = Mockito.mock(AccountService.class);
 		Mockito.when(accountService.login("john", "secret")).thenReturn(account);
-		ReflectionTestUtils.setField(loginController, "accountService", accountService);
 	}
 
 	@After
 	public void verify() throws AuthenticationException {
 		Mockito.verify(accountService, VerificationModeFactory.times(3)).login("john", "secret");
+		Mockito.reset();
 	}
 
 	@Test
@@ -71,5 +77,19 @@ public class LoginControllerTest {
 		mockHttpServletRequest.getSession().setAttribute(SecurityHandlerInterceptor.REQUESTED_URL, "abclogindef");
 		view = loginController.handleLogin("john", "secret", mockHttpServletRequest);
 		assertEquals("redirect:/index.htm", view);
+	}
+
+	@Configuration
+	static class LoginControllerTestConfiguration {
+
+		@Bean
+		public AccountService accountService() {
+			return Mockito.mock(AccountService.class);
+		}
+
+		@Bean
+		public LoginController loginController() {
+			return new LoginController();
+		}
 	}
 }

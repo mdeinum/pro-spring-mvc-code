@@ -19,57 +19,57 @@ import com.apress.prospringmvc.bookstore.domain.support.AccountBuilder;
 import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { AccountServiceTestContextConfiguration.class })
+@ContextConfiguration
 public class AccountServiceTest {
 
-	@Autowired
-	private AccountService accountService;
-	@Autowired
-	private AccountRepository accountRepository;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private AccountRepository accountRepository;
 
-	@Before
-	public void setup() {
-		Account account = new AccountBuilder() {
-			{
-				address("Herve", "4650", "Rue de la gare", "1", null, "Belgium");
-				credentials("john", "secret");
-				name("John", "Doe");
-			}
-		}.build(true);
+    @Before
+    public void setup() {
+        Account account = new AccountBuilder() {
+            {
+                address("Herve", "4650", "Rue de la gare", "1", null, "Belgium");
+                credentials("john", "secret");
+                name("John", "Doe");
+            }
+        }.build(true);
 
-		Mockito.when(accountRepository.findByUsername("john")).thenReturn(account);
-	}
+        Mockito.when(accountRepository.findByUsername("john")).thenReturn(account);
+    }
 
-	@After
-	public void verify() {
-		Mockito.verify(accountRepository, VerificationModeFactory.times(1)).findByUsername(Mockito.anyString());
-		// This is allowed here: using container injected mocks
-		Mockito.reset(accountRepository);
-	}
+    @After
+    public void verify() {
+        Mockito.verify(accountRepository, VerificationModeFactory.times(1)).findByUsername(Mockito.anyString());
+        // This is allowed here: using container injected mocks
+        Mockito.reset(accountRepository);
+    }
 
-	@Test(expected = AuthenticationException.class)
-	public void testLoginFailure() throws AuthenticationException {
-		accountService.login("john", "fail");
-	}
+    @Test(expected = AuthenticationException.class)
+    public void testLoginFailure() throws AuthenticationException {
+        accountService.login("john", "fail");
+    }
 
-	@Test()
-	public void testLoginSuccess() throws AuthenticationException {
-		Account account = accountService.login("john", "secret");
-		assertEquals("John", account.getFirstName());
-		assertEquals("Doe", account.getLastName());
-	}
-}
+    @Test()
+    public void testLoginSuccess() throws AuthenticationException {
+        Account account = accountService.login("john", "secret");
+        assertEquals("John", account.getFirstName());
+        assertEquals("Doe", account.getLastName());
+    }
 
-@Configuration
-class AccountServiceTestContextConfiguration {
+    @Configuration
+    static class AccountServiceTestContextConfiguration {
 
-	@Bean
-	public AccountService accountService() {
-		return new AccountServiceImpl();
-	}
+        @Bean
+        public AccountService accountService() {
+            return new AccountServiceImpl();
+        }
 
-	@Bean
-	public AccountRepository accountRepository() {
-		return Mockito.mock(AccountRepository.class);
-	}
+        @Bean
+        public AccountRepository accountRepository() {
+            return Mockito.mock(AccountRepository.class);
+        }
+    }
 }
