@@ -20,31 +20,23 @@
 <script>
 $('#bookSearchForm').submit(function(evt){
 	evt.preventDefault();
-	var formData = $('#bookSearchForm').serializeArray();
-	var data = {};
-	$.map(formData, function(input, i){
-		if (input['name'] == 'category') {
-			   data[input['name']] = {id: input['value']};		
-		} else {
-		  data[input['name']] = input['value'];
-	    }
-		return data;		
-	});
+	var title = $('#title').val();
+	var category = $('#category').val();
+	var json = { "title" : title, "category" : { "id" : category}};
 	
 	$.ajax({
 		url: $('#bookSearchForm').action,
 		type: 'POST',
 		dataType: 'json',
 		contentType: 'application/json',
-		data: JSON.stringify(data),
-		success: function(data) {
+		data: JSON.stringify(json),
+		success: function(books) {
 			var content = '';
-			var books = data;
 			var baseDetailUrl = '<c:url value="/book/detail/"/>';
 			var baseAddCartUrl = '<c:url value="/cart/add/" />';
 			for (var i = 0; i<books.length; i++) {
 				content += '<tr>';
-				content += '<td><a href="'+ baseDetailUrl + books[i].id+'">'+books[i].title+'</a</td>';
+				content += '<td><a href="'+ baseDetailUrl + books[i].id+'">'+books[i].title+'</a></td>';
 				content += '<td>'+books[i].description+'</td>';
                 content += '<td>'+books[i].price+'</td>';
                 content += '<td><a href="'+ baseAddCartUrl +books[i].id+'"><spring:message code="book.addtocart"/></a></td></tr>';
@@ -73,6 +65,6 @@ $('#bookSearchForm').submit(function(evt){
                 <td><a href="<c:url value="/cart/add/${book.id}"/>"><spring:message code="book.addtocart"/></a></td>
             </tr>
         </c:forEach>
-        <tbody>
+        </tbody>
     </table>
 </c:if>
