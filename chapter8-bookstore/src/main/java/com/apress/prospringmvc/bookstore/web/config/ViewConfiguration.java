@@ -6,7 +6,7 @@ import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesViewResolver;
 
 @Configuration
-public class ViewConfigurationContext {
+public class ViewConfiguration {
 
     @Bean
     public TilesConfigurer tilesConfigurer() {
