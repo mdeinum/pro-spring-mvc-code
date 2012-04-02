@@ -63,7 +63,7 @@ public class BookSearchController {
      * 
      * @see com.apress.prospringmvc.bookstore.repository.BookRepository#findBooks(BookSearchCriteria)
      */
-    @RequestMapping(value = "/book/search", method = { RequestMethod.GET, RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/book/search", method = { RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Collection<Book> listJSON(@RequestBody BookSearchCriteria criteria) {
         return this.bookstoreService.findBooks(criteria);
