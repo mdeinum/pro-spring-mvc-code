@@ -100,7 +100,7 @@ configure(webProjects) {
                      //root of the app is equal to the file name, which is equal to the sample directory name.
      }
 
-    task integrationTest(type: Test) {
+    task systemTest(type: Test) {
         include '**/*FrontendTest.*'
 	dependsOn(war)
 
