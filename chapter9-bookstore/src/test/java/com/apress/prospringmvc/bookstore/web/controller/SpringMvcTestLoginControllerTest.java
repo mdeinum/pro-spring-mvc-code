@@ -23,7 +23,6 @@ import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.support.AccountBuilder;
 import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
-import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -39,7 +38,7 @@ public class SpringMvcTestLoginControllerTest {
 
     @Before
     public void setup() throws Exception {
-        account = new AccountBuilder() {
+        this.account = new AccountBuilder() {
             {
                 address("Herve", "4650", "Rue de la station", "1", null, "Belgium");
                 credentials("john", "secret");
@@ -47,21 +46,21 @@ public class SpringMvcTestLoginControllerTest {
             }
         }.build(true);
 
-        Mockito.when(accountService.login("john", "secret")).thenReturn(account);
+        Mockito.when(this.accountService.login("john", "secret")).thenReturn(this.account);
     }
 
     @Test
     public void testHandleLogin() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(loginController).build();
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(this.loginController).build();
         mockMvc.perform(post("/login").param("username", "john").param("password", "secret"))
                 .andExpect(status().isOk())
-                .andExpect(request().sessionAttribute(SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, account))
+                .andExpect(request().sessionAttribute(LoginController.ACCOUNT_ATTRIBUTE, this.account))
                 .andExpect(redirectedUrl("/index.htm"));
     }
 
     @After
     public void verify() throws AuthenticationException {
-        Mockito.verify(accountService, VerificationModeFactory.times(1)).login("john", "secret");
+        Mockito.verify(this.accountService, VerificationModeFactory.times(1)).login("john", "secret");
         Mockito.reset();
     }
 
