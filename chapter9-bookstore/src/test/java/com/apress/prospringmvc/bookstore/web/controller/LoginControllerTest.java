@@ -13,7 +13,7 @@ import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,75 +21,73 @@ import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.support.AccountBuilder;
 import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
-import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class LoginControllerTest {
 
-	@Autowired
-	private LoginController loginController;
-	@Autowired
-	private AccountService accountService;
+    @Autowired
+    private LoginController loginController;
+    @Autowired
+    private AccountService accountService;
 
-	@Before
-	public void setup() throws AuthenticationException {
-		Account account = new AccountBuilder() {
-			{
-				address("Herve", "4650", "Rue de la station", "1", null, "Belgium");
-				credentials("john", "secret");
-				name("John", "Doe");
-			}
-		}.build(true);
+    @Before
+    public void setup() throws AuthenticationException {
+        Account account = new AccountBuilder() {
+            {
+                address("Herve", "4650", "Rue de la station", "1", null, "Belgium");
+                credentials("john", "secret");
+                name("John", "Doe");
+            }
+        }.build(true);
 
-		Mockito.when(accountService.login("john", "secret")).thenReturn(account);
-	}
+        Mockito.when(this.accountService.login("john", "secret")).thenReturn(account);
+    }
 
-	@After
-	public void verify() throws AuthenticationException {
-		Mockito.verify(accountService, VerificationModeFactory.times(3)).login("john", "secret");
-		Mockito.reset();
-	}
+    @After
+    public void verify() throws AuthenticationException {
+        Mockito.verify(this.accountService, VerificationModeFactory.times(3)).login("john", "secret");
+        Mockito.reset();
+    }
 
-	@Test
-	public void testHandleLogin() throws AuthenticationException {
+    @Test
+    public void testHandleLogin() throws AuthenticationException {
 
-		MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
-		mockHttpServletRequest.getSession().setAttribute(SecurityHandlerInterceptor.REQUESTED_URL, "someUrl");
+        MockHttpSession mockHttpSession = new MockHttpSession();
+        mockHttpSession.setAttribute(LoginController.REQUESTED_URL, "someUrl");
 
-		String view = loginController.handleLogin("john", "secret", mockHttpServletRequest);
+        String view = this.loginController.handleLogin("john", "secret", mockHttpSession);
 
-		Account account = (Account) mockHttpServletRequest.getSession().getAttribute(
-				SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE);
+        Account account = (Account) mockHttpSession.getAttribute(LoginController.ACCOUNT_ATTRIBUTE);
 
-		assertNotNull(account);
-		assertEquals("John", account.getFirstName());
-		assertEquals("Doe", account.getLastName());
-		assertNull(mockHttpServletRequest.getSession().getAttribute(SecurityHandlerInterceptor.REQUESTED_URL));
-		assertEquals("redirect:someUrl", view);
+        assertNotNull(account);
+        assertEquals("John", account.getFirstName());
+        assertEquals("Doe", account.getLastName());
+        assertNull(mockHttpSession.getAttribute(LoginController.REQUESTED_URL));
+        assertEquals("redirect:someUrl", view);
 
-		// Test the different view selection choices
-		mockHttpServletRequest = new MockHttpServletRequest();
-		view = loginController.handleLogin("john", "secret", mockHttpServletRequest);
-		assertEquals("redirect:/index.htm", view);
+        // Test the different view selection choices
+        mockHttpSession = new MockHttpSession();
+        view = this.loginController.handleLogin("john", "secret", mockHttpSession);
+        assertEquals("redirect:/index.htm", view);
 
-		mockHttpServletRequest = new MockHttpServletRequest();
-		mockHttpServletRequest.getSession().setAttribute(SecurityHandlerInterceptor.REQUESTED_URL, "abclogindef");
-		view = loginController.handleLogin("john", "secret", mockHttpServletRequest);
-		assertEquals("redirect:/index.htm", view);
-	}
+        mockHttpSession = new MockHttpSession();
+        mockHttpSession.setAttribute(LoginController.REQUESTED_URL, "abclogindef");
+        view = this.loginController.handleLogin("john", "secret", mockHttpSession);
+        assertEquals("redirect:/index.htm", view);
+    }
 
-	@Configuration
-	static class LoginControllerTestConfiguration {
+    @Configuration
+    static class LoginControllerTestConfiguration {
 
-		@Bean
-		public AccountService accountService() {
-			return Mockito.mock(AccountService.class);
-		}
+        @Bean
+        public AccountService accountService() {
+            return Mockito.mock(AccountService.class);
+        }
 
-		@Bean
-		public LoginController loginController() {
-			return new LoginController();
-		}
-	}
+        @Bean
+        public LoginController loginController() {
+            return new LoginController();
+        }
+    }
 }

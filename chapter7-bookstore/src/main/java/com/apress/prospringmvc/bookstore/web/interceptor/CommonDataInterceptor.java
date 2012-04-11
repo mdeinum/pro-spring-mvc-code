@@ -21,6 +21,7 @@ public class CommonDataInterceptor implements WebRequestInterceptor {
         if (model != null) {
             model.addAttribute("randomBooks", this.bookstoreService.findRandomBooks());
         }
+
     }
 
     @Override

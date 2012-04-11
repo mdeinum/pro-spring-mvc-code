@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 import com.apress.prospringmvc.bookstore.repository.OrderRepository;
-import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerInterceptor;
 import com.apress.prospringmvc.bookstore.web.method.support.SessionAttribute;
 
 @Controller
@@ -43,13 +42,12 @@ public class AccountController {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setDisallowedFields("id");
-        binder.setRequiredFields("username", "password", "emailAddress");
+        binder.setRequiredFields("username", "emailAddress");
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index(
-            Model model,
-            @SessionAttribute(value = SecurityHandlerInterceptor.ACCOUNT_ATTRIBUTE, exposeAsModelAttribute = true) Account account) {
+    public String index(Model model,
+            @SessionAttribute(value = LoginController.ACCOUNT_ATTRIBUTE, exposeAsModelAttribute = true) Account account) {
         model.addAttribute("orders", this.orderRepository.findByAccount(account));
         return "customer/account";
     }
