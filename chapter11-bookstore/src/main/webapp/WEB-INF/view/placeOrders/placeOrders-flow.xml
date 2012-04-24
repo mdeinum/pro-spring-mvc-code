@@ -5,7 +5,7 @@
 	
 	<input name="orderForm" required="true" type="com.apress.prospringmvc.bookstore.web.controller.OrderForm"/>
 	
-	<action-state id="createOrder">
+	<action-state id="placeOrder">
 		<evaluate expression="orderController.placeOrder(externalContext.sessionMap.authenticatedAccount, flowScope.orderForm)" result="flowScope.orderId"/>
 		<transition on="success" to="endOrderOk"/>
 	</action-state>

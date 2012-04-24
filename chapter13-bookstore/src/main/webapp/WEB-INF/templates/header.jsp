@@ -31,10 +31,12 @@
 						<a href="${ordersOverview}"><spring:message code="nav.ordersOverview"/></a>
 					</sec:authorize>
 				</li>
-				<li>
-					<spring:url value="/public/authentication/login.htm" var="login" />
-					<a href="${login}"><spring:message code="nav.login"/></a>
-				</li>
+				<sec:authorize access="! authenticated">
+					<li>
+						<spring:url value="/public/authentication/login.htm" var="login" />
+						<a href="${login}"><spring:message code="nav.login"/></a>
+					</li>
+				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR') ">
 					<li>
 						<spring:url value="/secured/manageBooks/manageBooks.htm" var="manageBooks" /> 

@@ -51,15 +51,15 @@
 	</view-state>
 	
 	<decision-state id="loginCheck">
-		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
+		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="placeOrder" else="authenticate"/>
 	</decision-state>	
 
 	<subflow-state id="authenticate" subflow="authentication">
-		<transition on="authenticationOk" to="createOrder"/>
+		<transition on="authenticationOk" to="placeOrder"/>
 		<transition on="previous" to="selectDeliveryOptions"/>
 	</subflow-state>
 	
-	<subflow-state id="createOrder" subflow="placeOrders">
+	<subflow-state id="placeOrder" subflow="placeOrders">
 		<input name="orderForm"/>
 		
 		<output name="orderId"/>

@@ -83,18 +83,18 @@ public class OrderController {
 
 	public Event validateDeliveryDate(OrderForm orderForm, MessageContext messageContext) {
 		if (orderForm.getDeliveryDate() == null) {
-			MessageBuilder errorMessageBuidler = new MessageBuilder().error();
-			errorMessageBuidler.source("deliveryDate");
-			errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.required");
-			messageContext.addMessage(errorMessageBuidler.build());
+			MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+			errorMessageBuilder.source("deliveryDate");
+			errorMessageBuilder.code("error.page.selectdeliveryoptions.deliverydate.required");
+			messageContext.addMessage(errorMessageBuilder.build());
 			return new EventFactorySupport().error(this);
 		}
 
-		if (orderForm.getDeliveryDate().before(DateUtils.truncate(orderForm.getOrderDate(), Calendar.DAY_OF_MONTH))) {
-			MessageBuilder errorMessageBuidler = new MessageBuilder().error();
-			errorMessageBuidler.source("deliveryDate");
-			errorMessageBuidler.code("error.page.selectdeliveryoptions.deliverydate.in.past");
-			messageContext.addMessage(errorMessageBuidler.build());
+		if (!orderForm.getDeliveryDate().after(DateUtils.truncate(orderForm.getOrderDate(), Calendar.DAY_OF_MONTH))) {
+			MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+			errorMessageBuilder.source("deliveryDate");
+			errorMessageBuilder.code("error.page.selectdeliveryoptions.deliverydate.in.past");
+			messageContext.addMessage(errorMessageBuilder.build());
 			return new EventFactorySupport().error(this);
 		}
 		return new EventFactorySupport().success(this);

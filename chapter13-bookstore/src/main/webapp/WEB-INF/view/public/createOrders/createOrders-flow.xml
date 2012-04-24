@@ -45,7 +45,7 @@
 	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
 		<transition on="previous" to="selectBooks" />
 
-		<transition on="finish" to="createOrder">
+		<transition on="finish" to="placeOrder">
 			<evaluate expression="orderController.validateDeliveryDate(flowScope.orderForm, messageContext)"/>
 		</transition>
 		
@@ -55,7 +55,7 @@
 <!-- Refactored: no longer needed, the placeOrders-flow uses Web Flow security. When the user is not authenticated
 	 we will be redirected to the login page via Spring Security.	
 	<decision-state id="loginCheck">
-		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
+		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="placeOrder" else="authenticate"/>
 	</decision-state>	
 
 	<subflow-state id="authenticate" subflow="authentication">
@@ -64,7 +64,7 @@
 	</subflow-state>
  -->
 			
-	<subflow-state id="createOrder" subflow="secured/placeOrders">
+	<subflow-state id="placeOrder" subflow="secured/placeOrders">
 		<input name="orderForm"/>
 		
 		<output name="orderId"/>
