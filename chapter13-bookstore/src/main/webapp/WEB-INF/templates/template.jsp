@@ -7,7 +7,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Bookstore - </title>
@@ -24,7 +24,7 @@
 		<script type="text/javascript" src="${springDojo}"><!----></script>
 	</head>
 
-	<body class="tundra">
+	<body>
 		<div id="wrap">
 			<tiles:insertAttribute name="header"/>
 
@@ -35,15 +35,18 @@
         
         	<div class="right_content">
       	     <div class="right_box">
-      	     	   <spring:url value="/public/resources/images/bullet4.gif" var="bullet4"/>
-			       <div class="title"><span class="title_icon"><img src="${bullet4}" alt="" title="" /></span><spring:message code="main.title.randombooks"/></div> 
+			       <div class="title">
+						<spring:url value="/public/resources/images/bullet4.gif" var="bullet4"/>
+						<img src="${bullet4}" alt="" title="" />
+						<spring:message code="main.title.randombooks"/>
+					</div> 
                     <c:forEach items="${randomBooks}" var="book">
-                        <div class="new_prod_box">
+                        <div class="new_prod_box" style="width: 100%">
                             <c:url value="/public/book/detail/${book.id}" var="bookUrl" />
                             <a href="${bookUrl}">${book.title}</a>
-                            <div>
+                            <div class="new_prod_img" style="width: 100%">
                             <c:url value="/public/resources/images/books/${book.isbn}/book_front_cover.png" var="bookImage"/>
-                            <a href="${bookUrl}	"><img class="new_prod_img" src="${bookImage}" alt="" title="" class="thumb" border="0"  /></a>
+                            <a href="${bookUrl}	"><img class="new_prod_img" src="${bookImage}" alt="${book.title}" title="${book.title}" class="thumb" border="0" width="100px"/></a>
                             </div>           
                         </div>
                     </c:forEach>
