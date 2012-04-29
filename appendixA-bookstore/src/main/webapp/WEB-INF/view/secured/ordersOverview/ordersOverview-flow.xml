@@ -4,6 +4,8 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<secured attributes="fullyAuthenticated"/>
+
+	<persistence-context/>
                
     <input name="orderId" required="false"/>
 

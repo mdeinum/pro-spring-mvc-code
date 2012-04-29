@@ -13,9 +13,10 @@ import javax.persistence.ManyToOne;
  * An order detail is the link table between {@link Order} and {@link Book} We also store how many books are ordered in
  * the {@link #quantity} field
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 @Entity
 public class OrderDetail implements Serializable {
 

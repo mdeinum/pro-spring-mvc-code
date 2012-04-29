@@ -9,6 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.repository.CategoryRepository;
 
+/**
+ * @see CategoryService
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Service("categoryService")
 @Transactional(readOnly = true)
 public class CategoryServiceImpl implements CategoryService {

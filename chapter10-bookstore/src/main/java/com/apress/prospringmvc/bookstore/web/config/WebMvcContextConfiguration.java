@@ -22,11 +22,12 @@ import org.springframework.web.servlet.view.tiles2.TilesView;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 
 /**
- * WebMvc Configuration.
+ * Spring MVC Configuration.
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })

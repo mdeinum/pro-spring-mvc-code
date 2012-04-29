@@ -22,9 +22,10 @@ import com.apress.prospringmvc.bookstore.domain.Order;
  * Form to capture all elements of a order creation flow. When all mandatory elements are filled in a new {@link Order}
  * can be created based upon this information contained in this form
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 public class OrderForm implements Serializable {
 
 	private Map<Book, Integer> books = new HashMap<Book, Integer>();

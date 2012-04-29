@@ -24,7 +24,7 @@
 		<script type="text/javascript" src="${springDojo}"><!----></script>
 	</head>
 
-	<body>
+	<body class="tundra">
 		<div id="wrap">
 			<tiles:insertAttribute name="header"/>
 

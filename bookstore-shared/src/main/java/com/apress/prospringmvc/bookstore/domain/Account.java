@@ -22,9 +22,10 @@ import org.hibernate.validator.constraints.NotEmpty;
  * by his or her username. When authenticating the user supplies its username and password. Besides identification
  * information we also store basic legal information such as address, firstname, lastname and email address.
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ *
  */
-
 @Entity
 public class Account implements Serializable {
 

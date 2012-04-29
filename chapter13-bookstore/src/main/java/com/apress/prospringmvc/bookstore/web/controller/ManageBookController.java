@@ -18,6 +18,13 @@ import com.apress.prospringmvc.bookstore.domain.support.BookBuilder;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.service.CategoryService;
 
+/**
+ * Controller for the manage books page, allowing to add new categories and books
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 @Controller
 public class ManageBookController {
 
@@ -28,7 +35,7 @@ public class ManageBookController {
 	private CategoryService categoryService;
 
 	@ModelAttribute("manageBookForm")
-	public ManageBookForm getManageBookForm(ManageBookForm manageBookForm) {
+	public ManageBookForm getManageBookForm(ManageBookForm manageBookForm, Errors errors) {
 		manageBookForm.setSelectableCategories(categoryService.findAll());
 		return manageBookForm;
 	}
@@ -36,7 +43,6 @@ public class ManageBookController {
 	@RequestMapping("secured/manageBooks/manageBooks.htm")
 	public ModelAndView manageBooks(@ModelAttribute
 	ManageBookForm manageBookForm, ModelAndView mov) {
-
 		mov.setViewName("manageBooks");
 		return mov;
 	}
@@ -72,8 +78,7 @@ public class ManageBookController {
 	@PreAuthorize("hasRole('PERM_ADD_CATEGORIES')")
 	public ModelAndView addCategory(@ModelAttribute
 	@Valid
-	ManageCategoryForm manageCategoryForm, BindingResult bindingResult, @ModelAttribute
-	ManageBookForm manageBookForm, ModelAndView mov, Errors errors) {
+	ManageCategoryForm manageCategoryForm, BindingResult bindingResult, ModelAndView mov) {
 		mov.setViewName("manageBooks");
 
 		if (bindingResult.hasErrors()) {
@@ -81,7 +86,9 @@ public class ManageBookController {
 		}
 
 		categoryService.addCategory(new Category(manageCategoryForm.getCategory()));
+		ManageBookForm manageBookForm = new ManageBookForm();
 		manageBookForm.setSelectableCategories(categoryService.findAll());
+		mov.addObject("manageBookForm", manageBookForm);
 		mov.addObject("actionSuccess", "category");
 		return mov;
 	}

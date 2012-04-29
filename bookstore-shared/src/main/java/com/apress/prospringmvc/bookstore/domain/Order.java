@@ -22,6 +22,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Entity
 // order is a reserved SQL keyword, hence the explicit table definition
 @Table(name = "orders")

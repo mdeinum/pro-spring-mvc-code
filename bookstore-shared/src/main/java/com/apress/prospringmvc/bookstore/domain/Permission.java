@@ -9,6 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "permission" }) })
 public class Permission implements Serializable {

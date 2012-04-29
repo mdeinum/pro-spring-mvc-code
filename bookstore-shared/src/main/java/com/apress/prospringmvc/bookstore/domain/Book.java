@@ -17,6 +17,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Entity
 @Cacheable
 @Cache(region = "books", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

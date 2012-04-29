@@ -8,7 +8,7 @@
 
 	<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" />
 
-	<header>
+	<div class="header">
 		<div class="logo">
 			<spring:url value="/index.jsp" var="home" />
 			<a href="${home}">
@@ -16,7 +16,7 @@
 				<img src="${logo }" alt="" title="" border="0" />
 			</a>
 		</div>
-		<nav>
+		<div class="nav">
 			<ul>
 				<li>
 					<a href="${home}"><spring:message code="nav.home"/></a>
@@ -31,15 +31,23 @@
 						<a href="${ordersOverview}"><spring:message code="nav.ordersOverview"/></a>
 					</sec:authorize>
 				</li>
-				<li>
-					<spring:url value="/public/authentication/login.htm" var="login" />
-					<a href="${login}"><spring:message code="nav.login"/></a>
-				</li>
+				<sec:authorize access="! authenticated">
+					<li>
+						<spring:url value="/public/authentication/login.htm" var="login" />
+						<a href="${login}"><spring:message code="nav.login"/></a>
+					</li>
+				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR') ">
 					<li>
 						<spring:url value="/secured/manageBooks/manageBooks.htm" var="manageBooks" /> 
 						<a href="${manageBooks}"><spring:message code="nav.manageBooks"/></a>
 					</li>
+				</sec:authorize>
+				<sec:authorize access="fullyAuthenticated">
+					<li>
+	                	<spring:url value="/logout" var="logout" />
+    	            	<a href="${logout}"><spring:message code="nav.logout"/></a>
+        	        </li>
 				</sec:authorize>
 			</ul>
 			<ul style="float: right;">
@@ -48,5 +56,5 @@
                 <li><a href="?lang=en" class="selected"><img src="${gb}" alt="" title="" border="0" /></a></li>
                 <li><a href="?lang=nl"><img src="${nl}" alt="" title="" border="0" /></a></li>
             </ul>
-		</nav>
-	</header>
+		</div>
+	</div>

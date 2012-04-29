@@ -23,9 +23,10 @@ import com.apress.prospringmvc.bookstore.domain.support.EntityBuilder.EntityBuil
  * Sets up initial data so the application can be used straight away. The data setup is executed in a separate
  * transaction, and committed when the {@link #setupData()} method returns
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 public class InitialDataSetup {
 
     private TransactionTemplate transactionTemplate;

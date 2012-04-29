@@ -16,9 +16,10 @@ import com.apress.prospringmvc.bookstore.domain.OrderDetail;
 /**
  * Builds {@link Order} domain objects
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 @Component
 public class OrderBuilder extends EntityBuilder<Order> {
 

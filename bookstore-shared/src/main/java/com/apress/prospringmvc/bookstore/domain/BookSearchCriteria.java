@@ -4,6 +4,7 @@ package com.apress.prospringmvc.bookstore.domain;
  * Object to hold the search criteria to search books.
  * 
  * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 public class BookSearchCriteria {

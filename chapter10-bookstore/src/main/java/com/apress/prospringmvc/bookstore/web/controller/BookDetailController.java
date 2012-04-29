@@ -12,26 +12,27 @@ import com.apress.prospringmvc.bookstore.service.BookstoreService;
 /**
  * Controller to handle book detail requests.
  * 
- * @author M. Deinum
- * @author K. Serneels
- *
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
  */
 @Controller
 public class BookDetailController {
 
-    @Autowired
-    private BookstoreService bookstoreService;
+	@Autowired
+	private BookstoreService bookstoreService;
 
-    /**
-     * Method used to prepare our model and select the view to show the details of the selected book.
-     * @param bookId the id of the book
-     * @param model the implicit model
-     * @return view name to render (book/detail)
-     */
-    @RequestMapping(value = "/book/detail/{bookId}")
-    public String details(@PathVariable("bookId") long bookId, Model model) {
-        Book book = this.bookstoreService.findBook(bookId);
-        model.addAttribute(book);
-        return "book/detail";
-    }
+	/**
+	 * Method used to prepare our model and select the view to show the details of the selected book.
+	 * @param bookId the id of the book
+	 * @param model the implicit model
+	 * @return view name to render (book/detail)
+	 */
+	@RequestMapping(value = "/book/detail/{bookId}")
+	public String details(@PathVariable("bookId")
+	long bookId, Model model) {
+		Book book = this.bookstoreService.findBook(bookId);
+		model.addAttribute(book);
+		return "book/detail";
+	}
 }

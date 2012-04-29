@@ -18,7 +18,9 @@ import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterc
  * which will enable the {@link DispatcherServlet} to recognize Web Flow requests and send them to the
  * {@link FlowExecutor}
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
 
 @Configuration

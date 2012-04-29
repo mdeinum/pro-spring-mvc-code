@@ -1,5 +1,14 @@
 package com.apress.prospringmvc.bookstore.dao;
 
+/**
+ * Represents a dummy implementation of a typical DAO. An instance of this
+ * class will be used to illustrate basic unit testing.
+ * 
+ * @see BasicUnitTest
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 import java.util.ArrayList;
 import java.util.List;
 

@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component;
 import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Category;
 
+/**
+ * Builds {@link Book} domain objects
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Component
 public class BookBuilder extends EntityBuilder<Book> {
 

@@ -14,6 +14,10 @@
         <put-attribute name="content" value="/WEB-INF/view/public/main.jsp"/>
     </definition>
 
+	<definition name="book/detail" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/view/public/book/detail.jsp"/>
+    </definition>
+
 	<definition name="show.selected.books" template="/WEB-INF/view/public/createOrders/selectBooks.jsp">
         <put-attribute name="selectedBooks" value="/WEB-INF/view/public/createOrders/showSelectedBooks.jsp"/>
     </definition>

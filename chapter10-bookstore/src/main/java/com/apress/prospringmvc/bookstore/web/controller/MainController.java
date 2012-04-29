@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Shows the main screen
+ * Controller for the homepage
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 @Controller
 public class MainController {
 	@RequestMapping("index.htm")

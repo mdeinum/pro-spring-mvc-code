@@ -4,13 +4,14 @@ import java.util.EnumSet;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.SpringServletContainerInitializer;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
@@ -21,21 +22,33 @@ import com.apress.prospringmvc.bookstore.config.InfrastructureContextConfigurati
 import com.apress.prospringmvc.bookstore.config.TestDataContextConfiguration;
 
 /**
- * The main {@link WebApplicationInitializer} which starts up a {@link AnnotationConfigWebApplicationContext}. Resources
- * for this context are retrieved from annotated classes which are annotated using the {@link Configuration}. The
- * classes loaded are mentioned here are stored in the {@link #configurationClasses}</p>
+ * {@link WebApplicationInitializer} that will be called by Spring's {@link SpringServletContainerInitializer} as part
+ * of the JEE {@link ServletContainerInitializer} pattern. This class will be called on application startup and will
+ * configure our JEE and Spring configuration.
+ * <p/>
  * 
- * The application context is then passed on to a {@link ContextLoaderListener} which is manually registered using the
- * JEE API for registering {@link ServletContextListener}. Using the same API we also programmatically configure the
- * {@link DispatcherServlet} that listens to / and register the {@link OpenEntityManagerInViewFilter}.
+ * It will first initializes our {@link AnnotationConfigWebApplicationContext} with the common {@link Configuration}
+ * classes: {@link InfrastructureContextConfiguration} and {@link TestDataContextConfiguration} using a typical JEE
+ * {@link ContextLoaderListener}.
+ * <p/>
  * 
+ * Next it creates a {@link DispatcherServlet}, being a normal JEE Servlet which will create on its turn a child
+ * {@link AnnotationConfigWebApplicationContext} configured with the Spring MVC {@link Configuration} classes
+ * {@link WebMvcContextConfiguration} and {@link WebflowContextConfiguration}. This Servlet will be registered using
+ * JEE's programmatical API support.
+ * <p/>
+ * 
+ * Finally it will also register a JEE listener for enabling the open entity manager in view pattern:
+ * {@link OpenEntityManagerInViewFilter}
+ * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
 public class BookstoreWebApplicationInitializer implements WebApplicationInitializer {
 
-	private static final Class<?>[] configurationClasses = new Class<?>[] { TestDataContextConfiguration.class,
-			WebMvcContextConfiguration.class, InfrastructureContextConfiguration.class,
-			WebflowContextConfiguration.class };
+	private static final Class<?>[] basicConfigurationClasses = new Class<?>[] { TestDataContextConfiguration.class,
+			InfrastructureContextConfiguration.class, };
 
 	private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
 
@@ -47,7 +60,8 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 	}
 
 	private void registerDispatcherServlet(ServletContext servletContext) {
-		AnnotationConfigWebApplicationContext dispatcherContext = createContext(WebMvcContextConfiguration.class);
+		AnnotationConfigWebApplicationContext dispatcherContext = createContext(WebMvcContextConfiguration.class,
+				WebflowContextConfiguration.class);
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
 				new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
@@ -55,7 +69,7 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 	}
 
 	private void registerListener(ServletContext servletContext) {
-		AnnotationConfigWebApplicationContext rootContext = createContext(configurationClasses);
+		AnnotationConfigWebApplicationContext rootContext = createContext(basicConfigurationClasses);
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 		servletContext.addListener(new RequestContextListener());
 	}

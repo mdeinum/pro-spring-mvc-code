@@ -23,6 +23,7 @@ import com.apress.prospringmvc.bookstore.domain.Category;
  * JPA implementation for the {@link BookRepository}.
  * 
  * @author Marten Deinum
+ * @author Koen Serneels
  * 
  */
 @Repository("bookRepository")

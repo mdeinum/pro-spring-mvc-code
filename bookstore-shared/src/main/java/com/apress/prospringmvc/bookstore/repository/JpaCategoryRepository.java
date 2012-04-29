@@ -10,6 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import com.apress.prospringmvc.bookstore.domain.Category;
 
+/**
+ * JPA based {@link CategoryRepository} implementation.
+ *  
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Repository("categoryRepository")
 public class JpaCategoryRepository implements CategoryRepository {
 

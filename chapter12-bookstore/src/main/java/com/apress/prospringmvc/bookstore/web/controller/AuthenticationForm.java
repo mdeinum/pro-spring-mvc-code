@@ -5,7 +5,9 @@ import java.io.Serializable;
 /**
  * Simple form for holding username and password
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
 
 public class AuthenticationForm implements Serializable {

@@ -12,7 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "role" }) })
 public class Role implements Serializable {

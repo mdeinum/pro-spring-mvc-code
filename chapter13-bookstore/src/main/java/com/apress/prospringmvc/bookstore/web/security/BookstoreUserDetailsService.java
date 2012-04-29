@@ -17,6 +17,14 @@ import com.apress.prospringmvc.bookstore.domain.Permission;
 import com.apress.prospringmvc.bookstore.domain.Role;
 import com.apress.prospringmvc.bookstore.service.AccountService;
 
+/**
+ * Custom {@link UserDetailsService} which retrieves the data for the user authenticatiing from the database. When the
+ * user exists returns a {@link BookstoreUserDetails} containing all inforamtion for further authentication
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 @Component
 public class BookstoreUserDetailsService implements UserDetailsService {
 

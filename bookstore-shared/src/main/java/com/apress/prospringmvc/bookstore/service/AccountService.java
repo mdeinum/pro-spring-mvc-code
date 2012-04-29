@@ -5,8 +5,8 @@ import com.apress.prospringmvc.bookstore.domain.Account;
 /**
  * Contract for services that work with an {@link Account}.
  * 
- * @author M. Deinum
- * @author K. Serneels
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 public interface AccountService {

@@ -1,8 +1,9 @@
-package com.apress.prospringmvc.bookstore.web;
+package com.apress.prospringmvc.bookstore.web.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
@@ -10,6 +11,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.apress.prospringmvc.bookstore.domain.Category;
 
+/**
+ * Form used to capture data to add {@link Category} and {@link Book}s to the system
+ * 
+ * @see ManageBookController
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 public class ManageBookForm {
 
 	private List<Category> selectableCategories;

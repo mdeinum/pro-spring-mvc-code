@@ -1,7 +1,15 @@
-package com.apress.prospringmvc.bookstore.web;
+package com.apress.prospringmvc.bookstore.web.controller;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * Form for adding {@link Category} enitities to the system
+ * 
+ * @See ManageBookController
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 public class ManageCategoryForm {
 
 	@NotEmpty

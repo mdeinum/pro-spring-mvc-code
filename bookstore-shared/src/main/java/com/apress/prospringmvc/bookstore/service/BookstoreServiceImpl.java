@@ -19,6 +19,12 @@ import com.apress.prospringmvc.bookstore.repository.BookRepository;
 import com.apress.prospringmvc.bookstore.repository.CategoryRepository;
 import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 
+/**
+ * @see BookstoreService
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Service("bookstoreService")
 @Transactional(readOnly = true)
 public class BookstoreServiceImpl implements BookstoreService {

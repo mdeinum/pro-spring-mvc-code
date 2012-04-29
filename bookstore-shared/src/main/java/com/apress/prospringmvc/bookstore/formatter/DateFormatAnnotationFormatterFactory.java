@@ -8,6 +8,11 @@ import org.springframework.format.AnnotationFormatterFactory;
 import org.springframework.format.Parser;
 import org.springframework.format.Printer;
 
+/**
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 public class DateFormatAnnotationFormatterFactory implements AnnotationFormatterFactory<DateFormat> {
 
     @Override

@@ -12,6 +12,12 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Entity
 @Cacheable
 @Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

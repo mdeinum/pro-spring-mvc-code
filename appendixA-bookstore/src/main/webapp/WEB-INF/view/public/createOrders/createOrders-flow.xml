@@ -4,7 +4,9 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<secured attributes="permitAll"/>
-	
+
+	<persistence-context/>
+		
 	<on-start>
 		<evaluate expression="orderController.initializeForm()" result="flowScope.orderForm"/>
 	</on-start>
@@ -21,7 +23,7 @@
 	
 	<view-state id="selectBooks" view="selectBooks" model="orderForm" >
 		<on-render>
-			<evaluate expression="orderController.initializeSelectableBooks(orderForm)" result="flashScope.selectableBooks" />
+			<evaluate expression="orderController.initializeSelectableBooks(orderForm)" result="requestScope.selectableBooks" />
 		</on-render>
 	
 		<transition on="add" >
@@ -43,7 +45,7 @@
 	<view-state id="selectDeliveryOptions" view="selectDeliveryOptions" model="orderForm">
 		<transition on="previous" to="selectBooks" />
 
-		<transition on="finish" to="createOrder">
+		<transition on="finish" to="placeOrder">
 			<evaluate expression="orderController.validateDeliveryDate(flowScope.orderForm, messageContext)"/>
 		</transition>
 		
@@ -53,7 +55,7 @@
 <!-- Refactored: no longer needed, the placeOrders-flow uses Web Flow security. When the user is not authenticated
 	 we will be redirected to the login page via Spring Security.	
 	<decision-state id="loginCheck">
-		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="createOrder" else="authenticate"/>
+		<if test="externalContext.sessionMap.contains('authenticatedAccount') == true" then="placeOrder" else="authenticate"/>
 	</decision-state>	
 
 	<subflow-state id="authenticate" subflow="authentication">
@@ -61,17 +63,8 @@
 		<transition on="previous" to="selectDeliveryOptions"/>
 	</subflow-state>
  -->
-	
-<!-- Refactored to a sub flow: placeOrders-flow.xml:
-
-     <action-state id="createOrder">
-		<evaluate expression="orderController.placeOrder(flowScope.orderForm, externalContext.sessionMap.authenticatedAccount)" result="flowScope.orderId"/>
-		<transition on="success" to="end"/>
-	</action-state>
--->
 			
-	<subflow-state id="createOrder" subflow="secured/placeOrders">
-		<input name="account" value="externalContext.sessionMap.get('authenticatedAccount')"/>
+	<subflow-state id="placeOrder" subflow="secured/placeOrders">
 		<input name="orderForm"/>
 		
 		<output name="orderId"/>

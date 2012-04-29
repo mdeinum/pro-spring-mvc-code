@@ -26,6 +26,8 @@
 		<security:intercept-url pattern="/secured/**" access="fullyAuthenticated" requires-channel="https" />
 	
 		<security:intercept-url pattern="/**" access="denyAll" />
+
+		<security:logout logout-success-url="/public/main.htm" logout-url="/logout" invalidate-session="true"/>
 	</security:http>
 	
 	<bean id="cloudFoundryHttpServletRequestWrappingFilter" class="com.apress.prospringmvc.bookstore.web.security.CloudFoundryHttpServletRequestWrappingFilter"/>

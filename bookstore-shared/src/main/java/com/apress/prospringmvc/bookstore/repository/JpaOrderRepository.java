@@ -12,7 +12,7 @@ import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.domain.Order;
 
 /**
- * Jpa based {@link OrderRepository} implementation.
+ * JPA based {@link OrderRepository} implementation.
  * 
  * @author Marten Deinum
  * @author Koen Serneels

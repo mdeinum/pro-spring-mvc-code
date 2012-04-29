@@ -8,6 +8,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
+/**
+ * Makes the random books available on the Servlet requet
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 public class CommonDataHandlerInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired

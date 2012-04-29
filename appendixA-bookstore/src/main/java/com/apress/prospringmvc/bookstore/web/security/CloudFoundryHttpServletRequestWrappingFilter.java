@@ -12,6 +12,14 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
+/**
+ * Wraps the {@link HttpServletRequest} and checks for any available headers that indicate of the original connection is
+ * over SSL. If so we tell Spring Security to avoid ending up in endless loop
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 public class CloudFoundryHttpServletRequestWrappingFilter extends GenericFilterBean {
 
 	@Override

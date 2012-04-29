@@ -12,8 +12,8 @@ import com.apress.prospringmvc.bookstore.service.BookstoreService;
 /**
  * Controller to handle book detail requests.
  * 
- * @author M. Deinum
- * @author K. Serneels
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 @Controller

@@ -26,9 +26,10 @@ import com.apress.prospringmvc.bookstore.service.BookstoreService;
  * This controller talks to the {@link BookstoreService} to authenticate a user. This controller can be used via Spring
  * MVC (request mapping login.html) or as POJO for example via Web Flow
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ *
  */
-
 @Controller
 public class AuthenticationController {
 

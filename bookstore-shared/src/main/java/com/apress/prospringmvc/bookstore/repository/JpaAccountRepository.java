@@ -10,6 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
 
+/**
+ * JPA based {@link AccountRepository} implementation.
+ *  
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Repository("accountRepository")
 public class JpaAccountRepository implements AccountRepository {
 

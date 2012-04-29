@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -27,11 +28,12 @@ import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 
 /**
- * WebMvc Configuration.
+ * Spring MVC configuration
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
@@ -126,7 +128,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	public CommonDataHandlerInterceptor commonDataHandlerInterceptor() {
 		return new CommonDataHandlerInterceptor();
 	}
-
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(commonDataHandlerInterceptor());

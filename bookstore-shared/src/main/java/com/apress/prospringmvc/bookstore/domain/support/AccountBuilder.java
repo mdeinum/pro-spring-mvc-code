@@ -11,9 +11,10 @@ import com.apress.prospringmvc.bookstore.domain.Role;
 /**
  * Builds {@link Account} domain objects
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 @Component
 public class AccountBuilder extends EntityBuilder<Account> {
 

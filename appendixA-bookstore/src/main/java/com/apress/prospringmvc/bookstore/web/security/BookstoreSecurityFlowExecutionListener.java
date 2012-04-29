@@ -40,7 +40,9 @@ import org.springframework.webflow.security.SecurityRule;
  * sure this issue isn't resolved yet. This class will become obsolete once Web Flow has adapted to the latest Spring
  * Security features.
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
 public class BookstoreSecurityFlowExecutionListener extends SecurityFlowExecutionListener implements
 		ApplicationContextAware {

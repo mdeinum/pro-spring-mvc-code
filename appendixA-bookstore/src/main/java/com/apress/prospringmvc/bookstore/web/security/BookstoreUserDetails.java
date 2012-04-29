@@ -9,6 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
 
+/**
+ * Customer {@link UserDetails} holding our authentication object {@link Account} and keeping track of the list of
+ * {@link GrantedAuthority} for the current authenticated user
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 public class BookstoreUserDetails implements UserDetails {
 
 	private Account account;

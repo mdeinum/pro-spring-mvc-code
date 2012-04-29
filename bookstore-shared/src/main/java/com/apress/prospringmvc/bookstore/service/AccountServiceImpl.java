@@ -8,6 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 
+/**
+ * @see AccountService
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class AccountServiceImpl implements AccountService {

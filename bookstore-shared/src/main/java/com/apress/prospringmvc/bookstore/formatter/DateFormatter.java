@@ -9,6 +9,11 @@ import java.util.Locale;
 import org.springframework.format.Formatter;
 import org.springframework.util.StringUtils;
 
+/**
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 public class DateFormatter implements Formatter<Date> {
 
     private String format;

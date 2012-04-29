@@ -67,7 +67,7 @@
 		<transition on="endOrderOk" to="endOrderOk"/>
 	</subflow-state>
 
-	<end-state id="endOrderOk" view="redirect:/ordersOverview.htm?orderOk=true&amp;orderId={orderId}" commit="true"/>
+	<end-state id="endOrderOk" view="redirect:/ordersOverview?orderOk=true&amp;orderId={orderId}" commit="true"/>
 	<end-state id="end" view="redirect:/index.htm"/>
 </flow>	
 	

@@ -36,129 +36,130 @@ import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerIntercep
 import com.apress.prospringmvc.bookstore.web.method.support.SessionAttributeProcessor;
 
 /**
- * WebMvc Configuration.
+ * Configures Spring MVC.
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
  */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
-    @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
-    }
+	@Override
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**/*").addResourceLocations("classpath:/META-INF/web-resources/");
+	}
 
-    @Override
-    public void addViewControllers(final ViewControllerRegistry registry) {
-        registry.addViewController("/index.htm").setViewName("index");
-    }
+	@Override
+	public void addViewControllers(final ViewControllerRegistry registry) {
+		registry.addViewController("/index.htm").setViewName("index");
+	}
 
-    @Override
-    public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
+	@Override
+	public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
-        registry.addWebRequestInterceptor(commonDataHandlerInterceptor());
-        registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account", "/cart/checkout",
-                "/order/*", "/order.*");
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
+		registry.addWebRequestInterceptor(commonDataHandlerInterceptor());
+		registry.addInterceptor(securityHandlerInterceptor()).addPathPatterns("/customer/account", "/cart/checkout",
+				"/order/*", "/order.*");
+	}
 
-    //-- Start Locale Support (I18N) --//
+	// -- Start Locale Support (I18N) --//
 
-    /**
-     * The {@link LocaleChangeInterceptor} allows for the locale to be changed. It provides a <code>paramName</code> property which sets 
-     * the request parameter to check for changing the language, the default is <code>locale</code>.
-     * @return the {@link LocaleChangeInterceptor}
-     */
-    @Bean
-    public HandlerInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang");
-        return localeChangeInterceptor;
-    }
+	/**
+	 * The {@link LocaleChangeInterceptor} allows for the locale to be changed. It provides a <code>paramName</code>
+	 * property which sets the request parameter to check for changing the language, the default is <code>locale</code>.
+	 * @return the {@link LocaleChangeInterceptor}
+	 */
+	@Bean
+	public HandlerInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+		localeChangeInterceptor.setParamName("lang");
+		return localeChangeInterceptor;
+	}
 
-    /**
-     * The {@link LocaleResolver} implementation to use. Specifies where to store the current selectd locale.
-     * 
-     * @return the {@link LocaleResolver}
-     */
-    @Bean
-    public LocaleResolver localeResolver() {
-        return new CookieLocaleResolver();
-    }
+	/**
+	 * The {@link LocaleResolver} implementation to use. Specifies where to store the current selectd locale.
+	 * 
+	 * @return the {@link LocaleResolver}
+	 */
+	@Bean
+	public LocaleResolver localeResolver() {
+		return new CookieLocaleResolver();
+	}
 
-    /**
-     * To resolve message codes to actual messages we need a {@link MessageSource} implementation. The default 
-     * implementations use a {@link java.util.ResourceBundle} to parse the property files with the messages in it.
-     * @return the {@link MessageSource}
-     */
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages");
-        messageSource.setUseCodeAsDefaultMessage(true);
-        return messageSource;
-    }
+	/**
+	 * To resolve message codes to actual messages we need a {@link MessageSource} implementation. The default
+	 * implementations use a {@link java.util.ResourceBundle} to parse the property files with the messages in it.
+	 * @return the {@link MessageSource}
+	 */
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("messages");
+		messageSource.setUseCodeAsDefaultMessage(true);
+		return messageSource;
+	}
 
-    //-- End Locale Support (I18N) --//
+	// -- End Locale Support (I18N) --//
 
-    @Bean
-    public CommonDataInterceptor commonDataHandlerInterceptor() {
-        return new CommonDataInterceptor();
-    }
+	@Bean
+	public CommonDataInterceptor commonDataHandlerInterceptor() {
+		return new CommonDataInterceptor();
+	}
 
-    @Bean
-    public SecurityHandlerInterceptor securityHandlerInterceptor() {
-        return new SecurityHandlerInterceptor();
-    }
+	@Bean
+	public SecurityHandlerInterceptor securityHandlerInterceptor() {
+		return new SecurityHandlerInterceptor();
+	}
 
-    @Bean
-    public SessionAttributeProcessor sessionAttributeProcessor() {
-        return new SessionAttributeProcessor();
-    }
+	@Bean
+	public SessionAttributeProcessor sessionAttributeProcessor() {
+		return new SessionAttributeProcessor();
+	}
 
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(sessionAttributeProcessor());
-    }
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(sessionAttributeProcessor());
+	}
 
-    @Override
-    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
-        returnValueHandlers.add(sessionAttributeProcessor());
-    }
+	@Override
+	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
+		returnValueHandlers.add(sessionAttributeProcessor());
+	}
 
-    @Bean
-    public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
-        Properties mappings = new Properties();
-        mappings.setProperty("AuthenticationException", "login");
+	@Bean
+	public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
+		SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
+		Properties mappings = new Properties();
+		mappings.setProperty("AuthenticationException", "login");
 
-        Properties statusCodes = new Properties();
-        mappings.setProperty("login", String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
+		Properties statusCodes = new Properties();
+		mappings.setProperty("login", String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
 
-        exceptionResolver.setExceptionMappings(mappings);
-        exceptionResolver.setStatusCodes(statusCodes);
-        return exceptionResolver;
-    }
+		exceptionResolver.setExceptionMappings(mappings);
+		exceptionResolver.setStatusCodes(statusCodes);
+		return exceptionResolver;
+	}
 
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(categoryConverter());
-    }
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(categoryConverter());
+	}
 
-    @Bean
-    public GenericConverter categoryConverter() {
-        return new StringToEntityConverter(Category.class);
-    }
+	@Bean
+	public GenericConverter categoryConverter() {
+		return new StringToEntityConverter(Category.class);
+	}
 
-    @Bean
-    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public Cart cart() {
-        return new Cart();
-    }
+	@Bean
+	@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+	public Cart cart() {
+		return new Cart();
+	}
 }

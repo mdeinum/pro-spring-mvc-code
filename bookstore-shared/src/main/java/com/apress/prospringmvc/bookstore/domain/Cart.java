@@ -11,7 +11,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * Basic implementation of a cart.
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 public class Cart implements Serializable {

@@ -31,9 +31,10 @@ import com.apress.prospringmvc.bookstore.web.AuthenticationSessionListener;
  * Controller to be used to place and view orders using the {@link BookstoreService}. This controller can be used using
  * Spring MVC (view orders) or by POJO access (for example Web Flow) for placing orders
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ *
  */
-
 @Controller
 public class OrderController {
 

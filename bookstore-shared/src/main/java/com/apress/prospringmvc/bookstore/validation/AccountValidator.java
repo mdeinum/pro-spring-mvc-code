@@ -6,6 +6,13 @@ import org.springframework.validation.Validator;
 
 import com.apress.prospringmvc.bookstore.domain.Account;
 
+/**
+ * Validates {@link Account} domain objects
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 public class AccountValidator implements Validator {
 
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";

@@ -4,6 +4,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -27,18 +28,20 @@ import com.apress.prospringmvc.bookstore.domain.Category;
 import com.apress.prospringmvc.bookstore.web.interceptor.CommonDataHandlerInterceptor;
 
 /**
- * WebMvc Configuration.
+ * Spring MVC configuration
  * 
+ * @author Marten Deinum
  * @author Koen Serneels
+ * 
  */
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
-public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
+@ImportResource("classpath:/spring/spring-security.xml")
+public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
-	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/public/resources/**/*")
 				.addResourceLocations("classpath:/META-INF/web-resources/");
 	}
@@ -75,7 +78,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasenames(new String[] { "messages", "org/springframework/security/messages" });
+		messageSource.setBasenames(new String[] { "messages", "org.springframework.security.messages" });
 		messageSource.setUseCodeAsDefaultMessage(true);
 		return messageSource;
 	}
@@ -95,7 +98,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
 		internalResourceViewResolver.setOrder(2);
 		internalResourceViewResolver.setPrefix("/WEB-INF/view/");
-		internalResourceViewResolver.setSuffix(".jspx");
+		internalResourceViewResolver.setSuffix(".jsp");
 		internalResourceViewResolver.setViewClass(JstlView.class);
 		return internalResourceViewResolver;
 	}
@@ -123,7 +126,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurationSupport {
 	}
 
 	@Override
-	protected void addFormatters(FormatterRegistry registry) {
+	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(bookConverter());
 		registry.addConverter(categoryConverter());
 	}
