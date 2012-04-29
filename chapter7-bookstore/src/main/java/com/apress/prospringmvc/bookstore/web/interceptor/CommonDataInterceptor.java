@@ -7,6 +7,12 @@ import org.springframework.web.context.request.WebRequestInterceptor;
 
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
+/**
+ * {@code WebRequestInterceptor} implementation to add common data (random books) to the model.
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class CommonDataInterceptor implements WebRequestInterceptor {
 
     @Autowired

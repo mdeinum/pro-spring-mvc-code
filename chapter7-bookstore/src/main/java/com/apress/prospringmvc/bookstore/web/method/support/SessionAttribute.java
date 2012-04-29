@@ -6,6 +6,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation to mark a method argument or return value to be retrieved or stored in the {@code javax.servlet.http.HttpSession}.
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Target({ ElementType.PARAMETER, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

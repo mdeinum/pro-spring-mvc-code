@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.apress.prospringmvc.bookstore.web.UploadOrderForm;
 
+/**
+ * Controller to handle file uploads.
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Controller
 public class UploadOrderController {
 
