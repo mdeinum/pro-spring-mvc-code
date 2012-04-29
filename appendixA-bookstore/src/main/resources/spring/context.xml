@@ -7,7 +7,7 @@
 		 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<context:annotation-config/>
-	<context:component-scan  base-package="com.apress.prospringmvc.bookstore.config,com.apress.prospringmvc.bookstore.web.security"/>
+	<context:component-scan  base-package="com.apress.prospringmvc.bookstore.controller,com.apress.prospringmvc.bookstore.config,com.apress.prospringmvc.bookstore.web.security"/>
 	
 	<import resource="classpath:/spring/spring-security.xml"/>
 </beans>
