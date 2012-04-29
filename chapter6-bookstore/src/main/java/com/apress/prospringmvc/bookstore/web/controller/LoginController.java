@@ -13,6 +13,13 @@ import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 
+/**
+ * Controller to handle login. 
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
