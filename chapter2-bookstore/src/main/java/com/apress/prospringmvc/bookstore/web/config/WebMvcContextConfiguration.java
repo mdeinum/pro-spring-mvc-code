@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import com.apress.prospringmvc.bookstore.web.IndexController;
 
 /**
- * Configuration for the MVC part of the application. Should only contain web related beans and configuration.
+ * Spring MVC configuration
  * 
  * @author Marten Deinum
  * @author Koen Serneels
- *
+ * 
  */
 @Configuration
 public class WebMvcContextConfiguration {
