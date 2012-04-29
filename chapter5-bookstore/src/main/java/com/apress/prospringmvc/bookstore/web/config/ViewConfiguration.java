@@ -6,11 +6,11 @@ import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesViewResolver;
 
 /**
- * Configuration for the view technologies.
+ * Spring MVC configuration for the View Technologies.
  * 
- * @author M. Deinum
- * @Author K. Serneels
- *
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
  */
 @Configuration
 public class ViewConfiguration {

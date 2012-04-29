@@ -14,9 +14,10 @@ import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 
 /**
- * Controller for handling login and logout.
+ * Controller to handle login. 
  * 
- * @author marten
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 @Controller

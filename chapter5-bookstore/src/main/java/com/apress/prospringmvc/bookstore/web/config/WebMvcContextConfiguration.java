@@ -22,9 +22,11 @@ import com.apress.prospringmvc.bookstore.converter.StringToEntityConverter;
 import com.apress.prospringmvc.bookstore.domain.Category;
 
 /**
- * WebMvc Configuration.
+ * Spring MVC configuration
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
  */
 @Configuration
 @EnableWebMvc

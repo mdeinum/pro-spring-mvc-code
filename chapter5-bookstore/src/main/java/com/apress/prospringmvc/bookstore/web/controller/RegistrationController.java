@@ -21,7 +21,9 @@ import com.apress.prospringmvc.bookstore.validation.AccountValidator;
 
 /**
  * Controller to handle the registration of a new {@link Account}
- * @author marten
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 @Controller

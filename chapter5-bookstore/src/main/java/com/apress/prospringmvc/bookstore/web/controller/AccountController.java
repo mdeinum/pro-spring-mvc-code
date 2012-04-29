@@ -19,6 +19,12 @@ import com.apress.prospringmvc.bookstore.domain.Account;
 import com.apress.prospringmvc.bookstore.repository.AccountRepository;
 import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 
+/**
+ *  
+ * @author Marten Deinum
+ * @author Koen Serneels
+ *
+ */
 @Controller
 @RequestMapping("/customer/account")
 @SessionAttributes(types = Account.class)
