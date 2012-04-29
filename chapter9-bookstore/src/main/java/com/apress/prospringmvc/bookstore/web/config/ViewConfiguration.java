@@ -5,6 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesViewResolver;
 
+/**
+ * Spring MVC configuration for the View Technologies.
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ * 
+ */
 @Configuration
 public class ViewConfiguration {
 
@@ -19,21 +26,4 @@ public class ViewConfiguration {
         tilesViewResolver.setOrder(2);
         return tilesViewResolver;
     }
-
-    //    @Bean
-    //    public VelocityConfigurer velocityConfigurer() {
-    //        VelocityConfigurer velocityConfigurer = new VelocityConfigurer();
-    //        velocityConfigurer.setResourceLoaderPath("WEB-INF/velocity");
-    //        return velocityConfigurer;
-    //    }
-    //
-    //    @Bean
-    //    public ViewResolver velocityViewResolver() {
-    //        VelocityViewResolver viewResolver = new VelocityViewResolver();
-    //        viewResolver.setSuffix(".vm");
-    //        viewResolver.setExposeSpringMacroHelpers(true);
-    //        viewResolver.setOrder(1);
-    //        return viewResolver;
-    //    }
-
 }

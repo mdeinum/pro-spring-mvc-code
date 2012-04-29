@@ -14,6 +14,12 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.PdfWriter;
 
+/**
+ * PDF view for an {@link Order}.
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class OrderPdfView extends AbstractPdfView {
 
     @Override

@@ -20,7 +20,7 @@ import com.apress.prospringmvc.bookstore.repository.OrderRepository;
 import com.apress.prospringmvc.bookstore.web.method.support.SessionAttribute;
 
 /**
- * ) 
+ *  
  * @author Marten Deinum
  * @author Koen Serneels
  *

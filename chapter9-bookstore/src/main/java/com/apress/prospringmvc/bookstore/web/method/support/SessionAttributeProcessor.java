@@ -9,6 +9,13 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+/**
+ * {@code HandlerMethodReturnValueHandler} and {@code HandlerMethodArgumentResolver} implementation to 
+ * handle a {@code SessionAttribute}.
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class SessionAttributeProcessor implements HandlerMethodReturnValueHandler, HandlerMethodArgumentResolver {
 
     @Override

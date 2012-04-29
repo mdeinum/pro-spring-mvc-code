@@ -27,6 +27,11 @@ import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 import com.apress.prospringmvc.bookstore.validation.OrderValidator;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Controller
 @SessionAttributes(types = { Order.class })
 @RequestMapping("/cart/checkout")

@@ -3,7 +3,6 @@ package com.apress.prospringmvc.bookstore.web.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
@@ -12,7 +11,7 @@ import com.apress.prospringmvc.bookstore.service.AuthenticationException;
 import com.apress.prospringmvc.bookstore.web.controller.LoginController;
 
 /**
- * {@link HandlerInterceptor} to apply security to controllers.
+ * {@code HandlerInterceptor} to apply security to controllers.
  * 
  * @author Marten Deinum
  * @author Koen Serneels
