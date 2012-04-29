@@ -8,7 +8,9 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 
 /**
- * Very simple implementation of a {@link ViewResolver}. It uses an internal {@link Map} to link the name of a view to a concrete {@link View} implementation.
+ * Very simple implementation of a {@link ViewResolver}. 
+ * 
+ * It uses an internal {@link Map} to link the name of a view to a concrete {@link View} implementation.
  * 
  * @author Marten Deinum
  * @author Koen Serneels

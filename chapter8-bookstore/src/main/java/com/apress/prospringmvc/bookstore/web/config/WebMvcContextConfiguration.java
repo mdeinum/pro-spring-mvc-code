@@ -36,9 +36,10 @@ import com.apress.prospringmvc.bookstore.web.interceptor.SecurityHandlerIntercep
 import com.apress.prospringmvc.bookstore.web.method.support.SessionAttributeProcessor;
 
 /**
- * WebMvc Configuration.
+ * Configures Spring MVC.
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
  */
 @Configuration
 @EnableWebMvc

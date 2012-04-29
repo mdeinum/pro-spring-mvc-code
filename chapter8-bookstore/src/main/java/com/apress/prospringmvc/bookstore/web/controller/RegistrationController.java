@@ -20,8 +20,10 @@ import com.apress.prospringmvc.bookstore.service.AccountService;
 import com.apress.prospringmvc.bookstore.validation.AccountValidator;
 
 /**
- * Controller to handle the registration of a new {@link Account}
- * @author marten
+ * Controller to handle the registration of a new {@code Account}
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 @Controller

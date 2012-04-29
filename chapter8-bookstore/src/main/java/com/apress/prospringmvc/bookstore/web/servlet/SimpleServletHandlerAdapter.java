@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class SimpleServletHandlerAdapter implements HandlerAdapter {
 
     @Override

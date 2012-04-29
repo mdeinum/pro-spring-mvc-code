@@ -12,6 +12,11 @@ import com.apress.prospringmvc.bookstore.domain.Book;
 import com.apress.prospringmvc.bookstore.domain.Cart;
 import com.apress.prospringmvc.bookstore.service.BookstoreService;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Controller
 @RequestMapping("/cart")
 public class CartController {

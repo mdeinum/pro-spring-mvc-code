@@ -15,6 +15,12 @@ import org.springframework.web.servlet.view.document.AbstractJExcelView;
 import com.apress.prospringmvc.bookstore.domain.Order;
 import com.apress.prospringmvc.bookstore.domain.OrderDetail;
 
+/**
+ * Excel view for an {@link Order}.
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class OrderExcelView extends AbstractJExcelView {
 
     @Override
