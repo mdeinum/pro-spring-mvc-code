@@ -11,6 +11,11 @@ import com.apress.prospringmvc.moneytransfer.repository.MapBasedTransactionRepos
 import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
 import com.apress.prospringmvc.moneytransfer.service.MoneyTransferService;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Configuration
 public class ApplicationContextConfiguration {
 

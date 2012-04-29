@@ -10,8 +10,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * Base class for transaction subclasses.
  * 
- * @author M. Deinum
- *
+ * @author Marten Deinum
+ * @author Koen Serneels
  */
 public abstract class Transaction {
 

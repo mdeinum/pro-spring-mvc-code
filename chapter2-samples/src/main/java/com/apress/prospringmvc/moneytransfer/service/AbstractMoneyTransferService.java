@@ -12,7 +12,8 @@ import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
  * Base class for {@link MoneyTransferService} implementations. This class implements the business logic to transfer money. 
  * Subclasses must implement the techniques to retrieve the repositories.
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 public abstract class AbstractMoneyTransferService implements MoneyTransferService {

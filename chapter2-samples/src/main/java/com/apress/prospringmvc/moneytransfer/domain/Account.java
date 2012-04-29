@@ -5,6 +5,11 @@ import java.math.BigDecimal;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class Account {
 
     private String owner;

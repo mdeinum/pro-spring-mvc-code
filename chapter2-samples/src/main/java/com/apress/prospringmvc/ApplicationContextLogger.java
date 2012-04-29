@@ -9,7 +9,8 @@ import org.springframework.context.ApplicationContext;
 /**
  * Helper class to log some basic information about the {@link ApplicationContext}
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 public class ApplicationContextLogger {

@@ -10,6 +10,11 @@ import com.apress.prospringmvc.moneytransfer.domain.Account;
 import com.apress.prospringmvc.moneytransfer.domain.Transaction;
 import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class StubTransactionRepository implements TransactionRepository {
 
     private final Logger logger = LoggerFactory.getLogger(StubTransactionRepository.class);

@@ -10,6 +10,11 @@ import com.apress.prospringmvc.moneytransfer.repository.MapBasedAccountRepositor
 import com.apress.prospringmvc.moneytransfer.repository.MapBasedTransactionRepository;
 import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class MoneyTransferStandalone {
 
     private static final Logger logger = LoggerFactory.getLogger(MoneyTransferStandalone.class);

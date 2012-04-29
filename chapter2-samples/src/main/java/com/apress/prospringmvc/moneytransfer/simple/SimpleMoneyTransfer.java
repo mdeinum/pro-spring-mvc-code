@@ -7,6 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import com.apress.prospringmvc.moneytransfer.domain.Transaction;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class SimpleMoneyTransfer {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleMoneyTransfer.class);

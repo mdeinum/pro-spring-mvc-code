@@ -12,9 +12,10 @@ import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
 import com.apress.prospringmvc.moneytransfer.service.MoneyTransferService;
 
 /**
- * {@link MoneyTransferService} implementation which instantiates the needed beans itself.
+ * {@code MoneyTransferService} implementation which instantiates the needed beans itself.
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 public class SimpleMoneyTransferServiceImpl implements MoneyTransferService {

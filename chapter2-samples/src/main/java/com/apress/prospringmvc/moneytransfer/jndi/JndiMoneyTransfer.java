@@ -13,6 +13,11 @@ import com.apress.prospringmvc.moneytransfer.repository.MapBasedAccountRepositor
 import com.apress.prospringmvc.moneytransfer.repository.MapBasedTransactionRepository;
 import com.apress.prospringmvc.moneytransfer.simple.SimpleMoneyTransfer;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class JndiMoneyTransfer {
     private static final Logger logger = LoggerFactory.getLogger(SimpleMoneyTransfer.class);
 

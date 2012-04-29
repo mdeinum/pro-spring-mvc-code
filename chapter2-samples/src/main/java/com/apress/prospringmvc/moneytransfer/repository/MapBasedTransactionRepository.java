@@ -14,6 +14,11 @@ import com.apress.prospringmvc.moneytransfer.domain.Account;
 import com.apress.prospringmvc.moneytransfer.domain.MoneyTransferTransaction;
 import com.apress.prospringmvc.moneytransfer.domain.Transaction;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Repository("transactionRepository")
 public class MapBasedTransactionRepository implements TransactionRepository {
 

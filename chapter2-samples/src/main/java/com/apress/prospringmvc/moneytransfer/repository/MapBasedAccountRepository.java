@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import com.apress.prospringmvc.moneytransfer.domain.Account;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Repository("accountRepository")
 public class MapBasedAccountRepository implements AccountRepository {
 

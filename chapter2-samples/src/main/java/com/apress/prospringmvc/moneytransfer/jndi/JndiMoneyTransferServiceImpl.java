@@ -12,6 +12,11 @@ import com.apress.prospringmvc.moneytransfer.repository.AccountRepository;
 import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
 import com.apress.prospringmvc.moneytransfer.service.MoneyTransferService;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class JndiMoneyTransferServiceImpl implements MoneyTransferService {
 
     private AccountRepository accountRepository;

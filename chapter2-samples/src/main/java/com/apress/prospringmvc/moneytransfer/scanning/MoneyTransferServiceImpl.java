@@ -8,6 +8,11 @@ import com.apress.prospringmvc.moneytransfer.repository.AccountRepository;
 import com.apress.prospringmvc.moneytransfer.repository.TransactionRepository;
 import com.apress.prospringmvc.moneytransfer.service.AbstractMoneyTransferService;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 @Service("moneyTransferService")
 @Transactional
 public class MoneyTransferServiceImpl extends AbstractMoneyTransferService {

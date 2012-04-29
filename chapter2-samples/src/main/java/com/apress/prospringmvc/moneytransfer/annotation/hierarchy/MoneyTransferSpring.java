@@ -11,6 +11,11 @@ import com.apress.prospringmvc.ApplicationContextLogger;
 import com.apress.prospringmvc.moneytransfer.domain.Transaction;
 import com.apress.prospringmvc.moneytransfer.service.MoneyTransferService;
 
+/**
+ * 
+ * @author Marten Deinum
+ * @author Koen Serneels
+ */
 public class MoneyTransferSpring {
 
     private static final Logger logger = LoggerFactory.getLogger(MoneyTransferSpring.class);

@@ -7,7 +7,8 @@ import com.apress.prospringmvc.moneytransfer.domain.Transaction;
 /**
  * Service contract for transfering money from one account to another.
  * 
- * @author M. Deinum
+ * @author Marten Deinum
+ * @author Koen Serneels
  *
  */
 public interface MoneyTransferService {
