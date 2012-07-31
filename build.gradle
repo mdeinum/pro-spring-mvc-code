@@ -112,6 +112,25 @@ configure(webProjects) {
     test {
         exclude '**/*FrontendTest.*'
     }
+    
+    eclipse {
+    	classpath {
+    		file {
+    			withXml {
+    				xml -> xml.asNode().classpathentry.findAll{
+    					it.@path == '/bookstore-shared' || it.@path == '/bookstore-web-resources'
+    					}.each{
+    						it.appendNode('attributes').appendNode('attribute',
+    						[
+    							name: 'org.eclipse.jst.component.dependency',
+    							value: '/WEB-INF/lib'
+    						])
+    					}
+    				} 
+    			}
+    		}
+    	}
+    
 }
 
 
