@@ -3,7 +3,6 @@ package com.apress.prospringmvc.bookstore.web.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
