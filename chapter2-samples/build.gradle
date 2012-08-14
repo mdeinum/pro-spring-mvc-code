@@ -1,4 +1,4 @@
-dependencies() {
+dependencies {
     compile 'javax.inject:javax.inject:1'
     compile "org.springframework:spring-test:$springVersion"
 }
