@@ -7,7 +7,7 @@ dependencies() {
     testCompile 'net.sourceforge.jwebunit:jwebunit-htmlunit-plugin:3.0'
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.9'
     testCompile 'org.springframework:spring-test-mvc:1.0.0.BUILD-SNAPSHOT'
-    testCompile 'org.seleniumhq.selenium:selenium-java:2.20.0'
-    testCompile 'org.seleniumhq.selenium:selenium-firefox-driver:2.20.0'
-    testCompile 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.20.0'
+    testCompile 'org.seleniumhq.selenium:selenium-java:2.25.0'
+    testCompile 'org.seleniumhq.selenium:selenium-firefox-driver:2.25.0'
+    testCompile 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.25.0'
 }
