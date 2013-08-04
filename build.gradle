@@ -1,16 +1,16 @@
 apply plugin: 'base'
 
-ext.springVersion = '3.1.4.RELEASE'
+ext.springVersion = '3.2.3.RELEASE'
 ext.tilesVersion = '2.2.2'
-ext.springSecurityVersion = '3.1.3.RELEASE'
+ext.springSecurityVersion = '3.1.4.RELEASE'
 ext.springSwfVersion = '2.3.2.RELEASE'
-ext.hibernateVersion = '4.1.9.Final'
-ext.hibernateValidatorVersion = '4.3.0.Final'
-ext.ehCacheVersion = '2.5.5'
-ext.aspectJVersion = '1.7.1'
+ext.hibernateVersion = '4.2.3.Final'
+ext.hibernateValidatorVersion = '5.0.1.Final'
+ext.ehCacheVersion = '2.7.2'
+ext.aspectJVersion = '1.7.3'
 
-ext.tomcatVersion = '7.0.37'
-ext.cargoVersion = '1.3.2'
+ext.tomcatVersion = '7.0.42'
+ext.cargoVersion = '1.3.3'
 
 ext.webProjects = subprojects.findAll { project -> project.name.endsWith('bookstore') }
 
@@ -20,8 +20,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.7'
-        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:0.5.9'
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.8'
+        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:0.6.1'
     }
 }
 
@@ -80,8 +80,8 @@ configure(webProjects) {
         port = 8080
 
         local {
-            homeDir = file('container/apache-tomcat-7.0.26')
-            output = file('container/apache-tomcat-7.0.26/output.log')
+            homeDir = file('container/apache-tomcat-7.0.42')
+            output = file('container/apache-tomcat-7.0.42/output.log')
         }
     }
 
@@ -111,8 +111,8 @@ subprojects() {
     apply plugin: 'eclipse-wtp'
     apply plugin: 'idea'
 
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 
     dependencies() {
         compile "org.springframework:spring-orm:$springVersion"
@@ -133,7 +133,7 @@ subprojects() {
         compile "org.hibernate:hibernate-core:$hibernateVersion"
         compile "org.hibernate:hibernate-ehcache:$hibernateVersion"
         compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
-        compile "net.sf.ehcache:ehcache-core:$ehCacheVersion"
+        compile "net.sf.ehcache:ehcache:$ehCacheVersion"
 
         compile 'com.lowagie:itext:2.1.7'
         compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
@@ -151,4 +151,4 @@ subprojects() {
 
 }
 
-task wrapper(type: Wrapper) { gradleVersion = '1.4' }
+task wrapper(type: Wrapper) { gradleVersion = '1.6' }

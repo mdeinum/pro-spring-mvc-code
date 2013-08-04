@@ -86,10 +86,10 @@ public class BookstoreSecurityFlowExecutionListener extends SecurityFlowExecutio
 	 * some reflection to instantiate an instance of that class. When done so, we pass along a Spring {@link Expression}
 	 * created by the {@link DefaultWebSecurityExpressionHandler} from the "attributes" String provided by this flow
 	 */
-	private Collection<ConfigAttribute> buildWebExpressionConfigAttribute(Collection<SecurityConfig> configAttributes) {
+	private Collection<ConfigAttribute> buildWebExpressionConfigAttribute(Collection<ConfigAttribute> configAttributes) {
 		Collection<ConfigAttribute> result = new ArrayList<ConfigAttribute>();
 
-		for (SecurityConfig configAttribute : configAttributes) {
+		for (ConfigAttribute configAttribute : configAttributes) {
 			result.add(createWebExpressionConfigAttribute(configAttribute.getAttribute()));
 		}
 		return result;
